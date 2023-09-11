@@ -258,13 +258,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2066896392038131396, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -16.48
+      objectReference: {fileID: 0}
     - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_LocalPosition.x
       value: 8.184
       objectReference: {fileID: 0}
     - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.18
+      value: 8.73
       objectReference: {fileID: 0}
     - target: {fileID: 2066896392038131574, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_LocalPosition.z
@@ -495,7 +499,7 @@ Transform:
   m_GameObject: {fileID: 1279093200}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 14.307725, y: 26.180002, z: -8.16624}
+  m_LocalPosition: {x: 14.307724, y: 13.7300005, z: -8.166239}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -673,11 +677,11 @@ MonoBehaviour:
   JumpTimeout: 0.5
   FallTimeout: 1.03
   Grounded: 0
-  GroundedOffset: 0.55
-  GroundedRadius: 0.3
+  GroundedOffset: 0
+  GroundedRadius: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 9
+    m_Bits: 0
 --- !u!1 &1838176098
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,7 +960,7 @@ Transform:
   m_GameObject: {fileID: 8944336656328210687}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 14.307725, y: 26.180002, z: -8.16624}
+  m_LocalPosition: {x: 14.307724, y: 13.7300005, z: -8.166239}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
