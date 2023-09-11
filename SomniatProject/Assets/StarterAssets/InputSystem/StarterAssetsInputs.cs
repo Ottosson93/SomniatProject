@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 
+
 		[Header("Movement Settings")]
 		public bool analogMovement;
 
@@ -44,6 +45,9 @@ namespace StarterAssets
 			SprintInput(value.isPressed);
 		}
 #endif
+
+
+
 
 
 		public void MoveInput(Vector2 newMoveDirection)
