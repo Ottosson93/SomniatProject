@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -58,6 +59,29 @@ namespace StarterAssets
 
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
+
+
+        //[Tooltip("The cooldown of the dash")]
+        //public const float maxDashTime = 1.0f;
+
+        //[Tooltip("The distance of the dash")]
+        //public float dashDistance = 10f;
+
+        //[Tooltip("Dash break")]
+        //public float dashStoppingSpeed = 0.1f;
+
+
+
+        //[Tooltip("The speed of the dash")]
+        //public float dashSpeed = 6f;
+
+
+        public float dashingPower = 24f;
+        private float dashingTime = 0.2f;
+        private float dashingCooldown = 1f;
+
+        public TrailRenderer tr;
+
 
 
         // cinemachine
@@ -136,13 +160,19 @@ namespace StarterAssets
             _fallTimeoutDelta = FallTimeout;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             _hasAnimator = TryGetComponent(out _animator);
 
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            if (_input.dash)
+            {
+                StartCoroutine(Dash());
+            }
+
         }
 
         private void LateUpdate()
@@ -259,6 +289,44 @@ namespace StarterAssets
 
         }
 
+        //private void Dash()
+        //{
+
+            
+
+
+
+
+        //    //float currentDashTime = maxDashTime;
+
+        //    //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+        //    //if (_input.dash)
+        //    //{
+        //    //    currentDashTime = 0;
+        //    //}
+        //    //if(currentDashTime < maxDashTime)
+        //    //{
+        //    //    dashSpeed = 6f;
+        //    //    // move the player
+        //    //    _controller.Move((targetDirection.normalized * (_speed * Time.deltaTime) +
+        //    //                     new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashDistance);
+
+        //    //    currentDashTime += dashStoppingSpeed;
+        //    //}
+        //    //else
+        //    //{
+        //    //    dashSpeed = 0;
+        //    //    _input.dash = false;
+        //    //}
+
+
+        //    //// move the player
+        //    //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+        //    //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+        //}
+
+
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -360,6 +428,27 @@ namespace StarterAssets
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
             }
+        }
+
+
+        private IEnumerator Dash()
+        {
+            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
+            _controller.Move((targetDirection.normalized * (Time.deltaTime) +
+                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
+
+            tr.emitting = true;
+
+            yield return new WaitForSeconds(dashingTime);
+
+            tr.emitting = false;
+
+            _input.dash = false;
+
+
+            yield return new WaitForSeconds(dashingCooldown);
+
         }
     }
 }
