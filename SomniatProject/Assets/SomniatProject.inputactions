@@ -56,7 +56,7 @@
                     "id": "33854d06-b4da-4142-b13e-265b53f187da",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "initialStateCheck": false
                 }
             ],
@@ -263,7 +263,7 @@
                     "name": "",
                     "id": "2f86706f-fd00-417a-a86a-ef7093c88c4b",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",

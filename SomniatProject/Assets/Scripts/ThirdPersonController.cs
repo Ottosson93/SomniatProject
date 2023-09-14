@@ -78,9 +78,10 @@ namespace StarterAssets
 
         public float dashingPower = 24f;
         private float dashingTime = 0.2f;
-        private float dashingCooldown = 1f;
+        private float dashingCooldown = 3f;
 
         public TrailRenderer tr;
+
 
 
 
@@ -158,6 +159,9 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+
+            tr.emitting = false;
         }
 
         private void FixedUpdate()
@@ -170,6 +174,7 @@ namespace StarterAssets
 
             if (_input.dash)
             {
+                
                 StartCoroutine(Dash());
             }
 
@@ -445,7 +450,6 @@ namespace StarterAssets
             tr.emitting = false;
 
             _input.dash = false;
-
 
             yield return new WaitForSeconds(dashingCooldown);
 
