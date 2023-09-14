@@ -32,20 +32,29 @@ public class MeleeAttack : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!!isAttacking && attackAction.triggered)
+        if (comboCount >= 3)
         {
-            animator.SetTrigger(currentAttackAnimation);
+            comboCount = 0;
+        }
 
-            currentAttackAnimation = (currentAttackAnimation == "Attack01") ? "Attack02" : "Attack01";
-
+        if (Input.GetButtonDown("AttackButton")) // Replace "AttackButton" with your actual attack input.
+        {
             comboCount++;
 
-            if(comboCount >= maxCombo)
+            if (comboCount == 1)
             {
-                comboCount = 0;
+                animator.SetTrigger("Attack01"); // First press, trigger "Attack01."
             }
-
-            isAttacking = true;
+            else if (comboCount == 2)
+            {
+                animator.SetTrigger("Attack02"); // Second press, trigger "Attack02."
+            }
+            else if (comboCount == 3)
+            {
+                comboCount = 1; // Third press, reset comboCount to 1.
+                animator.SetTrigger("Attack01"); // Set to trigger "Attack01" again.
+            }
         }
+
     }
 }
