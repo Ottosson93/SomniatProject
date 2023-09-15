@@ -16,12 +16,12 @@ public class DungeonCreator : MonoBehaviour
     {
         generator = new DungeonGenerator(size, maxNumberOfRooms);
         generator.Generate();
+        generator.BuildRooms(); 
     }
 
     // Update is called once per frame
     void Update()
     {
-
     }
 
 }

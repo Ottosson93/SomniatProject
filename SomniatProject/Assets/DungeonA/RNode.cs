@@ -9,6 +9,7 @@ public class RNode
     public Vector2 topLeft, topRight, bottomLeft, bottomRight;  
     public RNode parent, sibling;
     public bool bottom = false;
+    public bool vertical = false;
 
     public RNode(Vector2 bottomLeft, Vector2 topRight) //Vector2 topLeft, Vector2 bottomRight
     {
@@ -23,6 +24,7 @@ public class RNode
             this.height = bottomLeft.y * -1 * topRight.y;
         else
             this.height = topRight.y - bottomLeft.y;
+
         //this.height = topLeft.y + bottomLeft.y; // not Correct
         //this.width = bottomLeft.x + topRight.x; // not Correct
         //this.childOne = childOne;
