@@ -5,11 +5,13 @@ public class CheckEnemyInFOVRange : Node
 {
 
     private Transform transform;
+    private Animator animator;
 
 
     public CheckEnemyInFOVRange(Transform transform)
     {
         this.transform = transform;
+        animator = transform.GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
@@ -20,20 +22,24 @@ public class CheckEnemyInFOVRange : Node
 
         if (t == null)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GuardBT.fovRange);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, GuardBT.fovRange);
 
-            foreach (Collider2D collider in colliders)
+            foreach (Collider collider in colliders)
             {
 
                 // Check if the collider's game object is the player
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+                    animator.SetBool("Walk", true);
+
+
                     state = NodeState.SUCCESS;
                     return state;
                 }
-                
-                
+                else
+                    animator.SetBool("Walk", false);
+
             }
 
             

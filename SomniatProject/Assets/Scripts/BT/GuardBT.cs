@@ -14,8 +14,9 @@ public class GuardBT : Tree
     public static float speed = 2f;
     public static float fovRange = 7f;
     public static float distance = 9f;
-    public static float attackRange = 5f;
+    public static float attackRange = 1f;
     public static float bulletForce = 20f;
+    public static float rotationSpeed = 5f;
 
     protected override Node SetupTree()
     {
@@ -24,7 +25,6 @@ public class GuardBT : Tree
             new Sequence(new List<Node>
             {
                 new CheckEnemyInAttackRange(transform),
-                new TaskAttack(transform, enemyShooting),
             }),
 
             new Sequence(new List<Node>

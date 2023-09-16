@@ -10,7 +10,7 @@ public class TaskPatrol : Node
     private Animator animator;
     private int currentWaypointIndex;
 
-    private float waitTime = 1f;
+    private float waitTime = 1.5f;
     private float waitCounter = 0f;
     private bool waiting = false;
 
@@ -24,42 +24,50 @@ public class TaskPatrol : Node
 
     public override NodeState Evaluate()
     {
+
+        Transform wp = waypoints[currentWaypointIndex];
+
+
+        // Calculate the direction to the waypoint
+        Vector3 directionToWaypoint = (wp.position - transform.position).normalized;
+
+        // Calculate the rotation to look at the waypoint smoothly
+        Quaternion targetRotation = Quaternion.LookRotation(directionToWaypoint);
+
+        // Smoothly rotate towards the waypoint
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, GuardBT.rotationSpeed * Time.deltaTime);
+
+
         if (waiting)
         {
             waitCounter += Time.deltaTime;
+            animator.SetBool("Walk", false);
+
 
             if (waitCounter >= waitTime)
             {
                 waiting = false;
-
-                if(transform.position.normalized == Vector3.left)
-                    animator.SetBool("Left", true);
-                if(transform.position.normalized == Vector3.right)
-                    animator.SetBool("Right", true);
-                if (transform.position.normalized == Vector3.up)
-                    animator.SetBool("Up", true);
-                if (transform.position.normalized == Vector3.down)
-                    animator.SetBool("Down", true);
             }
                 
         }
         else
         {
-            Transform wp = waypoints[currentWaypointIndex];
+            animator.SetBool("Walk", true);
+
+
             if (Vector3.Distance(transform.position, wp.position) < 0.01f)
             {
                 transform.position = wp.position;
                 waitCounter = 0f;
                 waiting = true;
-                animator.SetBool("Idle", true);
-
+                
                 currentWaypointIndex = (currentWaypointIndex + 1) % waypoints.Length;
             }
             else
             {
-
-
+                
                 transform.position = Vector3.MoveTowards(transform.position, wp.position, GuardBT.speed * Time.deltaTime);
+                transform.LookAt(wp.position);
             }
         }
 
