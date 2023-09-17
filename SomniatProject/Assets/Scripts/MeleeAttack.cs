@@ -1,17 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class MeleeAttack : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    InputAction attackAction;
     public int maxCombo = 3;
 
     private int comboCount = 0;
-    private bool isAttacking = false;
-    private string currentAttackAnimation = "Attack01";
+    private InputAction attackAction;
 
     private void Awake()
     {
@@ -37,20 +34,26 @@ public class MeleeAttack : MonoBehaviour
 
         if (attackAction.triggered)
         {
+            Debug.Log("Attack sequence triggered");
             comboCount++;
 
             if (comboCount == 1)
             {
+                Debug.Log("Attack 1 triggered");
+
                 animator.SetTrigger("Attack01");
             }
             else if (comboCount == 2)
             {
+                Debug.Log("Attack 2 triggered");
+
                 animator.SetTrigger("Attack02");
             }
             else if (comboCount == 3)
             {
+                Debug.Log("Attack 3 triggered");
                 //Deal extra dmg
-                comboCount = 1;
+                comboCount = 0;
                 animator.SetTrigger("Attack01");
             }
         }
