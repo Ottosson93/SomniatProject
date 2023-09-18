@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (comboCount >= 3)
+        if (comboCount >= maxCombo)
         {
             comboCount = 0;
         }
@@ -40,23 +40,19 @@ public class PlayerController : MonoBehaviour
             if (comboCount == 1)
             {
                 Debug.Log("Attack 1 triggered");
-
                 animator.SetTrigger("Attack01");
             }
             else if (comboCount == 2)
             {
                 Debug.Log("Attack 2 triggered");
-
                 animator.SetTrigger("Attack02");
             }
             else if (comboCount == 3)
             {
                 Debug.Log("Attack 3 triggered");
-                //Deal extra dmg
                 comboCount = 0;
                 animator.SetTrigger("Attack01");
             }
         }
-
     }
 }
