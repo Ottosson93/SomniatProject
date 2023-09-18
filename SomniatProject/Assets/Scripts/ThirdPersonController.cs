@@ -82,7 +82,7 @@ namespace StarterAssets
 
         public TrailRenderer tr;
 
-
+        private bool isDashing = false;
 
 
         // cinemachine
@@ -224,6 +224,16 @@ namespace StarterAssets
 
         private void Move()
         {
+
+            // If dashing, disable grounded check and gravity
+            if (isDashing)
+            {
+                Grounded = true;  // Set grounded to true to avoid falling during dash
+                _verticalVelocity = 0f;  // Set vertical velocity to 0
+            }
+
+
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -394,11 +404,20 @@ namespace StarterAssets
                 _input.jump = false;
             }
 
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (_verticalVelocity < _terminalVelocity)
+            if (isDashing)
             {
-                _verticalVelocity += Gravity * Time.deltaTime;
+                _verticalVelocity = 0f;
             }
+            else
+            {
+                if (_verticalVelocity < _terminalVelocity)
+                {
+                    _verticalVelocity += Gravity * Time.deltaTime;
+                }
+            }
+
+
+           
         }
 
         private void OnDrawGizmosSelected()
@@ -438,7 +457,11 @@ namespace StarterAssets
 
         private IEnumerator Dash()
         {
+            isDashing = true;  // Set dashing flag
+
+
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
 
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
@@ -447,9 +470,12 @@ namespace StarterAssets
 
             yield return new WaitForSeconds(dashingTime);
 
+            isDashing = false;  // Reset dashing flag
+
             tr.emitting = false;
 
             _input.dash = false;
+
 
             yield return new WaitForSeconds(dashingCooldown);
 
