@@ -4,18 +4,16 @@ using UnityEngine;
 
 using BehaviorTree;
 
-public class TaskAttack : Node
+public class TaskMeleeAttack : Node
 {
 
     private Transform transform;
-    private EnemyShooting enemyShooting;
     
 
 
-    public TaskAttack(Transform transform, EnemyShooting enemyShooting)
+    public TaskMeleeAttack(Transform transform)
     {
         this.transform = transform;
-        this.enemyShooting = enemyShooting;
 
     }
 
@@ -23,15 +21,7 @@ public class TaskAttack : Node
     public override NodeState Evaluate()
     {
         object target = (Transform)GetData("target");
-        
 
-        enemyShooting.timer += Time.deltaTime;
-
-        if (enemyShooting.timer > enemyShooting.cooldownTime)
-        {
-            enemyShooting.timer = 0;
-            enemyShooting.Shoot();
-        }
 
         state = NodeState.RUNNING;
         return state;
