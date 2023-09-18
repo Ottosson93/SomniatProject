@@ -10,7 +10,7 @@ namespace Assets.Eric_folder
 
         [SerializeField] int value = 10;
         [SerializeField] int scoreValue = 20;
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnTriggerEnter3D(Collider collision)
         {
             if (collision.gameObject.tag == "Player")
             {

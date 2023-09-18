@@ -14,17 +14,17 @@ namespace Assets.Eric_folder
         [SerializeField] float timeBetweenShots = 2.0f;
         [SerializeField] float attacksPerSec = 1.5f;
         private Transform target;
-        private Rigidbody2D bulletRigidbody;
+        private Rigidbody bulletRigidbody;
         private GameObject bullet;
 
-        private Rigidbody2D rigidbody;
+        private Rigidbody rigidbody;
         private Coroutine shootingCoroutine;
         private bool inRange = false;
         private float nextFire = 0f;
 
         void Start()
         {
-            rigidbody = GetComponent<Rigidbody2D>();
+            rigidbody = GetComponent<Rigidbody>();
             //target = FindObjectOfType<PlayerMovement>().transform;
         }
 
@@ -33,7 +33,7 @@ namespace Assets.Eric_folder
             UpdatingDirection();
             Shoot();
         }
-        void Shoot()
+        void Shoot() // Behaviour tree -->
         {
             if (Vector2.Distance(target.position, rigidbody.transform.position) <= shootingRadius)
             {
@@ -52,7 +52,7 @@ namespace Assets.Eric_folder
             var ePos = rigidbody.transform.position;
             var tPos = target.position;
             float angle = Mathf.Rad2Deg * Mathf.Atan2(tPos.y - ePos.y, tPos.x - ePos.x) - 90f;
-            rigidbody.rotation = angle;
+            rigidbody.rotation = Quaternion.AngleAxis(angle,Vector3.up);
         }
 
         IEnumerator FireContinuously()
@@ -67,17 +67,17 @@ namespace Assets.Eric_folder
 
         void InstantiateBullet()
         {
-            Vector2 dir = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y).normalized;
+            Vector3 dir = (target.position - transform.position).normalized;
             bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            bulletRigidbody = bullet.GetComponent<Rigidbody2D>();
+            bulletRigidbody = bullet.GetComponent<Rigidbody>();
             // bullet.GetComponent<EnemyBullet>().Damage = damage;
-            bulletRigidbody.velocity = new Vector2(dir.x * bulletForce,
-                dir.y * bulletForce);
+            bulletRigidbody.velocity = dir * bulletForce;
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.DrawWireSphere(transform.position, shootingRadius);
+            //Shooting radius om de behövs för debugging.
         }
     }
 

@@ -150,8 +150,8 @@ public class FireWeapon_Reload : MonoBehaviour
         private void InstantiateBulletAndUpdateUI()
         {
             GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            rb.AddForce(firePoint.up * projectileForce, ForceMode2D.Impulse);
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            rb.AddForce(firePoint.up * projectileForce, ForceMode.Impulse); // KAnske behöver firepoint.forward istället.
             ammo--;
             ammoUI.GetComponent<TMPro.TextMeshProUGUI>().text = ammo.ToString();
         }
