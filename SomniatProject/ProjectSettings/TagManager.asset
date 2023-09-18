@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -12,9 +14,9 @@ TagManager:
   - Floor
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Player
+  - Obstacles
+  - Enemy
   - 
   - 
   - 

@@ -5,14 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public Animator animator;
+    public DamgeTextPlayer damageTextPlayer;
 
-    
 
 
     public void TakeDamage() 
     {
         animator.SetTrigger("Hurt");
-        
+        damageTextPlayer.SubtractHealth(10, transform);
+
+
     }
 
 
