@@ -178,6 +178,9 @@ namespace StarterAssets
                 StartCoroutine(Dash());
             }
 
+            if (_input.attack1)
+                StartCoroutine(Attack1());
+
         }
 
         private void LateUpdate()
@@ -304,42 +307,7 @@ namespace StarterAssets
 
         }
 
-        //private void Dash()
-        //{
-
-            
-
-
-
-
-        //    //float currentDashTime = maxDashTime;
-
-        //    //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-        //    //if (_input.dash)
-        //    //{
-        //    //    currentDashTime = 0;
-        //    //}
-        //    //if(currentDashTime < maxDashTime)
-        //    //{
-        //    //    dashSpeed = 6f;
-        //    //    // move the player
-        //    //    _controller.Move((targetDirection.normalized * (_speed * Time.deltaTime) +
-        //    //                     new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashDistance);
-
-        //    //    currentDashTime += dashStoppingSpeed;
-        //    //}
-        //    //else
-        //    //{
-        //    //    dashSpeed = 0;
-        //    //    _input.dash = false;
-        //    //}
-
-
-        //    //// move the player
-        //    //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-        //    //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-        //}
+        
 
 
         private void JumpAndGravity()
@@ -479,6 +447,59 @@ namespace StarterAssets
 
             yield return new WaitForSeconds(dashingCooldown);
 
+        }
+
+
+        private IEnumerator Attack1()
+        {
+            _animator.SetBool("AttackCombo", true);
+
+
+            Vector2 newMovement = _input.move;
+
+
+            _animator.SetBool("Attack1", true);
+
+            _input.move = Vector2.zero;
+
+            yield return new WaitForSeconds(0.2f);
+
+            _animator.SetBool("Attack1", false);
+
+
+            if (_input.attack1)
+            {
+                _animator.SetBool("Attack2", true);
+                yield return new WaitForSeconds(0.2f);
+                _animator.SetBool("Attack2", false);
+            }
+                
+
+
+            _input.attack1 = false;
+
+            _input.move = newMovement;
+
+
+            _animator.SetBool("AttackCombo", false);
+
+        }
+
+        private IEnumerator Attack2()
+        {
+            Vector2 newMovement = _input.move;
+
+
+            _animator.SetBool("Attack2", true);
+
+            _input.move = Vector2.zero;
+
+            yield return new WaitForSeconds(0.2f);
+
+            _animator.SetBool("Attack2", false);
+            _input.attack1 = false;
+
+            _input.move = newMovement;
         }
     }
 }
