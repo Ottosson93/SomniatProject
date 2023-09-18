@@ -9,12 +9,13 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] private Vector2 size;
     [SerializeField] private int maxNumberOfRooms;
     DungeonGenerator generator;
+    [SerializeField] Material material;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        generator = new DungeonGenerator(size, maxNumberOfRooms);
+        generator = new DungeonGenerator(size, maxNumberOfRooms, material);
         generator.Generate();
         generator.BuildRooms(); 
     }

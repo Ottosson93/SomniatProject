@@ -11,19 +11,27 @@ public class DungeonGenerator
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> oldNodes = new List<RNode>();
-    
-    
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom)
+    Material material;
+
+
+
+    public DungeonGenerator(Vector2 size, int nbrOfRoom, Material material)
     {
         //making the rootnode centered with size/2 being the center in both x and y dimensions
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2));
         nodes.Add(rootNode);
-        
+        this.material = material; 
     }
 
     public void Generate()
     {
+        /*
+        while(nodes.Count >= 1)
+        {
+
+        }
+        */
         for (int i = 0; i < nodes.Count; i++)
         {
             RNode node = nodes[0];
@@ -101,12 +109,27 @@ public class DungeonGenerator
 
     public void BuildRooms()
     {
-        GameObject room = new GameObject("floor", typeof(MeshFilter), typeof(MeshRenderer));
+        for (int i = 0; i < oldNodes.Count; i++)
+        {
+            Debug.Log("Creating mesh for node: " + i);
+            if (oldNodes[i].bottom == true)
+            {
+                CreateMesh(oldNodes[i]);
+            }
+        }
 
         
+    }
+
+    void CreateMesh(RNode n)
+    {
+        Debug.Log("Room Created");
+        Mesh mesh = new Mesh();
+        GameObject room = new GameObject("floor" + n.bottomLeft.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
+        //room.transform.position = Vector3.zero;
+        room.GetComponent<MeshFilter>().mesh = mesh;
+        room.GetComponent<MeshRenderer>().material = material;
         //oom.name = "room";
         //room.AddComponent<MeshRenderer>();
-
-        
     }
 }
