@@ -10,9 +10,9 @@ public class PickUpScript : MonoBehaviour
 {
 
     public Transform player;
+    public float pickUpRange = 1.5F;
     private Transform eKeyPlane;
     private Material material;
-    private const float pickUpRange = 1.5F;
     Vector3 distanceToPlayer;
     bool displayKey, playerInRange;
 
