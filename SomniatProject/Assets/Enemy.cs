@@ -9,12 +9,10 @@ public class Enemy : MonoBehaviour
 
 
 
-    public void TakeDamage() 
+    public async void TakeDamage() 
     {
         animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(10, transform);
-
-
     }
 
 

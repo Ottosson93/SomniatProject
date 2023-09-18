@@ -11,41 +11,44 @@ using UnityEngine.Rendering.Universal;
 public class DamgeTextPlayer : ScriptableObject
 {
     private string pathToObject = @"DamageText";
-    private TextMeshPro textMeshPro;
+    private GameObject gameObj;
 
     private void OnEnable()
     {
-        textMeshPro = Resources.Load<GameObject>(pathToObject).GetComponent<TextMeshPro>();
+        gameObj = Resources.Load<GameObject>(pathToObject);
     }
 
 
-    public async void SubtractHealth(int value, Transform transform)
+    public async Task SubtractHealth(int value, Transform transform)
     {
 
         await CreateDamageText(transform, SubtractHealthColor(value), value);
 
     }
 
-    public async void AddHealth(int value, Transform transform)
+    public async Task AddHealth(int value, Transform transform)
     {
         await CreateDamageText(transform, AddHealthColor(value), value);
     }
 
     private async Task CreateDamageText(Transform transform, Color color, int value)
     {
-        TextMeshPro damageText = Instantiate(textMeshPro, transform.position, textMeshPro.transform.rotation);
+        var obj = Instantiate(gameObj, transform.position, gameObj.transform.rotation);
+
+        var damageText = obj.GetComponent<TextMeshPro>();
 
         damageText.transform.position = new Vector3(transform.position.x + Random.Range(-2, 2), transform.position.y + 1.5F + Random.Range(0, 1), transform.position.z + Random.Range(-2, 2));
         damageText.text = value.ToString();
         damageText.faceColor = new Color32((byte)color.r, (byte)color.g, (byte)color.b, 255);
         damageText.fontSize = FontSize(value);
+
         while (damageText.color.a > 0.01F)
         {
             damageText.color = new Color(color.r, color.g, color.b, damageText.color.a - 0.01F);
             await Task.Delay(10);
         }
 
-        Destroy(damageText);
+        Destroy(obj);
     }
 
     private Color AddHealthColor(int value)
@@ -84,7 +87,7 @@ public class DamgeTextPlayer : ScriptableObject
     private float FontSize(int value)
     {
         float modifier = 0;
-        var baseSize = textMeshPro.fontSize;
+        var baseSize = 36;
         if (value < 10)
             modifier = 0;
         else if (value < 25)
