@@ -17,11 +17,25 @@ public class RNode
         this.topRight = topRight;
 
         if (bottomLeft.x < 0)
-            this.width = bottomLeft.x * -1 + topRight.x;
+        {
+            if(topLeft.x < 0)
+            {
+                this.width = bottomLeft.x * -1 + topRight.x * -1;
+            }
+            else
+                this.width = bottomLeft.x * -1 + topRight.x;
+        }
         else
             this.width = topRight.x - bottomLeft.x;
         if (bottomLeft.y < 0)
-            this.height = bottomLeft.y * -1 * topRight.y;
+        {
+            if(topLeft.y < 0)
+            {
+                this.height = bottomLeft.y * -1 + topRight.y * -1;
+            }
+            else
+                this.height = bottomLeft.y * -1 + topRight.y;
+        }
         else
             this.height = topRight.y - bottomLeft.y;
 

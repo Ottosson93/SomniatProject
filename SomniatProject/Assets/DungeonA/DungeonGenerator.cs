@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Packages.Rider.Editor.UnitTesting;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -8,16 +9,20 @@ using UnityEngine.InputSystem.Android;
 
 public class DungeonGenerator
 {
+    //int dungeonSize;
+    int minRoomSize;
+
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
-    List<RNode> oldNodes = new List<RNode>();
+    List<RNode> finishedNodes = new List<RNode>();
 
     Material material;
 
 
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom, Material material)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material)
     {
+        this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2));
         nodes.Add(rootNode);
@@ -26,35 +31,38 @@ public class DungeonGenerator
 
     public void Generate()
     {
-        /*
-        while(nodes.Count >= 1)
-        {
-
-        }
-        */
-        for (int i = 0; i < nodes.Count; i++)
+        for (int i = 0; i < nodes.Count + 1000; i++)
         {
             RNode node = nodes[0];
-            Debug.Log("The nr 1 node is: " + node.bottomLeft + " " + node.topRight);
+            //Debug.Log("loop nr: " + i); 
+            //Debug.Log("The nr 1 node is: " + node.bottomLeft + " " + node.topRight);
 
-            if (node.width > 200 && node.height > 200)
+            if (node.width > minRoomSize && node.height > minRoomSize)
+            {
+                //Debug.Log("Splitting node of size: " + (int)node.width + " and " + (int)node.height);
                 SplitRoom(node);
+            }
+            
             else
             {
+
+                Debug.Log("Bottom node reached");
                 node.bottom = true;
                 nodes.Remove(node);
-                oldNodes.Add(node);
+                finishedNodes.Add(node); 
+                Debug.Log("Nodes.Count: " + nodes.Count);
+                Debug.Log("i: " + i);
             }
-        }
-
-        foreach (RNode node in nodes)
-        {
-            // 200 minimum allowed size for now
             
         }
 
-        foreach (RNode n in nodes)
-            Debug.Log(n.bottomLeft + " " + n.topRight);
+        foreach (RNode node in finishedNodes)
+        {
+            if (node.bottom == true)
+                Debug.Log("this is a leaf node");
+            //node.bottom = true;
+        }
+        Debug.Log("TOTAL NODES LEFT: " + nodes.Count);
     }
 
     void SplitRoom(RNode node)
@@ -62,14 +70,16 @@ public class DungeonGenerator
         RNode newNode;
         RNode newNode2;
 
-        //horizontal split
-        //if vertial split was done last time, do horizontal
+        //splitting Vertically
         if(node.vertical == false)
         {
-            float splitV = Random.Range(node.bottomLeft.x * 0.25f, node.bottomLeft.x * 0.75f);
-            newNode = new RNode(node.bottomLeft, new Vector2(splitV, node.topRight.y));
+            float splitSideways = Random.Range(node.width * 0.25f, node.width * 0.75f);
+
+            //float splitV = Random.Range(node.bottomLeft.x * 0.25f, node.bottomLeft.x * 0.75f);
+
+            newNode = new RNode(node.bottomLeft, new Vector2(node.topRight.x - (int)splitSideways, node.topRight.y));
             newNode.parent = node;
-            newNode2 = new RNode(new Vector2(splitV, node.bottomLeft.y), node.topRight);
+            newNode2 = new RNode(new Vector2(node.bottomLeft.x + (int)splitSideways, node.bottomLeft.y), node.topRight);
             newNode2.parent = node;
             newNode.sibling = newNode2;
             newNode2.sibling = newNode;
@@ -80,13 +90,16 @@ public class DungeonGenerator
         } 
         
 
-
-        if (node.vertical == true)
+        //splitting Horizontally 
+        else
         {
-            float splitH = Random.Range(node.bottomLeft.y, node.topRight.y);
-            newNode = new RNode(new Vector2(node.bottomLeft.x, splitH), node.topRight);
+            float splitVertical = Random.Range(node.height * 0.25f, node.height * 0.75f);
+
+            //float splitH = Random.Range(node.bottomLeft.y, node.topRight.y);
+
+            newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + (int)splitVertical), node.topRight);
             newNode.parent = node;
-            newNode2 = new RNode(node.bottomLeft, new Vector2(node.topRight.x, splitH));
+            newNode2 = new RNode(node.bottomLeft, new Vector2(node.topRight.x, node.topRight.y - (int)splitVertical));
             newNode2.parent = node;
             newNode.sibling = newNode2;
             newNode2.sibling = newNode;
@@ -96,10 +109,10 @@ public class DungeonGenerator
             nodes.Add(newNode2);
         }
 
-        oldNodes.Add(node);
+        finishedNodes.Add(node);
         nodes.Remove(node);
-        Debug.Log("There are " + nodes.Count + " nodes");
         //int width = Random.Range(node.)
+        
     }
 
     void DeclareFamily() //this method basically connects nodes to their parent + sibling
@@ -107,28 +120,77 @@ public class DungeonGenerator
 
     }
 
+    bool CheckSize(RNode n)
+    {
+        if (n.width < minRoomSize && n.height < minRoomSize)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public void BuildRooms()
     {
-        for (int i = 0; i < oldNodes.Count; i++)
+        Debug.Log("Building " + finishedNodes.Count + " rooms");
+        for (int i = 0; i < finishedNodes.Count; i++)
         {
-            Debug.Log("Creating mesh for node: " + i);
-            if (oldNodes[i].bottom == true)
+            if (finishedNodes[i].bottom == true)
             {
-                CreateMesh(oldNodes[i]);
+                Debug.Log("Creating mesh!");
+                ShrinkNodes();
+                CreateMesh(finishedNodes[i], i);
             }
         }
 
         
     }
 
-    void CreateMesh(RNode n)
+    void ShrinkNodes()
     {
-        Debug.Log("Room Created");
+        foreach (RNode n in finishedNodes)
+        {
+            
+            //n.topLeft.y = 0;
+            //n.bottomLeft.x = 
+        }
+    }
+
+    void CreateMesh(RNode n, int id)
+    {
         Mesh mesh = new Mesh();
-        GameObject room = new GameObject("floor" + n.bottomLeft.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
-        //room.transform.position = Vector3.zero;
+
+        Vector3 bottomLeftV = new Vector3(n.bottomLeft.x, 0, n.bottomLeft.y);
+        Vector3 bottomRightV = new Vector3(n.topRight.x, 0, n.bottomLeft.y);
+        Vector3 topLeftV = new Vector3(n.bottomLeft.x, 0, n.topRight.y);
+        Vector3 topRightV = new Vector3(n.topRight.x, 0, n.topRight.y);
+
+        Vector3[] vertices = new Vector3[]
+        {
+            topLeftV, topRightV, bottomLeftV , bottomRightV
+        };
+
+        Vector2[] uvs = new Vector2[vertices.Length];
+
+        for (int i = 0; i < uvs.Length; i++)
+        {
+            uvs[i] = new Vector2(vertices[i].x, vertices[i].y);
+        }
+
+        int[] triangles = new int[]
+        {
+            0, 1, 2, 2, 1, 3
+        };
+
+        mesh.vertices = vertices;
+        mesh.uv = uvs;
+        mesh.triangles = triangles;
+
+        GameObject room = new GameObject("floor" + id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
+        room.transform.position = Vector3.zero;
+        room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
         room.GetComponent<MeshRenderer>().material = material;
+
         //oom.name = "room";
         //room.AddComponent<MeshRenderer>();
     }

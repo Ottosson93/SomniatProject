@@ -351,8 +351,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30c10a10a620feb42aed429c28284683, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: {x: 2000, y: 2000}
+  size: {x: 200, y: 200}
   maxNumberOfRooms: 0
+  minimumRoomSize: 30
   material: {fileID: 2100000, guid: 6067de840336ef64499e38fe2429a62e, type: 2}
 --- !u!4 &963015290
 Transform:
@@ -405,7 +406,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.19215688, g: 0.43991035, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
