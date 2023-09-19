@@ -353,7 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: {x: 200, y: 200}
   maxNumberOfRooms: 0
-  minimumRoomSize: 30
+  minimumRoomSize: 40
   material: {fileID: 2100000, guid: 6067de840336ef64499e38fe2429a62e, type: 2}
 --- !u!4 &963015290
 Transform:

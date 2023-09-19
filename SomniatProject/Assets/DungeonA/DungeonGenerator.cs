@@ -31,7 +31,26 @@ public class DungeonGenerator
 
     public void Generate()
     {
-        for (int i = 0; i < nodes.Count + 1000; i++)
+
+        while (nodes.Count > 0)
+        {
+            RNode node = nodes[nodes.Count - 1];
+            if (node.width > minRoomSize && node.height > minRoomSize)
+            {
+                Debug.Log("Splitting node of coordinates: " + node.bottomLeft + " and " + node.topRight);
+                SplitRoom(node);
+            }
+            else
+            {
+
+                Debug.Log("Bottom node reached");
+                node.bottom = true;
+                nodes.Remove(node);
+                finishedNodes.Add(node);
+            }
+        }
+        /*
+        for (int i = 0; i < nodes.Count; i++)
         {
             RNode node = nodes[0];
             //Debug.Log("loop nr: " + i); 
@@ -42,10 +61,8 @@ public class DungeonGenerator
                 //Debug.Log("Splitting node of size: " + (int)node.width + " and " + (int)node.height);
                 SplitRoom(node);
             }
-            
             else
             {
-
                 Debug.Log("Bottom node reached");
                 node.bottom = true;
                 nodes.Remove(node);
@@ -54,15 +71,8 @@ public class DungeonGenerator
                 Debug.Log("i: " + i);
             }
             
-        }
+        }*/
 
-        foreach (RNode node in finishedNodes)
-        {
-            if (node.bottom == true)
-                Debug.Log("this is a leaf node");
-            //node.bottom = true;
-        }
-        Debug.Log("TOTAL NODES LEFT: " + nodes.Count);
     }
 
     void SplitRoom(RNode node)
@@ -73,13 +83,14 @@ public class DungeonGenerator
         //splitting Vertically
         if(node.vertical == false)
         {
+            //change name for split sideways to vertical!!!!!!!
             float splitSideways = Random.Range(node.width * 0.25f, node.width * 0.75f);
-
+            Debug.Log("split Vertical = " + splitSideways);
             //float splitV = Random.Range(node.bottomLeft.x * 0.25f, node.bottomLeft.x * 0.75f);
 
             newNode = new RNode(node.bottomLeft, new Vector2(node.topRight.x - (int)splitSideways, node.topRight.y));
             newNode.parent = node;
-            newNode2 = new RNode(new Vector2(node.bottomLeft.x + (int)splitSideways, node.bottomLeft.y), node.topRight);
+            newNode2 = new RNode(new Vector2(node.topRight.x - (int)splitSideways, node.bottomLeft.y), node.topRight);
             newNode2.parent = node;
             newNode.sibling = newNode2;
             newNode2.sibling = newNode;
@@ -94,10 +105,10 @@ public class DungeonGenerator
         else
         {
             float splitVertical = Random.Range(node.height * 0.25f, node.height * 0.75f);
-
+            Debug.Log("split sideways = " + splitVertical);
             //float splitH = Random.Range(node.bottomLeft.y, node.topRight.y);
 
-            newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + (int)splitVertical), node.topRight);
+            newNode = new RNode(new Vector2(node.bottomLeft.x, node.topRight.y - (int)splitVertical), node.topRight);
             newNode.parent = node;
             newNode2 = new RNode(node.bottomLeft, new Vector2(node.topRight.x, node.topRight.y - (int)splitVertical));
             newNode2.parent = node;
@@ -136,7 +147,6 @@ public class DungeonGenerator
         {
             if (finishedNodes[i].bottom == true)
             {
-                Debug.Log("Creating mesh!");
                 ShrinkNodes();
                 CreateMesh(finishedNodes[i], i);
             }
@@ -185,7 +195,8 @@ public class DungeonGenerator
         mesh.uv = uvs;
         mesh.triangles = triangles;
 
-        GameObject room = new GameObject("floor" + id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
+        //GameObject room = new GameObject("floor" + id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
+        GameObject room = new GameObject("floor" + n.bottomLeft.ToString() + ", " + n.topRight.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
         room.transform.position = Vector3.zero;
         room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
