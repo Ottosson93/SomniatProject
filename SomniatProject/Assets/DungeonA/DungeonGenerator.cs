@@ -147,7 +147,7 @@ public class DungeonGenerator
         {
             if (finishedNodes[i].bottom == true)
             {
-                ShrinkNodes();
+                ShrinkNodes(finishedNodes[i]);
                 CreateMesh(finishedNodes[i], i);
             }
         }
@@ -155,14 +155,15 @@ public class DungeonGenerator
         
     }
 
-    void ShrinkNodes()
+    void ShrinkNodes(RNode n)
     {
-        foreach (RNode n in finishedNodes)
-        {
-            
-            //n.topLeft.y = 0;
-            //n.bottomLeft.x = 
-        }
+        float shrinkWidth = Random.Range(0, n.width * 0.25f);
+        n.bottomLeft.x += shrinkWidth;
+        n.topRight.x -= shrinkWidth;
+        float shrinkheight = Random.Range(0, n.height * 0.25f);
+        n.bottomLeft.y += shrinkheight;
+        n.topRight.y -= shrinkheight;
+        //ALSO UPDATE NEW WIDTH AND HEIGHT FOR THESE NEW AREAS
     }
 
     void CreateMesh(RNode n, int id)
