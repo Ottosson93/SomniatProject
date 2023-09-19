@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ViewMain
   m_EditorClassIdentifier: 
   padding:
-    m_Left: 50
-    m_Right: 50
-    m_Top: 25
-    m_Bottom: 25
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
   spacing: 0
   theme: {fileID: 11400000, guid: f4c836c69e244ca4e95e2392aeebb7f7, type: 2}

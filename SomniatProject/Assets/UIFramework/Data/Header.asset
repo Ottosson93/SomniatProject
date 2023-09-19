@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   theme: {fileID: 11400000, guid: f4c836c69e244ca4e95e2392aeebb7f7, type: 2}
   font: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
-  size: 50
+  size: 40
