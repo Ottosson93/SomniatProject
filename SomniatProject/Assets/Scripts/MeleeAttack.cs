@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public Animator animator;
     public int maxCombo = 3;
+    public Sword sword;
+
 
     private int comboCount = 0;
     private InputAction attackAction;
@@ -41,17 +43,20 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.Log("Attack 1 triggered");
                 animator.SetTrigger("Attack01");
+                sword.Attack();
             }
             else if (comboCount == 2)
             {
                 Debug.Log("Attack 2 triggered");
                 animator.SetTrigger("Attack02");
+                sword.Attack();
             }
             else if (comboCount == 3)
             {
                 Debug.Log("Attack 3 triggered");
                 comboCount = 0;
                 animator.SetTrigger("Attack01");
+                sword.Attack();
             }
         }
     }
