@@ -7,10 +7,13 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public int maxCombo = 3;
     public Sword sword;
+    public float comboResetTime = 3.0f;
 
+    public string[] attackAnimations; 
 
     private int comboCount = 0;
     private InputAction attackAction;
+    private float comboTimer;
 
     private void Awake()
     {
@@ -29,35 +32,46 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (comboCount >= maxCombo)
+        comboTimer += Time.deltaTime;
+
+        if (comboCount >= maxCombo || comboTimer >= comboResetTime)
         {
             comboCount = 0;
+            comboTimer = 0f;
         }
 
         if (attackAction.triggered)
         {
+
             Debug.Log("Attack sequence triggered");
             comboCount++;
 
-            if (comboCount == 1)
+            int animationIndex = CalculateAnimationIndex();
+
+            if (animationIndex < attackAnimations.Length)
             {
-                Debug.Log("Attack 1 triggered");
-                animator.SetTrigger("Attack01");
+                Debug.Log("Attack " + comboCount + " triggered");
+                animator.SetTrigger(attackAnimations[animationIndex]);
                 sword.Attack();
             }
-            else if (comboCount == 2)
+            else
             {
-                Debug.Log("Attack 2 triggered");
-                animator.SetTrigger("Attack02");
-                sword.Attack();
+                Debug.LogWarning("No attack animation defined for combo count: " + comboCount);
             }
-            else if (comboCount == 3)
-            {
-                Debug.Log("Attack 3 triggered");
-                comboCount = 0;
-                animator.SetTrigger("Attack01");
-                sword.Attack();
-            }
+
+            comboTimer = 0.0f;
+
+
         }
+
+
+    }
+
+    private int CalculateAnimationIndex()
+    {
+        if (comboCount == 3)
+            return 0;
+        else
+            return comboCount - 1;
     }
 }
