@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Attack",
+                    "name": "Attack1",
                     "type": "Button",
                     "id": "d4a1a13e-e05e-432a-a95e-416887dffe82",
                     "expectedControlType": "Button",
@@ -230,10 +230,10 @@
                     "name": "",
                     "id": "cd35bc67-ee61-470c-a681-055b9cae3789",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "",
+                    "interactions": "Press(behavior=2)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Attack",
+                    "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
