@@ -163,7 +163,7 @@ namespace StarterAssets
             tr.emitting = false;
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -178,7 +178,7 @@ namespace StarterAssets
                 if (_input.attack1)
                 {
                     Attack1();
-                    nextAttackTime = Time.deltaTime + 1f / attackRate;
+                    nextAttackTime = Time.time + 1f / attackRate;
                 }
             }
 

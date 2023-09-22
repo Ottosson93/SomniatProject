@@ -21,25 +21,26 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage() 
     {
+        current -= 10;
+
         animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(10, transform);
 
-        current -= 10;
+        
 
         if(current <= 0)
         {
-            StartCoroutine(Die());
+            Die();
         }
         
     }
 
 
-    IEnumerator Die() { 
+    void Die() {
+
         animator.SetBool("Die", true);
         GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
-
-        yield return new WaitForSeconds(2f);
 
         dead = true;                
         Destroy(gameObject);
