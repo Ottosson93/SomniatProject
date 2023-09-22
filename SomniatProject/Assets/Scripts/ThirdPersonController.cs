@@ -77,7 +77,7 @@ namespace StarterAssets
         public LayerMask enemyLayers;
 
 
-        public float attackRate = 4f;
+        public float attackRate = 5f;
         float nextAttackTime = 0f;
 
 
@@ -177,7 +177,7 @@ namespace StarterAssets
             {
                 if (_input.attack1)
                 {
-                    StartCoroutine(Attack1());
+                    Attack1();
                     nextAttackTime = Time.deltaTime + 1f / attackRate;
                 }
             }
@@ -465,7 +465,7 @@ namespace StarterAssets
         }
 
 
-        private IEnumerator Attack1()
+        private void Attack1()
         {
             _animator.SetTrigger("Attack1");
 
@@ -473,28 +473,15 @@ namespace StarterAssets
 
             foreach (Collider enemy in hitEnemies)
             {
-                yield return new WaitForSeconds(nextAttackTime);
-                enemy.GetComponent<Enemy>().TakeDamage();
+                if(enemy.GetComponent<Enemy>().dead == false)
+                {
+                    enemy.GetComponent<Enemy>().TakeDamage();
+                }
             }
 
         }
 
-        private IEnumerator Attack2()
-        {
-            Vector2 newMovement = _input.move;
-
-
-            _animator.SetBool("Attack2", true);
-
-            _input.move = Vector2.zero;
-
-            yield return new WaitForSeconds(0.2f);
-
-            _animator.SetBool("Attack2", false);
-            _input.attack1 = false;
-
-            _input.move = newMovement;
-        }
+      
 
 
        

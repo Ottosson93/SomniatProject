@@ -7,27 +7,42 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
 
+
     public int health;
-    public void TakeDamage(int damage)
+    public int current;
+
+    public bool dead = false;
+
+    private void Start()
     {
-        health -= damage;
-        if (health < 0)
-        {
-            Destroy(gameObject);
-        }
+        current = health;
     }
+
 
     public void TakeDamage() 
     {
         animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(10, transform);
+
+        current -= 10;
+
+        if(current <= 0)
+        {
+            StartCoroutine(Die());
+        }
+        
     }
 
 
-    void Die() { 
-        animator.SetBool("Dead", true);
-        GetComponent<MeshCollider>().enabled = false;
+    IEnumerator Die() { 
+        animator.SetBool("Die", true);
+        GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
+
+        yield return new WaitForSeconds(2f);
+
+        dead = true;                
+        Destroy(gameObject);
     }
 
 

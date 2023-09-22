@@ -23,7 +23,7 @@ public class Sword : MonoBehaviour
             {
                 if (hitCollider.CompareTag("Enemy"))
                 {
-                    hitCollider.GetComponent<Enemy>().TakeDamage(damage);
+                    //hitCollider.GetComponent<Enemy>().TakeDamage(damage);
                 }
             }
 
