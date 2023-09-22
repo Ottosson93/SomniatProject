@@ -61,19 +61,6 @@ namespace StarterAssets
         public LayerMask GroundLayers;
 
 
-        //[Tooltip("The cooldown of the dash")]
-        //public const float maxDashTime = 1.0f;
-
-        //[Tooltip("The distance of the dash")]
-        //public float dashDistance = 10f;
-
-        //[Tooltip("Dash break")]
-        //public float dashStoppingSpeed = 0.1f;
-
-
-
-        //[Tooltip("The speed of the dash")]
-        //public float dashSpeed = 6f;
 
 
         public float dashingPower = 24f;
@@ -83,6 +70,18 @@ namespace StarterAssets
         public TrailRenderer tr;
 
         private bool isDashing = false;
+
+
+        public Transform attackPoint;
+        public float attackRange = 0.5f;
+        public LayerMask enemyLayers;
+
+
+        public float attackRate = 4f;
+        float nextAttackTime = 0f;
+
+
+
 
 
         // cinemachine
@@ -172,11 +171,25 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
+
+
+            if(Time.time >= nextAttackTime)
+            {
+                if (_input.attack1)
+                {
+                    StartCoroutine(Attack1());
+                    nextAttackTime = Time.deltaTime + 1f / attackRate;
+                }
+            }
+
             if (_input.dash)
             {
                 
                 StartCoroutine(Dash());
             }
+
+
+
 
         }
 
@@ -203,10 +216,7 @@ namespace StarterAssets
                 QueryTriggerInteraction.Ignore);
 
             // update animator if using character
-            if (_hasAnimator)
-            {
-                _animator.SetBool(_animIDGrounded, Grounded);
-            }
+            
         }
 
         private void CameraRotation()
@@ -304,42 +314,7 @@ namespace StarterAssets
 
         }
 
-        //private void Dash()
-        //{
-
-            
-
-
-
-
-        //    //float currentDashTime = maxDashTime;
-
-        //    //Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
-        //    //if (_input.dash)
-        //    //{
-        //    //    currentDashTime = 0;
-        //    //}
-        //    //if(currentDashTime < maxDashTime)
-        //    //{
-        //    //    dashSpeed = 6f;
-        //    //    // move the player
-        //    //    _controller.Move((targetDirection.normalized * (_speed * Time.deltaTime) +
-        //    //                     new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashDistance);
-
-        //    //    currentDashTime += dashStoppingSpeed;
-        //    //}
-        //    //else
-        //    //{
-        //    //    dashSpeed = 0;
-        //    //    _input.dash = false;
-        //    //}
-
-
-        //    //// move the player
-        //    //_controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-        //    //                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-        //}
+        
 
 
         private void JumpAndGravity()
@@ -349,12 +324,12 @@ namespace StarterAssets
                 // reset the fall timeout timer
                 _fallTimeoutDelta = FallTimeout;
 
-                // update animator if using character
-                if (_hasAnimator)
-                {
-                    _animator.SetBool(_animIDJump, false);
-                    _animator.SetBool(_animIDFreeFall, false);
-                }
+                //// update animator if using character
+                //if (_hasAnimator)
+                //{
+                //    _animator.SetBool(_animIDJump, false);
+                //    _animator.SetBool(_animIDFreeFall, false);
+                //}
 
                 // stop our velocity dropping infinitely when grounded
                 if (_verticalVelocity < 0.0f)
@@ -422,6 +397,14 @@ namespace StarterAssets
 
         private void OnDrawGizmosSelected()
         {
+            if (attackPoint == null)
+                return;
+
+
+            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+
+
+
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
             Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
 
@@ -480,5 +463,41 @@ namespace StarterAssets
             yield return new WaitForSeconds(dashingCooldown);
 
         }
+
+
+        private IEnumerator Attack1()
+        {
+            _animator.SetTrigger("Attack1");
+
+            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+            foreach (Collider enemy in hitEnemies)
+            {
+                yield return new WaitForSeconds(nextAttackTime);
+                enemy.GetComponent<Enemy>().TakeDamage();
+            }
+
+        }
+
+        private IEnumerator Attack2()
+        {
+            Vector2 newMovement = _input.move;
+
+
+            _animator.SetBool("Attack2", true);
+
+            _input.move = Vector2.zero;
+
+            yield return new WaitForSeconds(0.2f);
+
+            _animator.SetBool("Attack2", false);
+            _input.attack1 = false;
+
+            _input.move = newMovement;
+        }
+
+
+       
+
     }
 }
