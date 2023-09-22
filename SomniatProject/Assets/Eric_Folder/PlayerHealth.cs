@@ -6,11 +6,11 @@ using UnityEngine.UI;
 namespace Assets.Eric_folder
 {
 
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : Health
     {
         [SerializeField] int maxHealth = 10;
-        public float Health;
-        [SerializeField] Slider healthBar;
+        
+        //[SerializeField] Slider healthBar;
         private Animator animator;
         [SerializeField] GameObject playerDieExplosion;
         [SerializeField] float healthDamageAnimation;
@@ -20,47 +20,48 @@ namespace Assets.Eric_folder
         {
             waitForAnimationTimer = 0.3f;
             waitForEndScreenTimer = 1.1f;
-            Health = maxHealth;
+            health = maxHealth;
             if (GameObject.Find("PassableObject") != null)
             {
               //  GameObject.Find("PassableObject").GetComponent<PassingScript>().GetHealth();
             }
-            UpdateHealthBar();
+           // UpdateHealthBar();
             animator = GetComponent<Animator>();
-            healthDamageAnimation = Health;
+            healthDamageAnimation = health;
         }
 
-        private void UpdateHealthBar()
+        /*private void UpdateHealthBar()
         {
             float precentageHealth = (float)Health / (float)maxHealth;
             float sliderValue = precentageHealth * 3.5f; //3.5 is tested to be the best value for the healthbar.
-            healthBar.value = sliderValue;
-        }
+          //  healthBar.value = sliderValue;
+        }*/
         IEnumerator GettingHurt(float hurtAnimationDelay)
         {
-            animator.Play("Red_Solider_light_Hurt");
+           // animator.Play("Red_Solider_light_Hurt");
             yield return new WaitForSeconds(hurtAnimationDelay);
-            healthDamageAnimation = Health;
+            healthDamageAnimation = health;
         }
         private void Update()
         {
-            if (healthDamageAnimation > Health)
+            if (healthDamageAnimation > health)
             {
                 StartCoroutine(GettingHurt(.7f));
             }
             else
             {
-                animator.Play("Red_Solider_light_Walking");
+                //animator.Play("Red_Solider_light_Walking");
             }
 
         }
-        public void TakeDamage(float damage)
+        public override void TakeDamage(int damage)
         {
-            Health -= damage;
-            UpdateHealthBar();
-            if (Health <= 0)
+            health -= damage;
+            //UpdateHealthBar();
+            if (health <= 0)
             {
-                StartCoroutine(Die());
+               // StartCoroutine(Die());
+               gameObject.SetActive(false);
             }
         }
 
@@ -68,18 +69,18 @@ namespace Assets.Eric_folder
         {
             Instantiate(playerDieExplosion, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(waitForAnimationTimer);
-            animator.Play("DieAnimation");
+           // animator.Play("DieAnimation");
             yield return new WaitForSeconds(waitForEndScreenTimer);
-            FindObjectOfType<LevelLoader>().LoadGameOver();
+           // FindObjectOfType<LevelLoader>().LoadGameOver();
         }
         public void Heal(int amountHealed)
         {
-            Health += amountHealed;
-            if (Health > maxHealth)
+            health += amountHealed;
+            if (health > maxHealth)
             {
-                Health = maxHealth;
+                health = maxHealth;
             }
-            UpdateHealthBar();
+           // UpdateHealthBar();
         }
     }
 

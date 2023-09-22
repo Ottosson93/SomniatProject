@@ -5,22 +5,27 @@ using UnityEngine;
 namespace Assets.Eric_folder
 {
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : Health
 {
     [SerializeField] int scoreValue = 10;
-    public float health = 20;
+     
     [SerializeField] AudioSource hitSound;
     [SerializeField] AudioClip deathSound;
     [SerializeField] GameObject bloodParticle;
 
-    public void TakingDamage(int damage)
+        private void Start()
+        {
+            
+        }
+
+        public override void TakeDamage(int damage)
     {
         health -= damage;
         //if (GetComponentInChildren<HealthBar>() != null)
         {
        //     GetComponentInChildren<HealthBar>().hp = health;
         }
-        Instantiate(bloodParticle, transform.position, Quaternion.identity);
+        //Instantiate(bloodParticle, transform.position, Quaternion.identity);
         Die();
     }
 
@@ -45,8 +50,8 @@ public class EnemyHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            Instantiate(GetMoney(), transform.position, Quaternion.identity);
-            AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 0.5f);
+            //Instantiate(GetMoney(), transform.position, Quaternion.identity);
+            //AudioSource.PlayClipAtPoint(deathSound, Camera.main.transform.position, 0.5f);
 
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             if (player != null)

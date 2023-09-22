@@ -6,7 +6,7 @@ namespace Assets.Eric_folder {
 public class MuzzleFlash : MonoBehaviour
 {
     [Range(0.1f, 1f)][SerializeField] float timeBetweenFrames = 1f;
-    [SerializeField] Texture2D[] frames;
+    [SerializeField] Texture[] frames;
     private MeshRenderer rendererMy;
     Coroutine firingCoroutine;
     private bool coroutineRunning = false;
