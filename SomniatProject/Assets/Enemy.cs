@@ -7,14 +7,20 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
 
-
+    public int health;
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void TakeDamage() 
     {
         animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(10, transform);
-
-
     }
 
 
