@@ -157,10 +157,10 @@ public class DungeonGenerator
 
     void ShrinkNodes(RNode n)
     {
-        float shrinkWidth = Random.Range(0, n.width * 0.25f);
+        float shrinkWidth = Random.Range(n.width * 0.05f, n.width * 0.2f);
         n.bottomLeft.x += shrinkWidth;
         n.topRight.x -= shrinkWidth;
-        float shrinkheight = Random.Range(0, n.height * 0.25f);
+        float shrinkheight = Random.Range(n.height * 0.05f, n.height * 0.2f);
         n.bottomLeft.y += shrinkheight;
         n.topRight.y -= shrinkheight;
         //ALSO UPDATE NEW WIDTH AND HEIGHT FOR THESE NEW AREAS
