@@ -30,13 +30,19 @@ public class CheckEnemyInAttackRange : Node
 
         if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange)
         {
+            
             agent.speed = 0f;
             animator.SetTrigger("Attack");
             animator.SetBool("Run", false);
 
             state = NodeState.SUCCESS;
             return state;
+            
+
+            
         }
+
+        
 
         state = NodeState.FAILURE;
         return state;

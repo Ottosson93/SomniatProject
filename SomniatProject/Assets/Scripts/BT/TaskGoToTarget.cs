@@ -8,6 +8,7 @@ public class TaskGoToTarget : Node
     private Transform transform;
     private Animator animator;
     private NavMeshAgent agent;
+    private Enemy enemy;
 
     private float maxFollowTime = 3f;   // Adjust as needed
     private float followStartTime = 0f;
@@ -19,6 +20,7 @@ public class TaskGoToTarget : Node
         this.transform = transform;
         animator = transform.GetComponent<Animator>();
         agent = transform.GetComponent<NavMeshAgent>();
+        enemy = transform.GetComponent<Enemy>();
     }
 
     public override NodeState Evaluate()
@@ -36,7 +38,7 @@ public class TaskGoToTarget : Node
 
 
 
-        if (Vector3.Distance(transform.position, target.position) > 0.01f)
+        if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.attackRange )
         {
             agent.SetDestination(target.position);
 
@@ -51,8 +53,9 @@ public class TaskGoToTarget : Node
                 agent.speed = GuardMeleeBT.speed;
                 ClearData("target");
             }
-                
         }
+
+
 
         followStartTime += Time.deltaTime;
 

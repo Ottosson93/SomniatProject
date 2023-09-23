@@ -163,7 +163,7 @@ namespace StarterAssets
             tr.emitting = false;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             _hasAnimator = TryGetComponent(out _animator);
 
@@ -444,6 +444,7 @@ namespace StarterAssets
 
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+
 
 
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
