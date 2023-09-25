@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using StarterAssets;
 
 namespace Assets.Eric_folder
 {
 
     public class PlayerHealth : Health
     {
-        [SerializeField] int maxHealth = 10;
+        [SerializeField] float maxHealth = 10;
+        public CharacterStat Strength;
+        public CharacterStat Dexterity;
+        public CharacterStat Intelligence;
+
+
         
         //[SerializeField] Slider healthBar;
         private Animator animator;
@@ -18,9 +24,22 @@ namespace Assets.Eric_folder
         [SerializeField] float waitForEndScreenTimer;
         void Start()
         {
+            Strength = new CharacterStat();
+            Dexterity = new CharacterStat();
+            Intelligence = new CharacterStat();
             waitForAnimationTimer = 0.3f;
             waitForEndScreenTimer = 1.1f;
             health = maxHealth;
+
+            Dexterity.BaseValue = 2.0f;
+            Strength.BaseValue = 5.0f;
+            Intelligence.BaseValue = 1.0f;
+
+
+            ThirdPersonController tpc = GetComponent<ThirdPersonController>();
+                tpc.MoveSpeed = Dexterity.Value;
+            health = Strength.Value;
+            
             if (GameObject.Find("PassableObject") != null)
             {
               //  GameObject.Find("PassableObject").GetComponent<PassingScript>().GetHealth();
@@ -29,6 +48,16 @@ namespace Assets.Eric_folder
             animator = GetComponent<Animator>();
             healthDamageAnimation = health;
         }
+
+        public void UpdateCharacterStats()
+        {
+            health = Strength.Value;
+            GetComponent<ThirdPersonController>().MoveSpeed= Dexterity.Value;
+
+            Debug.Log("Updating health + movementspeed : " + health + " " + Dexterity.Value);
+        }
+
+
 
         /*private void UpdateHealthBar()
         {
@@ -52,9 +81,10 @@ namespace Assets.Eric_folder
             {
                 //animator.Play("Red_Solider_light_Walking");
             }
+            
 
         }
-        public override void TakeDamage(int damage)
+        public override void TakeDamage(float damage)
         {
             health -= damage;
             //UpdateHealthBar();
@@ -73,7 +103,7 @@ namespace Assets.Eric_folder
             yield return new WaitForSeconds(waitForEndScreenTimer);
            // FindObjectOfType<LevelLoader>().LoadGameOver();
         }
-        public void Heal(int amountHealed)
+        public void Heal(float amountHealed)
         {
             health += amountHealed;
             if (health > maxHealth)

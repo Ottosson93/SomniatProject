@@ -18,7 +18,7 @@ public class EnemyHealth : Health
             
         }
 
-        public override void TakeDamage(int damage)
+        public override void TakeDamage(float damage)
     {
         health -= damage;
         //if (GetComponentInChildren<HealthBar>() != null)
