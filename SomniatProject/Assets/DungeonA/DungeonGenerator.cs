@@ -10,9 +10,11 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 
-public class DungeonGenerator
+public class DungeonGenerator : MonoBehaviour
 {
     int minRoomSize;
+
+    //Node system variables
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> finishedNodes = new List<RNode>();
@@ -22,7 +24,11 @@ public class DungeonGenerator
 
     Material material;
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr)
+    //Enemy variables
+    GameObject enemyPrefab;
+    List<GameObject> enemyList = new List<GameObject>();
+
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject enemy)
     {
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
@@ -30,6 +36,7 @@ public class DungeonGenerator
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2));
         nodes.Add(rootNode);
         this.material = material; 
+        this.enemyPrefab = enemy;
     }
 
     public void Generate()
@@ -203,6 +210,7 @@ public class DungeonGenerator
             {
                 ShrinkNodes(finishedNodes[i]);
                 CreateMesh(finishedNodes[i], i);
+                SpawnEnemy(finishedNodes[i], enemyPrefab);
             }
         }
     }
@@ -266,5 +274,14 @@ public class DungeonGenerator
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
+    }
+
+    public void SpawnEnemy(RNode node, GameObject enemyPrefab)
+    {
+        Vector3 bottomLeftV = new Vector3(node.bottomLeft.x, 0, node.bottomLeft.y);
+        Vector3 center = new Vector3(bottomLeftV.x + node.width / 2, 0, bottomLeftV.z + node.height / 2);
+        Instantiate(enemyPrefab, center, Quaternion.identity);
+        enemyList.Add(enemyPrefab);
+        Debug.Log("Printing enemies: " + enemyList.Count());
     }
 }
