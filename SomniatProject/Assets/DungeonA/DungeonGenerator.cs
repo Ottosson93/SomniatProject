@@ -12,9 +12,7 @@ using UnityEngine.Rendering.Universal;
 
 public class DungeonGenerator
 {
-    //int dungeonSize;
     int minRoomSize;
-
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> finishedNodes = new List<RNode>();
@@ -23,8 +21,6 @@ public class DungeonGenerator
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
 
     Material material;
-
-
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr)
     {
@@ -38,17 +34,18 @@ public class DungeonGenerator
 
     public void Generate()
     {
-
         while (nodes.Count > 0)
         {
-            RNode node = nodes[nodes.Count - 1];
-            
+            int takeRandom = Random.Range(0, nodes.Count);
+            RNode node = nodes[takeRandom];
+
             //REVERT BACK TO PREVIOUS VERSION WITHOUT MANUAL ROOMS THAT WORKS: JUST CHANGE "ManageSplit()" with "SplitRoom()";
             if (node.width > minRoomSize && node.height > minRoomSize)
             {
                 ManageSplit(node);
                 //SplitRoom(node);
             }
+            
             else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize) //REMOVE?
             {
                 
@@ -62,6 +59,7 @@ public class DungeonGenerator
                 ManageSplit(node);
                 //SplitRoom(node);
             }
+            
             else
             {
                 node.bottom = true;
@@ -80,38 +78,35 @@ public class DungeonGenerator
             largestPreMadeRoom.y = preMadeRooms[preMadeRooms.Count - 1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
             GameObject manualRoom = preMadeRooms[preMadeRooms.Count - 1];
 
-            if ((node.width > (largestPreMadeRoom.x * 1.5) && node.width < (largestPreMadeRoom.x * 4) && node.height >= largestPreMadeRoom.y)
-            || (node.height > (largestPreMadeRoom.y * 1.5) && node.height < (largestPreMadeRoom.y * 4) && node.width >= largestPreMadeRoom.x))
+            if ((node.width > (largestPreMadeRoom.x) && node.width < (largestPreMadeRoom.x * 2) && node.height >= largestPreMadeRoom.y)
+            || (node.height > (largestPreMadeRoom.y) && node.height < (largestPreMadeRoom.y * 2) && node.width >= largestPreMadeRoom.x))
             {
+                float offsetWidth = Random.Range(largestPreMadeRoom.x * 0.25f, largestPreMadeRoom.x * 0.4f);
+                float offsetHeight = Random.Range(largestPreMadeRoom.y * 0.25f, largestPreMadeRoom.y * 0.4f);
                 Debug.Log("There is enough space for a manual room");
                 if (node.width - largestPreMadeRoom.x > node.height - largestPreMadeRoom.y)
                 {
-                    //there will be more space left horizontally of the pre-made room
-                    //so split it vertically? right?
 
                     //this is the node that hold the object and and coordinates of the manual room;
-                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
+                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
                     PreMadeRoom pmr = new PreMadeRoom(posM, manualRoom);
                     preMadeRoomNodes.Add(pmr);
 
-                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x + largestPreMadeRoom.x, node.bottomLeft.y), node.topRight);
+                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, node.bottomLeft.y), node.topRight);
                     //Change ^ if adding another node of remaining space
                     newNode.parent = node;
                     newNode.sibling = null; //change?
                     newNode.vertical = true;
                     nodes.Add(newNode);
-
-                    //problem: a room of size 80x100 is elligable for split, but that would make an insertion of manual room of 25x25, the room into an 25x75 right?
-                    //solution: maybe check if the lesser space above or beside is eligable for a seperate room, then make that into a node before slicing for the manual
-                    //OR: Maybe check if the space above/bellow is large above minRoomSize and make that into a additional room/node
                 }
                 else
                 {
-                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
+
+                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
                     PreMadeRoom pmr = new PreMadeRoom(posM, manualRoom);
                     preMadeRoomNodes.Add(pmr);
 
-                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + largestPreMadeRoom.y), node.topRight);
+                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), node.topRight);
                     //Change ^ if adding another node of remaining space
                     newNode.parent = node;
                     newNode.sibling = null; //change?
@@ -162,6 +157,8 @@ public class DungeonGenerator
             newNode2.sibling = newNode;
             newNode.vertical = true;
             newNode2.vertical = true;
+
+
             nodes.Add(newNode);
             nodes.Add(newNode2);
         } 
@@ -212,10 +209,10 @@ public class DungeonGenerator
 
     void ShrinkNodes(RNode n)
     {
-        float shrinkWidth = Random.Range(n.width * 0.05f, n.width * 0.2f);
+        float shrinkWidth = Random.Range(n.width * 0.1f, n.width * 0.2f);
         n.bottomLeft.x += shrinkWidth;
         n.topRight.x -= shrinkWidth;
-        float shrinkheight = Random.Range(n.height * 0.05f, n.height * 0.2f);
+        float shrinkheight = Random.Range(n.height * 0.1f, n.height * 0.2f);
         n.bottomLeft.y += shrinkheight;
         n.topRight.y -= shrinkheight;
 
