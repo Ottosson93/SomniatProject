@@ -10,12 +10,9 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 
-public class DungeonGenerator : MonoBehaviour
+public class DungeonGenerator
 {
-    //int dungeonSize;
     int minRoomSize;
-
-    //Node system variables
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> finishedNodes = new List<RNode>();
@@ -24,14 +21,8 @@ public class DungeonGenerator : MonoBehaviour
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
 
     Material material;
-    
-    //Enemy variables
-    GameObject enemyPrefab;
-    List<GameObject> enemyList = new List<GameObject>();
 
-
-
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject enemyPrefab)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr)
     {
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
@@ -39,22 +30,22 @@ public class DungeonGenerator : MonoBehaviour
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2));
         nodes.Add(rootNode);
         this.material = material; 
-        this.enemyPrefab = enemyPrefab;
     }
 
     public void Generate()
     {
-
         while (nodes.Count > 0)
         {
-            RNode node = nodes[nodes.Count - 1];
-            
+            int takeRandom = Random.Range(0, nodes.Count);
+            RNode node = nodes[takeRandom];
+
             //REVERT BACK TO PREVIOUS VERSION WITHOUT MANUAL ROOMS THAT WORKS: JUST CHANGE "ManageSplit()" with "SplitRoom()";
             if (node.width > minRoomSize && node.height > minRoomSize)
             {
                 ManageSplit(node);
                 //SplitRoom(node);
             }
+            
             else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize) //REMOVE?
             {
                 
@@ -68,6 +59,7 @@ public class DungeonGenerator : MonoBehaviour
                 ManageSplit(node);
                 //SplitRoom(node);
             }
+            
             else
             {
                 node.bottom = true;
@@ -86,38 +78,35 @@ public class DungeonGenerator : MonoBehaviour
             largestPreMadeRoom.y = preMadeRooms[preMadeRooms.Count - 1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
             GameObject manualRoom = preMadeRooms[preMadeRooms.Count - 1];
 
-            if ((node.width > (largestPreMadeRoom.x * 2) && node.width < (largestPreMadeRoom.x * 3) && node.height >= largestPreMadeRoom.y)
-            || (node.height > (largestPreMadeRoom.y * 2) && node.height < (largestPreMadeRoom.y * 3) && node.width >= largestPreMadeRoom.x))
+            if ((node.width > (largestPreMadeRoom.x) && node.width < (largestPreMadeRoom.x * 2) && node.height >= largestPreMadeRoom.y)
+            || (node.height > (largestPreMadeRoom.y) && node.height < (largestPreMadeRoom.y * 2) && node.width >= largestPreMadeRoom.x))
             {
+                float offsetWidth = Random.Range(largestPreMadeRoom.x * 0.25f, largestPreMadeRoom.x * 0.4f);
+                float offsetHeight = Random.Range(largestPreMadeRoom.y * 0.25f, largestPreMadeRoom.y * 0.4f);
                 Debug.Log("There is enough space for a manual room");
                 if (node.width - largestPreMadeRoom.x > node.height - largestPreMadeRoom.y)
                 {
-                    //there will be more space left horizontally of the pre-made room
-                    //so split it vertically? right?
 
                     //this is the node that hold the object and and coordinates of the manual room;
-                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
+                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
                     PreMadeRoom pmr = new PreMadeRoom(posM, manualRoom);
                     preMadeRoomNodes.Add(pmr);
 
-                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x + largestPreMadeRoom.x, node.bottomLeft.y), node.topRight);
+                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, node.bottomLeft.y), node.topRight);
                     //Change ^ if adding another node of remaining space
                     newNode.parent = node;
                     newNode.sibling = null; //change?
                     newNode.vertical = true;
                     nodes.Add(newNode);
-
-                    //problem: a room of size 80x100 is elligable for split, but that would make an insertion of manual room of 25x25, the room into an 25x75 right?
-                    //solution: maybe check if the lesser space above or beside is eligable for a seperate room, then make that into a node before slicing for the manual
-                    //OR: Maybe check if the space above/bellow is large above minRoomSize and make that into a additional room/node
                 }
                 else
                 {
-                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2);
+
+                    Vector3 posM = new Vector3(node.bottomLeft.x + largestPreMadeRoom.x / 2, 0, node.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
                     PreMadeRoom pmr = new PreMadeRoom(posM, manualRoom);
                     preMadeRoomNodes.Add(pmr);
 
-                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + largestPreMadeRoom.y), node.topRight);
+                    RNode newNode = new RNode(new Vector2(node.bottomLeft.x, node.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), node.topRight);
                     //Change ^ if adding another node of remaining space
                     newNode.parent = node;
                     newNode.sibling = null; //change?
@@ -168,6 +157,8 @@ public class DungeonGenerator : MonoBehaviour
             newNode2.sibling = newNode;
             newNode.vertical = true;
             newNode2.vertical = true;
+
+
             nodes.Add(newNode);
             nodes.Add(newNode2);
         } 
@@ -212,24 +203,26 @@ public class DungeonGenerator : MonoBehaviour
             {
                 ShrinkNodes(finishedNodes[i]);
                 CreateMesh(finishedNodes[i], i);
-                SpawnEnemy(finishedNodes[i], enemyPrefab);
             }
         }
     }
 
     void ShrinkNodes(RNode n)
     {
-        float shrinkWidth = Random.Range(n.width * 0.05f, n.width * 0.2f);
+        float shrinkWidth = Random.Range(n.width * 0.1f, n.width * 0.2f);
         n.bottomLeft.x += shrinkWidth;
         n.topRight.x -= shrinkWidth;
-        float shrinkheight = Random.Range(n.height * 0.05f, n.height * 0.2f);
+        float shrinkheight = Random.Range(n.height * 0.1f, n.height * 0.2f);
         n.bottomLeft.y += shrinkheight;
         n.topRight.y -= shrinkheight;
 
         n.UpdateWH();
     }
 
-    
+    public List<PreMadeRoom> GetManualCoordinates()
+    {
+        return preMadeRoomNodes;
+    }
 
     void CreateMesh(RNode n, int id)
     {
@@ -273,19 +266,5 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
-    }
-    
-    public void SpawnEnemy(RNode node, GameObject enemyPrefab)
-    {
-        Vector3 bottomLeftV = new Vector3(node.bottomLeft.x, 0, node.bottomLeft.y);
-        Vector3 center = new Vector3(bottomLeftV.x + node.width / 2, 0, bottomLeftV.z + node.height / 2);
-        Instantiate(enemyPrefab, center, Quaternion.identity);
-        enemyList.Add(enemyPrefab);
-        Debug.Log("Printing enemies: " + enemyList.Count());
-    }
-    
-    public List<PreMadeRoom> GetManualCoordinates()
-    {
-        return preMadeRoomNodes;
     }
 }

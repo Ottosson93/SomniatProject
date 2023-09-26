@@ -10,6 +10,7 @@ public class RNode
     public RNode parent, sibling;
     public bool bottom = false;
     public bool vertical = false;
+    
 
     public RNode(Vector2 bottomLeft, Vector2 topRight) //Vector2 topLeft, Vector2 bottomRight
     {
