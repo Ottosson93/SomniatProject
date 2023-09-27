@@ -29,6 +29,7 @@ public abstract class Item : MonoBehaviour
 
         }
         c.UpdateCharacterStats();
+        Debug.Log("Added Some Stat");
     }
 
     public void Unequip(Player c)
