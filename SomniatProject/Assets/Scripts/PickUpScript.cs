@@ -18,7 +18,7 @@ public class PickUpScript : MonoBehaviour
     private Material material;
     Vector3 distanceToPlayer;
     bool displayKey, playerInRange;
-      Item item;
+
 
 
     void Start()
@@ -27,17 +27,12 @@ public class PickUpScript : MonoBehaviour
         playerInRange = false;
         eKeyPlane = transform.GetChild(0);
         material = eKeyPlane.GetComponent<MeshRenderer>().material;
-        StatModifier[] statModifiers = new StatModifier[]
-        {
-            new StatModifier(5.0f,StatModifier.StatModType.Flat,this,StatModifier.CharacterStatType.Dexterity),
-            new StatModifier(2.0f,StatModifier.StatModType.PercentMult,this,StatModifier.CharacterStatType.Dexterity)
-        };
-        item = new Item(statModifiers);
+        
         
     }
 
     // Update is called once per frame
-    async void Update()
+    public async Task<bool> PickUp()
     {
         distanceToPlayer = player.position - transform.position;
 
@@ -53,7 +48,7 @@ public class PickUpScript : MonoBehaviour
             if (Keyboard.current.eKey.wasReleasedThisFrame)
             {
                 damageTextPlayer.AddHealth(Random.Range(10, 100) , transform);
-                item.Equip(player.GetComponent<PlayerHealth>());
+                return true;
             }
         }
         else
@@ -63,6 +58,7 @@ public class PickUpScript : MonoBehaviour
             if (!displayKey && CanDecreaseOpacity)
                 await HideKey();
         }
+        return false;
     }
 
     private async Task ShowKey()

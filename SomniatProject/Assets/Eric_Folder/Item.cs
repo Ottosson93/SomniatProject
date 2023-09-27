@@ -1,27 +1,17 @@
 using System;
 using Assets.Eric_folder;
+using UnityEngine;
 
 [Serializable]
-public class Item
+public abstract class Item : MonoBehaviour
 {
     protected StatModifier[] stat_arr;
      
 
 
-   public Item()
-    {
-        stat_arr = new StatModifier[]
-        {
-            new StatModifier(1.0f,StatModifier.StatModType.Flat,this,StatModifier.CharacterStatType.Dexterity)
-        };
-    }
-    public Item(StatModifier[] statModifiers)
-    {
-        stat_arr = statModifiers;
-    }
 
 
-    public virtual void Equip(PlayerHealth c)
+    public virtual void Equip(Player c)
     {
         for (int i = 0; i < stat_arr.Length; ++i)
         {
@@ -41,7 +31,7 @@ public class Item
         c.UpdateCharacterStats();
     }
 
-    public void Unequip(PlayerHealth c)
+    public void Unequip(Player c)
     {
         c.Strength.RemoveAllModifiersFromSource(this);
         c.Dexterity.RemoveAllModifiersFromSource(this);

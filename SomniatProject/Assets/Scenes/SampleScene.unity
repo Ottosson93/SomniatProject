@@ -1110,14 +1110,54 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1563865308}
     - target: {fileID: 8770628506346339599, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8770628506346339599, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
       propertyPath: damageTextPlayer
       value: 
       objectReference: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4228824917890696628, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1522140534}
   m_SourcePrefab: {fileID: 100100000, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
+--- !u!1 &1522140532 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4228824917890696628, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
+  m_PrefabInstance: {fileID: 1522140531}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522140533 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8770628506346339599, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
+  m_PrefabInstance: {fileID: 1522140531}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522140532}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1d0eb3da23422f408ca51cfd8183c44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1522140534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522140532}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statType: 00000000
+  modType: 00000000
+  value:
+  - 1
+  pickUpScript: {fileID: 1522140533}
 --- !u!1 &1537261648 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1111077012074832685, guid: 5bcb057a99d726d468b6c14f72b1a4bd, type: 3}
@@ -1198,7 +1238,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0522b728d3c9f3e408ca6f29805220f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
   maxHealth: 10
   Strength:
     BaseValue: 0
@@ -1206,10 +1245,6 @@ MonoBehaviour:
     BaseValue: 0
   Intelligence:
     BaseValue: 0
-  playerDieExplosion: {fileID: 0}
-  healthDamageAnimation: 0
-  waitForAnimationTimer: 0
-  waitForEndScreenTimer: 0
 --- !u!1 &1604329104
 GameObject:
   m_ObjectHideFlags: 0
