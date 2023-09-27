@@ -33,17 +33,13 @@ namespace Assets.Eric_folder
         {
             if (other.gameObject.tag != targetTag)
                 return;
-            Health health;
+            
             if (targetTag == "Player")
-                health = other.GetComponent<PlayerHealth>();
+                other.GetComponent<Player>().TakeDamage(damage);
             else
-                health = other.GetComponent<EnemyHealth>();
+                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
 
-            if (health != null)
-            {
-                health.TakeDamage(damage);
-                Debug.Log("Adding damage!");
-            }
+            
             gameObject.SetActive(false);
         }
 

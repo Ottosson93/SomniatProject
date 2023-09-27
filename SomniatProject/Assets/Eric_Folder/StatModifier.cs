@@ -1,6 +1,6 @@
+using UnityEngine;
 
-
-public class StatModifier 
+public class StatModifier : MonoBehaviour
 {
     public enum CharacterStatType
     {
@@ -17,17 +17,29 @@ public class StatModifier
         PercentMult,
     };
 
-    public readonly object Source;
-    public readonly int Order;
+
+    private void Start()
+    {
+        if(_order == 0)
+        {
+            _order = (int)statModType;
+        }
+        Source = GetComponent<Relic>();
+    }
+
 
     public StatModType statModType;
+    public  object Source;
+    public int Order { get { return _order; } }
+    private int _order;
 
-    public readonly float Value;
+
+    public  float Value;
     public StatModifier(float value, StatModType type, int order, object src)
     {
         statModType = type;
         Value = value;
-        Order = order;
+        _order = order;
         Source = src;
     }
 
