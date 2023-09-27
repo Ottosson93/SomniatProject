@@ -19,6 +19,8 @@ public class PlayerLuciditySystem : MonoBehaviour
     private void Awake()
     {
         spellInput = new InputAction("Spell Cast", binding: "<Keyboard>/q");
+
+        currentLucidity = maxLucidity;
     }
 
     private void OnEnable()
@@ -33,9 +35,11 @@ public class PlayerLuciditySystem : MonoBehaviour
 
     private void Update()
     {
-        if(!castingSpell && spellInput.triggered)
+        bool hasEnoughLucidity = currentLucidity - spellToCast.SpellToCast.LucidityCost > 0f;
+        if(!castingSpell && spellInput.triggered && hasEnoughLucidity)
         {
             castingSpell = true;
+            currentLucidity -= spellToCast.SpellToCast.LucidityCost;
             currentCastTimer = 0;
             CastSpell();
         }
