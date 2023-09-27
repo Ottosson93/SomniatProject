@@ -41,9 +41,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8375683441798114363}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46115c611d359e443a0715e3558fb0ff, type: 3}
+  m_Script: {fileID: 11500000, guid: bb6182818d8781742aee16fb5fb76f0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currency: 1000
+  currency: 0
   currencyText: {fileID: 0}
-  shop: {fileID: 0}
+  shop: {fileID: 8422779526648998243, guid: 9bc5a85e24f66904399dce469999765a, type: 3}

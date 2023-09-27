@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7107363829114811093}
   - component: {fileID: 6465077685135506131}
   - component: {fileID: 4787386327428889473}
-  - component: {fileID: 1540069273987679298}
+  - component: {fileID: 7122854408554767133}
   m_Layer: 5
   m_Name: Item1
   m_TagString: Untagged
@@ -136,7 +136,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1540069273987679298
+--- !u!114 &7122854408554767133
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -145,13 +145,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1116728695379325303}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cae6fc1ff8ed248b10b1160209cb5b, type: 3}
+  m_Script: {fileID: 11500000, guid: f734b17c01ad83b45becb720eb7d3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 1
+  itemID: 0
   QuantityText: {fileID: 8948931996254964347}
   PriceText: {fileID: 8177792723300569451}
-  ShopManager: {fileID: 3978284075338962006, guid: 99c255938f17115449762b30b39fa4c6, type: 3}
+  ShopManager: {fileID: 0}
 --- !u!1 &1279744632080617381
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ GameObject:
   - component: {fileID: 2408097546914049285}
   - component: {fileID: 7145074136075240670}
   - component: {fileID: 8482316695039316129}
-  - component: {fileID: 7502977467740273128}
+  - component: {fileID: 3147424985920096695}
   m_Layer: 5
   m_Name: Item4
   m_TagString: Untagged
@@ -438,7 +438,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &7502977467740273128
+--- !u!114 &3147424985920096695
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -447,13 +447,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1469000823177002336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cae6fc1ff8ed248b10b1160209cb5b, type: 3}
+  m_Script: {fileID: 11500000, guid: f734b17c01ad83b45becb720eb7d3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 4
+  itemID: 0
   QuantityText: {fileID: 3890114964671884558}
   PriceText: {fileID: 1733169038619857856}
-  ShopManager: {fileID: 3978284075338962006, guid: 99c255938f17115449762b30b39fa4c6, type: 3}
+  ShopManager: {fileID: 0}
 --- !u!1 &1585403703312950518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ GameObject:
   - component: {fileID: 2011033490910502227}
   - component: {fileID: 2318227314359139350}
   - component: {fileID: 7120139434372944088}
-  - component: {fileID: 1595218593780014917}
+  - component: {fileID: 6084996729203221073}
   m_Layer: 5
   m_Name: Item3
   m_TagString: Untagged
@@ -1148,7 +1148,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1595218593780014917
+--- !u!114 &6084996729203221073
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1157,13 +1157,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3225789473748850374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cae6fc1ff8ed248b10b1160209cb5b, type: 3}
+  m_Script: {fileID: 11500000, guid: f734b17c01ad83b45becb720eb7d3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 3
+  itemID: 0
   QuantityText: {fileID: 6810890393530182110}
   PriceText: {fileID: 7531879801812258738}
-  ShopManager: {fileID: 3978284075338962006, guid: 99c255938f17115449762b30b39fa4c6, type: 3}
+  ShopManager: {fileID: 0}
 --- !u!1 &3630379675511722139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1584,7 +1584,7 @@ GameObject:
   - component: {fileID: 11537236557669902}
   - component: {fileID: 3944407256263354924}
   - component: {fileID: 579748627398126743}
-  - component: {fileID: 5744559220880902269}
+  - component: {fileID: 6587919628695015937}
   m_Layer: 5
   m_Name: Item2
   m_TagString: Untagged
@@ -1708,7 +1708,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &5744559220880902269
+--- !u!114 &6587919628695015937
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1717,13 +1717,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5266481137154803813}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cae6fc1ff8ed248b10b1160209cb5b, type: 3}
+  m_Script: {fileID: 11500000, guid: f734b17c01ad83b45becb720eb7d3fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 2
+  itemID: 0
   QuantityText: {fileID: 202299087047334463}
   PriceText: {fileID: 4580603371670408449}
-  ShopManager: {fileID: 3978284075338962006, guid: 99c255938f17115449762b30b39fa4c6, type: 3}
+  ShopManager: {fileID: 0}
 --- !u!1 &6222232288730397101
 GameObject:
   m_ObjectHideFlags: 0
