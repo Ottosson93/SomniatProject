@@ -12,6 +12,7 @@ public class GuardMeleeBT : Tree
     public static float distance = 9f;
     public static float attackRange = 3f;
     public static float rotationSpeed = 3f;
+    public static int attackDamage = 10;
 
 
 
