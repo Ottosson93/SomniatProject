@@ -949,7 +949,7 @@ MonoBehaviour:
   modType: 00000000
   value:
   - 2
-  pickUpScript: {fileID: 0}
+  pickUpScript: {fileID: 1206809308}
 --- !u!1 &1279093200
 GameObject:
   m_ObjectHideFlags: 0

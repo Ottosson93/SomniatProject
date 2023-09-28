@@ -27,6 +27,7 @@ public class Relic : Item
     {
         CreateStats();
         player = FindObjectOfType<Player>();
+        pickUpScript = GetComponent<PickUpScript>();
     }
 
     private void Update()
@@ -36,12 +37,12 @@ public class Relic : Item
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             Player p = other.GetComponent<Player>();
             Equip(p);
         }
-    }
+    }*/
 }

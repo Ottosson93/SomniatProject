@@ -14,6 +14,7 @@ public class Potion : MonoBehaviour
     {
         pickUpScript = FindObjectOfType<PickUpScript>();
         player = FindObjectOfType<Player>();
+        
     }
 
     void Update()
