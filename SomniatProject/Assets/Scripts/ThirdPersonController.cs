@@ -72,13 +72,13 @@ namespace StarterAssets
         private bool isDashing = false;
 
 
-        public Transform attackPoint;
-        public float attackRange = 0.5f;
+        //public Transform attackPoint;
+        //public float attackRange = 0.5f;
         public LayerMask enemyLayers;
 
 
-        public float attackRate = 5f;
-        float nextAttackTime = 0f;
+        //public float attackRate = 4f;
+        //float nextAttackTime = 0f;
 
 
 
@@ -163,35 +163,35 @@ namespace StarterAssets
             tr.emitting = false;
         }
 
-        private void FixedUpdate()
-        {
-            _hasAnimator = TryGetComponent(out _animator);
+        //private void FixedUpdate()
+        //{
+        //    _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+        //    JumpAndGravity();
+        //    GroundedCheck();
+        //    Move();
 
 
 
-            if(Time.time >= nextAttackTime)
-            {
-                if (_input.attack1)
-                {
-                    Attack1();
-                    nextAttackTime = Time.time + 1f / attackRate;
-                }
-            }
+        //    if(Time.time >= nextAttackTime)
+        //    {
+        //        if (_input.attack1)
+        //        {
+        //            StartCoroutine(Attack1());
+        //            nextAttackTime = Time.deltaTime + 1f / attackRate;
+        //        }
+        //    }
 
-            if (_input.dash)
-            {
+        //    if (_input.dash)
+        //    {
                 
-                StartCoroutine(Dash());
-            }
+        //        StartCoroutine(Dash());
+        //    }
 
 
 
 
-        }
+        //}
 
         private void LateUpdate()
         {
@@ -397,11 +397,11 @@ namespace StarterAssets
 
         private void OnDrawGizmosSelected()
         {
-            if (attackPoint == null)
-                return;
+            //if (attackPoint == null)
+            //    return;
 
 
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
 
 
@@ -446,7 +446,6 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
 
-
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
 
@@ -466,23 +465,36 @@ namespace StarterAssets
         }
 
 
-        private void Attack1()
-        {
-            _animator.SetTrigger("Attack1");
+        //private IEnumerator Attack1()
+        //{
+        //    _animator.SetTrigger("Attack1");
 
-            Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+        //    Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-            foreach (Collider enemy in hitEnemies)
-            {
-                if(enemy.GetComponent<Enemy>().dead == false)
-                {
-                    enemy.GetComponent<Enemy>().TakeDamage();
-                }
-            }
+        //    foreach (Collider enemy in hitEnemies)
+        //    {
+        //        yield return new WaitForSeconds(nextAttackTime);
+        //        enemy.GetComponent<Enemy>().TakeDamage();
+        //    }
 
-        }
+        //}
 
-      
+        //private IEnumerator Attack2()
+        //{
+        //    Vector2 newMovement = _input.move;
+
+
+        //    _animator.SetBool("Attack2", true);
+
+        //    _input.move = Vector2.zero;
+
+        //    yield return new WaitForSeconds(0.2f);
+
+        //    _animator.SetBool("Attack2", false);
+        //    _input.attack1 = false;
+
+        //    _input.move = newMovement;
+        //}
 
 
        

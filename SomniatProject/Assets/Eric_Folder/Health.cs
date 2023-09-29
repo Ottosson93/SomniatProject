@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class Health : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int health;
+    public float health;
 
-    public abstract void TakeDamage(int damage);
+    public abstract void TakeDamage(float damage);
 
 }

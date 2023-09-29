@@ -45,7 +45,7 @@ namespace Assets.Eric_folder
                     {
                         if (collider.tag == "Player")
                         {
-                            collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                            collider.GetComponent<Player>().TakeDamage(damage);
                             nextTimeToFire = Time.time + 1f / attacksPerSec;
                         }
 

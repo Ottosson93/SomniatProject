@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 using Random = UnityEngine.Random;
+using Assets.Eric_folder;
 
 public class PickUpScript : MonoBehaviour
 {
@@ -18,16 +19,20 @@ public class PickUpScript : MonoBehaviour
     Vector3 distanceToPlayer;
     bool displayKey, playerInRange;
 
+
+
     void Start()
     {
         displayKey = false;
         playerInRange = false;
         eKeyPlane = transform.GetChild(0);
         material = eKeyPlane.GetComponent<MeshRenderer>().material;
+        
+        
     }
 
     // Update is called once per frame
-    async void Update()
+    public async Task<bool> PickUp()
     {
         distanceToPlayer = player.position - transform.position;
 
@@ -41,7 +46,10 @@ public class PickUpScript : MonoBehaviour
                 await ShowKey();
 
             if (Keyboard.current.eKey.wasReleasedThisFrame)
+            {
                 damageTextPlayer.AddHealth(Random.Range(10, 100) , transform);
+                return true;
+            }
         }
         else
         {
@@ -50,6 +58,7 @@ public class PickUpScript : MonoBehaviour
             if (!displayKey && CanDecreaseOpacity)
                 await HideKey();
         }
+        return false;
     }
 
     private async Task ShowKey()
