@@ -25,10 +25,10 @@ public class DungeonGenerator : MonoBehaviour
     Material material;
 
     //Enemy variables
-    GameObject enemyPrefab;
+    //GameObject enemyPrefab = new GameObject();
     List<GameObject> enemyList = new List<GameObject>();
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject enemy)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, List<GameObject> enemyList)
     {
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
@@ -36,7 +36,7 @@ public class DungeonGenerator : MonoBehaviour
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2));
         nodes.Add(rootNode);
         this.material = material; 
-        this.enemyPrefab = enemy;
+        this.enemyList = enemyList;
     }
 
     public void Generate()
@@ -210,7 +210,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 ShrinkNodes(finishedNodes[i]);
                 CreateMesh(finishedNodes[i], i);
-                SpawnEnemy(finishedNodes[i], enemyPrefab);
+                SpawnEnemy(finishedNodes[i]);
             }
         }
     }
@@ -276,12 +276,20 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<MeshCollider>().convex = true;
     }
 
-    public void SpawnEnemy(RNode node, GameObject enemyPrefab)
+    public void SpawnEnemy(RNode node)
     {
         Vector3 bottomLeftV = new Vector3(node.bottomLeft.x, 0, node.bottomLeft.y);
         Vector3 center = new Vector3(bottomLeftV.x + node.width / 2, 0, bottomLeftV.z + node.height / 2);
-        Instantiate(enemyPrefab, center, Quaternion.identity);
-        enemyList.Add(enemyPrefab);
-        Debug.Log("Printing enemies: " + enemyList.Count());
+
+        for (int i = 0; i < enemyList.Count; i++)
+        { 
+            //Change this to change spawn position for enemy
+            Vector3 offsetForEnemy = new Vector3(Random.Range(-node.width / 2.5f, node.width / 2.5f), 0, Random.Range(-node.height / 2.5f, node.height / 2.5f)); 
+           
+            //Can change enemyList[i] to enemyList[rndNumber] to choose what spawns in the room randomly
+            Instantiate(enemyList[i], center + offsetForEnemy, Quaternion.identity); 
+
+            //todo: get a trigger to check if something has spawned at chosen position
+        }
     }
 }
