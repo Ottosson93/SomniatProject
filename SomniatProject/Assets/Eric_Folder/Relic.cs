@@ -9,7 +9,7 @@ public class Relic : Item
     public StatModifier.CharacterStatType[] statType;
     public StatModifier.StatModType[] modType;
     public float[] value;
-    [SerializeField] PickUpScript pickUpScript;
+     PickUpScript pickUpScript;
 
     void CreateStats()
     {

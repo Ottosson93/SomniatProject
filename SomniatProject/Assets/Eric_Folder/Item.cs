@@ -18,18 +18,26 @@ public abstract class Item : MonoBehaviour
             if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Strength)
             {
                 c.Strength.AddModifier(stat_arr[i]);
+                Debug.Log("Added Strength");
             }
             else if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Intelligence)
             {
                 c.Intelligence.AddModifier(stat_arr[i]);
+                Debug.Log("Added Intelligence");
 
             }
             else if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Dexterity)
+            {
                 c.Dexterity.AddModifier(stat_arr[i]);
+                Debug.Log("Added Dexterity");
+            }
 
         }
         c.UpdateCharacterStats();
-        Debug.Log("Added Some Stat");
+        
+        Transform parent = GetComponentInParent<Transform>();
+        parent.gameObject.SetActive(false);
+
     }
 
     public void Unequip(Player c)

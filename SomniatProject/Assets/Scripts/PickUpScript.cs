@@ -12,7 +12,7 @@ using Assets.Eric_folder;
 public class PickUpScript : MonoBehaviour
 {
     public DamgeTextPlayer damageTextPlayer;
-    public Transform player;
+     Transform player;
     public float pickUpRange = 1.5F;
     private Transform eKeyPlane;
     private Material material;
@@ -27,6 +27,7 @@ public class PickUpScript : MonoBehaviour
         playerInRange = false;
         eKeyPlane = transform.GetChild(0);
         material = eKeyPlane.GetComponent<MeshRenderer>().material;
+        player = FindObjectOfType<Player>().transform;
         
         
     }
@@ -42,11 +43,12 @@ public class PickUpScript : MonoBehaviour
 
             playerInRange = true;
 
-            if (!displayKey && CanIncreaseOpacity)
-                await ShowKey();
+          //  if (!displayKey && CanIncreaseOpacity)
+            //    await ShowKey();
 
             if (Keyboard.current.eKey.wasReleasedThisFrame)
             {
+                Debug.Log("Pressed E");
                 damageTextPlayer.AddHealth(Random.Range(10, 100) , transform);
                 return true;
             }
@@ -55,14 +57,16 @@ public class PickUpScript : MonoBehaviour
         {
             playerInRange = false;
 
-            if (!displayKey && CanDecreaseOpacity)
-                await HideKey();
+            //if (!displayKey && CanDecreaseOpacity)
+              //  await HideKey();
         }
+        Debug.Log("Return False");
         return false;
     }
 
     private async Task ShowKey()
     {
+        Debug.Log("ShowKey");
         displayKey = true;
         while (CanIncreaseOpacity && playerInRange)
         {
@@ -74,6 +78,7 @@ public class PickUpScript : MonoBehaviour
     }
     private async Task HideKey()
     {
+        Debug.Log("HideKey");
         displayKey = true;
         while (CanDecreaseOpacity && !playerInRange)
         {
