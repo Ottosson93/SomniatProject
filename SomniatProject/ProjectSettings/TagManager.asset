@@ -11,10 +11,17 @@ TagManager:
   - 
   - Water
   - UI
+<<<<<<< HEAD
   - 
   - 
   - 
   - 
+=======
+  - Obstacle
+  - Player
+  - Spell
+  - 
+>>>>>>> parent of dcbaf5b (Addar allt förutom animationerna)
   - 
   - 
   - 
