@@ -77,13 +77,8 @@ namespace StarterAssets
         public LayerMask enemyLayers;
 
 
-<<<<<<< HEAD
         //public float attackRate = 4f;
         //float nextAttackTime = 0f;
-=======
-        public float attackRate = 5f;
-        float nextAttackTime = 0f;
->>>>>>> Mindes_Fantasy
 
 
 
@@ -178,7 +173,6 @@ namespace StarterAssets
 
 
 
-<<<<<<< HEAD
         //    if(Time.time >= nextAttackTime)
         //    {
         //        if (_input.attack1)
@@ -187,16 +181,6 @@ namespace StarterAssets
         //            nextAttackTime = Time.deltaTime + 1f / attackRate;
         //        }
         //    }
-=======
-            if(Time.time >= nextAttackTime)
-            {
-                if (_input.attack1)
-                {
-                    Attack1();
-                    nextAttackTime = Time.time + 1f / attackRate;
-                }
-            }
->>>>>>> Mindes_Fantasy
 
         //    if (_input.dash)
         //    {
@@ -462,7 +446,6 @@ namespace StarterAssets
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
 
-
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
 
@@ -482,37 +465,20 @@ namespace StarterAssets
         }
 
 
-<<<<<<< HEAD
         //private IEnumerator Attack1()
         //{
         //    _animator.SetTrigger("Attack1");
-=======
-        private void Attack1()
-        {
-            _animator.SetTrigger("Attack1");
->>>>>>> Mindes_Fantasy
 
         //    Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-<<<<<<< HEAD
         //    foreach (Collider enemy in hitEnemies)
         //    {
         //        yield return new WaitForSeconds(nextAttackTime);
         //        enemy.GetComponent<Enemy>().TakeDamage();
         //    }
-=======
-            foreach (Collider enemy in hitEnemies)
-            {
-                if(enemy.GetComponent<Enemy>().dead == false)
-                {
-                    enemy.GetComponent<Enemy>().TakeDamage();
-                }
-            }
->>>>>>> Mindes_Fantasy
 
         //}
 
-<<<<<<< HEAD
         //private IEnumerator Attack2()
         //{
         //    Vector2 newMovement = _input.move;
@@ -529,9 +495,6 @@ namespace StarterAssets
 
         //    _input.move = newMovement;
         //}
-=======
-      
->>>>>>> Mindes_Fantasy
 
 
        
