@@ -3,26 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CinemachineTarget
-  - Enemy
-  - Weapon
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Floor
+  - 
   - Water
   - UI
-  - Obstacle
-  - Player
-<<<<<<< HEAD
-  - Spell
   - 
-=======
-  - Enemy
-  - Post Processing
->>>>>>> Mindes_Fantasy
+  - 
+  - 
+  - 
   - 
   - 
   - 
