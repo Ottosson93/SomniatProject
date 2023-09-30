@@ -1,37 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.AI;
 using BehaviorTree;
 
-public class TaskAttack : Node
+public class TaskMeleeAttack : Node
 {
 
-    private Transform transform;
-    private EnemyShooting enemyShooting;
-    
+    private Transform lastTarget;
+    private NavMeshAgent agent;
+    private PlayerHealth playerHealth;
+    private Animator animator;
 
 
-    public TaskAttack(Transform transform, EnemyShooting enemyShooting)
+    private float attackTime = 1f;
+    private float attackCounter = 0f;
+
+    public TaskMeleeAttack(Transform transform)
     {
-        this.transform = transform;
-        this.enemyShooting = enemyShooting;
-
+        animator = transform.GetComponent<Animator>();
     }
 
 
     public override NodeState Evaluate()
     {
-        object target = (Transform)GetData("target");
-        
-
-        enemyShooting.timer += Time.deltaTime;
-
-        if (enemyShooting.timer > enemyShooting.cooldownTime)
+        Transform target = (Transform)GetData("target");
+        if(target != lastTarget)
         {
-            enemyShooting.timer = 0;
-            enemyShooting.Shoot();
+            playerHealth = target.GetComponent<PlayerHealth>();
+
+            lastTarget = target;
         }
+        attackCounter += Time.deltaTime;
+        if(attackCounter >= attackTime)
+        {
+            playerHealth.TakeDamage(GuardMeleeBT.attackDamage);
+
+            if(playerHealth.health <= 0f)
+            {
+                ClearData("target");
+                animator.SetBool("Walk", true);
+            }
+            else
+                attackCounter = 0f;
+        }
+
 
         state = NodeState.RUNNING;
         return state;
