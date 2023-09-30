@@ -2,14 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BehaviorTree;
-using UnityEngine.AI;
 
 public class TaskPatrol : Node
 {
     private Transform transform;
     public Transform[] waypoints;
     private Animator animator;
-    private NavMeshAgent agent;
     private int currentWaypointIndex;
 
     private float waitTime = 1f;
@@ -20,29 +18,12 @@ public class TaskPatrol : Node
     {
         this.transform = transform;
         animator = transform.GetComponent<Animator>();
-        agent = transform.GetComponent<NavMeshAgent>();
         this.waypoints = waypoints;
 
     }
 
     public override NodeState Evaluate()
     {
-        Transform wp = waypoints[currentWaypointIndex];
-
-        animator.SetBool("Walk", true);
-
-        // Calculate the direction to the waypoint
-        Vector3 directionToWaypoint = (wp.position - transform.position).normalized;
-
-        // Calculate the rotation to look at the waypoint smoothly
-        Quaternion targetRotation = Quaternion.LookRotation(directionToWaypoint);
-
-        // Smoothly rotate towards the waypoint
-        transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, GuardMeleeBT.rotationSpeed * Time.deltaTime);
-
-
-
-
         if (waiting)
         {
             waitCounter += Time.deltaTime;
@@ -50,12 +31,21 @@ public class TaskPatrol : Node
             if (waitCounter >= waitTime)
             {
                 waiting = false;
+
+                if(transform.position.normalized == Vector3.left)
+                    animator.SetBool("Left", true);
+                if(transform.position.normalized == Vector3.right)
+                    animator.SetBool("Right", true);
+                if (transform.position.normalized == Vector3.up)
+                    animator.SetBool("Up", true);
+                if (transform.position.normalized == Vector3.down)
+                    animator.SetBool("Down", true);
             }
                 
         }
         else
         {
-            
+            Transform wp = waypoints[currentWaypointIndex];
             if (Vector3.Distance(transform.position, wp.position) < 0.01f)
             {
                 transform.position = wp.position;
@@ -68,7 +58,8 @@ public class TaskPatrol : Node
             else
             {
 
-                agent.SetDestination(wp.position);
+
+                transform.position = Vector3.MoveTowards(transform.position, wp.position, GuardBT.speed * Time.deltaTime);
             }
         }
 
