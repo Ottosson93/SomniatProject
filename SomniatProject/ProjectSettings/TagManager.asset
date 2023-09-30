@@ -16,8 +16,13 @@ TagManager:
   - UI
   - Obstacle
   - Player
+<<<<<<< HEAD
   - Spell
   - 
+=======
+  - Enemy
+  - Post Processing
+>>>>>>> Mindes_Fantasy
   - 
   - 
   - 
