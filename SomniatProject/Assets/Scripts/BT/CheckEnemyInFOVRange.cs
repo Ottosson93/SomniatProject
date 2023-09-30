@@ -15,14 +15,13 @@ public class CheckEnemyInFOVRange : Node
     public override NodeState Evaluate()
     {
 
-
         object t = GetData("target");
 
         if (t == null)
         {
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GuardBT.fovRange);
+            Collider[] colliders = Physics.OverlapSphere(transform.position, GuardMeleeBT.fovRange);
 
-            foreach (Collider2D collider in colliders)
+            foreach (Collider collider in colliders)
             {
 
                 // Check if the collider's game object is the player
