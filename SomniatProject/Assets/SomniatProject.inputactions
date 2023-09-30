@@ -230,7 +230,7 @@
                     "name": "",
                     "id": "cd35bc67-ee61-470c-a681-055b9cae3789",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press(pressPoint=0.3,behavior=2)",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "Attack1",
