@@ -10,14 +10,11 @@ public class PreMadeRoom
     public Vector3 centerPos; 
     public GameObject preMadeRoom;
 
-    public PreMadeRoom(Vector3 pos, GameObject pmr)
+    public PreMadeRoom(Vector3 centerPos, GameObject pmr)
     {
-        //this.bottomLeftCorner = bottomLeftCorner;
-        //this.topRightCorner = topRightCorner;
-        this.centerPos = pos;
+        this.centerPos = centerPos;
         this.preMadeRoom = pmr;
         //this.width = width;
         //this.height = height;
-
     }
 }

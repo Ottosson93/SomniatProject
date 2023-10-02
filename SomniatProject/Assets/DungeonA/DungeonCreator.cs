@@ -19,12 +19,13 @@ public class DungeonCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
-        Debug.Log(roomSize);
+        //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
+        //Debug.Log(roomSize);
         
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms);
         generator.Generate();
         generator.BuildRooms();
+        generator.BuildCorridors();
         preMadeNodes = generator.GetManualCoordinates();
         foreach(PreMadeRoom p in preMadeNodes)
         {
