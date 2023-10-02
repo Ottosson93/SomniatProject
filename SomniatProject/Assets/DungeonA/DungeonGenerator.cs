@@ -286,7 +286,6 @@ public class DungeonGenerator : MonoBehaviour
             //Change this to change spawn position for enemy
             Vector3 offsetForEnemy = new Vector3(Random.Range(-node.width / 2.5f, node.width / 2.5f), 0, Random.Range(-node.height / 2.5f, node.height / 2.5f)); 
            
-            //Can change enemyList[i] to enemyList[rndNumber] to choose what spawns in the room randomly
             Instantiate(enemyList[i], center + offsetForEnemy, Quaternion.identity); 
 
             //todo: get a trigger to check if something has spawned at chosen position
