@@ -12,7 +12,7 @@ using StarterAssets;
         public CharacterStat Dexterity;
         public CharacterStat Intelligence;
         private float speed;
-        private float lucidity;
+        public float lucidity;
         private float meleeDamage;
         private float attackSpeed;
 
