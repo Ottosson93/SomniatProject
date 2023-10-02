@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Assets.Eric_folder
-{
 
     public class EnemyShooting : MonoBehaviour
     {
@@ -16,8 +14,12 @@ namespace Assets.Eric_folder
         private Transform target;
         private Rigidbody bulletRigidbody;
         private GameObject bullet;
+        public Transform bulletPos;
 
-        private Rigidbody rigidbody;
+        public float timer;
+        public float cooldownTime;
+
+    private Rigidbody rigidbody;
         private Coroutine shootingCoroutine;
         private bool inRange = false;
         private float nextFire = 0f;
@@ -33,7 +35,7 @@ namespace Assets.Eric_folder
             UpdatingDirection();
             Shoot();
         }
-        void Shoot() // Behaviour tree -->
+        public void Shoot() // Behaviour tree -->
         {
             if (Vector2.Distance(target.position, rigidbody.transform.position) <= shootingRadius)
             {
@@ -80,5 +82,3 @@ namespace Assets.Eric_folder
             //Shooting radius om de behövs för debugging.
         }
     }
-
-}

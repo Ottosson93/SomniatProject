@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
 
-namespace Assets.Eric_folder
-{
-
     public class Player : MonoBehaviour
     {
         [SerializeField] float maxLucidity = 100;
@@ -63,5 +60,3 @@ namespace Assets.Eric_folder
             }
         }
     }
-
-}

@@ -336,8 +336,9 @@ GameObject:
   - component: {fileID: 6629684541128406666}
   - component: {fileID: 189437958377128477}
   - component: {fileID: 2209933729498995069}
-  - component: {fileID: 2412811601543799494}
   - component: {fileID: 8611573942179307939}
+  - component: {fileID: 606327360922671928}
+  - component: {fileID: -8208281938850205785}
   m_Layer: 8
   m_Name: OurGruntPrefab
   m_TagString: Enemy
@@ -478,23 +479,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
---- !u!114 &2412811601543799494
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664211645506664793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b8ec18a45a48f34885d7acaf151a345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 8442482085988791223}
-  damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
-  health: 200
-  current: 0
-  dead: 0
 --- !u!136 &8611573942179307939
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -518,6 +502,43 @@ CapsuleCollider:
   m_Height: 2.34
   m_Direction: 1
   m_Center: {x: -0.1, y: 0.84, z: 0.14}
+--- !u!114 &606327360922671928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664211645506664793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a03cef9de5134f41b966670d3233ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  attacksPerSec: 1
+  attackRadius: 0
+  attackPoint: {fileID: 0}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!114 &-8208281938850205785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664211645506664793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7113c1e93d23d8d4e9059340d8ea3ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 8442482085988791223}
+  damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
+  isBeingHit: 0
+  health: 100
+  current: 0
+  dead: 0
 --- !u!1 &2226753920156996051
 GameObject:
   m_ObjectHideFlags: 0
