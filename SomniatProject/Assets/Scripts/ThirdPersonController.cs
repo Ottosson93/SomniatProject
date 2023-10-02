@@ -173,7 +173,7 @@ namespace StarterAssets
 
 
 
-            if(Time.time >= nextAttackTime)
+            if (Time.time >= nextAttackTime)
             {
                 if (_input.attack1)
                 {
@@ -184,7 +184,7 @@ namespace StarterAssets
 
             if (_input.dash)
             {
-                
+
                 StartCoroutine(Dash());
             }
 
@@ -397,11 +397,11 @@ namespace StarterAssets
 
         private void OnDrawGizmosSelected()
         {
-            if (attackPoint == null)
-                return;
+            //if (attackPoint == null)
+            //    return;
 
 
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
 
 
@@ -497,7 +497,7 @@ namespace StarterAssets
         }
 
 
-       
+
 
     }
 }

@@ -11,7 +11,7 @@ public class Sword : MonoBehaviour
     public float attackRange;
 
     private bool canAttack;
-    
+
     public void Attack()
     {
         if(canAttack)
@@ -26,7 +26,6 @@ public class Sword : MonoBehaviour
                     //hitCollider.GetComponent<Enemy>().TakeDamage(damage);
                 }
             }
-
             canAttack = false;
             Invoke(nameof(ResetAttackCooldown), attackCooldown);
         }
