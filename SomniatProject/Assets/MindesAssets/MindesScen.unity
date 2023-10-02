@@ -1039,6 +1039,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3274898775725854940, guid: d100cc292c62b394382ecc8c261399b0, type: 3}
   m_PrefabInstance: {fileID: 1472614767}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1551619027 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8850706905132399442, guid: d100cc292c62b394382ecc8c261399b0, type: 3}
+  m_PrefabInstance: {fileID: 1472614767}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0522b728d3c9f3e408ca6f29805220f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1838176098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1532,6 +1543,7 @@ GameObject:
   - component: {fileID: 8944336656328210685}
   - component: {fileID: 8944336656328210684}
   - component: {fileID: 8944336656328210688}
+  - component: {fileID: 8944336656328210689}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -1573,6 +1585,22 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8944336656328210689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8944336656328210687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c314006f670e1cf4cb480b7b7fc381bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shader: {fileID: 4800000, guid: 13542f2af98dc7f4594c7d507a98ee09, type: 3}
+  player: {fileID: 1551619027}
+  initialRadius: 14.15
+  minRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

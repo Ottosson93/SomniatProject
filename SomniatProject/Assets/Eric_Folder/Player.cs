@@ -7,7 +7,7 @@ using StarterAssets;
 
     public class Player : MonoBehaviour
     {
-        [SerializeField] float maxLucidity = 100;
+        [SerializeField] public float maxLucidity = 100;
         public CharacterStat Strength;
         public CharacterStat Dexterity;
         public CharacterStat Intelligence;
@@ -46,6 +46,9 @@ using StarterAssets;
         public  void TakeDamage(float damage)
         {
             lucidity -= damage;
+            lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
+
+
             if (lucidity <= 0)
             {
                gameObject.SetActive(false);
