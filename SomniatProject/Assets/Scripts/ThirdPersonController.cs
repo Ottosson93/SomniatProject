@@ -171,9 +171,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-
-
-            if(Time.time >= nextAttackTime)
+            if (Time.time >= nextAttackTime)
             {
                 if (_input.attack1)
                 {
@@ -184,13 +182,8 @@ namespace StarterAssets
 
             if (_input.dash)
             {
-                
                 StartCoroutine(Dash());
             }
-
-
-
-
         }
 
         private void LateUpdate()
@@ -314,9 +307,6 @@ namespace StarterAssets
 
         }
 
-        
-
-
         private void JumpAndGravity()
         {
             if (Grounded)
@@ -397,11 +387,11 @@ namespace StarterAssets
 
         private void OnDrawGizmosSelected()
         {
-            if (attackPoint == null)
-                return;
+            //if (attackPoint == null)
+            //    return;
 
 
-            Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+            //Gizmos.DrawWireSphere(attackPoint.position, attackRange);
 
 
 
@@ -479,25 +469,9 @@ namespace StarterAssets
 
         }
 
-        private IEnumerator Attack2()
-        {
-            Vector2 newMovement = _input.move;
+        
 
 
-            _animator.SetBool("Attack2", true);
-
-            _input.move = Vector2.zero;
-
-            yield return new WaitForSeconds(0.2f);
-
-            _animator.SetBool("Attack2", false);
-            _input.attack1 = false;
-
-            _input.move = newMovement;
-        }
-
-
-       
 
     }
 }

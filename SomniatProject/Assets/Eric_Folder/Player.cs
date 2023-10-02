@@ -4,17 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
 
-namespace Assets.Eric_folder
-{
-
     public class Player : MonoBehaviour
     {
-        [SerializeField] float maxLucidity = 100;
+        [SerializeField] public float maxLucidity = 100;
         public CharacterStat Strength;
         public CharacterStat Dexterity;
         public CharacterStat Intelligence;
         private float speed;
-        private float lucidity;
+        public float lucidity;
         private float meleeDamage;
         private float attackSpeed;
 
@@ -48,6 +45,9 @@ namespace Assets.Eric_folder
         public  void TakeDamage(float damage)
         {
             lucidity -= damage;
+            lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
+
+
             if (lucidity <= 0)
             {
                gameObject.SetActive(false);
@@ -63,5 +63,3 @@ namespace Assets.Eric_folder
             }
         }
     }
-
-}

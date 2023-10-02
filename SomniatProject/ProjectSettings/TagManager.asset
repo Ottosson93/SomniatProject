@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Enemy
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -15,8 +16,8 @@ TagManager:
   - UI
   - Obstacle
   - Player
-  - 
-  - 
+  - Spell
+  - Enemy
   - 
   - 
   - 
