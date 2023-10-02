@@ -244,6 +244,7 @@ public class DungeonGenerator
         corridors = corridorGenerator.GenerateCorridors();
         foreach(CNode c in corridors)
         {
+            c.updateWH();
             CreateM(c);
         }
         
@@ -342,14 +343,15 @@ public class DungeonGenerator
 
 
         //GameObject room = new GameObject("floor" + id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
-        GameObject room = new GameObject("Corridor", typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider), typeof(MeshCollider));
+        GameObject room = new GameObject("Corridor: " + n.id, typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider), typeof(MeshCollider));
         //room.transform.position = Vector3.zero;
         //room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
-        //room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
-        //Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
-        //room.GetComponent<BoxCollider>().center = center;
-        //room.GetComponent<BoxCollider>().center = center;
+        room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
+        Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
+        Debug.Log("Id: " + n.id + " center: " + center + ". Width = " + n.width + " height = " + n.height);
+        room.GetComponent<BoxCollider>().center = center;
+        room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
     }
