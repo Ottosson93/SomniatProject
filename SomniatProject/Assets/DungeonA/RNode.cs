@@ -10,6 +10,7 @@ public class RNode
     public RNode parent, sibling;
     public bool bottom = false;
     public bool vertical = false;
+    
 
     public RNode(Vector2 bottomLeft, Vector2 topRight) //Vector2 topLeft, Vector2 bottomRight
     {
@@ -43,5 +44,31 @@ public class RNode
         //this.width = bottomLeft.x + topRight.x; // not Correct
         //this.childOne = childOne;
         //this.childTwo = childTwo;
+    }
+
+    public void UpdateWH()
+    {
+        if (bottomLeft.x < 0)
+        {
+            if (topLeft.x < 0)
+            {
+                width = bottomLeft.x * -1 + topRight.x * -1;
+            }
+            else
+                width = bottomLeft.x * -1 + topRight.x;
+        }
+        else
+            width = topRight.x - bottomLeft.x;
+        if (bottomLeft.y < 0)
+        {
+            if (topLeft.y < 0)
+            {
+                height = bottomLeft.y * -1 + topRight.y * -1;
+            }
+            else
+                height = bottomLeft.y * -1 + topRight.y;
+        }
+        else
+            height = topRight.y - bottomLeft.y;
     }
 }

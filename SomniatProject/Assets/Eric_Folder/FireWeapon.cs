@@ -52,13 +52,15 @@ namespace Assets.Eric_folder
 
             //     if (!gamePauser.InMenu) //Man kan inte skjuta när man är i shoppen
             {
-                bool buttonDownLeft = UnityEngine.InputSystem.Mouse.current.leftButton.wasPressedThisFrame;
-                bool buttonUpLeft = UnityEngine.InputSystem.Mouse.current.leftButton.wasReleasedThisFrame;
-               if (UnityEngine.InputSystem.Mouse.current.leftButton.isPressed)
+                bool buttonDownRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasPressedThisFrame;
+                bool buttonUpRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasReleasedThisFrame;
+               
+                if (UnityEngine.InputSystem.Mouse.current.rightButton.isPressed)
                 {
-                    Debug.Log("Left Button is pressed");
+                    Debug.Log("Right Button is pressed");
                 }
-                if (buttonDownLeft && isShooting == false)
+                
+                if (buttonDownRight && isShooting == false)
                 {
                     Debug.Log("Fire1");
                     isShooting = true;
@@ -67,12 +69,12 @@ namespace Assets.Eric_folder
                     //Fire();
                     //firingCoroutine = StartCoroutine(Fire());
                 }
-                else if (buttonDownLeft && isShooting == true)
+                else if (buttonDownRight && isShooting == true)
                 {
                     //StopCoroutine(firingCoroutine);
                     isShooting = false;
                 }
-                else if (buttonUpLeft)
+                else if (buttonUpRight)
                 {
                     //StopCoroutine(firingCoroutine);
                     isShooting = false;
@@ -105,6 +107,15 @@ namespace Assets.Eric_folder
         {
             GameObject line = Instantiate(bulletTrailLine, firePoint);
             LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
+
+            Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
+            //Prevents the bullet trail from going to far when not hitting anything
+            Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
+
+            lineRenderer.SetPosition(0, firePoint.position);
+            lineRenderer.SetPosition(1, new Vector3(mouseWorldPos.x, transform.position.y, mouseWorldPos.z));
+
+
             /*RaycastHit[] hitInfo = Physics.RaycastAll(firePoint.position, firePoint.forward);
             if (hitInfo.Length > 0)
             {
@@ -126,16 +137,16 @@ namespace Assets.Eric_folder
 
             }
             else*/
-            {
-                
+            //{
 
-                 Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y%Screen.height, 0) ;
-                //Prevents the bullet trail from going to far when not hitting anything
-                Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
-                
-                lineRenderer.SetPosition(0, firePoint.position);
-                lineRenderer.SetPosition(1, new Vector3(mouseWorldPos.x,transform.position.y, mouseWorldPos.z));
-            }
+
+            //     Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y%Screen.height, 0) ;
+            //    //Prevents the bullet trail from going to far when not hitting anything
+            //    Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
+
+            //    lineRenderer.SetPosition(0, firePoint.position);
+            //    lineRenderer.SetPosition(1, new Vector3(mouseWorldPos.x,transform.position.y, mouseWorldPos.z));
+            //}
 
 
 

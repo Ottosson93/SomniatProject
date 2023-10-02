@@ -171,8 +171,6 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-
-
             if (Time.time >= nextAttackTime)
             {
                 if (_input.attack1)
@@ -184,13 +182,8 @@ namespace StarterAssets
 
             if (_input.dash)
             {
-
                 StartCoroutine(Dash());
             }
-
-
-
-
         }
 
         private void LateUpdate()
@@ -313,9 +306,6 @@ namespace StarterAssets
 
 
         }
-
-        
-
 
         private void JumpAndGravity()
         {

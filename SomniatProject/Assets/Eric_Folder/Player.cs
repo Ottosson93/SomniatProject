@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
 
+namespace Assets.Eric_folder
+{
 
     public class Player : MonoBehaviour
     {
@@ -62,3 +64,4 @@ using StarterAssets;
         }
     }
 
+}
