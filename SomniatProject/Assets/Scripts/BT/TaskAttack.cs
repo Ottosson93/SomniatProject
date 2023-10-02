@@ -1,28 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+
 using BehaviorTree;
 
-public class TaskMeleeAttack : Node
+public class TaskAttack : Node
 {
 
     private Transform transform;
-    private NavMeshAgent agent;
+    private EnemyShooting enemyShooting;
+    
 
 
-    public TaskMeleeAttack(Transform transform)
+    public TaskAttack(Transform transform, EnemyShooting enemyShooting)
     {
         this.transform = transform;
-        agent = transform.GetComponent<NavMeshAgent>();
+        this.enemyShooting = enemyShooting;
+
     }
 
 
     public override NodeState Evaluate()
     {
         object target = (Transform)GetData("target");
-        agent.speed = 0f;
+        
 
+        enemyShooting.timer += Time.deltaTime;
+
+        if (enemyShooting.timer > enemyShooting.cooldownTime)
+        {
+            enemyShooting.timer = 0;
+            enemyShooting.Shoot();
+        }
 
         state = NodeState.RUNNING;
         return state;

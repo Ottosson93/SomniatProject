@@ -20,7 +20,17 @@ public class Spell : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
-        Destroy(this.gameObject, SpellToCast.Lifetime);
+
+        StartCoroutine(DestroyAndExplodeOnLifetimeEnd());
+    }
+
+    private IEnumerator DestroyAndExplodeOnLifetimeEnd()
+    {
+        yield return new WaitForSeconds(SpellToCast.Lifetime);
+
+        DealDamageInRadius();
+        CreateExplosionEffect();
+        Destroy(this.gameObject);
     }
 
     private void Update()
@@ -52,7 +62,7 @@ public class Spell : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                // Apply your damage logic here
+                // Apply damage logic here
                 
             }
         }
