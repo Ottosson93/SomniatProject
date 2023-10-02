@@ -7,10 +7,6 @@ public abstract class Item : MonoBehaviour
 {
     protected StatModifier[] stat_arr;
      
-
-
-
-
     public virtual void Equip(Player c)
     {
         for (int i = 0; i < stat_arr.Length; ++i)
@@ -18,18 +14,24 @@ public abstract class Item : MonoBehaviour
             if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Strength)
             {
                 c.Strength.AddModifier(stat_arr[i]);
+                Debug.Log("Added Str");
             }
             else if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Intelligence)
             {
                 c.Intelligence.AddModifier(stat_arr[i]);
+                Debug.Log("Added Int");
 
             }
             else if (stat_arr[i].characterStatType == StatModifier.CharacterStatType.Dexterity)
+            {
                 c.Dexterity.AddModifier(stat_arr[i]);
+                Debug.Log("Added Dex");
+            }
+                
 
         }
         c.UpdateCharacterStats();
-        Debug.Log("Added Some Stat");
+        //Debug.Log("Added Some Stat");
     }
 
     public void Unequip(Player c)

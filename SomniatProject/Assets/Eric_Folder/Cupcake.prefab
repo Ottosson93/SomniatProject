@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 4241062488612193668}
   - component: {fileID: 1338977635462037220}
   - component: {fileID: 6011578599104991214}
-  - component: {fileID: 2330964789711623633}
   - component: {fileID: 7653338836962884744}
+  - component: {fileID: -7430532362169264658}
   m_Layer: 0
   m_Name: Cupcake
   m_TagString: Untagged
@@ -107,23 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.12271368, y: 0.12232481, z: 0.12651125}
   m_Center: {x: 0, y: 0.061162405, z: 0}
---- !u!114 &2330964789711623633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 171687321140661758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  statType: 00000000
-  modType: 00000000
-  value:
-  - 2
-  pickUpScript: {fileID: 7653338836962884744}
 --- !u!114 &7653338836962884744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,3 +122,20 @@ MonoBehaviour:
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   player: {fileID: 0}
   pickUpRange: 1.5
+--- !u!114 &-7430532362169264658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171687321140661758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statType: 00000000
+  modType: 00000000
+  value:
+  - 5
+  pickUpScript: {fileID: 0}
