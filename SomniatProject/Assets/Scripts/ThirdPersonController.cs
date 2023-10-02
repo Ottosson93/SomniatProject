@@ -474,7 +474,7 @@ namespace StarterAssets
             foreach (Collider enemy in hitEnemies)
             {
                 yield return new WaitForSeconds(nextAttackTime);
-                enemy.GetComponent<Enemy>().TakeDamage();
+                //enemy.GetComponent<Enemy>().TakeDamage();
             }
 
         }

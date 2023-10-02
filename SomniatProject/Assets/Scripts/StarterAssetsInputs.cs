@@ -102,10 +102,6 @@ namespace StarterAssets
 			attack1 = newAttackInput;
         }
 
-		public void AttackInput2(bool newAttackInput)
-		{
-			attack2 = newAttackInput;
-		}
 	}
 	
 }
