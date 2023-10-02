@@ -63,5 +63,6 @@ public class CustomButton : CustomUIComponent
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
+        Debug.Log("CLICKED OPEN PAUSE MENU");
     }
 }
