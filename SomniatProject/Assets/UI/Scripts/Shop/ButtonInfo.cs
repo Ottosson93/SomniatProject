@@ -10,7 +10,7 @@ public class ButtonInfo : MonoBehaviour
     public TextMeshProUGUI QuantityText;
     public TextMeshProUGUI PriceText;
     public GameObject ShopManager;
-    
+
 
     void Update()
     {

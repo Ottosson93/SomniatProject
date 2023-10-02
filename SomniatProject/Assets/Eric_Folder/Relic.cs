@@ -13,12 +13,14 @@ public class Relic : Item
 
     void CreateStats()
     {
+        Debug.Log("Createstats run");
+
         stat_arr = new StatModifier[value.Length];
+
         for (int i = 0; i < stat_arr.Length; i++)
         {
             stat_arr[i] = new StatModifier(value[i], modType[i], this, statType[i]);
         }
-        
     }
 
 
@@ -27,6 +29,7 @@ public class Relic : Item
     {
         CreateStats();
         player = FindObjectOfType<Player>();
+
     }
 
     private void Update()
@@ -38,7 +41,7 @@ public class Relic : Item
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
         {
             Player p = other.GetComponent<Player>();
             Equip(p);
