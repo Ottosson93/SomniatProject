@@ -64,6 +64,7 @@ public class CorridorGenerator
             if (node.parent != null)
             {
                 CreateCorridor(node, node.sibling);
+                Debug.Log("Connecting siblings " + node.id + " " + node.sibling.id);
                 currentRooms.Remove(node);
                 currentRooms.Add(node.parent);
                 node.connectedWithSibling = true;
@@ -106,6 +107,7 @@ public class CorridorGenerator
             rightRoomsChildren = new List<RNode>();
             rightRoomsChildren.Add(r2);
         }
+        
 
         if ((angle < 45 && angle > -45))
         {
@@ -153,16 +155,11 @@ public class CorridorGenerator
                 }
             }
         }
-
-        int minY = (int)leftCandidate.bottomLeft.y;
-        int maxY = (int)leftCandidate.topRight.y;
-
         
         Vector2 rightSideComparisonPoint = new Vector2( rightCandidate.bottomLeft.x , rightCandidate.bottomLeft.y + rightCandidate.height / 2);
-
         Vector2 leftSideComparisonPoint = new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2);
-        float distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
         
+        float distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
         
         //float distance = Math.Abs(test - test1)
         foreach (RNode node in rightRooms)
@@ -176,19 +173,21 @@ public class CorridorGenerator
                 distance = d;
                 rightCandidate = node;
             }
-            /*
-            if((node.bottomLeft.y > minY + 5 && node.topRight.y < maxY - 5) && node.bottomLeft.x - leftCandidate.bottomRight.y > 20)
-            {
-                Debug.Log("Right: " + rightCandidate.id.ToString() + rightCandidate + rightCandidate.topLeft + rightCandidate.bottomRight + rightCandidate.topRight);
-                rightCandidate = node;
-            }*/
         }
 
-        Debug.Log("Connecting: " + leftCandidate.id + " with " + rightCandidate.id);
         int offsetY = 0;
-        while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) + offsetY < rightCandidate.bottomLeft.y)
+        
+
+        if(leftCandidate.maunal != true && rightCandidate.maunal != true)
         {
-            offsetY += 5;
+            while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) + offsetY < rightCandidate.bottomLeft.y)
+            {
+                offsetY += 3;
+            }
+            while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) - offsetY + 5 > rightCandidate.topLeft.y)
+            {
+                offsetY -= 3;
+            }
         }
 
         CNode c = new CNode(new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY), 
@@ -216,15 +215,13 @@ public class CorridorGenerator
                 }
             }
         }
+
         //point a low and center on width of a room above
         Vector2 aboveComparisonPoint = new Vector2(topCandidate.bottomLeft.x + topCandidate.width / 2, topCandidate.bottomLeft.y);
-        
         Vector2 belowComparisonPoint = new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2, bottomCandidate.topRight.y);
 
         float distance = Vector2.Distance(belowComparisonPoint, aboveComparisonPoint);
 
-
-        //float distance = Math.Abs(test - test1)
         foreach (RNode node in topRooms)
         {
 
@@ -236,18 +233,19 @@ public class CorridorGenerator
                 distance = d;
                 topCandidate = node;
             }
-            /*
-            if((node.bottomLeft.y > minY + 5 && node.topRight.y < maxY - 5) && node.bottomLeft.x - leftCandidate.bottomRight.y > 20)
-            {
-                Debug.Log("Right: " + rightCandidate.id.ToString() + rightCandidate + rightCandidate.topLeft + rightCandidate.bottomRight + rightCandidate.topRight);
-                rightCandidate = node;
-            }*/
         }
 
         int offsetX = 0;
-        while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) + offsetX < topCandidate.bottomLeft.x)
+        if (bottomCandidate.maunal != true && topCandidate.maunal != true)
         {
-            offsetX += 5;
+            while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) + offsetX < topCandidate.bottomLeft.x)
+            {
+                offsetX += 3;
+            }
+            while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) - offsetX + 5 > topCandidate.bottomRight.x)
+            {
+                offsetX -= 3;
+            }
         }
         CNode c = new CNode(new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX, bottomCandidate.topRight.y), 
             new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + 5, topCandidate.bottomLeft.y), 
@@ -265,12 +263,6 @@ public class CorridorGenerator
 
         float angle = Mathf.Atan2(center2.y - center1.y, center2.x - center1.x) * Mathf.Rad2Deg;
 
-        //Debug.Log("Center1: " + center1);
-        //Debug.Log("center2: " + center2);
-        //Debug.Log("Angle " + angle);
-
-        //Debug.Log("Node 1: " + r1.id + " Node 2: " + r2.id);
-        //||
         return angle;
     }
 

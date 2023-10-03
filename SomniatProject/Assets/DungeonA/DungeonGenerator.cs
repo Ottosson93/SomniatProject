@@ -33,8 +33,9 @@ public class DungeonGenerator
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
-        rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2), roomID);
+        rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2), roomID++);
         rootNode.parent = null;
+        rootNode.sibling = null;
         nodes.Add(rootNode);
         this.material = material;
     }
@@ -91,12 +92,15 @@ public class DungeonGenerator
                 PreMadeRoom pmr;
                 Vector3 posM;
                 RNode newNode;
+                Vector2 bl;
+                Vector2 tr;
                 if (parentNode.width - largestPreMadeRoom.x > parentNode.height - largestPreMadeRoom.y)
                 {
 
                     //this is the node that hold the object and and coordinates of the manual room;
                     posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2);
-                    
+                    bl = new Vector2(parentNode.bottomLeft.x + offsetWidth, parentNode.bottomLeft.y);
+                    tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y);
 
                     newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
                     //Change ^ if adding another node of remaining space
@@ -105,17 +109,19 @@ public class DungeonGenerator
                 else
                 {
                     posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
+                    bl = new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + offsetHeight);
+                    tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight);
 
                     newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
                     //Change ^ if adding another node of remaining space
                     
                 }
-                Vector2 bl = new Vector2(posM.x - largestPreMadeRoom.x / 2, posM.z - largestPreMadeRoom.y / 2);
-                Vector2 tr = new Vector2(posM.x + largestPreMadeRoom.x / 2, posM.z + largestPreMadeRoom.y / 2);
                 pmr = new PreMadeRoom(posM, manualRoom);
                 preMadeRoomNodes.Add(pmr);
 
                 RNode manualRNode = new RNode(bl, tr, roomID++);
+                Debug.Log("Manual Room " + manualRNode.id);
+                Debug.Log("Manual coordinates: " + bl + tr);
                 manualRNode.parent = parentNode;
                 manualRNode.sibling = newNode;
                 manualRNode.bottom = true;
@@ -130,12 +136,8 @@ public class DungeonGenerator
                 parentNode.children.Add(newNode);
                 
                 finishedNodes.Add(manualRNode);
-                //--testing here. REMVOVE THIS LATER?
                 finishedNodes.Add(parentNode);
                 nodes.Remove(parentNode);
-
-                //Call CreateParentRoom
-                //--this ^
 
                 preMadeRooms.Remove(manualRoom);
             }
@@ -148,24 +150,6 @@ public class DungeonGenerator
         {
             SplitRoom(parentNode);
         }
-    }
-
-    void CreateParentRoom(RNode n)
-    {
-        /*
-        if (n.parrent != null)
-        {
-
-        }
-        Room nodeParent = n.parent.bottomLeft
-        Room parentRoom = new Room(n.bottomLeft, n.topRight, false, n.parent);
-        allRooms*/
-        
-    }
-
-    void SplitWithManualRoom(RNode node)
-    {
-
     }
 
     void SplitRoom(RNode parentNode)
@@ -240,6 +224,20 @@ public class DungeonGenerator
 
     public void BuildCorridors()
     {
+        Debug.Log("--------Corridors-------");
+        Debug.Log("finished nodes count: " + finishedNodes.Count);
+
+        foreach (RNode n in finishedNodes)
+        {
+            
+            if(n.parent != null && n.sibling != null)
+            {
+                Debug.Log("Node: " + n.id + " sibling " + n.sibling.id + " parent " + n.parent.id);
+            }
+            else
+                Debug.Log("Node: " + n.id + " sibling: root"  + " parent: root");
+            
+        }
         corridorGenerator = new CorridorGenerator(finishedNodes);
         corridors = corridorGenerator.GenerateCorridors();
         foreach(CNode c in corridors)
@@ -349,7 +347,6 @@ public class DungeonGenerator
         room.GetComponent<MeshFilter>().mesh = mesh;
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
-        Debug.Log("Id: " + n.id + " center: " + center + ". Width = " + n.width + " height = " + n.height);
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
