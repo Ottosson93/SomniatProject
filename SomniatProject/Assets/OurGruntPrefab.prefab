@@ -517,7 +517,7 @@ MonoBehaviour:
   damage: 1
   attacksPerSec: 1
   attackRadius: 0
-  attackPoint: {fileID: 0}
+  attackPoint: {fileID: 1933032181884293085}
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
