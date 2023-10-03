@@ -1,21 +1,31 @@
-﻿using System.Collections;
+﻿using BehaviorTree;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class RNode
 {
     public float height, width;
-    public Vector2 topLeft, topRight, bottomLeft, bottomRight;  
+    public Vector2 topLeft, topRight, bottomLeft, bottomRight;
     public RNode parent, sibling;
+    public List<RNode> children = new List<RNode>();
+    public bool maunal = false;
     public bool bottom = false;
     public bool vertical = false;
+    public bool connectedWithSibling = false;
+
+    public int id;
     
 
-    public RNode(Vector2 bottomLeft, Vector2 topRight) //Vector2 topLeft, Vector2 bottomRight
+    public RNode(Vector2 bottomLeft, Vector2 topRight, int id) //Vector2 topLeft, Vector2 bottomRight
     {
         this.bottomLeft = bottomLeft;
         this.topRight = topRight;
+
+        this.id = id; 
 
         if (bottomLeft.x < 0)
         {
@@ -44,6 +54,12 @@ public class RNode
         //this.width = bottomLeft.x + topRight.x; // not Correct
         //this.childOne = childOne;
         //this.childTwo = childTwo;
+    }
+
+    public void UpdateCorners()
+    {
+        bottomRight = new Vector2(topRight.x, bottomLeft.y);
+        topLeft = new Vector2(bottomLeft.x, topRight.y);
     }
 
     public void UpdateWH()

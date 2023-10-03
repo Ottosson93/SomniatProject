@@ -534,7 +534,7 @@ PrefabInstance:
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: minimumRoomSize
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
