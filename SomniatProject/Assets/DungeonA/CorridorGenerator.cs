@@ -64,7 +64,6 @@ public class CorridorGenerator
             if (node.parent != null)
             {
                 CreateCorridor(node, node.sibling);
-                Debug.Log("Connecting siblings " + node.id + " " + node.sibling.id);
                 currentRooms.Remove(node);
                 currentRooms.Add(node.parent);
                 node.connectedWithSibling = true;
@@ -177,7 +176,7 @@ public class CorridorGenerator
 
         int offsetY = 0;
         
-
+        /*
         if(leftCandidate.maunal != true && rightCandidate.maunal != true)
         {
             while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) + offsetY < rightCandidate.bottomLeft.y)
@@ -189,10 +188,11 @@ public class CorridorGenerator
                 offsetY -= 3;
             }
         }
-
+        */
         CNode c = new CNode(new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY), 
             new Vector2 (rightCandidate.topLeft.x , leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY + 5), 
             10, idTracker++);
+        Debug.Log("C " + c.id + " coordinates " + c.bottomLeft + c.topRight);
 
         c.vertical = false;
         corridors.Add(c);
@@ -236,6 +236,7 @@ public class CorridorGenerator
         }
 
         int offsetX = 0;
+        /*
         if (bottomCandidate.maunal != true && topCandidate.maunal != true)
         {
             while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) + offsetX < topCandidate.bottomLeft.x)
@@ -246,12 +247,15 @@ public class CorridorGenerator
             {
                 offsetX -= 3;
             }
-        }
+        }*/
+       
         CNode c = new CNode(new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX, bottomCandidate.topRight.y), 
             new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + 5, topCandidate.bottomLeft.y), 
             10, idTracker++);
+        Debug.Log("C " + c.id + " coordinates " + c.bottomLeft + c.topRight);
 
-        c.vertical = true;
+
+       c.vertical = true;
         corridors.Add(c);
     }
 
