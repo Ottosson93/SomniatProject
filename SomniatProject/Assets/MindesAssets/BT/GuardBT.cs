@@ -32,7 +32,7 @@ public class GuardBT : Tree
                 new CheckEnemyInFOVRange(transform),
                 new TaskGoToTarget(transform),
             }),
-            new TaskPatrol(transform, waypoints),
+            //new TaskPatrol(transform, waypoints),
         }); 
 
         return root;

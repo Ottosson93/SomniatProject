@@ -7,14 +7,18 @@ using UnityEngine.AI;
 public class TaskPatrol : Node
 {
     private Transform transform;
-    public Transform[] waypoints;
+    
     private Animator animator;
     private NavMeshAgent agent;
-    private int currentWaypointIndex;
+    
 
     private float waitTime = 1f;
     private float waitCounter = 0f;
     private bool waiting = false;
+    
+    //Waypoint system
+    public Transform[] waypoints;
+    private int currentWaypointIndex;
 
     public TaskPatrol(Transform transform, Transform[] waypoints)
     {
