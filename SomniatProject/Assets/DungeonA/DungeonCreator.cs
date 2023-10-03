@@ -12,24 +12,27 @@ public class DungeonCreator : MonoBehaviour
     DungeonGenerator generator;
     [SerializeField] Material material;
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
-    private List<PreMadeRoom> preMadeNodes; 
-   
+    private List<PreMadeRoom> preMadeNodes;
 
+    //[SerializeField] private GameObject enemyPrefab;
+    [SerializeField]private List<GameObject> enemyList;
+    RNode node;
 
     // Start is called before the first frame update
     void Start()
     {
         //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
         //Debug.Log(roomSize);
-        
-        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms);
+
+        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms, enemyList);
+
         generator.Generate();
         generator.BuildRooms();
         generator.BuildCorridors();
         preMadeNodes = generator.GetManualCoordinates();
         foreach(PreMadeRoom p in preMadeNodes)
         {
-            //fix Locations 
+            //fix Locations
             Instantiate(p.preMadeRoom, p.centerPos, Quaternion.identity);
         }
         Debug.Log("MADE IT");

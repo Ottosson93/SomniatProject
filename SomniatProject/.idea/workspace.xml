@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="049dc370-8cd5-43b8-a3fa-4506c684f2e0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Start Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Boss Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Boss Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Boss Room.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Boss Room.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/DungeonA.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/DungeonA.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/DungeonGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/DungeonGenerator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Floor Material.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Floor Material.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/RNode.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/RNode.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Start Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Start Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Start Room.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Start Room.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Upgrade Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Upgrade Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/DungeonA/Upgrade Room.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/DungeonA/Prefabs/Upgrade Room.prefab.meta" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Vw3iiuR9V9tNpT8sOWzkQMfMl3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="049dc370-8cd5-43b8-a3fa-4506c684f2e0" name="Changes" comment="" />
+      <created>1695733444211</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1695733444211</updated>
+    </task>
+    <servers />
+  </component>
+</project>

@@ -1,6 +1,6 @@
 ﻿using Packages.Rider.Editor.UnitTesting;
 using System.Collections.Generic;
-using System.Collections; 
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -11,9 +11,11 @@ using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting.Antlr3.Runtime;
 
-public class DungeonGenerator
+public class DungeonGenerator : MonoBehaviour
 {
     int minRoomSize;
+
+    //Node system variables
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> finishedNodes = new List<RNode>();
@@ -24,11 +26,15 @@ public class DungeonGenerator
     CorridorGenerator corridorGenerator;
     List<CNode> corridors = new List<CNode>();
     CNode Cnoded;
-    int roomID = 1; 
+    int roomID = 1;
 
     Material material;
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr)
+    //Enemy variables
+    //GameObject enemyPrefab = new GameObject();
+    List<GameObject> enemyList = new List<GameObject>();
+
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, List<GameObject> enemyList)
     {
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
@@ -37,7 +43,8 @@ public class DungeonGenerator
         rootNode.parent = null;
         rootNode.sibling = null;
         nodes.Add(rootNode);
-        this.material = material;
+        this.material = material; 
+        this.enemyList = enemyList;
     }
 
     public void Generate()
@@ -55,7 +62,7 @@ public class DungeonGenerator
             }
             else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize) //REMOVE?
             {
-                
+
                 node.vertical = false;
                 ManageSplit(node);
                 //SplitRoom(node);
@@ -104,7 +111,7 @@ public class DungeonGenerator
 
                     newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
                     //Change ^ if adding another node of remaining space
-                    
+
                 }
                 else
                 {
@@ -114,7 +121,7 @@ public class DungeonGenerator
 
                     newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
                     //Change ^ if adding another node of remaining space
-                    
+
                 }
                 pmr = new PreMadeRoom(posM, manualRoom);
                 preMadeRoomNodes.Add(pmr);
@@ -134,7 +141,7 @@ public class DungeonGenerator
                 nodes.Add(newNode);
                 parentNode.children.Add(manualRNode);
                 parentNode.children.Add(newNode);
-                
+
                 finishedNodes.Add(manualRNode);
                 finishedNodes.Add(parentNode);
                 nodes.Remove(parentNode);
@@ -174,9 +181,9 @@ public class DungeonGenerator
 
             nodes.Add(newNode);
             nodes.Add(newNode2);
-        } 
-        
-        //splitting Horizontally 
+        }
+
+        //splitting Horizontally
         else
         {
             float splitH = Random.Range(parentNode.height * 0.25f, parentNode.height * 0.75f);
@@ -198,7 +205,7 @@ public class DungeonGenerator
 
         finishedNodes.Add(parentNode);
         nodes.Remove(parentNode);
-        
+
     }
 
     bool CheckSize(RNode n)
@@ -218,6 +225,7 @@ public class DungeonGenerator
             {
                 ShrinkNodes(finishedNodes[i]);
                 CreateMesh(finishedNodes[i], i);
+                SpawnEnemy(finishedNodes[i]);
             }
         }
     }
@@ -229,14 +237,14 @@ public class DungeonGenerator
 
         foreach (RNode n in finishedNodes)
         {
-            
+
             if(n.parent != null && n.sibling != null)
             {
                 Debug.Log("Node: " + n.id + " sibling " + n.sibling.id + " parent " + n.parent.id);
             }
             else
                 Debug.Log("Node: " + n.id + " sibling: root"  + " parent: root");
-            
+
         }
         corridorGenerator = new CorridorGenerator(finishedNodes);
         corridors = corridorGenerator.GenerateCorridors();
@@ -245,7 +253,7 @@ public class DungeonGenerator
             c.updateWH();
             CreateM(c);
         }
-        
+
     }
 
     void ShrinkNodes(RNode n)
@@ -351,5 +359,21 @@ public class DungeonGenerator
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
+    }
+
+    public void SpawnEnemy(RNode node)
+    {
+        Vector3 bottomLeftV = new Vector3(node.bottomLeft.x, 0, node.bottomLeft.y);
+        Vector3 center = new Vector3(bottomLeftV.x + node.width / 2, 0, bottomLeftV.z + node.height / 2);
+
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            //Change this to change spawn position for enemy
+            Vector3 offsetForEnemy = new Vector3(Random.Range(-node.width / 2.5f, node.width / 2.5f), 0, Random.Range(-node.height / 2.5f, node.height / 2.5f));
+
+            Instantiate(enemyList[i], center + offsetForEnemy, Quaternion.identity);
+
+            //todo: get a trigger to check if something has spawned at chosen position
+        }
     }
 }
