@@ -5,8 +5,9 @@ using UnityEngine;
 public class ShopTriggerCollider : MonoBehaviour
 {
     [SerializeField] private ShopManagerScript shop;
-    [SerializeField] private GameObject shopView;
+    [SerializeField] public GameObject shopView;
     public Transform player;
+
     private void OnTriggerEnter(Collider collider)
     {
         if (collider.tag == "Player")
@@ -21,6 +22,7 @@ public class ShopTriggerCollider : MonoBehaviour
     {
         if (collider.tag == "Player")
         {
+            Debug.Log("EXITED SHOP");
             player = collider.GetComponent<Transform>();
             shop.Hide(shopView);
         }
