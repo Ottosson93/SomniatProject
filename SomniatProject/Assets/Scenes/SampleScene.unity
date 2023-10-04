@@ -1568,6 +1568,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Eric dog
       objectReference: {fileID: 0}
+    - target: {fileID: 3470051121666536308, guid: c1109c27c530d64498a7134b3262c4fb, type: 3}
+      propertyPath: useMouseRotation
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3470051121666536308, guid: c1109c27c530d64498a7134b3262c4fb, type: 3}
+      propertyPath: GroundLayers.m_Bits
+      value: 73
+      objectReference: {fileID: 0}
     - target: {fileID: 3912068186948689715, guid: c1109c27c530d64498a7134b3262c4fb, type: 3}
       propertyPath: camera
       value: 

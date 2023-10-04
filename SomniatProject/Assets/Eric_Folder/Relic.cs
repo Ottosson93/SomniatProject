@@ -26,14 +26,16 @@ public class Relic : Item
     void Start()
     {
         CreateStats();
-        player = FindObjectOfType<Player>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         pickUpScript = GetComponent<PickUpScript>();
     }
 
     private void Update()
     {
+
         if (pickUpScript.PickUp().Result) // Dont know what to name it but i simply remade Atalay's update script to return a bool 
-            Equip(player);                 // So that i could use it in this class for my Equip() script.
+            Equip(player);        // So that i could use it in this class for my Equip() script.
+
     }
 
 

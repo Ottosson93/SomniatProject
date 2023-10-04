@@ -739,6 +739,14 @@ PrefabInstance:
       propertyPath: SprintSpeed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: useMouseRotation
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: GroundLayers.m_Bits
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -755,6 +763,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7789102434509546048}
+    - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5797741600474887703}
   m_SourcePrefab: {fileID: 100100000, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
 --- !u!4 &2113542468856960366 stripped
 Transform:
@@ -807,3 +818,23 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   projectileForce: 20
   projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
+--- !u!114 &5797741600474887703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113542468856989966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0522b728d3c9f3e408ca6f29805220f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxLucidity: 100
+  Strength:
+    BaseValue: 0
+  Dexterity:
+    BaseValue: 0
+  Intelligence:
+    BaseValue: 0
+  lucidity: 50

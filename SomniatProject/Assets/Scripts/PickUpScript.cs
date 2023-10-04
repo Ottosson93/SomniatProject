@@ -27,8 +27,8 @@ public class PickUpScript : MonoBehaviour
         playerInRange = false;
         eKeyPlane = transform.GetChild(0);
         material = eKeyPlane.GetComponent<MeshRenderer>().material;
-        player = FindObjectOfType<Player>().transform;
-        
+       // player = FindObjectOfType<Player>().transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         
     }
 
