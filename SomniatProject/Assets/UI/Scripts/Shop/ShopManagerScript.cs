@@ -13,15 +13,15 @@ public class ShopManagerScript : MonoBehaviour
     public Relic relic;
     private Player player;
     private StatModifier statModifier;
+    [SerializeField]GameObject shopView;
 
     public TextMeshProUGUI currencyText;
-    [SerializeField] GameObject shop;
+    //[SerializeField] GameObject shop;
     // Start is called before the first frame update
     void Awake()
     {
         player = FindObjectOfType<Player>();
-        
-        Hide(shop);
+        GameObject ur = GameObject.FindGameObjectWithTag("UpgradeRoom");
         currencyText.text = "Currency: " + currency.ToString();
 
         //IDs
@@ -44,7 +44,6 @@ public class ShopManagerScript : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
@@ -130,14 +129,15 @@ public class ShopManagerScript : MonoBehaviour
     }
 
 
-    public void Show(GameObject shop)
+    public void Show(GameObject shopView)
     {
-        shop.SetActive(true);
+        Debug.Log("Shop activated");
+        shopView.SetActive(true);
     }
 
 
-    public void Hide(GameObject shop)
+    public void Hide(GameObject shopView)
     {
-        shop.SetActive(false);
+        shopView.SetActive(false);
     }
 }

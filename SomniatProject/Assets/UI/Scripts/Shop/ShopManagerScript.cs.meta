@@ -4,11 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - item: {instanceID: 0}
-  - potion: {instanceID: 0}
-  - relic: {fileID: 171687321140661758, guid: dc670538b36548e4cb4dc814fed20267, type: 3}
+  - relic: {instanceID: 0}
+  - shopView: {fileID: 8422779526648998243, guid: 9bc5a85e24f66904399dce469999765a, type: 3}
   - currencyText: {instanceID: 0}
-  - shop: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
