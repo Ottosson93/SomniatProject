@@ -20,10 +20,13 @@ public class ShopManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        player = FindObjectOfType<Player>();
-        GameObject ur = GameObject.FindGameObjectWithTag("UpgradeRoom");
-        currencyText.text = "Currency: " + currency.ToString();
+        shopView = GameObject.FindGameObjectWithTag("Shop");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        
+    }
 
+    public void Init()
+    {
         //IDs
         shopItems[1, 1] = 1;
         shopItems[1, 2] = 2;
@@ -31,10 +34,10 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[1, 4] = 4;
 
         //Price
-        shopItems[2, 1] = 10;
-        shopItems[2, 2] = 20;
-        shopItems[2, 3] = 30;
-        shopItems[2, 4] = 40;
+        shopItems[2, 1] = 200;
+        shopItems[2, 2] = 200;
+        shopItems[2, 3] = 200;
+        shopItems[2, 4] = 200;
 
         //Quantity
         shopItems[3, 1] = 0;
@@ -42,8 +45,8 @@ public class ShopManagerScript : MonoBehaviour
         shopItems[3, 3] = 0;
         shopItems[3, 4] = 0;
 
+        currencyText.text = "Currency: " + currency.ToString();
     }
-
     public void Buy()
     {
         GameObject ButtonRef = GameObject.FindGameObjectWithTag("Event").GetComponent<EventSystem>().currentSelectedGameObject;
@@ -64,16 +67,17 @@ public class ShopManagerScript : MonoBehaviour
 
     public void BuyFirst()
     {
+        shopItems[2, 1] = 200;
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         if (currency >= shopItems[2, 1])
         {
 
             player.Dexterity.AddModifier(new StatModifier(10, StatModifier.StatModType.Flat, this, StatModifier.CharacterStatType.Dexterity));
             player.UpdateCharacterStats();
-            Debug.Log("BOUGHT FIRST");
-            relic.Equip(player);
-            Debug.Log("Equipped cupcakerelic");
-            currency -= shopItems[2, 1];
+            Debug.Log("BOUGHT FIRST - DEXTERITY");
+            Debug.Log("Cost: " + shopItems[2, 1]);
+            currency = currency - shopItems[2, 1];
             shopItems[3, 1]++;
             currencyText.text = "Currency: " + currency.ToString();
         }
@@ -83,26 +87,32 @@ public class ShopManagerScript : MonoBehaviour
 
     public void BuySecond()
     {
+        shopItems[2, 2] = 200;
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
         if (currency >= shopItems[2, 2])
         {
             player.Strength.AddModifier(new StatModifier(10, StatModifier.StatModType.Flat, this, StatModifier.CharacterStatType.Strength));
             player.UpdateCharacterStats();
-            Debug.Log("BOUGHT SECOND");
-            currency -= shopItems[2, 2];
+            Debug.Log("Cost: " + shopItems[2, 2]);
+            Debug.Log("BOUGHT SECOND - STRENGTH");
+            currency = currency - shopItems[2, 2];
             shopItems[3, 2]++;
             currencyText.text = "Currency: " + currency.ToString();
         }
     }
     public void BuyThird()
     {
-
+        shopItems[2, 3] = 200;
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         if (currency >= shopItems[2, 3])
         {
             player.Intelligence.AddModifier(new StatModifier(10, StatModifier.StatModType.Flat, this, StatModifier.CharacterStatType.Intelligence));
             player.UpdateCharacterStats();
-            Debug.Log("BOUGHT THIRD");
-            currency -= shopItems[2, 3];
+            Debug.Log("Cost: " + shopItems[2, 3]) ;
+            Debug.Log("BOUGHT THIRD - INTELLIGENCE");
+            currency = currency - shopItems[2, 3];
             shopItems[3, 3]++;
             currencyText.text = "Currency: " + currency.ToString();
         }
@@ -113,13 +123,15 @@ public class ShopManagerScript : MonoBehaviour
     }
     public void BuyFourth()
     {
-
+        shopItems[2, 4] = 200;
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
         if (currency >= shopItems[2, 4])
         {
             Debug.Log("BOUGHT FOURTH");
+            Debug.Log("Cost: " + shopItems[2, 4]);
             relic.Equip(player);
-            currency -= shopItems[2, 4];
+            currency = currency - shopItems[2, 4];
             shopItems[3, 4]++;
             currencyText.text = "Currency: " + currency.ToString();
         }
