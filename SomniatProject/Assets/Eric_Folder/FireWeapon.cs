@@ -38,7 +38,7 @@ namespace Assets.Eric_folder
             //muzzelFlashScript = muzzleFlashObject.GetComponent<MuzzleFlash>();
             //    gamePauser = FindObjectOfType<GamePauser>();
             
-            crosshair = Instantiate(crosshair);
+            //crosshair = Instantiate(crosshair);
         }
 
         void Update()
@@ -47,7 +47,7 @@ namespace Assets.Eric_folder
             Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
             //Prevents the bullet trail from going to far when not hitting anything
             Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
-            crosshair.transform.position = mouseWorldPos;
+            //crosshair.transform.position = mouseWorldPos;
 
 
             //     if (!gamePauser.InMenu) //Man kan inte skjuta när man är i shoppen
