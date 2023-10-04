@@ -1462,7 +1462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 961119763530031066, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 961119763530031066, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
+      propertyPath: m_MaxValue
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 961187173086171294, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: pauseMenu
@@ -1526,11 +1530,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1099142674915858634, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 484.5
+      value: 403.1
       objectReference: {fileID: 0}
     - target: {fileID: 1099142674915858634, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -118.91
+      value: -97.7
       objectReference: {fileID: 0}
     - target: {fileID: 1938856253834237007, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1570,11 +1574,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: b7182ce79de20204abafb0435e798c48, type: 3}
     - target: {fileID: 5709482566906357141, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 409.5
+      value: 327
       objectReference: {fileID: 0}
     - target: {fileID: 5709482566906357141, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -73.16194
+      value: -61
       objectReference: {fileID: 0}
     - target: {fileID: 7720777562105991089, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1636,6 +1640,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b7182ce79de20204abafb0435e798c48, type: 3}
+    - target: {fileID: 8245732319240421073, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 8684600749589291719, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1812,7 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}

@@ -19,6 +19,7 @@ public class TaskMeleeAttack : Node
     public TaskMeleeAttack(Transform transform)
     {
         animator = transform.GetComponent<Animator>();
+
     }
 
 
