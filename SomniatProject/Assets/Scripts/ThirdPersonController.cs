@@ -80,7 +80,9 @@ namespace StarterAssets
         public float attackRate = 4f;
         float nextAttackTime = 0f;
 
-
+        //-------------
+        [SerializeField] bool useMouseRotation;
+        //------------
 
 
 
@@ -113,7 +115,7 @@ namespace StarterAssets
         private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
-        private GameObject _mainCamera;
+        private Camera _mainCamera;
 
         private const float _threshold = 0.01f;
 
@@ -137,7 +139,7 @@ namespace StarterAssets
             // get a reference to our main camera
             if (_mainCamera == null)
             {
-                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
+                _mainCamera = FindAnyObjectByType<Camera>();
             }
         }
 
@@ -224,6 +226,40 @@ namespace StarterAssets
                 _cinemachineTargetPitch += _input.look.y * deltaTimeMultiplier;
             }
         }
+        private void Aim()
+        {
+            var (success, position) = GetMousePosition();
+            if (success)
+            {
+                // Calculate the direction
+                var direction = position - transform.position;
+
+                // You might want to delete this line.
+                // Ignore the height difference.
+                direction.y = 0;
+
+                // Make the transform look in the direction.
+                transform.forward = direction;
+                Debug.Log("Updated forward direction");
+            }
+        }
+
+        private (bool success, Vector3 position) GetMousePosition()
+        {
+            Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
+            var ray = _mainCamera.ScreenPointToRay(mousePos);
+
+            if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, GroundLayers))
+            {
+                // The Raycast hit something, return with the position.
+                return (success: true, position: hitInfo.point);
+            }
+            else
+            {
+                // The Raycast did not hit anything.
+                return (success: false, position: Vector3.zero);
+            }
+        }
 
         private void Move()
         {
@@ -274,6 +310,15 @@ namespace StarterAssets
 
             // normalise input direction
             Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
+            Vector3 targetDirection = Vector3.zero;
+            if (useMouseRotation)
+            {
+                Aim();
+                targetDirection = transform.forward*_input.move.y+_input.move.x*transform.right;
+            }
+            if (!useMouseRotation)
+            {
+
 
             // note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
             // if there is a move input rotate player when the player is moving
@@ -291,7 +336,8 @@ namespace StarterAssets
             
 
 
-            Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+                targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
+            }
 
             // move the player
             _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
@@ -434,7 +480,8 @@ namespace StarterAssets
 
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
-
+            if (useMouseRotation)
+                targetDirection = transform.forward;
 
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
