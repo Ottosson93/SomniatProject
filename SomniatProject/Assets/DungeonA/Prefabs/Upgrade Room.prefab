@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6713062058501447085}
   m_Layer: 0
   m_Name: Upgrade Room
-  m_TagString: Untagged
+  m_TagString: UpgradeRoom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -468,7 +468,7 @@ PrefabInstance:
     - target: {fileID: -2463636181253480118, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: shop
       value: 
-      objectReference: {fileID: -2498761849414874833, guid: 9bc5a85e24f66904399dce469999765a, type: 3}
+      objectReference: {fileID: 3899592631940888398, guid: ce35473d2a2b3e442b80de088d81ba8d, type: 3}
     - target: {fileID: -2463636181253480118, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: player
       value: 

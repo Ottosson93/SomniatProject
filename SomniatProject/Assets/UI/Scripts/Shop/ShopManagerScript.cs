@@ -21,8 +21,7 @@ public class ShopManagerScript : MonoBehaviour
     void Awake()
     {
         player = FindObjectOfType<Player>();
-        
-        Hide(shopView);
+        GameObject ur = GameObject.FindGameObjectWithTag("UpgradeRoom");
         currencyText.text = "Currency: " + currency.ToString();
 
         //IDs
@@ -132,6 +131,7 @@ public class ShopManagerScript : MonoBehaviour
 
     public void Show(GameObject shopView)
     {
+        Debug.Log("Shop activated");
         shopView.SetActive(true);
     }
 

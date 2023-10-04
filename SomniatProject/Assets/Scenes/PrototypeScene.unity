@@ -341,6 +341,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShopView
       objectReference: {fileID: 0}
+    - target: {fileID: 8422779526648998243, guid: 9bc5a85e24f66904399dce469999765a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9077155766167745469, guid: 9bc5a85e24f66904399dce469999765a, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -839,6 +843,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 149673827}
     - target: {fileID: 3899592631940888398, guid: ce35473d2a2b3e442b80de088d81ba8d, type: 3}
+      propertyPath: shopView
+      value: 
+      objectReference: {fileID: 149673827}
+    - target: {fileID: 3899592631940888398, guid: ce35473d2a2b3e442b80de088d81ba8d, type: 3}
       propertyPath: currencyText
       value: 
       objectReference: {fileID: 1968091020}
@@ -1323,6 +1331,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PauseMenuView
       objectReference: {fileID: 0}
+    - target: {fileID: 7847687340315544713, guid: 002ea0a557ec37e49ae9ddefda3b9810, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8125775218300070627, guid: 002ea0a557ec37e49ae9ddefda3b9810, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1591,6 +1603,10 @@ PrefabInstance:
     - target: {fileID: 7847687340315544713, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_Name
       value: HUD
+      objectReference: {fileID: 0}
+    - target: {fileID: 7847687340315544713, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8125775218300070627, guid: f0a0c8b15e9d39140a248e83d5642788, type: 3}
       propertyPath: m_AnchorMax.y
