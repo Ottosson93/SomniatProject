@@ -713,7 +713,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0
+  m_text: '1000
 
 '
   m_isRightToLeft: 0
@@ -2219,11 +2219,11 @@ GameObject:
   - component: {fileID: 4513167813103520974}
   m_Layer: 5
   m_Name: ShopView
-  m_TagString: Untagged
+  m_TagString: Shop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5117919713260994971
 RectTransform:
   m_ObjectHideFlags: 0
