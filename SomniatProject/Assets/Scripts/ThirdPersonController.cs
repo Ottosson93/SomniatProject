@@ -177,8 +177,8 @@ namespace StarterAssets
             {
                 if (_input.attack1)
                 {
-                    StartCoroutine(Attack1());
-                    nextAttackTime = Time.deltaTime + 1f / attackRate;
+                    Attack1();
+                    nextAttackTime = Time.time + 1f / attackRate;
                 }
             }
 
@@ -502,7 +502,7 @@ namespace StarterAssets
         }
 
 
-        private IEnumerator Attack1()
+        private void Attack1()
         {
             _animator.SetTrigger("Attack1");
 
@@ -510,8 +510,9 @@ namespace StarterAssets
 
             foreach (Collider enemy in hitEnemies)
             {
-                yield return new WaitForSeconds(nextAttackTime);
                 enemy.GetComponent<Enemy>().TakeDamage();
+                
+                
             }
 
         }
