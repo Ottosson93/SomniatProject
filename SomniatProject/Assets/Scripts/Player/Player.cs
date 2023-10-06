@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
     private float speed;
-    private float meleeDamage;
+    public float meleeDamage;
     private float attackSpeed;
 
     private ThirdPersonController controller;

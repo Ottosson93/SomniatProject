@@ -678,13 +678,17 @@ MonoBehaviour:
   GroundLayers:
     serializedVersion: 2
     m_Bits: 9
+  combo:
+  - {fileID: 11400000, guid: e2f7a1646bfdd7747ab7fa6166e2720e, type: 2}
+  - {fileID: 11400000, guid: 76481abf0a76b5c49b1fb70bf8b2dc36, type: 2}
+  - {fileID: 11400000, guid: ede24943754a590478297ebc20978136, type: 2}
   dashingPower: 15
   tr: {fileID: 8448971290705006888}
   attackPoint: {fileID: 1033906477445040309}
   attackRange: 0.8
   enemyLayers:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   attackRate: 5
   useMouseRotation: 1
 --- !u!96 &8448971290705006888
@@ -848,6 +852,7 @@ MonoBehaviour:
     BaseValue: 1
   Intelligence:
     BaseValue: 1
+  meleeDamage: 0
 --- !u!1 &5178686219891413429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2066896392038628068, guid: 45288819fde2143449a96207b14db0bb, type: 3}
