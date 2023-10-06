@@ -16,8 +16,12 @@ using StarterAssets;
         private float attackSpeed;
 
         private ThirdPersonController controller;
-        
-        void Start()
+        private Lucidity luciditySlider;
+
+
+
+
+    void Start()
         {
             Strength = new CharacterStat();
             Dexterity = new CharacterStat();
@@ -28,17 +32,23 @@ using StarterAssets;
             Dexterity.BaseValue = 2.0f;
             Strength.BaseValue = 5.0f;
             Intelligence.BaseValue = 1.0f;
-
+            
+            
 
             controller.MoveSpeed = Dexterity.Value;
             lucidity = Strength.Value;
+
+            luciditySlider = GetComponent<Lucidity>();
+            luciditySlider.SetMaxLucidity(lucidity);
         }
 
         public void UpdateCharacterStats()
         {
             lucidity = Strength.Value;
+            luciditySlider.SetMaxLucidity(lucidity);
             GetComponent<ThirdPersonController>().MoveSpeed= Dexterity.Value;
-
+            
+            
             Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
         }
 
@@ -47,6 +57,7 @@ using StarterAssets;
             lucidity -= damage;
             lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
+            luciditySlider.SetLucidity(lucidity);
 
             if (lucidity <= 0)
             {
@@ -57,7 +68,10 @@ using StarterAssets;
         public void Heal(float amountHealed)
         {
             lucidity += amountHealed;
-            if (lucidity > maxLucidity)
+
+            luciditySlider.SetLucidity(lucidity);
+
+        if (lucidity > maxLucidity)
             {
                 lucidity = maxLucidity;
             }
