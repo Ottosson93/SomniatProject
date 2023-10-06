@@ -522,7 +522,7 @@ namespace StarterAssets
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
 
-            if (Time.time - lastComboEnd > 0.7f && comboCounter <= combo.Count)
+            if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
             {
                 CancelInvoke("EndCombo");
 
@@ -555,7 +555,7 @@ namespace StarterAssets
 
         private void ExitAttack()
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f
+            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.97f
                 && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
             {
                 Invoke("EndCombo", 1);
