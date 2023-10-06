@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 13542f2af98dc7f4594c7d507a98ee09, type: 3}
-  player: {fileID: 5797741600474887703}
+  player: {fileID: 0}
   initialRadius: 10
   minRadius: 0.01
 --- !u!1 &5949676255278032641
@@ -704,6 +704,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 84363304578499070}
     m_Modifications:
+    - target: {fileID: 4586738781332085182, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: lucidity
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5178686219891051559, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.26
@@ -749,10 +753,6 @@ PrefabInstance:
       value: DogPolyart Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6852181729260232146, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      propertyPath: attack1
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6852181729260232146, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: cursorLocked
       value: 0
       objectReference: {fileID: 0}
@@ -769,10 +769,6 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      propertyPath: combo.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: useMouseRotation
       value: 1
       objectReference: {fileID: 0}
@@ -782,20 +778,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: GroundLayers.m_Bits
-      value: 4294967295
+      value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      propertyPath: combo.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: ede24943754a590478297ebc20978136, type: 2}
-    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      propertyPath: combo.Array.data[3]
-      value: 
-      objectReference: {fileID: 11400000, guid: 76481abf0a76b5c49b1fb70bf8b2dc36, type: 2}
-    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      propertyPath: combo.Array.data[4]
-      value: 
-      objectReference: {fileID: 11400000, guid: e2f7a1646bfdd7747ab7fa6166e2720e, type: 2}
     m_RemovedComponents:
     - {fileID: 4553528591294247558, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
     m_RemovedGameObjects: []
@@ -809,13 +793,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1561891194240249693}
-    - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 7789102434509546048}
-    - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 5797741600474887703}
     - targetCorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3810547148532738670}
@@ -830,23 +808,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5178686219891413063, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
   m_PrefabInstance: {fileID: 6524216129189763401}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1561891194240249693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113542468856989966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edd137009aa197b49a351e4a24a9c3d8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellToCast: {fileID: 6265623028904570207, guid: 5fdebec7a2fbd2140acc26b930daba91, type: 3}
-  maxLucidity: 100
-  currentLucidity: 0
-  castPoint: {fileID: 5109655547162723753}
-  timeBetweenCasts: 0.3
 --- !u!114 &7789102434509546048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,28 +830,6 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   projectileForce: 20
   projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
---- !u!114 &5797741600474887703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2113542468856989966}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0522b728d3c9f3e408ca6f29805220f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLucidity: 100
-  Strength:
-    BaseValue: 0
-  Dexterity:
-    BaseValue: 0
-  Intelligence:
-    BaseValue: 0
-  lucidity: 5
-  meleeDamage: 0
-  meleeKnockback: 0
 --- !u!114 &3810547148532738670
 MonoBehaviour:
   m_ObjectHideFlags: 0
