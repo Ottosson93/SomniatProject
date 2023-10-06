@@ -12,7 +12,8 @@ using StarterAssets;
         public CharacterStat Intelligence;
         private float speed;
         public float lucidity;
-        private float meleeDamage;
+        public float meleeDamage;
+        public float meleeKnockback;
         private float attackSpeed;
 
         private ThirdPersonController controller;

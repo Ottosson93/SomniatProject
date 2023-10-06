@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
@@ -61,6 +62,11 @@ namespace StarterAssets
         public LayerMask GroundLayers;
 
 
+        //Combat and combos
+        public List<AttackSO> combo;
+        float lastClickedTime;
+        float lastComboEnd;
+        int comboCounter;
 
 
         public float dashingPower = 24f;
@@ -84,7 +90,7 @@ namespace StarterAssets
         [SerializeField] bool useMouseRotation;
         //------------
 
-
+        Coroutine startDash;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -116,6 +122,7 @@ namespace StarterAssets
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private Camera _mainCamera;
+        private Player player;
 
         private const float _threshold = 0.01f;
 
@@ -141,6 +148,7 @@ namespace StarterAssets
             {
                 _mainCamera = FindAnyObjectByType<Camera>();
             }
+
         }
 
         private void Start()
@@ -151,6 +159,10 @@ namespace StarterAssets
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM 
             _playerInput = GetComponent<PlayerInput>();
+            player = GetComponent<Player>();
+
+
+            _animator = GetComponent<Animator>();
 #else
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
@@ -173,19 +185,23 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-            if (Time.time >= nextAttackTime)
-            {
-                if (_input.attack1)
-                {
-                    Attack1();
-                    nextAttackTime = Time.time + 1f / attackRate;
-                }
-            }
+            
 
             if (_input.dash)
             {
-                StartCoroutine(Dash());
+               startDash = StartCoroutine(Dash());
             }
+        }
+
+        private void Update()
+        {
+            if (_input.attack1)
+            {
+                Attack();
+            }
+
+
+            ExitAttack();
         }
 
         private void LateUpdate()
@@ -503,22 +519,74 @@ namespace StarterAssets
         }
 
 
-        private void Attack1()
+        private void Attack()
         {
-            _animator.SetTrigger("Attack1");
-
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
-            foreach (Collider enemy in hitEnemies)
+
+            if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
             {
-                enemy.GetComponent<Enemy>().TakeDamage(10);
+                CancelInvoke("EndCombo");
+
+                if (Time.time - lastClickedTime >= 0.7f)
+                {
+                    _animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
+                    _animator.Play("Attack", 0 , 0);
+                    player.meleeDamage = combo[comboCounter].damage;
+                    comboCounter = comboCounter + 1;
+                    lastClickedTime = Time.time;
+
+                    foreach (Collider enemy in hitEnemies)
+                    {
+                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
+
+
+                    }
+
+
+                    if (comboCounter >= combo.Count)
+                    {
+                        comboCounter = 0;
+                    }
+
+                }
+
                 
+
                 
+
+
             }
+
+
+            //_animator.SetTrigger("Attack1");
+
+            //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+
+            //foreach (Collider enemy in hitEnemies)
+            //{
+            //    enemy.GetComponent<Enemy>().TakeDamage(10);
+
+
+            //}
 
         }
 
+        private void ExitAttack()
+        {
+            if(_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.99f 
+                && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            {
+                Invoke("EndCombo", 1);
+            }
+        }
 
+        void EndCombo()
+        {
+            comboCounter = 0;
+            lastComboEnd = Time.time;
+
+        }
 
 
 

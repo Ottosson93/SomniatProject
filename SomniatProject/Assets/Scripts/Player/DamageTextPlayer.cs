@@ -10,13 +10,8 @@ using UnityEngine.Rendering.Universal;
 [CreateAssetMenu(menuName = "ScriptableObjects/DamgeTextPlayer", fileName = "DamgeTextPlayer")]
 public class DamgeTextPlayer : ScriptableObject
 {
-    private string pathToObject = @"DamageText";
-    private TextMeshPro textMeshPro;
+    public TextMeshPro textMeshPro;
 
-    private void OnEnable()
-    {
-        textMeshPro = Resources.Load<GameObject>(pathToObject).GetComponent<TextMeshPro>();
-    }
 
 
     public async void SubtractHealth(int value, Transform transform)
