@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private float attackSpeed;
 
     private ThirdPersonController controller;
-    private Lucidity luciditySlider;
+    private LuciditySlider luciditySlider;
 
 
 
@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
         lucidity = maxLucidity;
         controller.MoveSpeed = CalculateSpeed();
 
-        luciditySlider = GetComponent<Lucidity>();
+        luciditySlider = GetComponent<LuciditySlider>();
         luciditySlider.SetMaxLucidity(lucidity);
     }
 

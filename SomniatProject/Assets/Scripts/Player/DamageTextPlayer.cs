@@ -10,7 +10,7 @@ using UnityEngine.Rendering.Universal;
 [CreateAssetMenu(menuName = "ScriptableObjects/DamgeTextPlayer", fileName = "DamgeTextPlayer")]
 public class DamgeTextPlayer : ScriptableObject
 {
-    private string pathToObject = @"DamageText";
+    private string pathToObject = @"Prefabs/Effects/DamageText";
     private TextMeshPro textMeshPro;
 
     private void OnEnable()
