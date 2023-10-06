@@ -6,11 +6,12 @@ using UnityEngine.InputSystem;
 public class PlayerLuciditySystem : MonoBehaviour
 {
     [SerializeField] private Spell spellToCast;
-    [SerializeField] private float maxLucidity = 100f;
-    [SerializeField] private float currentLucidity;
     [SerializeField] private Transform castPoint;
     [SerializeField] private float timeBetweenCasts = 0.3f;
     private float currentCastTimer;
+
+    // Added player so that lucidity is fetched from this class.
+    private Player player;
 
     private bool castingSpell = false;
 
@@ -19,8 +20,8 @@ public class PlayerLuciditySystem : MonoBehaviour
     private void Awake()
     {
         spellInput = new InputAction("Spell Cast", binding: "<Keyboard>/q");
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
 
-        currentLucidity = maxLucidity;
     }
 
     private void OnEnable()
@@ -35,11 +36,11 @@ public class PlayerLuciditySystem : MonoBehaviour
 
     private void Update()
     {
-        bool hasEnoughLucidity = currentLucidity - spellToCast.SpellToCast.LucidityCost > 0f;
+        bool hasEnoughLucidity = player.lucidity - spellToCast.SpellToCast.LucidityCost > 0f;
         if(!castingSpell && spellInput.triggered && hasEnoughLucidity)
         {
             castingSpell = true;
-            currentLucidity -= spellToCast.SpellToCast.LucidityCost;
+            player.lucidity -= spellToCast.SpellToCast.LucidityCost;
             currentCastTimer = 0;
             CastSpell();
         }
