@@ -335,8 +335,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shader: {fileID: 4800000, guid: 13542f2af98dc7f4594c7d507a98ee09, type: 3}
-  player: {fileID: 0}
-  initialRadius: 10
+  player: {fileID: 7290750132351680759}
+  initialRadius: 0.6
   minRadius: 0.01
 --- !u!1 &5949676255278032641
 GameObject:
@@ -840,5 +840,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45894ff7a3b5d584bb245acc13bad6b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7290750132351680759 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4586738781332085182, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+  m_PrefabInstance: {fileID: 6524216129189763401}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113542468856989966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0522b728d3c9f3e408ca6f29805220f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

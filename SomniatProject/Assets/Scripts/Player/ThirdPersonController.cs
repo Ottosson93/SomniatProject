@@ -69,6 +69,8 @@ namespace StarterAssets
 
         Player player;
 
+        private bool isAttacking = false; // Add this variable to track attack animation
+
 
         public float dashingPower = 24f;
         private float dashingTime = 0.2f;
@@ -85,7 +87,6 @@ namespace StarterAssets
 
 
         public float attackRate = 4f;
-        float nextAttackTime = 0f;
 
         //-------------
         [SerializeField] bool useMouseRotation;
@@ -191,7 +192,7 @@ namespace StarterAssets
 
         private void Update()
         {
-            if (_input.attack1)
+            if (_input.attack1 && !isAttacking)
             {
                 Attack();
             }
@@ -517,17 +518,18 @@ namespace StarterAssets
 
         private void Attack()
         {
+
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
 
-            if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
+            if (Time.time - lastComboEnd > 0.7f && comboCounter <= combo.Count)
             {
                 CancelInvoke("EndCombo");
 
-                if (Time.time - lastClickedTime >= 0.7f)
+                if (Time.time - lastClickedTime >= 0.9f)
                 {
                     _animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
-                    _animator.Play("Attack", 0, 0);
+                    _animator.Play("Attack", 1, 0);
                     player.meleeDamage = combo[comboCounter].damage;
                     comboCounter = comboCounter + 1;
                     lastClickedTime = Time.time;
@@ -547,24 +549,7 @@ namespace StarterAssets
 
                 }
 
-
-
-
-
-
             }
-
-
-            //_animator.SetTrigger("Attack1");
-
-            //Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
-
-            //foreach (Collider enemy in hitEnemies)
-            //{
-            //    enemy.GetComponent<Enemy>().TakeDamage(10);
-
-
-            //}
 
         }
 
