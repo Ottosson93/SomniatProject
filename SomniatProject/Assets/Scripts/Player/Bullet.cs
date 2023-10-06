@@ -36,16 +36,11 @@ using UnityEngine;
             if (targetTag == "Player")
                 other.GetComponent<Player>().TakeDamage(damage);
             else
-                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
+                 other.GetComponent<Enemy>().TakeDamage(damage);
 
             
             gameObject.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 

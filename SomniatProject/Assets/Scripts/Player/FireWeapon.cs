@@ -15,28 +15,17 @@ using UnityEngine;
         Coroutine firingCoroutine;
 
         [SerializeField] Camera camera;
-        [SerializeField] GameObject bulletTrailLine;
-        [SerializeField] GameObject muzzleFlashPrefab;
         [SerializeField] GameObject crosshair;
-        private GameObject muzzleFlashObject;
-        private MuzzleFlash muzzelFlashScript;
         [SerializeField] AudioSource audioSource;
 
 
-        //Test
         [SerializeField] float projectileForce = 20f;
         [SerializeField] GameObject projectilePrefab;
 
-        //GamePauser gamePauser;
 
         private void Start()
         {
             isShooting = false;
-            //camera = FindObjectOfType<Camera>();
-            // muzzleFlashObject = Instantiate(muzzleFlashPrefab, firePoint);
-            //muzzelFlashScript = muzzleFlashObject.GetComponent<MuzzleFlash>();
-            //    gamePauser = FindObjectOfType<GamePauser>();
-
             //crosshair = Instantiate(crosshair);
         }
 
@@ -80,16 +69,10 @@ using UnityEngine;
             }
         }
 
-        void AnimateMuzzleFlash()
-        {
-            muzzelFlashScript.PlayAnimation();
-        }
-
         IEnumerator Fire()
         {
             while (true)
             {
-                // AnimateMuzzleFlash();
 
                 if (audioSource != null)
                 {

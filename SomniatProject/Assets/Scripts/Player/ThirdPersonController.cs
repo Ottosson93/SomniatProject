@@ -511,7 +511,7 @@ namespace StarterAssets
 
             foreach (Collider enemy in hitEnemies)
             {
-                enemy.GetComponent<Enemy>().TakeDamage();
+                enemy.GetComponent<Enemy>().TakeDamage(10);
                 
                 
             }
