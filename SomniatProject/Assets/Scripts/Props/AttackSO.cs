@@ -9,4 +9,5 @@ public class AttackSO : ScriptableObject
     public float damage;
     public float knockback;
 
+
 }
