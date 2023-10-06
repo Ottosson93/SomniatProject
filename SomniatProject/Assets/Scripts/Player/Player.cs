@@ -6,7 +6,7 @@ using StarterAssets;
 
 public class Player : MonoBehaviour
 {
-    public float maxLucidity = 100;
+    public float maxLucidity;
     public float lucidity;
     public CharacterStat Strength;
     public CharacterStat Dexterity;
@@ -30,20 +30,15 @@ public class Player : MonoBehaviour
         Dexterity = new CharacterStat();
         Intelligence = new CharacterStat();
         controller = GetComponent<ThirdPersonController>();
-        lucidity = maxLucidity;
 
         speed = baseSpeed;
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
 
-        Dexterity.BaseValue = 1.0f;
-        Strength.BaseValue = 1.0f;
-        Intelligence.BaseValue = 1.0f;
 
-
-
+        maxLucidity = CalculateLucidity();
+        lucidity = maxLucidity;
         controller.MoveSpeed = CalculateSpeed();
-        lucidity = Strength.Value;
 
         luciditySlider = GetComponent<Lucidity>();
         luciditySlider.SetMaxLucidity(lucidity);
@@ -67,14 +62,22 @@ public class Player : MonoBehaviour
     {
         return 1.0f;
     }
+    float CalculateLucidity()
+    {
+        if(Strength.Value == 0)
+        {
+            return 20f;
+        }
+        return Strength.Value * 20;
+    }
 
 
 
     public void UpdateCharacterStats()
     {
-        lucidity = Strength.Value;
+        maxLucidity = CalculateLucidity();
         luciditySlider.SetMaxLucidity(lucidity);
-        GetComponent<ThirdPersonController>().MoveSpeed = Dexterity.Value;
+        GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
 
         Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
