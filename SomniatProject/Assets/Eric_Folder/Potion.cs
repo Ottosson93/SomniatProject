@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Assets.Eric_folder;
 
 public class Potion : MonoBehaviour
 {

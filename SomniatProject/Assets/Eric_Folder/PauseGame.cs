@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Eric_folder
-{
+
 
 
     public class PauseGame : MonoBehaviour
@@ -34,5 +33,3 @@ namespace Assets.Eric_folder
             inMenu = false;
         }
     }
-
-}

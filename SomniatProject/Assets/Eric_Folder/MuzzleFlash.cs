@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Eric_folder { 
+
 public class MuzzleFlash : MonoBehaviour
 {
     [Range(0.1f, 1f)][SerializeField] float timeBetweenFrames = 1f;
@@ -51,4 +51,3 @@ public class MuzzleFlash : MonoBehaviour
     }
 }
 
-}

@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Eric_folder
-{
+
 
     public class FireWeapon : MonoBehaviour
     {
@@ -15,7 +14,7 @@ namespace Assets.Eric_folder
         [SerializeField] float accuracy = 0f;
         Coroutine firingCoroutine;
 
-        [SerializeField]Camera camera;
+        [SerializeField] Camera camera;
         [SerializeField] GameObject bulletTrailLine;
         [SerializeField] GameObject muzzleFlashPrefab;
         [SerializeField] GameObject crosshair;
@@ -34,10 +33,10 @@ namespace Assets.Eric_folder
         {
             isShooting = false;
             //camera = FindObjectOfType<Camera>();
-           // muzzleFlashObject = Instantiate(muzzleFlashPrefab, firePoint);
+            // muzzleFlashObject = Instantiate(muzzleFlashPrefab, firePoint);
             //muzzelFlashScript = muzzleFlashObject.GetComponent<MuzzleFlash>();
             //    gamePauser = FindObjectOfType<GamePauser>();
-            
+
             //crosshair = Instantiate(crosshair);
         }
 
@@ -54,29 +53,28 @@ namespace Assets.Eric_folder
             {
                 bool buttonDownRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasPressedThisFrame;
                 bool buttonUpRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasReleasedThisFrame;
-               
+
                 if (UnityEngine.InputSystem.Mouse.current.rightButton.isPressed)
                 {
                     Debug.Log("Right Button is pressed");
                 }
-                
+
                 if (buttonDownRight && isShooting == false)
                 {
-                    Debug.Log("Fire1");
+                    Debug.Log("Fire2");
                     isShooting = true;
-                   // InstantiateBullet();
-                    InstantiateBullet_Projectile();
-                    //Fire();
-                    //firingCoroutine = StartCoroutine(Fire());
+                    
+                    firingCoroutine = StartCoroutine(Fire());
+     
                 }
                 else if (buttonDownRight && isShooting == true)
                 {
-                    //StopCoroutine(firingCoroutine);
+                    StopCoroutine(firingCoroutine);
                     isShooting = false;
                 }
-                else if (buttonUpRight)
+                 if (buttonUpRight)
                 {
-                    //StopCoroutine(firingCoroutine);
+                    StopCoroutine(firingCoroutine);
                     isShooting = false;
                 }
             }
@@ -91,73 +89,24 @@ namespace Assets.Eric_folder
         {
             while (true)
             {
-               // AnimateMuzzleFlash();
+                // AnimateMuzzleFlash();
 
                 if (audioSource != null)
                 {
                     audioSource.Play();
                 }
-                InstantiateBullet();
+                InstantiateBullet_Projectile();
 
                 yield return new WaitForSeconds(rateOfFire);
             }
         }
-
-        private void InstantiateBullet()
+        private void InstantiateBullet_Projectile()
         {
-            GameObject line = Instantiate(bulletTrailLine, firePoint);
-            LineRenderer lineRenderer = line.GetComponent<LineRenderer>();
-
-            Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
-            //Prevents the bullet trail from going to far when not hitting anything
-            Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
-
-            lineRenderer.SetPosition(0, firePoint.position);
-            lineRenderer.SetPosition(1, new Vector3(mouseWorldPos.x, transform.position.y, mouseWorldPos.z));
-
-
-            /*RaycastHit[] hitInfo = Physics.RaycastAll(firePoint.position, firePoint.forward);
-            if (hitInfo.Length > 0)
-            {
-                foreach (RaycastHit hit in hitInfo)
-                {
-
-                    if (hit.transform.gameObject.tag == "Enemy")
-                    {
-                        hit.transform.gameObject.GetComponent<EnemyHealth>().TakingDamage(WeaponDamage);
-                    }
-                    if (hit.transform.gameObject.tag == "Destructible")
-                    {
-                        hit.transform.gameObject.GetComponent<DestructibleHealth>().TakingDamage(WeaponDamage);
-                    }
-                    //This is the bullet trail
-                    lineRenderer.SetPosition(0, firePoint.position);
-                    lineRenderer.SetPosition(1, firePoint.position + firePoint.forward * hit.distance); // KAnske behöver firepoint.forward.
-                }
-
-            }
-            else*/
-            //{
-
-
-            //     Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y%Screen.height, 0) ;
-            //    //Prevents the bullet trail from going to far when not hitting anything
-            //    Vector3 mouseWorldPos = camera.ScreenToWorldPoint(mousePos);
-
-            //    lineRenderer.SetPosition(0, firePoint.position);
-            //    lineRenderer.SetPosition(1, new Vector3(mouseWorldPos.x,transform.position.y, mouseWorldPos.z));
-            //}
-
-
-
-        }
-            private void InstantiateBullet_Projectile()
-            {
             Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
             //Prevents the bullet trail from going to far when not hitting anything
             Ray ray = camera.ScreenPointToRay(mousePos);
             Vector3 targetPos = new Vector3();
-            if(Physics.Raycast(ray, out RaycastHit raycast))
+            if (Physics.Raycast(ray, out RaycastHit raycast))
             {
                 targetPos = raycast.point;
                 Debug.Log("Raycasted");
@@ -166,12 +115,10 @@ namespace Assets.Eric_folder
 
             GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
             bullet.GetComponent<Bullet>().damage = WeaponDamage;
-                Rigidbody rb = bullet.GetComponent<Rigidbody>();
-            Vector3 dir = new Vector3(targetPos.x-firePoint.position.x,0,targetPos.z - firePoint.position.z).normalized;
-                rb.AddForce(dir * projectileForce, ForceMode.Impulse); // KAnske behöver firepoint.forward istället.
-                
-                Debug.Log("Mouse_screen_pos: " + mousePos.x + " "+mousePos.y+" " + mousePos.z + "  Mouse_world_pos: " + camera.ScreenToWorldPoint(mousePos).x + " "+ camera.ScreenToWorldPoint(mousePos).y+" " + camera.ScreenToWorldPoint(mousePos).z);
-            }
-    }
+            Rigidbody rb = bullet.GetComponent<Rigidbody>();
+            Vector3 dir = new Vector3(targetPos.x - firePoint.position.x, 0, targetPos.z - firePoint.position.z).normalized;
+            rb.AddForce(dir * projectileForce, ForceMode.Impulse); // KAnske behöver firepoint.forward istället.
 
-}
+            Debug.Log("Mouse_screen_pos: " + mousePos.x + " " + mousePos.y + " " + mousePos.z + "  Mouse_world_pos: " + camera.ScreenToWorldPoint(mousePos).x + " " + camera.ScreenToWorldPoint(mousePos).y + " " + camera.ScreenToWorldPoint(mousePos).z);
+        }
+    }

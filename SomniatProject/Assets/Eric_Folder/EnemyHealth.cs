@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.Eric_folder
-{
+
 
 public class EnemyHealth : Health
 {
@@ -70,5 +69,4 @@ public class EnemyHealth : Health
             }
         }
     }
-}
 }

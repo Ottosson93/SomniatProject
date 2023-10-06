@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace Assets.Eric_folder
-{
+
 
     public class LevelLoader : MonoBehaviour
     {
@@ -57,4 +56,3 @@ namespace Assets.Eric_folder
             Application.Quit();
         }
     }
-}
