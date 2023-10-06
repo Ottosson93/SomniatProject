@@ -1,8 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Assets.Eric_folder
-{
+
 
     public class Bullet : MonoBehaviour
     {
@@ -37,17 +36,11 @@ namespace Assets.Eric_folder
             if (targetTag == "Player")
                 other.GetComponent<Player>().TakeDamage(damage);
             else
-                 other.GetComponent<EnemyHealth>().TakeDamage(damage);
+                 other.GetComponent<Enemy>().TakeDamage(damage);
 
             
             gameObject.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 
-}

@@ -502,6 +502,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8448971290705006888}
+    - targetCorrespondingSourceObject: {fileID: 2066896392038628118, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4553528591294247558}
     - targetCorrespondingSourceObject: {fileID: 2066896392038628068, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6556296261253276187}
@@ -598,7 +601,6 @@ MonoBehaviour:
   dash: 0
   sprint: 0
   attack1: 0
-  attack2: 0
   analogMovement: 1
   cursorLocked: 0
   cursorInputForLook: 0
@@ -630,7 +632,7 @@ MonoBehaviour:
   GroundedRadius: 0
   GroundLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   dashingPower: 15
   tr: {fileID: 8448971290705006888}
   attackPoint: {fileID: 1033906477445040309}
@@ -639,6 +641,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   attackRate: 5
+  useMouseRotation: 1
 --- !u!96 &8448971290705006888
 TrailRenderer:
   serializedVersion: 3
@@ -743,6 +746,28 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &4553528591294247558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5178686219891413063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e772c9472c7b54a43a34571f06863896, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firePoint: {fileID: 1033906477445040309}
+  bulletForce: 100
+  WeaponDamage: 10
+  rateOfFire: 0.4
+  accuracy: 0
+  camera: {fileID: 0}
+  crosshair: {fileID: 0}
+  audioSource: {fileID: 0}
+  projectileForce: 20
+  projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
 --- !u!1 &5178686219891413429 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2066896392038628068, guid: 45288819fde2143449a96207b14db0bb, type: 3}

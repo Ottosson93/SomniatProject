@@ -19,21 +19,18 @@ public class Enemy : MonoBehaviour
     }
 
 
-    public void TakeDamage() 
+    public void TakeDamage(int damage) 
     {
         isBeingHit = true;
         StartCoroutine(ResetHitFlagAfterDelay(1f));
-        current -= 10;
+        current -= damage;
         animator.SetTrigger("Hurt");
-        damageTextPlayer.SubtractHealth(10, transform);
-
-
+        damageTextPlayer.SubtractHealth(damage, transform);
 
         if(current <= 0)
         {
             Die();
         }
-        
     }
 
     public IEnumerator ResetHitFlagAfterDelay(float delay)

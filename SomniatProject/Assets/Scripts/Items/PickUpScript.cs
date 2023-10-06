@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 using Random = UnityEngine.Random;
-using Assets.Eric_folder;
 
 public class PickUpScript : MonoBehaviour
 {
