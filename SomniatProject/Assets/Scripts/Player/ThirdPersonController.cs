@@ -244,7 +244,7 @@ namespace StarterAssets
             }
         }
 
-        private (bool success, Vector3 position) GetMousePosition()
+        public (bool success, Vector3 position) GetMousePosition()
         {
             Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
             var ray = _mainCamera.ScreenPointToRay(mousePos);
@@ -516,7 +516,7 @@ namespace StarterAssets
                 
             }
 
-        }
+        } 
 
 
 

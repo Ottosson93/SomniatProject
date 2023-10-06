@@ -12,6 +12,7 @@ public class PostProcess : MonoBehaviour
     private void Start()
     {
         material = new Material(shader);
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
