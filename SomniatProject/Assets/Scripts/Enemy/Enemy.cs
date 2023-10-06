@@ -7,7 +7,6 @@ public class Enemy : MonoBehaviour
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
 
-    public bool isBeingHit = false;
     public int health = 100;
     public int current;
 
@@ -21,9 +20,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        isBeingHit = true;
-        StartCoroutine(ResetHitFlagAfterDelay(1f));
-        current -= damage;
+        current = current - damage;
         animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(damage, transform);
 
@@ -33,13 +30,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public IEnumerator ResetHitFlagAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-
-        isBeingHit = false;
-    }
-
+   
 
     void Die() {
 

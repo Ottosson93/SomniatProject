@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1a3980af5beec24a8e9f6a98ea1e9ba, type: 3}
-  m_Name: DamgeTextPlayer
+  m_Script: {fileID: 11500000, guid: b59c58aa8f5f42f4dab2aaa5b87c0ed1, type: 3}
+  m_Name: Attack2
   m_EditorClassIdentifier: 
-  textMeshPro: {fileID: 7825478717212459650, guid: 96f3b8fe28b988446bb40dc3aa29b9ff, type: 3}
+  animatorOV: {fileID: 22100000, guid: 5a06636668664984fb2b424c50410624, type: 2}
+  damage: 8
+  knockback: 5
