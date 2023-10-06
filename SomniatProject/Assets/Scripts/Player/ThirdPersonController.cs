@@ -314,7 +314,9 @@ namespace StarterAssets
             if (useMouseRotation)
             {
                 Aim();
-                targetDirection = transform.forward*_input.move.y+_input.move.x*transform.right;
+                float y_rotation = _mainCamera.transform.eulerAngles.y;
+                float x_rotation = _mainCamera.transform.eulerAngles.x;
+                targetDirection = Matrix4x4.Rotate(Quaternion.Euler(new Vector3(0, y_rotation, 0)))* new Vector4(inputDirection.x, inputDirection.y, inputDirection.z, 0);
             }
             if (!useMouseRotation)
             {
@@ -477,11 +479,11 @@ namespace StarterAssets
         private IEnumerator Dash()
         {
             isDashing = true;  // Set dashing flag
-
+            Vector3 inputDirection = new Vector3(_input.move.x, 0, _input.move.y);
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
             if (useMouseRotation)
-                targetDirection = transform.forward;
+                targetDirection = Matrix4x4.Rotate(Quaternion.Euler(new Vector3(0, _mainCamera.transform.eulerAngles.y, 0))) * inputDirection;
 
             _controller.Move((targetDirection.normalized * (Time.deltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
