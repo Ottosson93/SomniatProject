@@ -5,6 +5,7 @@ using BehaviorTree;
 public class GuardMeleeBT : Tree
 {
     public UnityEngine.Transform[] waypoints;
+    public List<AttackSO> combo;
 
     public static float speed = 2f;
     public static float targetedSpeed = 4f;
@@ -13,7 +14,13 @@ public class GuardMeleeBT : Tree
     public static float attackRange = 2f;
     public static float rotationSpeed = 3f;
     public static float attackDamage = 0.10f;
+    public static bool canAttack = true;
 
+    public static float lastClickedTime;
+    public static float lastComboEnd;
+    public static int comboCounter;
+
+    public static float attackRate = 0.4f;
 
 
     protected override Node SetupTree()
@@ -22,8 +29,8 @@ public class GuardMeleeBT : Tree
         {
             new Sequence(new List<Node>
             {
-                new CheckEnemyInAttackRange(transform),
-                new TaskMeleeAttack(transform),
+                new CheckEnemyInAttackRange(transform, combo),
+                new TaskMeleeAttack(transform, combo),
             }),
 
             new Sequence(new List<Node>

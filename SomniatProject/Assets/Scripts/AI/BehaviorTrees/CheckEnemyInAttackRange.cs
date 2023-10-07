@@ -7,13 +7,19 @@ using BehaviorTree;
 public class CheckEnemyInAttackRange : Node
 {
     private Transform transform;
+    private List<AttackSO> combo;
     private Animator animator;
     private NavMeshAgent agent;
-    public CheckEnemyInAttackRange(Transform transform)
+
+    
+
+    public CheckEnemyInAttackRange(Transform transform, List<AttackSO> combo)
     {
         this.transform = transform;
+        this.combo = combo;
         animator = transform.GetComponent<Animator>();
         agent = transform.GetComponent<NavMeshAgent>();
+        
     }
 
     public override NodeState Evaluate()
@@ -28,18 +34,32 @@ public class CheckEnemyInAttackRange : Node
 
         Transform target = (Transform)t;
 
-        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange)
+        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange &&  GuardMeleeBT.canAttack)
         {
-            
-            agent.speed = 0f;
-            animator.SetTrigger("Attack");
-            animator.SetBool("Run", false);
+            if (Time.time - GuardMeleeBT.lastClickedTime > 1.7f && GuardMeleeBT.comboCounter <= combo.Count)
+            {   
+                if(Time.time - GuardMeleeBT.lastClickedTime >= 1.7f)
+                {
+                    animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
+                    animator.Play("Attack", 1, 0);
+                    GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
 
-            state = NodeState.SUCCESS;
-            return state;
-            
+                    GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
+                    GuardMeleeBT.lastClickedTime = Time.time;
 
-            
+                    agent.speed = 0f;
+                    animator.SetBool("Run", false);
+
+                    state = NodeState.SUCCESS;
+                    return state;
+
+                   
+                    
+                }
+
+            }
+
+           
         }
 
         
