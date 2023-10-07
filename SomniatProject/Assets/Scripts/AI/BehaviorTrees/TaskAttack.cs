@@ -11,13 +11,14 @@ public class TaskMeleeAttack : Node
     private NavMeshAgent agent;
     private Player player;
     private Animator animator;
-
+    private List<AttackSO> combo;
 
     private float attackTime = 1f;
     private float attackCounter = 0f;
 
-    public TaskMeleeAttack(Transform transform)
+    public TaskMeleeAttack(Transform transform, List<AttackSO> combo)
     {
+        this.combo = combo;
         animator = transform.GetComponent<Animator>();
 
     }
@@ -32,19 +33,33 @@ public class TaskMeleeAttack : Node
 
             lastTarget = target;
         }
-        attackCounter += Time.deltaTime;
-        if(attackCounter >= attackTime)
-        {
-            player.TakeDamage(GuardMeleeBT.attackDamage);
+        
+        
+        player.TakeDamage(GuardMeleeBT.attackDamage);
 
-            if (player.lucidity <= 0f)
-            {
-                ClearData("target");
-                animator.SetBool("Walk", true);
-            }
-            else
-                attackCounter = 0f;
+        if(GuardMeleeBT.comboCounter >= combo.Count)
+        {
+            GuardMeleeBT.comboCounter = 0;
         }
+
+
+        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+                && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+        {
+            GuardMeleeBT.comboCounter = 0;
+            GuardMeleeBT.lastComboEnd = Time.time;
+        }
+
+
+
+        if (player.lucidity <= 0f)
+        {
+            ClearData("target");
+            animator.SetBool("Walk", true);
+        }
+        else
+            attackCounter = 0f;
+        
 
 
         state = NodeState.RUNNING;

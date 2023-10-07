@@ -8,7 +8,7 @@ public class GuardBT : Tree
     public UnityEngine.GameObject bulletPrefab;
     public UnityEngine.Transform bulletSpawnPoint;
     public EnemyShooting enemyShooting;
-
+    List<AttackSO> combo;
     
     
     public static float speed = 2f;
@@ -23,7 +23,7 @@ public class GuardBT : Tree
         {
             new Sequence(new List<Node>
             {
-                new CheckEnemyInAttackRange(transform),
+                new CheckEnemyInAttackRange(transform, combo),
                 new TaskAttack(transform, enemyShooting),
             }),
 
