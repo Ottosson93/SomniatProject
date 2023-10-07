@@ -69,8 +69,7 @@ namespace StarterAssets
 
         Player player;
 
-        private bool isAttacking = false; // Add this variable to track attack animation
-
+        private bool canAttack = true;  // Flag to control attack cooldown
 
         public float dashingPower = 24f;
         private float dashingTime = 0.2f;
@@ -192,9 +191,12 @@ namespace StarterAssets
 
         private void Update()
         {
-            if (_input.attack1 && !isAttacking)
+            if (_input.attack1 && canAttack)
             {
                 Attack();
+
+                canAttack = false;  // Disable attack until cooldown is over
+                StartCoroutine(AttackCooldown());
             }
 
 
@@ -515,6 +517,12 @@ namespace StarterAssets
 
         }
 
+        private IEnumerator AttackCooldown()
+        {
+            yield return new WaitForSeconds(attackRate);
+            canAttack = true;  // Re-enable attack after cooldown
+        }
+
 
         private void Attack()
         {
@@ -541,7 +549,6 @@ namespace StarterAssets
 
                     }
 
-
                     if (comboCounter >= combo.Count)
                     {
                         comboCounter = 0;
@@ -555,8 +562,8 @@ namespace StarterAssets
 
         private void ExitAttack()
         {
-            if (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.97f
-                && _animator.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
+            if (_animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+                && _animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
             {
                 Invoke("EndCombo", 1);
             }
@@ -566,7 +573,6 @@ namespace StarterAssets
         {
             comboCounter = 0;
             lastComboEnd = Time.time;
-
         }
 
 

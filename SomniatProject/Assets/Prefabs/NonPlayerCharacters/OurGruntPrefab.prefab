@@ -332,7 +332,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5276592867460521514}
   - component: {fileID: 8442482085988791223}
-  - component: {fileID: 368505141966788286}
   - component: {fileID: 6629684541128406666}
   - component: {fileID: 189437958377128477}
   - component: {fileID: 2209933729498995069}
@@ -384,32 +383,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!143 &368505141966788286
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664211645506664793}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2.61
-  m_Radius: 1.28
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.8, z: 0}
 --- !u!114 &6629684541128406666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -535,7 +508,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 8442482085988791223}
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
-  isBeingHit: 0
   health: 100
   current: 0
   dead: 0
