@@ -689,7 +689,7 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
-  attackRate: 5
+  attackRate: 1.5
   useMouseRotation: 1
 --- !u!96 &8448971290705006888
 TrailRenderer:
