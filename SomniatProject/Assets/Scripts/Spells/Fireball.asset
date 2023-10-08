@@ -16,6 +16,6 @@ MonoBehaviour:
   LucidityCost: 5
   Lifetime: 2
   Speed: 15
-  SpellRadius: 0
+  SpellRadius: 1
   ExplosionPrefab: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   ExplosionDuration: 2

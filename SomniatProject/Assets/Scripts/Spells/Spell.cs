@@ -11,6 +11,8 @@ public class Spell : MonoBehaviour
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
 
+    private List<GameObject> triggeredGameObjects = new List<GameObject>();
+
     private void Awake()
     {
         myCollider = GetComponent<SphereCollider>();
@@ -33,6 +35,14 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject triggeredObject = other.gameObject;
+
+        triggeredGameObjects.Add(triggeredObject);
+
+        foreach(GameObject gameObject in triggeredGameObjects)
+        {
+            Debug.Log(gameObject);
+        }
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
@@ -52,8 +62,7 @@ public class Spell : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                // Apply your damage logic here
-                
+                hitCollider.GetComponent<Enemy>().TakeDamage(SpellToCast.DamageAmount);                
             }
         }
 
