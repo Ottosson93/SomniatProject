@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
+using System.Threading.Tasks;
 
 public class Player : MonoBehaviour
 {
@@ -14,14 +15,27 @@ public class Player : MonoBehaviour
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
-    private float speed;
+     float speed;
     public float meleeDamage;
     private float attackSpeed;
 
     private ThirdPersonController controller;
     private LuciditySlider luciditySlider;
 
+    public bool canHealOnHit = false;
+    public Spell mySpell = null;
 
+
+    public float Speed { get { return speed; } set { speed = value; } }
+
+    public void HealOnHit(int damage)
+    {
+        if (canHealOnHit)
+        {
+            float amount = damage * CalculateLifeSteal();
+            Heal(amount);
+        }
+    }
 
 
     void Start()
@@ -71,16 +85,18 @@ public class Player : MonoBehaviour
         return Strength.Value * 20;
     }
 
+    float CalculateLifeSteal()
+    {
+        return 0.2f*Intelligence.Value*(1+Strength.Value*0.1f);
+    }
+
 
 
     public void UpdateCharacterStats()
     {
         maxLucidity = CalculateLucidity();
-        luciditySlider.SetMaxLucidity(lucidity);
+        luciditySlider.SetMaxLucidity(maxLucidity);
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
-
-
-        Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
     }
 
     public void TakeDamage(float damage)
@@ -106,5 +122,20 @@ public class Player : MonoBehaviour
         {
             lucidity = maxLucidity;
         }
+    }
+
+    public async Task MovementIncrease(float speed, float duration)
+    {
+        Debug.Log("Started MovementIncrease");
+        Speed += speed;
+        int waitTime = 50;
+        float time = 0;
+        while (time < duration)
+        {
+            await Task.Delay(waitTime);
+            time += waitTime;
+            Debug.Log("Time: " + time);
+        }
+        Speed -= speed;
     }
 }
