@@ -175,20 +175,21 @@ public class CorridorGenerator
         }
 
         int offsetY = 0;
-        
-        /*
-        if(leftCandidate.maunal != true && rightCandidate.maunal != true)
+        if(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
         {
-            while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) + offsetY < rightCandidate.bottomLeft.y)
+            while(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
             {
-                offsetY += 3;
-            }
-            while ((leftCandidate.bottomRight.y + leftCandidate.height / 2) - offsetY + 5 > rightCandidate.topLeft.y)
-            {
-                offsetY -= 3;
+                offsetY = offsetY + 3;
             }
         }
-        */
+        if(leftSideComparisonPoint.y + offsetY + 3 >= rightCandidate.topLeft.y)
+        {
+            while (leftSideComparisonPoint.y + offsetY + 3 >= rightCandidate.topLeft.y)
+            {
+                offsetY = offsetY - 3;
+            }
+        }
+
         CNode c = new CNode(new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY), 
             new Vector2 (rightCandidate.topLeft.x , leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY + 5), 
             10, idTracker++);
@@ -236,6 +237,22 @@ public class CorridorGenerator
         }
 
         int offsetX = 0;
+
+        if(belowComparisonPoint.x + offsetX  >= topCandidate.bottomRight.x)
+        {
+            while(belowComparisonPoint.x + offsetX >= topCandidate.bottomRight.x)
+            {
+                offsetX = offsetX - 3;
+            }
+        }
+        if (belowComparisonPoint.x + offsetX + 3 <= topCandidate.bottomLeft.x)
+        {
+            while (belowComparisonPoint.x + offsetX + 3 <= topCandidate.bottomLeft.x)
+            {
+                offsetX = offsetX + 3;
+            }
+        }
+
         /*
         if (bottomCandidate.maunal != true && topCandidate.maunal != true)
         {
@@ -248,7 +265,7 @@ public class CorridorGenerator
                 offsetX -= 3;
             }
         }*/
-       
+
         CNode c = new CNode(new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX, bottomCandidate.topRight.y), 
             new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + 5, topCandidate.bottomLeft.y), 
             10, idTracker++);

@@ -59,7 +59,7 @@ public class PickUpScript : MonoBehaviour
             //if (!displayKey && CanDecreaseOpacity)
               //  await HideKey();
         }
-        Debug.Log("Return False");
+        //Debug.Log("Return False");
         return false;
     }
 

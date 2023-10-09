@@ -246,11 +246,16 @@ public class DungeonGenerator : MonoBehaviour
                 Debug.Log("Node: " + n.id + " sibling: root"  + " parent: root");
 
         }
+        foreach (RNode r in finishedNodes)
+        {
+            r.UpdateCorners();
+        }
         corridorGenerator = new CorridorGenerator(finishedNodes);
         corridors = corridorGenerator.GenerateCorridors();
         foreach(CNode c in corridors)
         {
             c.updateWH();
+            Debug.Log("C width: " + c.width + " height: " + c.height);
             CreateM(c);
         }
 
