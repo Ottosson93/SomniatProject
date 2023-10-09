@@ -182,9 +182,9 @@ public class CorridorGenerator
                 offsetY = offsetY + 3;
             }
         }
-        if(leftSideComparisonPoint.y + offsetY + 3 >= rightCandidate.topLeft.y)
+        else if(leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
         {
-            while (leftSideComparisonPoint.y + offsetY + 3 >= rightCandidate.topLeft.y)
+            while (leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
             {
                 offsetY = offsetY - 3;
             }
@@ -238,18 +238,18 @@ public class CorridorGenerator
 
         int offsetX = 0;
 
-        if(belowComparisonPoint.x + offsetX  >= topCandidate.bottomRight.x)
+        if (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
         {
-            while(belowComparisonPoint.x + offsetX >= topCandidate.bottomRight.x)
-            {
-                offsetX = offsetX - 3;
-            }
-        }
-        if (belowComparisonPoint.x + offsetX + 3 <= topCandidate.bottomLeft.x)
-        {
-            while (belowComparisonPoint.x + offsetX + 3 <= topCandidate.bottomLeft.x)
+            while (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
             {
                 offsetX = offsetX + 3;
+            }
+        }
+        else if (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
+        {
+            while (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
+            {
+                offsetX = offsetX - 3;
             }
         }
 
