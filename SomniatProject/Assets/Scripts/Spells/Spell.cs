@@ -12,6 +12,7 @@ public class Spell : MonoBehaviour
     private Rigidbody myRigidbody;
 
     private List<GameObject> triggeredGameObjects = new List<GameObject>();
+    
 
     private void Awake()
     {
@@ -31,6 +32,7 @@ public class Spell : MonoBehaviour
         {
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
