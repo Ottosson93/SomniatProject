@@ -24,7 +24,6 @@ public class PlayerLuciditySystem : MonoBehaviour
         controller = GetComponent<ThirdPersonController>();
         spellInput = new InputAction("Spell Cast", binding: "<Keyboard>/q");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
     }
 
     private void OnEnable()
@@ -57,6 +56,7 @@ public class PlayerLuciditySystem : MonoBehaviour
                 castingSpell = false;
             }
         }
+
     }
 
     private void CastSpell()
