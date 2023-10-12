@@ -170,7 +170,7 @@ MonoBehaviour:
   m_PreferredWidth: -1
   m_PreferredHeight: -1
   m_FlexibleWidth: -1
-  m_FlexibleHeight: 1
+  m_FlexibleHeight: 0
   m_LayoutPriority: 1
 --- !u!1 &7653105349507070061
 GameObject:
@@ -354,6 +354,10 @@ PrefabInstance:
     - target: {fileID: 31197100703243392, guid: c992724c38a2c984eb090a68b01c10ac, type: 3}
       propertyPath: m_Color.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 31197100703243392, guid: c992724c38a2c984eb090a68b01c10ac, type: 3}
+      propertyPath: m_Maskable
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 627252617010249035, guid: c992724c38a2c984eb090a68b01c10ac, type: 3}
       propertyPath: m_Pivot.x
@@ -599,7 +603,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7242878282571844590, guid: 24a7df3862513544c9a931ce3a8a8ad0, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 13.295
+      value: 13.295013
       objectReference: {fileID: 0}
     - target: {fileID: 7242878282571844590, guid: 24a7df3862513544c9a931ce3a8a8ad0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
