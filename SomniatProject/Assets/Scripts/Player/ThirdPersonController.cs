@@ -68,6 +68,7 @@ namespace StarterAssets
         int comboCounter;
 
         Player player;
+        DashIconScript dashIconScript;
 
         private bool canAttack = true;  // Flag to control attack cooldown
 
@@ -152,7 +153,7 @@ namespace StarterAssets
 
         private void Start()
         {
-
+            dashIconScript = FindObjectOfType<DashIconScript>();
             _hasAnimator = GetComponent<Animator>();
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -512,6 +513,7 @@ namespace StarterAssets
 
             _input.dash = false;
 
+            dashIconScript.Dash();
 
             yield return new WaitForSeconds(dashingCooldown);
 
@@ -553,7 +555,6 @@ namespace StarterAssets
                     {
                         comboCounter = 0;
                     }
-
                 }
 
             }
