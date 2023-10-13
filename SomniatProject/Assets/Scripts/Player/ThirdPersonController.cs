@@ -256,7 +256,7 @@ namespace StarterAssets
 
                 // Make the transform look in the direction.
                 transform.forward = direction;
-                Debug.Log("Updated forward direction");
+                //Debug.Log("Updated forward direction");
             }
         }
 

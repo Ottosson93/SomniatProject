@@ -65,4 +65,10 @@ public class CustomButton : CustomUIComponent
         pauseMenu.SetActive(true);
         Debug.Log("CLICKED OPEN PAUSE MENU");
     }
+
+    public void OpenSettingsMenu()
+    {
+        
+    }
+
 }
