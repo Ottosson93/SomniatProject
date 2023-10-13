@@ -38,8 +38,8 @@ public class TaskGoToTarget : Node
 
         if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.attackRange )
         {
-            //agent.SetDestination(target.position);
-            transform.position = Vector3.MoveTowards(transform.position, target.position, GuardMeleeBT.speed * Time.deltaTime);
+            agent.SetDestination(target.position);
+            
 
             float currentTime = Time.deltaTime - followStartTime;
             agent.speed = GuardMeleeBT.targetedSpeed;
