@@ -12,7 +12,9 @@ public class Spell : MonoBehaviour
     private Rigidbody myRigidbody;
 
     private List<GameObject> triggeredGameObjects = new List<GameObject>();
-    
+
+    [SerializeField] private ParticleSystem burnParticleSystem;
+
 
     private void Awake()
     {
@@ -51,6 +53,19 @@ public class Spell : MonoBehaviour
         }
         else
         {
+
+            Enemy enemy = other.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                // Apply burn effect to the enemy
+                BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
+                {
+                    // Add the BurnEffect component if not already present
+                    burnEffect = other.gameObject.AddComponent<BurnEffect>();
+                    burnEffect.SetParticleSystem(burnParticleSystem);
+                }
+            }
             DealDamageInRadius();
             CreateExplosionEffect();
         }
@@ -64,11 +79,32 @@ public class Spell : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                hitCollider.GetComponent<Enemy>().TakeDamage(SpellToCast.DamageAmount);                
+                hitCollider.GetComponent<Enemy>().TakeDamage(SpellToCast.DamageAmount);
+                
+                BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
+                if(burnEffect != null)
+                {
+                    if(burnEffect.duration > 0)
+                    {
+                        burnEffect.enabled = true;
+                    }
+                }
+
+                StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
+
             }
         }
 
         Destroy(this.gameObject);
+    }
+
+    private IEnumerator StopFireParticleSystem(float delay, BurnEffect burnEffect)
+    {
+        yield return new WaitForSeconds(delay);
+        if(burnEffect != null)
+        {
+            burnEffect.fireParticles.Stop();
+        }
     }
 
     private void CreateExplosionEffect()

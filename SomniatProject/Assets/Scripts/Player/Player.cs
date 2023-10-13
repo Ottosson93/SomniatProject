@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
 
         luciditySlider = GetComponent<LuciditySlider>();
         luciditySlider.SetMaxLucidity(lucidity);
+
     }
 
     float CalculateSpeed()
