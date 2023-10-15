@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BossMelee2
   m_EditorClassIdentifier: 
   animatorOV: {fileID: 22100000, guid: d5962230a93627449812f35f45118e64, type: 2}
-  damage: 15
+  damage: 1
   knockback: 10
