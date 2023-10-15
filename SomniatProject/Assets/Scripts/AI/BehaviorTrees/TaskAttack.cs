@@ -13,8 +13,6 @@ public class TaskMeleeAttack : Node
     private Animator animator;
     private List<AttackSO> combo;
 
-    private float attackTime = 1f;
-    private float attackCounter = 0f;
 
     public TaskMeleeAttack(Transform transform, List<AttackSO> combo)
     {
@@ -58,7 +56,7 @@ public class TaskMeleeAttack : Node
             animator.SetBool("Walk", true);
         }
         else
-            attackCounter = 0f;
+            GuardMeleeBT.attackCounter = 0;
         
 
 

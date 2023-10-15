@@ -28,13 +28,15 @@ public class DungeonGenerator : MonoBehaviour
     CNode Cnoded;
     int roomID = 1;
 
+    LayerMask Layer;
+
     Material material;
 
     //Enemy variables
     //GameObject enemyPrefab = new GameObject();
     List<GameObject> enemyList = new List<GameObject>();
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, List<GameObject> enemyList)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, List<GameObject> enemyList, LayerMask layer)
     {
         this.preMadeRooms = pmr;
         this.minRoomSize = roomSize;
@@ -45,6 +47,7 @@ public class DungeonGenerator : MonoBehaviour
         nodes.Add(rootNode);
         this.material = material; 
         this.enemyList = enemyList;
+        this.Layer = layer;
     }
 
     public void Generate()
@@ -321,6 +324,8 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
+        room.layer = 3;
+        
     }
     void CreateM(CNode n)
     {

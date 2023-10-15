@@ -21,7 +21,7 @@ public class GuardMeleeBT : Tree
     public static int comboCounter;
 
     public static float attackRate = 0.4f;
-
+    public static int attackCounter = 0;
 
     protected override Node SetupTree()
     {
