@@ -1,24 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using BehaviorTree;
 using UnityEngine;
 using UnityEngine.AI;
-using BehaviorTree;
 
-public class BossTaskMeleeAttack : Node
+public class BossTaskBoulderAttack : Node
 {
-
+    private Transform transform;
+    private Transform castPos;
     private Transform lastTarget;
     private NavMeshAgent agent;
     private Player player;
     private Animator animator;
-    private List<AttackSO> combo;
+    private SpellAttackSystem spell;
+    private List<Spell> spells;
 
-
-    public BossTaskMeleeAttack(Transform transform, List<AttackSO> combo)
+    public BossTaskBoulderAttack(Transform transform, List<Spell> spells, Transform castPos)
     {
-        this.combo = combo;
+        this.transform = transform;
+        this.spells = spells;
+        this.castPos = castPos;
         animator = transform.GetComponent<Animator>();
-
+        spell = transform.GetComponent<SpellAttackSystem>();
     }
 
 
@@ -32,22 +35,13 @@ public class BossTaskMeleeAttack : Node
             lastTarget = target;
         }
 
-        
 
 
-        if (BossBT.comboCounter >= combo.Count)
-        {
-            BossBT.comboCounter = 0;
-        }
+        spell.AICastSpell(spells[0], castPos.transform, player.transform);
 
 
-        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
-                && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
-        {
 
-            BossBT.comboCounter = 0;
-            BossBT.lastComboEnd = Time.time;
-        }
+
 
 
 
@@ -59,20 +53,14 @@ public class BossTaskMeleeAttack : Node
         else
         {
             animator.SetBool("Walk", false);
-            player.TakeDamage(BossBT.attackDamage);
-            BossBT.attackCounter = 0;
+
         }
 
-            
+
 
 
 
         state = NodeState.RUNNING;
         return state;
     }
-
-
-
-
-
 }

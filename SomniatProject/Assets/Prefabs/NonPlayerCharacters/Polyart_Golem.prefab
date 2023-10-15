@@ -221,6 +221,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1511967824}
+  - {fileID: 5841089883432334600}
   m_Father: {fileID: 1565357287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &834585473
@@ -336,6 +337,7 @@ GameObject:
   - component: {fileID: -9166232515405935649}
   - component: {fileID: 712614891738577095}
   - component: {fileID: 5572677172883243070}
+  - component: {fileID: 380792647450541006}
   m_Layer: 9
   m_Name: Polyart_Golem
   m_TagString: Enemy
@@ -441,9 +443,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
+  castPos: {fileID: 5841089883432334600}
   combo:
   - {fileID: 11400000, guid: 7f90fbfea3b9ea74a936c9df65d54597, type: 2}
   - {fileID: 11400000, guid: 409f0ada51686914d9c54a079dd68b53, type: 2}
+  spells:
+  - {fileID: 7443138587565036086, guid: edafa36dc62f35e4dacd0dd17f3d2819, type: 3}
 --- !u!195 &712614891738577095
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -489,6 +494,21 @@ CapsuleCollider:
   m_Height: 0.24
   m_Direction: 1
   m_Center: {x: 0, y: 1.83, z: 0}
+--- !u!114 &380792647450541006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077356408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edd137009aa197b49a351e4a24a9c3d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spellToCast: {fileID: 6265623028904570207, guid: 5fdebec7a2fbd2140acc26b930daba91, type: 3}
+  castPoint: {fileID: 5841089883432334600}
+  timeBetweenCasts: 10
 --- !u!1 &1099011281
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,4 +931,35 @@ Transform:
   m_Children:
   - {fileID: 21698125}
   m_Father: {fileID: 1024790831}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8146902534621191831
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5841089883432334600}
+  m_Layer: 0
+  m_Name: SpellPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5841089883432334600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8146902534621191831}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.25210536, y: -0.6606383, z: -0.25210536, w: 0.6606383}
+  m_LocalPosition: {x: -386, y: 48, z: 2}
+  m_LocalScale: {x: 99.99997, y: 100, z: 99.99998}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 831724753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

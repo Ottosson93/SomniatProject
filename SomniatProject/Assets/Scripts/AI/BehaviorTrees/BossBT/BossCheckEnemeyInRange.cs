@@ -48,7 +48,6 @@ public class BossCheckEnemyInAttackRange : Node
                     BossBT.lastClickedTime = Time.time;
 
                     agent.speed = 0f;
-                    animator.SetBool("Run", false);
 
                     state = NodeState.SUCCESS;
                     return state;
@@ -61,8 +60,6 @@ public class BossCheckEnemyInAttackRange : Node
 
 
         }
-
-
 
         state = NodeState.FAILURE;
         return state;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StarterAssets;
-public class PlayerLuciditySystem : MonoBehaviour
+public class SpellAttackSystem : MonoBehaviour
 {
     [SerializeField] private Spell spellToCast;
     [SerializeField] private Transform castPoint;
@@ -57,6 +57,8 @@ public class PlayerLuciditySystem : MonoBehaviour
             }
         }
 
+
+
     }
 
     private void CastSpell()
@@ -76,5 +78,15 @@ public class PlayerLuciditySystem : MonoBehaviour
             Debug.Log("Updated forward direction");
         }
         Instantiate(spellToCast, castPoint.position, castPoint.rotation);
+    }
+
+    public void AICastSpell(Spell spell, Transform castPoint, Transform PlayerPos)
+    {
+        Vector3 direction = ( PlayerPos.position - castPoint.position).normalized;
+        direction.y = 0;
+        castPoint.forward = direction;
+
+        Instantiate(spell, castPoint.position, castPoint.rotation);
+
     }
 }
