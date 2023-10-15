@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 8020057104215782255}
   - component: {fileID: 8381876561953769216}
   - component: {fileID: 8832351906070675253}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ Transform:
   m_GameObject: {fileID: 4810651007436223222}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 5.547448, y: 10.850001, z: -6.2674475}
+  m_LocalPosition: {x: 5.5474486, y: 10.850001, z: -12.117448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,6 +338,69 @@ MonoBehaviour:
   player: {fileID: 7290750132351680759}
   initialRadius: 0.6
   minRadius: 0.01
+--- !u!1 &5268056162859228469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8981364338070170999}
+  - component: {fileID: 4407042517006491847}
+  m_Layer: 0
+  m_Name: NavmeshBoss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8981364338070170999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268056162859228469}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 77.12955, y: -90.82756, z: 193.35646}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 84363304578499070}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4407042517006491847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268056162859228469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: -334000983
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 712
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 1
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: c637855fd87e7b1419abb5e508573998, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &5949676255278032641
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,7 +427,7 @@ Transform:
   m_GameObject: {fileID: 5949676255278032641}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 5.547448, y: 10.850001, z: -6.2674475}
+  m_LocalPosition: {x: 5.5474486, y: 10.850001, z: -12.117448}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -447,6 +510,7 @@ Transform:
   - {fileID: 3216802513980206780}
   - {fileID: 6916445741889547713}
   - {fileID: 1745848575953964613}
+  - {fileID: 8981364338070170999}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6766099233166833191
@@ -581,9 +645,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 84363304578499070}
     m_Modifications:
+    - target: {fileID: 349858835127620278, guid: ff39ded27f70b7c4895011597f9e5249, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 375329239235487479, guid: ff39ded27f70b7c4895011597f9e5249, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1580663253824928426, guid: ff39ded27f70b7c4895011597f9e5249, type: 3}
       propertyPath: m_Name
       value: Pickup_steak Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 1580663253824928426, guid: ff39ded27f70b7c4895011597f9e5249, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8048279097115092062, guid: ff39ded27f70b7c4895011597f9e5249, type: 3}
       propertyPath: m_LocalPosition.x
@@ -687,6 +763,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup_cupcake Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 7812822752120188569, guid: 67a3da0b8bd668546a17f64f51a069e9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8650423488550244021, guid: 67a3da0b8bd668546a17f64f51a069e9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9032513298831607429, guid: 67a3da0b8bd668546a17f64f51a069e9, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -745,9 +833,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6254272924714189177, guid: 35ebbe9b896de8f40b94f4ec0af63bec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7745868501654595758, guid: 35ebbe9b896de8f40b94f4ec0af63bec, type: 3}
       propertyPath: m_Name
       value: Pickup_burger Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7745868501654595758, guid: 35ebbe9b896de8f40b94f4ec0af63bec, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8812291336392491186, guid: 35ebbe9b896de8f40b94f4ec0af63bec, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
