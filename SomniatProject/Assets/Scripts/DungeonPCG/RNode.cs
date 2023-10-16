@@ -17,6 +17,8 @@ public class RNode
     public bool vertical = false;
     public bool connectedWithSibling = false;
 
+    public List<Doorway> doorways = new List<Doorway>();
+
     public int id;
     
 

@@ -16,12 +16,15 @@ public class CorridorGenerator
     List<RNode> leafs = new List<RNode>();
     List<RNode> currentRooms = new List<RNode>();
     int numberOfCorridors = 0;
+    GameObject pillar;
+    List<PCGObjects> corridorObjects = new List<PCGObjects>();
 
     int idTracker = 0;
 
-    public CorridorGenerator(List<RNode> rooms)
+    public CorridorGenerator(List<RNode> rooms, GameObject pillar)
     {
         this.rooms = rooms;
+        this.pillar = pillar;
     }
 
     public List<CNode> GenerateCorridors()
@@ -142,14 +145,15 @@ public class CorridorGenerator
     {
         RNode leftCandidate = leftRooms[0];
         RNode rightCandidate = rightRooms[0];
+        RNode leftBackUp = leftRooms[0];
 
-        
         if (leftRooms.Count > 0)
         {
             foreach (RNode node in leftRooms)
             {
                 if (node.topRight.x > leftCandidate.topRight.x)
                 {
+                    leftBackUp = leftCandidate;
                     leftCandidate = node;
                 }
             }
@@ -174,29 +178,71 @@ public class CorridorGenerator
             }
         }
 
+        /*
+        if(leftCandidate.bottomLeft.y - rightCandidate.topRight.y < 5)
+        {
+            Debug.Log("There was no room for a Corridor, So I changed the LEFT CANDIDATE");
+            //use leftbackup as candidate instead
+            leftCandidate = leftBackUp;
+            rightCandidate = rightRooms[0];
+            leftSideComparisonPoint = new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2);
+            rightSideComparisonPoint = new Vector2(rightCandidate.bottomLeft.x, rightCandidate.bottomLeft.y + rightCandidate.height / 2);
+
+            distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
+
+            //float distance = Math.Abs(test - test1)
+            foreach (RNode node in rightRooms)
+            {
+
+                rightSideComparisonPoint = new Vector2(node.bottomLeft.x, node.bottomLeft.y + node.height / 2);
+                float d = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
+
+                if (d < distance)
+                {
+                    distance = d;
+                    rightCandidate = node;
+                }
+            }
+        }
+        */
+
         int offsetY = 0;
         if(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
         {
             while(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
             {
-                offsetY = offsetY + 3;
+                offsetY = offsetY + 2;
             }
         }
         else if(leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
         {
             while (leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
             {
-                offsetY = offsetY - 3;
+                offsetY = offsetY - 2;
             }
         }
 
         CNode c = new CNode(new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY), 
             new Vector2 (rightCandidate.topLeft.x , leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY + 5), 
             10, idTracker++);
-        Debug.Log("C " + c.id + " coordinates " + c.bottomLeft + c.topRight);
 
         c.vertical = false;
         corridors.Add(c);
+
+        Doorway ldr = new Doorway(c.bottomLeft, new Vector2(c.bottomLeft.x, c.topRight.y), true);
+        leftCandidate.doorways.Add(ldr);
+        Doorway rdr = new Doorway(new Vector2(c.topRight.x, c.bottomLeft.y), c.topRight, true);
+        rightCandidate.doorways.Add(rdr);
+
+        PCGObjects obj = new PCGObjects(ldr.pillarOne, pillar);
+        corridorObjects.Add(obj);
+        obj = new PCGObjects(ldr.pillarTwo, pillar);
+        corridorObjects.Add(obj);
+        obj = new PCGObjects(rdr.pillarOne, pillar);
+        corridorObjects.Add(obj);
+        obj = new PCGObjects(rdr.pillarTwo, pillar);
+        corridorObjects.Add(obj);
+
     }
     
     void ConnectRoomsVertically(List<RNode> bottomRooms, List<RNode> topRooms)
@@ -242,38 +288,42 @@ public class CorridorGenerator
         {
             while (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
             {
-                offsetX = offsetX + 3;
+                offsetX = offsetX + 2;
             }
         }
         else if (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
         {
             while (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
             {
-                offsetX = offsetX - 3;
+                offsetX = offsetX - 2;
             }
         }
-
-        /*
-        if (bottomCandidate.maunal != true && topCandidate.maunal != true)
-        {
-            while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) + offsetX < topCandidate.bottomLeft.x)
-            {
-                offsetX += 3;
-            }
-            while ((bottomCandidate.topLeft.x + bottomCandidate.width / 2) - offsetX + 5 > topCandidate.bottomRight.x)
-            {
-                offsetX -= 3;
-            }
-        }*/
-
         CNode c = new CNode(new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX, bottomCandidate.topRight.y), 
             new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + 5, topCandidate.bottomLeft.y), 
             10, idTracker++);
-        Debug.Log("C " + c.id + " coordinates " + c.bottomLeft + c.topRight);
 
 
        c.vertical = true;
-        corridors.Add(c);
+       corridors.Add(c);
+
+       Doorway bdr = new Doorway(c.bottomLeft, new Vector2(c.topRight.x, c.bottomLeft.y), false);
+       bottomCandidate.doorways.Add(bdr);
+       Doorway tdr = new Doorway(new Vector2(c.bottomLeft.x, c.topRight.y), c.topRight, false);
+       topCandidate.doorways.Add(tdr);
+
+       PCGObjects obj = new PCGObjects(bdr.pillarOne, pillar);
+       corridorObjects.Add(obj);
+       obj = new PCGObjects(bdr.pillarTwo, pillar);
+       corridorObjects.Add(obj);
+       obj = new PCGObjects(tdr.pillarOne, pillar);
+       corridorObjects.Add(obj);
+       obj = new PCGObjects(tdr.pillarTwo, pillar);
+       corridorObjects.Add(obj);
+    }
+
+    public List<PCGObjects> GetCorridorObjects()
+    {
+        return corridorObjects;
     }
 
 

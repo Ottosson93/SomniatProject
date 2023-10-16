@@ -22,9 +22,12 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> preMadeRooms;
     Vector2 largestPreMadeRoom;  //maybe change to two ints: width and height
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
+    private GameObject horizontalWall, verticalWall, pillar;
     //List<Room> allRooms = new List<Room>();
     CorridorGenerator corridorGenerator;
     List<CNode> corridors = new List<CNode>();
+
+    List<PCGObjects> objectsToSPawn = new List<PCGObjects>();
     CNode Cnoded;
     int roomID = 1;
 
@@ -36,9 +39,12 @@ public class DungeonGenerator : MonoBehaviour
     //GameObject enemyPrefab = new GameObject();
     List<GameObject> enemyList = new List<GameObject>();
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, List<GameObject> enemyList, LayerMask layer)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject horizontalWall, GameObject verticalWall, GameObject pillar, List<GameObject> enemyList, LayerMask layer)
     {
         this.preMadeRooms = pmr;
+        this.verticalWall = verticalWall;
+        this.horizontalWall = horizontalWall;
+        this.pillar = pillar;
         this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
         rootNode = new RNode(new Vector2(-size.x/2, -size.y/2), new Vector2(size.x/2, size.y/2), roomID++);
@@ -131,7 +137,6 @@ public class DungeonGenerator : MonoBehaviour
 
                 RNode manualRNode = new RNode(bl, tr, roomID++);
                 Debug.Log("Manual Room " + manualRNode.id);
-                Debug.Log("Manual coordinates: " + bl + tr);
                 manualRNode.parent = parentNode;
                 manualRNode.sibling = newNode;
                 manualRNode.bottom = true;
@@ -235,33 +240,23 @@ public class DungeonGenerator : MonoBehaviour
 
     public void BuildCorridors()
     {
-        Debug.Log("--------Corridors-------");
-        Debug.Log("finished nodes count: " + finishedNodes.Count);
-
-        foreach (RNode n in finishedNodes)
-        {
-
-            if(n.parent != null && n.sibling != null)
-            {
-                Debug.Log("Node: " + n.id + " sibling " + n.sibling.id + " parent " + n.parent.id);
-            }
-            else
-                Debug.Log("Node: " + n.id + " sibling: root"  + " parent: root");
-
-        }
         foreach (RNode r in finishedNodes)
         {
             r.UpdateCorners();
         }
-        corridorGenerator = new CorridorGenerator(finishedNodes);
+        corridorGenerator = new CorridorGenerator(finishedNodes, pillar);
         corridors = corridorGenerator.GenerateCorridors();
         foreach(CNode c in corridors)
         {
             c.updateWH();
-            Debug.Log("C width: " + c.width + " height: " + c.height);
             CreateM(c);
         }
 
+    }
+    
+    public List<PCGObjects> GetCorridorObjects()
+    {
+        return corridorGenerator.GetCorridorObjects();
     }
 
     void ShrinkNodes(RNode n)
