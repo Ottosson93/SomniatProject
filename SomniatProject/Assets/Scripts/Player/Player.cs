@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
+    public float flatSpeed = 0;
     private float speed;
     public float meleeDamage;
     private float attackSpeed;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     private ThirdPersonController controller;
     private LuciditySlider luciditySlider;
 
+    public EmpoweredRelic empoweredRelic;
 
 
 
@@ -46,7 +48,7 @@ public class Player : MonoBehaviour
 
     float CalculateSpeed()
     {
-        return baseSpeed * (1 + (Dexterity.Value / baseSpeed));
+        return baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
     }
 
     float CalculateAttackSpeed()

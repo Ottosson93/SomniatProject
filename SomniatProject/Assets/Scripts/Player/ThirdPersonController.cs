@@ -69,6 +69,8 @@ namespace StarterAssets
 
         Player player;
         DashIconScript dashIconScript;
+        Hud_Attack hud_melee_script;
+        
 
         private bool canAttack = true;  // Flag to control attack cooldown
 
@@ -153,6 +155,13 @@ namespace StarterAssets
 
         private void Start()
         {
+            Hud_Attack[] hud_Attacks = FindObjectsOfType<Hud_Attack>();
+            foreach (Hud_Attack hud_Attack in hud_Attacks)
+            {
+                if (hud_Attack.attackType == AttackType.Melee)
+                    hud_melee_script = hud_Attack;
+            }
+
             dashIconScript = FindObjectOfType<DashIconScript>();
             _hasAnimator = GetComponent<Animator>();
             _controller = GetComponent<CharacterController>();
@@ -531,6 +540,8 @@ namespace StarterAssets
 
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
+            hud_melee_script.Run();
+
 
             if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
             {
@@ -546,9 +557,26 @@ namespace StarterAssets
 
                     foreach (Collider enemy in hitEnemies)
                     {
+                        bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
                         enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
 
-
+                        if (player.empoweredRelic != null)
+                        {
+                            foreach (Effect effect in player.empoweredRelic.effects)
+                            {
+                                if (effect != null)
+                                {
+                                    if(effect.type == EffectType.MoveSpeed )
+                                    {
+                                        if(dead)
+                                            effect.Run();
+                                    }
+                                    else
+                                        effect.Run();
+                                }
+                            }
+                        }
+                            
                     }
 
                     if (comboCounter >= combo.Count)
