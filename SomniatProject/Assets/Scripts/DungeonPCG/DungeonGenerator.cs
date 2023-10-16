@@ -369,6 +369,7 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
+        room.layer = 3;
     }
 
     public void SpawnEnemy(RNode node)
