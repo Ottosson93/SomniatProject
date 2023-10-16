@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpellItem : Item
 {
     PickUpScript pickUpScript;
-    private PlayerLuciditySystem playerLuciditySystem;
+    private SpellAttackSystem playerLuciditySystem;
     public Spell spell;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        playerLuciditySystem = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerLuciditySystem>();
+        playerLuciditySystem = GameObject.FindGameObjectWithTag("Player").GetComponent<SpellAttackSystem>();
         pickUpScript = GetComponent<PickUpScript>();
     }
 
