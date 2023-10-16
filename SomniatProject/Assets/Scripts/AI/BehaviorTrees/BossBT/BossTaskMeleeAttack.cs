@@ -50,6 +50,9 @@ public class BossTaskMeleeAttack : Node
         }
 
 
+       
+
+
 
         if (player.lucidity <= 0f)
         {
@@ -58,8 +61,11 @@ public class BossTaskMeleeAttack : Node
         }
         else
         {
+            if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 0.3f && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            {
+                player.TakeDamage(BossBT.attackDamage);
+            }
             animator.SetBool("Walk", false);
-            player.TakeDamage(BossBT.attackDamage);
             BossBT.attackCounter = 0;
         }
 

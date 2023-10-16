@@ -12,7 +12,7 @@ public class BossBT : Tree
     public static float targetedSpeed = 4f;
     public static float fovRange = 10f;
     public static float distance = 9f;
-    public static float attackRange = 15f;
+    public static float attackRange = 4f;
     public static float rotationSpeed = 3f;
     public static float attackDamage = 0;
     public static bool canAttack = true;
@@ -31,8 +31,8 @@ public class BossBT : Tree
             new Sequence(new List<Node>
             {
                 new BossCheckEnemyInAttackRange(transform, combo),
-                //new BossTaskMeleeAttack(transform, combo),
-                new BossTaskBoulderAttack(transform, spells, castPos),
+                new BossTaskMeleeAttack(transform, combo),
+                //new BossTaskBoulderAttack(transform, spells, castPos),
             }),
 
             new Sequence(new List<Node>
