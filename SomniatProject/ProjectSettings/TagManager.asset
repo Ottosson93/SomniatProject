@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - Shop
   - UpgradeRoom
+  - OnDeathMenu
   layers:
   - Default
   - TransparentFX

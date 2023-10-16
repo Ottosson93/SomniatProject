@@ -19,6 +19,9 @@ public class Player : MonoBehaviour
     public float meleeDamage;
     private float attackSpeed;
 
+    //Temporär lösning för OnDeathMenu 
+    private GameObject onDeathMenu;
+
     private ThirdPersonController controller;
     private LuciditySlider luciditySlider;
 
@@ -83,7 +86,6 @@ public class Player : MonoBehaviour
         lucidity = adjuster * maxLucidity;
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
-
         Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
     }
 
@@ -97,6 +99,7 @@ public class Player : MonoBehaviour
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
+            MenuManager._menuManager.onDeath();
         }
     }
 
