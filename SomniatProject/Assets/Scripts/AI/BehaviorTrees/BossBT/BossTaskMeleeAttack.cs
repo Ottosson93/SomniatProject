@@ -12,13 +12,14 @@ public class BossTaskMeleeAttack : Node
     private Player player;
     private Animator animator;
     private List<AttackSO> combo;
+    private Enemy enemy;
 
 
     public BossTaskMeleeAttack(Transform transform, List<AttackSO> combo)
     {
         this.combo = combo;
         animator = transform.GetComponent<Animator>();
-
+        enemy = transform.GetComponent<Enemy>();
     }
 
 
@@ -61,10 +62,15 @@ public class BossTaskMeleeAttack : Node
         }
         else
         {
-            if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 0.3f && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
+
+            foreach (Collider enemy in hitEnemies)
             {
-                player.TakeDamage(BossBT.attackDamage);
+                player.TakeDamage(GuardMeleeBT.attackDamage);
             }
+
+            
+            
             animator.SetBool("Walk", false);
             BossBT.attackCounter = 0;
         }
