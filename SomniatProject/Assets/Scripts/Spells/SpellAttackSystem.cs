@@ -19,6 +19,12 @@ public class SpellAttackSystem : MonoBehaviour
 
     private InputAction spellInput;
 
+
+    public void UpdateSpell(Spell spell)
+    {
+        spellToCast = spell;
+    }
+
     private void Awake()
     {
         controller = GetComponent<ThirdPersonController>();
