@@ -1,8 +1,9 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BurnEffect : MonoBehaviour
 {
-    public float duration = 5.0f;
+    public float duration = 2.0f;
     public int damagePerTick = 10;
     private float tickInterval = 1.0f;
 
@@ -11,16 +12,27 @@ public class BurnEffect : MonoBehaviour
 
     public ParticleSystem fireParticles;
 
+    private bool playFireParticles = false;
+
     public void SetParticleSystem(ParticleSystem particleSystem)
     {
         fireParticles = particleSystem;
+        playFireParticles = true;
     }
     private void Start()
     {
-        if(fireParticles != null)
+        if(playFireParticles && fireParticles != null)
         {
-            fireParticles.Play();
+            PlayFireParticles();
+            playFireParticles=false;
+            Debug.Log("Playing fire particles, name of prefab: " + fireParticles.name);
         }
+    }
+
+
+    private void OnDestroy()
+    {
+        StopFireParticles();
     }
 
     void Update()
@@ -47,6 +59,26 @@ public class BurnEffect : MonoBehaviour
         if (elapsedTime >= duration)
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void PlayFireParticles()
+    {
+        if(fireParticles != null)
+        {
+            fireParticles.transform.position = transform.position;
+            fireParticles.Play();
+            Debug.Log("Playing fire particles");
+        }
+    }
+
+
+    private void StopFireParticles()
+    {
+        if(fireParticles != null)
+        {
+            fireParticles.Stop();
+            Debug.Log("Stopped fire particles.");
         }
     }
 

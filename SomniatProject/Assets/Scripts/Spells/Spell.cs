@@ -28,6 +28,22 @@ public class Spell : MonoBehaviour
         Destroy(this.gameObject, SpellToCast.Lifetime);
     }
 
+
+    void Start()
+    {
+        if (burnParticleSystem != null)
+        {
+            Debug.Log("Particle System is assigned.The prefab used: " + burnParticleSystem.name + "Position: " + burnParticleSystem.transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Particle System is not assigned!");
+        }
+    }
+
+
+
+
     private void Update()
     {
         if (SpellToCast.Speed > 0)
@@ -40,7 +56,6 @@ public class Spell : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GameObject triggeredObject = other.gameObject;
-
         triggeredGameObjects.Add(triggeredObject);
 
         foreach(GameObject gameObject in triggeredGameObjects)
@@ -57,14 +72,19 @@ public class Spell : MonoBehaviour
             Enemy enemy = other.GetComponent<Enemy>();
             if (enemy != null)
             {
-                // Apply burn effect to the enemy
                 BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
                 if (burnEffect == null)
                 {
-                    // Add the BurnEffect component if not already present
                     burnEffect = other.gameObject.AddComponent<BurnEffect>();
                     burnEffect.SetParticleSystem(burnParticleSystem);
                 }
+                else
+                {
+                    burnEffect.SetParticleSystem(burnParticleSystem);
+                }
+
+
+                StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
             }
             DealDamageInRadius();
             CreateExplosionEffect();
@@ -79,18 +99,24 @@ public class Spell : MonoBehaviour
         {
             if (hitCollider.CompareTag("Enemy"))
             {
-                hitCollider.GetComponent<Enemy>().TakeDamage(SpellToCast.DamageAmount);
-                
-                BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
-                if(burnEffect != null)
+                Enemy enemy = hitCollider.GetComponent<Enemy>();
+                if (enemy != null)
                 {
-                    if(burnEffect.duration > 0)
-                    {
-                        burnEffect.enabled = true;
-                    }
-                }
+                    enemy.TakeDamage(SpellToCast.DamageAmount);
 
-                StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
+                    BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
+                    if (burnEffect == null)
+                    {
+                        burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
+                        burnEffect.SetParticleSystem(burnParticleSystem);                        
+                    }
+                    else
+                    {
+                        burnEffect.SetParticleSystem(burnParticleSystem);
+                    }
+                    StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
+
+                }
 
             }
         }
@@ -104,6 +130,7 @@ public class Spell : MonoBehaviour
         if(burnEffect != null)
         {
             burnEffect.fireParticles.Stop();
+            Debug.Log("Stopped fire particles.");
         }
     }
 
