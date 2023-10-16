@@ -937,7 +937,7 @@ PrefabInstance:
     - target: {fileID: 2434976405422277944, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: spellToCast
       value: 
-      objectReference: {fileID: 6265623028904570207, guid: 5fdebec7a2fbd2140acc26b930daba91, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 4586738781332085182, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: lucidity
       value: 5
