@@ -6,6 +6,7 @@ public class GuardMeleeBT : Tree
 {
     public UnityEngine.Transform[] waypoints;
     public List<AttackSO> combo;
+    
 
     public static float speed = 2f;
     public static float targetedSpeed = 4f;
