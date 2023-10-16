@@ -53,6 +53,7 @@ public class CustomButton : CustomUIComponent
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
     }
 
     public void Resume()

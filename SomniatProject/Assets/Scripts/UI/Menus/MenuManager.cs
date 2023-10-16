@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MenuManager : MonoBehaviour
 {
-    private static MenuManager s_instance;
+    public static MenuManager _menuManager;
 
     [SerializeField] private Menu _startingMenu;
 
@@ -17,6 +17,7 @@ public class MenuManager : MonoBehaviour
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuView;
+    public GameObject onDeathMenuView;
 
     public void OnGUI()
     {
@@ -31,6 +32,12 @@ public class MenuManager : MonoBehaviour
                 Pause();
             }
         }
+    }
+
+    public void onDeath()
+    {
+        onDeathMenuView.SetActive(true);
+        Time.timeScale = 0f;
     }
 
     void Resume()
@@ -48,9 +55,9 @@ public class MenuManager : MonoBehaviour
     }
     public static T GetMenu<T>() where T : Menu
     {
-        for (int i=0; i<s_instance._menus.Length; i++)
+        for (int i=0; i<_menuManager._menus.Length; i++)
         {
-            if(s_instance._menus[i] is T tMenu)
+            if(_menuManager._menus[i] is T tMenu)
             {
                 return tMenu;
             }
@@ -60,53 +67,55 @@ public class MenuManager : MonoBehaviour
 
     public static void Show<T>(bool remember = true) where T : Menu
     {
-        for(int i=0; i<s_instance._menus.Length; i++)
+        for(int i=0; i<_menuManager._menus.Length; i++)
         {
-            if(s_instance._menus[i] is T)
+            if(_menuManager._menus[i] is T)
             {
-                if (s_instance._currentMenu != null)
+                if (_menuManager._currentMenu != null)
                 {
-                    s_instance._history.Push(s_instance._currentMenu);
+                    _menuManager._history.Push(_menuManager._currentMenu);
                 }
 
-                s_instance._currentMenu.Hide();
+                _menuManager._currentMenu.Hide();
             }
 
-            s_instance._menus[i].Show();
+            _menuManager._menus[i].Show();
 
-            s_instance._currentMenu = s_instance._menus[i];
+            _menuManager._currentMenu = _menuManager._menus[i];
         }
     }
 
     public static void Show(Menu menu, bool remember = true)
     {
-        if (s_instance._currentMenu != null)
+        if (_menuManager._currentMenu != null)
         {
             if (remember)
             {
-                s_instance._history.Push(s_instance._currentMenu);
+                _menuManager._history.Push(_menuManager._currentMenu);
             }
 
-            s_instance._currentMenu.Hide();
+            _menuManager._currentMenu.Hide();
         }
 
         menu.Show();
 
-        s_instance._currentMenu = menu;
+        _menuManager._currentMenu = menu;
     }
 
     public static void ShowLast()
     {
-        if(s_instance._history.Count != 0)
+        if(_menuManager._history.Count != 0)
         {
-            Show(s_instance._history.Pop(), false);
+            Show(_menuManager._history.Pop(), false);
         }
     }
 
-    private void Awake() => s_instance = this;
+    private void Awake() => _menuManager = this;
 
     private void Start()
     {
+        onDeathMenuView.SetActive(false);
+
         for(int i=0; i <_menus.Length; i++)
         {
             _menus[i].Initialize();
@@ -118,6 +127,7 @@ public class MenuManager : MonoBehaviour
         {
             Show(_startingMenu, true);
         }
+
     }
 
 }
