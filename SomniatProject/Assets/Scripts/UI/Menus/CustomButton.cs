@@ -54,6 +54,7 @@ public class CustomButton : CustomUIComponent
     {
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
+
     }
 
     public void Resume()
