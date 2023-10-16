@@ -114,7 +114,6 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        onDeathMenuView.SetActive(false);
 
         for(int i=0; i <_menus.Length; i++)
         {
@@ -127,6 +126,8 @@ public class MenuManager : MonoBehaviour
         {
             Show(_startingMenu, true);
         }
+
+        onDeathMenuView.SetActive(false);
 
     }
 
