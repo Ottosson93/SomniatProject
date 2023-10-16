@@ -33,7 +33,7 @@ public class Relic : Item
     private void Update()
     {
 
-        if (pickUpScript.PickUp().Result) // Dont know what to name it but i simply remade Atalay's update script to return a bool 
+        if (pickUpScript.PickUp) // Dont know what to name it but i simply remade Atalay's update script to return a bool 
             Equip(player);        // So that i could use it in this class for my Equip() script.
 
     }

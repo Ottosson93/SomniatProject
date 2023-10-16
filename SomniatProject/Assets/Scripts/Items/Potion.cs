@@ -18,7 +18,7 @@ public class Potion : MonoBehaviour
 
     void Update()
     {
-        if (pickUpScript.PickUp().Result)
+        if (pickUpScript.PickUp)
             player.Heal(Lucidity);
 
     }
