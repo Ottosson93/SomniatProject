@@ -36,9 +36,9 @@ public abstract class Item : MonoBehaviour
 
     }
 
-    public void ConsumeSpellItem(PlayerLuciditySystem playerLuciditySystem, Spell spell)
+    public void ConsumeSpellItem(SpellAttackSystem spellAttackSystem, Spell spell)
     {
-        playerLuciditySystem.UpdateSpell(spell);
+        spellAttackSystem.UpdateSpell(spell);
 
         Transform parent = GetComponentInParent<Transform>();
         parent.gameObject.SetActive(false);
