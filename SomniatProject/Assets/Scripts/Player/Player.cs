@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
         meleeDamage = baseMeleeDamage;
 
 
-        maxLucidity = CalculateLucidity();
+        maxLucidity = CalculateMaxLucity();
         lucidity = maxLucidity;
         controller.MoveSpeed = CalculateSpeed();
 
@@ -64,7 +64,7 @@ public class Player : MonoBehaviour
     {
         return 1.0f;
     }
-    float CalculateLucidity()
+    float CalculateMaxLucity()
     {
         if(Strength.Value == 0)
         {
@@ -77,8 +77,10 @@ public class Player : MonoBehaviour
 
     public void UpdateCharacterStats()
     {
-        maxLucidity = CalculateLucidity();
-        luciditySlider.SetMaxLucidity(lucidity);
+        float adjuster = lucidity / maxLucidity;
+        maxLucidity = CalculateMaxLucity();
+        luciditySlider.SetMaxLucidity(maxLucidity);
+        lucidity = adjuster * maxLucidity;
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
 
