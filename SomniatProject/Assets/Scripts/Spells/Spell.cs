@@ -76,15 +76,7 @@ public class Spell : MonoBehaviour
                 if (burnEffect == null)
                 {
                     burnEffect = other.gameObject.AddComponent<BurnEffect>();
-                    burnEffect.SetParticleSystem(burnParticleSystem);
                 }
-                else
-                {
-                    burnEffect.SetParticleSystem(burnParticleSystem);
-                }
-
-
-                StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
             }
             DealDamageInRadius();
             CreateExplosionEffect();
@@ -108,13 +100,7 @@ public class Spell : MonoBehaviour
                     if (burnEffect == null)
                     {
                         burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
-                        burnEffect.SetParticleSystem(burnParticleSystem);                        
                     }
-                    else
-                    {
-                        burnEffect.SetParticleSystem(burnParticleSystem);
-                    }
-                    StartCoroutine(StopFireParticleSystem(burnEffect.duration, burnEffect));
 
                 }
 
@@ -124,15 +110,8 @@ public class Spell : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    private IEnumerator StopFireParticleSystem(float delay, BurnEffect burnEffect)
-    {
-        yield return new WaitForSeconds(delay);
-        if(burnEffect != null)
-        {
-            burnEffect.fireParticles.Stop();
-            Debug.Log("Stopped fire particles.");
-        }
-    }
+
+
 
     private void CreateExplosionEffect()
     {

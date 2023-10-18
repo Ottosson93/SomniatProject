@@ -13,7 +13,4 @@ public class SpellScriptableObject : ScriptableObject
     public GameObject ExplosionPrefab;
     public float ExplosionDuration = 2f;
     public int BurnDamagePerTick = 10;
-    public float BurnDuration = 5.0f;
-
-   
 }
