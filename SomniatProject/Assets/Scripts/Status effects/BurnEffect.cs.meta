@@ -1,11 +1,10 @@
 fileFormatVersion: 2
-guid: 8dc4af72349995d4487e362adcb1962c
+guid: c739268955ff6454fa1a2022d78ab0f0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - SpellToCast: {instanceID: 0}
-  - burnParticleSystem: {fileID: 8185350239260671889, guid: 3a4fb7e316c4c0c45beee5a16b14ecbb, type: 3}
+  - fireParticles: {fileID: 198321560017527566, guid: 89956e675b749204c8e10395ce2b5fb9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
