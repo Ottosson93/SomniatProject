@@ -27,7 +27,7 @@ public class PickUpScript : MonoBehaviour
 
     }
 
-    public async Task Update()
+    public async Task<bool> Update()
     {
         if (InRangeOfPickup)
         {

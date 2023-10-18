@@ -12,7 +12,7 @@ public class RNode
     public Vector2 topLeft, topRight, bottomLeft, bottomRight;
     public RNode parent, sibling;
     public List<RNode> children = new List<RNode>();
-    public bool maunal = false;
+    public bool manual = false;
     public bool bottom = false;
     public bool vertical = false;
     public bool connectedWithSibling = false;
