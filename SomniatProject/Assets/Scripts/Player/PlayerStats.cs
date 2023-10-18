@@ -1,24 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
-[CreateAssetMenu(menuName = "ScriptableObjects/PlayerStats", fileName = "PlayerStats")]
 public class PlayerStats : ScriptableObject
 {
-    [SerializeField]
-    int lucidity = 100;
-    [SerializeField]
-    int maxLucidity = 100;
-
-    public void SubtractHealth(int value, Transform transform)
+    // Start is called before the first frame update
+    void Start()
     {
-        lucidity = Mathf.Clamp(lucidity - value, 0, maxLucidity);
+        
     }
 
-    public void AddHealth(int value, Transform transform)
+    // Update is called once per frame
+    void Update()
     {
-        lucidity = Mathf.Clamp(lucidity - value, 0, maxLucidity);
+        
     }
-
 }

@@ -1,6 +1,7 @@
 using Palmmedia.ReportGenerator.Core;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,11 +13,19 @@ public class DungeonCreator : MonoBehaviour
     DungeonGenerator generator;
     [SerializeField] Material material;
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
+    [SerializeField] private GameObject horizontalWall, verticalWall, pillar;
     private List<PreMadeRoom> preMadeNodes;
+
+    private List<PCGObjects> objects = new List<PCGObjects>();
+
+    
+    
 
     //[SerializeField] private GameObject enemyPrefab;
     [SerializeField]private List<GameObject> enemyList;
     RNode node;
+    
+    [SerializeField] NavMeshSurface navSurface;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +33,7 @@ public class DungeonCreator : MonoBehaviour
         //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
         //Debug.Log(roomSize);
 
-        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms, enemyList);
+        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms, horizontalWall, verticalWall, pillar, enemyList, 3);
 
         generator.Generate();
         generator.BuildRooms();
@@ -36,6 +45,12 @@ public class DungeonCreator : MonoBehaviour
             Instantiate(p.preMadeRoom, p.centerPos, Quaternion.identity);
         }
         Debug.Log("MADE IT");
+        objects = generator.GetCorridorObjects();
+        foreach(PCGObjects obj in objects)
+        {
+            Instantiate(obj.objectType, obj.spawnPoint, Quaternion.identity);
+        }
+        navSurface.BuildNavMesh();
     }
 
     // Update is called once per frame
