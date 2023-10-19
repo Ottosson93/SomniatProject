@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     public float meleeDamage;
     private float attackSpeed;
 
-    private ThirdPersonController controller;
+    public ThirdPersonController controller;
     private LuciditySlider luciditySlider;
 
     public EmpoweredRelic empoweredRelic;
@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         luciditySlider.SetMaxLucidity(lucidity);
     }
 
-    float CalculateSpeed()
+    public float CalculateSpeed()
     {
         return baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
     }
@@ -83,8 +83,6 @@ public class Player : MonoBehaviour
         lucidity = adjuster * maxLucidity;
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
-
-        Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
     }
 
     public void TakeDamage(float damage)
