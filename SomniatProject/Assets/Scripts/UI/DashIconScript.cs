@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Threading.Tasks;
+using StarterAssets;
 
 public class DashIconScript : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class DashIconScript : MonoBehaviour
     
     private void Start()
     {
-        adjustableImage = GameObject.Find("Dash_Filled").GetComponent<Image>();        
+        adjustableImage = GameObject.Find("Dash_Filled").GetComponent<Image>();
+        cooldown = FindObjectOfType<ThirdPersonController>().dashingCooldown;
     }
 
 

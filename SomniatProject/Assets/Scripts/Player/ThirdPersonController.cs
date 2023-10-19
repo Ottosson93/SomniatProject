@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -76,7 +77,7 @@ namespace StarterAssets
 
         public float dashingPower = 24f;
         private float dashingTime = 0.2f;
-        private float dashingCooldown = 3f;
+        public float dashingCooldown = 3f;
 
         public TrailRenderer tr;
 
@@ -93,7 +94,6 @@ namespace StarterAssets
         //-------------
         [SerializeField] bool useMouseRotation;
         //------------
-
 
 
         // cinemachine
@@ -195,7 +195,7 @@ namespace StarterAssets
 
             if (_input.dash)
             {
-                StartCoroutine(Dash());
+                Dash();
             }
         }
 
@@ -500,7 +500,7 @@ namespace StarterAssets
         }
 
 
-        private IEnumerator Dash()
+        private async void Dash()
         {
             isDashing = true;  // Set dashing flag
             Vector3 inputDirection = new Vector3(_input.move.x, 0, _input.move.y);
@@ -514,7 +514,7 @@ namespace StarterAssets
 
             tr.emitting = true;
 
-            yield return new WaitForSeconds(dashingTime);
+            await Timer(dashingTime);
 
             isDashing = false;  // Reset dashing flag
 
@@ -524,9 +524,22 @@ namespace StarterAssets
 
             dashIconScript.Dash();
 
-            yield return new WaitForSeconds(dashingCooldown);
-
+            
+            await Timer(dashingCooldown);
         }
+
+        private async Task Timer(float timeToWait)
+        {
+            int delay = 10;
+            float timePassed = 0;
+            while (timePassed < timeToWait)
+            {
+                await Task.Delay(delay);
+                timePassed += Time.deltaTime;
+            }
+            
+        }
+
 
         private IEnumerator AttackCooldown()
         {
