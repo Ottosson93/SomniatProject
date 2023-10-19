@@ -28,9 +28,9 @@ public class DungeonGenerator : MonoBehaviour
     Material orangeRoomMaterial;
     Material redRoomMaterial;
     float distFromCenter;
-    bool isGreenRoom;
-    bool isOrangeRoom;
-    bool isRedRoom;
+    bool isGreenRoom = false;
+    bool isOrangeRoom = false;
+    bool isRedRoom = false;
 
     //Room variables
     List<GameObject> preMadeRooms;
@@ -339,7 +339,6 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
-        room.GetComponent<BoxCollider>().center = center;
         //room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
@@ -356,7 +355,7 @@ public class DungeonGenerator : MonoBehaviour
                 room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
                 isGreenRoom = true;
             }
-            else if (distFromCenter > 50 && distFromCenter < 75)
+            else if (distFromCenter > 50 && distFromCenter <= 75)
             {
                 orangeRoomNode.Add(n);
                 room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
@@ -412,7 +411,6 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
-        room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
@@ -455,7 +453,7 @@ public class DungeonGenerator : MonoBehaviour
                 Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
                 Instantiate(redEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
-                Debug.Log("Printing enemy " );
+                Debug.Log("Printing enemy esa dsa");
                 //todo: get a trigger to check if something has spawned at chosen position
             }
         }
