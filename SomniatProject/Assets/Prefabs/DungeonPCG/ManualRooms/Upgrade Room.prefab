@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 552301460660343113}
   - component: {fileID: 4313842439599253620}
   - component: {fileID: 249854899839183883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: r (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 1466857701323368675}
   - component: {fileID: 2966735178495162486}
   - component: {fileID: 7373552577971472601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: r
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 2247580057517856463}
   - component: {fileID: 932006318305438020}
   - component: {fileID: 7833145384887657358}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: r (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 4075592325626159540}
   - component: {fileID: 9108524024142116040}
   - component: {fileID: 332025996568828420}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -473,9 +473,25 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5178686219891051559, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+    - target: {fileID: 1904762223958030522, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2217982354390685929, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4246267861249761399, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4697017240656324050, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: m_Name
       value: MerchantPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 4697017240656324050, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5360683131785772904, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: m_LocalPosition.x
@@ -516,6 +532,30 @@ PrefabInstance:
     - target: {fileID: 5360683131785772904, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6774080502169825540, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973413696058740841, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7077608692380533153, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206035749426561629, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7533163476571990239, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8500709513404734051, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

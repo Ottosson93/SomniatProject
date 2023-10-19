@@ -6,9 +6,12 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
+    public Transform attackPoint;
+    public LayerMask enemyLayer;
 
     public int health = 100;
     public int current;
+    public float attackRange;
 
     public bool dead = false;
 
@@ -40,6 +43,15 @@ public class Enemy : MonoBehaviour
 
         dead = true;                
         Destroy(gameObject);
+    }
+
+
+    private void OnDrawGizmos()
+    {
+        if (attackPoint == null)
+            return;
+
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
 

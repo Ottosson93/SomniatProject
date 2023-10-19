@@ -7,10 +7,6 @@ public abstract class Item : MonoBehaviour
 {
     protected StatModifier[] stat_arr;
      
-
-
-
-
     public virtual void Equip(Player c)
     {
         for (int i = 0; i < stat_arr.Length; ++i)
@@ -38,6 +34,14 @@ public abstract class Item : MonoBehaviour
         Transform parent = GetComponentInParent<Transform>();
         parent.gameObject.SetActive(false);
 
+    }
+
+    public void ConsumeSpellItem(SpellAttackSystem spellAttackSystem, Spell spell)
+    {
+        spellAttackSystem.UpdateSpell(spell);
+
+        Transform parent = GetComponentInParent<Transform>();
+        parent.gameObject.SetActive(false);
     }
 
     public void Unequip(Player c)

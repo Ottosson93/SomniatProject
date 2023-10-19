@@ -12,14 +12,14 @@ public class TaskMeleeAttack : Node
     private Player player;
     private Animator animator;
     private List<AttackSO> combo;
+    private Enemy enemy;
 
-    private float attackTime = 1f;
-    private float attackCounter = 0f;
 
     public TaskMeleeAttack(Transform transform, List<AttackSO> combo)
     {
         this.combo = combo;
         animator = transform.GetComponent<Animator>();
+        enemy = transform.GetComponent<Enemy>();
 
     }
 
@@ -33,9 +33,18 @@ public class TaskMeleeAttack : Node
 
             lastTarget = target;
         }
+
+
+        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
         
+        foreach (Collider enemy in hitEnemies)
+        {
+            player.TakeDamage(GuardMeleeBT.attackDamage);
+        }
+
         
-        player.TakeDamage(GuardMeleeBT.attackDamage);
+
+
 
         if(GuardMeleeBT.comboCounter >= combo.Count)
         {
@@ -58,7 +67,7 @@ public class TaskMeleeAttack : Node
             animator.SetBool("Walk", true);
         }
         else
-            attackCounter = 0f;
+            GuardMeleeBT.attackCounter = 0;
         
 
 
