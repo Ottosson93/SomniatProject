@@ -7,6 +7,7 @@ public class BossBT : Tree
     public UnityEngine.Transform castPos;
     public List<AttackSO> combo;
     public List<Spell> spells;
+    public static bool hitByProjectile = false;
 
     public static float speed = 1f;
     public static float targetedSpeed = 4f;
@@ -17,6 +18,8 @@ public class BossBT : Tree
     public static float attackDamage = 0;
     public static bool canAttack = true;
 
+    public static float rushDamage = 5f;
+
     public static float lastClickedTime = 0;
     public static float lastComboEnd = 0;
     public static int comboCounter;
@@ -24,16 +27,25 @@ public class BossBT : Tree
     public static float attackRate = 2f;
     public static float attackCounter = 0f;
 
+    public static float bossRushRadius = 12f;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
         {
             new Sequence(new List<Node>
             {
-                new BossCheckEnemyInAttackRange(transform, combo),
-                new BossTaskMeleeAttack(transform, combo),
-                //new BossTaskBoulderAttack(transform, spells, castPos),
+                new BossCheckRangeRushAttack(transform),
+                new BossTaskRushAttack(transform),
             }),
+
+
+            //new Sequence(new List<Node>
+            //{
+            //    new BossCheckEnemyInAttackRange(transform, combo),
+            //    new BossTaskMeleeAttack(transform, combo),
+            //    //new BossTaskBoulderAttack(transform, spells, castPos),
+            //}),
 
             new Sequence(new List<Node>
             {

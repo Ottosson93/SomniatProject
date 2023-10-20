@@ -10,6 +10,7 @@ TagManager:
   - Shop
   - UpgradeRoom
   - OnDeathMenu
+  - Spell
   layers:
   - Default
   - TransparentFX
