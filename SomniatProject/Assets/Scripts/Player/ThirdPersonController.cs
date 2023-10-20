@@ -71,7 +71,6 @@ namespace StarterAssets
         Player player;
         DashIconScript dashIconScript;
         Hud_Attack hud_melee_script;
-        
 
         private bool canAttack = true;  // Flag to control attack cooldown
 
@@ -82,6 +81,7 @@ namespace StarterAssets
         public TrailRenderer tr;
 
         private bool isDashing = false;
+        bool canDash = true;
 
 
         public Transform attackPoint;
@@ -499,9 +499,14 @@ namespace StarterAssets
             }
         }
 
-
         private async void Dash()
         {
+            if (!canDash)
+            {
+                return;
+            }
+            canDash = false;
+
             isDashing = true;  // Set dashing flag
             Vector3 inputDirection = new Vector3(_input.move.x, 0, _input.move.y);
 
@@ -509,12 +514,12 @@ namespace StarterAssets
             if (useMouseRotation)
                 targetDirection = Matrix4x4.Rotate(Quaternion.Euler(new Vector3(0, _mainCamera.transform.eulerAngles.y, 0))) * inputDirection;
 
-            _controller.Move((targetDirection.normalized * (Time.deltaTime) +
-                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime) * dashingPower);
+            _controller.Move((targetDirection.normalized * (Time.fixedDeltaTime) +
+                                 new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.fixedDeltaTime) * dashingPower);
 
             tr.emitting = true;
 
-            await Timer(dashingTime);
+            await Task.Delay((int)(dashingTime*1000));
 
             isDashing = false;  // Reset dashing flag
 
@@ -524,21 +529,11 @@ namespace StarterAssets
 
             dashIconScript.Dash();
 
-            
-            await Timer(dashingCooldown);
+            await Task.Delay((int)(dashingCooldown * 1000));
+            canDash = true;
         }
+        
 
-        private async Task Timer(float timeToWait)
-        {
-            int delay = 10;
-            float timePassed = 0;
-            while (timePassed < timeToWait)
-            {
-                await Task.Delay(delay);
-                timePassed += Time.deltaTime;
-            }
-            
-        }
 
 
         private IEnumerator AttackCooldown()
