@@ -21,16 +21,11 @@ public class DungeonGenerator : MonoBehaviour
     List<RNode> finishedNodes = new List<RNode>();
 
     //Room zone variables
-    List<RNode> greenRoomNode= new List<RNode>();
-    List<RNode> orangeRoomNode = new List<RNode>();
-    List<RNode> redRoomNode = new List<RNode>();
     Material greenRoomMaterial;
     Material orangeRoomMaterial;
     Material redRoomMaterial;
     float distFromCenter;
-    bool isGreenRoom = false;
-    bool isOrangeRoom = false;
-    bool isRedRoom = false;
+    
 
     //Room variables
     List<GameObject> preMadeRooms;
@@ -255,6 +250,7 @@ public class DungeonGenerator : MonoBehaviour
             if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
             {
                 ShrinkNodes(finishedNodes[i]);
+                DeclareRoom(finishedNodes[i]);
                 CreateRoomMesh(finishedNodes[i], i);
                 SpawnEnemy(finishedNodes[i]);
             }
@@ -339,39 +335,46 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
-        //room.GetComponent<MeshRenderer>().material = material;
+        room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
-
-
-        foreach (RNode node in finishedNodes)
+        
+        //Maybe use an enum instead
+        if (n.isGreenRoom == true)
         {
-            //Vector3 nodePos = new Vector3(n.bottomLeft.x, 0, n.bottomLeft.y);
-            //distFromCenter = Vector3.Distance(nodePos, new Vector3(0, 0, 0));
-            distFromCenter = Vector3.Distance(center, new Vector3(0, 0, 0));
-            if (distFromCenter <= 50)
-            {
-                greenRoomNode.Add(n);
-                room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
-                isGreenRoom = true;
-            }
-            else if (distFromCenter > 50 && distFromCenter <= 75)
-            {
-                orangeRoomNode.Add(n);
-                room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
-                isOrangeRoom = true;
-            }
-            else
-            {
-                redRoomNode.Add(n);
-                room.GetComponent<MeshRenderer>().material = redRoomMaterial;
-                isRedRoom = true;
-            }
+            room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
+        }
+        else if (n.isOrangeRoom == true)
+        {
+            room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
+        }
+        else if (n.isRedRoom == true)
+        {
+            room.GetComponent<MeshRenderer>().material = redRoomMaterial;
         }
 
-
-
     }
+
+    private void DeclareRoom(RNode n)
+    {
+        
+        Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
+        distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
+        //Debug.Log(n.id + " " + distFromCenter);
+        if (distFromCenter <= 100)
+        {
+            n.isGreenRoom = true;
+        }
+        else if (distFromCenter > 100 && distFromCenter <= 150)
+        {
+            n.isOrangeRoom = true;
+        }
+        else if (distFromCenter > 150)
+        {
+            n.isRedRoom = true;
+        }
+    }
+
     void CreateCorridorMesh(CNode n)
     {
         Mesh mesh = new Mesh();
@@ -420,45 +423,64 @@ public class DungeonGenerator : MonoBehaviour
     {
         Vector3 bottomLeftV = new Vector3(n.bottomLeft.x, 0, n.bottomLeft.y);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
+        float enemySphere = 4f;
 
-        if (isGreenRoom)
+        if (n.isGreenRoom)
         {
             for (int i = 0; i < greenEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
                 Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                Instantiate(greenEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
-
-                //todo: get a trigger to check if something has spawned at chosen position
+                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres nothing here");
+                    Instantiate(greenEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                }
+                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres something here");
+                    return;
+                }
             }
         }
-        else if (isOrangeRoom)
+        else if (n.isOrangeRoom)
         {
             for (int i = 0; i < orangeEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
                 Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                Instantiate(orangeEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
-
-                //todo: get a trigger to check if something has spawned at chosen position
+                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres something here");
+                    Instantiate(orangeEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                }
+                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres nothing here");
+                    return;
+                }
             }
         }
-        else if (isRedRoom)
+        else if (n.isRedRoom)
         {
             for (int i = 0; i < redEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
                 Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                Instantiate(redEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
-                Debug.Log("Printing enemy esa dsa");
-                //todo: get a trigger to check if something has spawned at chosen position
+                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres something here");
+                    Instantiate(redEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                }
+                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                {
+                    Debug.Log("Theres nothing here");
+                    return;
+                }
             }
         }
-
-
-        
     }
 }

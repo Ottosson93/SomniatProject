@@ -17,6 +17,10 @@ public class RNode
     public bool vertical = false;
     public bool connectedWithSibling = false;
 
+    public bool isGreenRoom = false;
+    public bool isOrangeRoom = false;
+    public bool isRedRoom = false;
+
     public List<Doorway> doorways = new List<Doorway>();
 
     public int id;
