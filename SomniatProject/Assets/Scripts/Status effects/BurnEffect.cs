@@ -9,30 +9,35 @@ public class BurnEffect : MonoBehaviour
 
     private float elapsedTime = 0.0f;
     private float timeSinceLastTick = 0.0f;
+
+    private bool isEffectActive = true;
     void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        timeSinceLastTick += Time.deltaTime;
-        if (timeSinceLastTick >= tickInterval)
+        if (isEffectActive)
         {
-            Player player = GetComponent<Player>();
-            if (player != null)
+            elapsedTime += Time.deltaTime;
+
+            timeSinceLastTick += Time.deltaTime;
+            if (timeSinceLastTick >= tickInterval)
             {
-                player.TakeDamage(damagePerTick);
-            }
-            Enemy enemy = GetComponent<Enemy>();
-            if(enemy != null)
-            {
-                enemy.TakeDamage(damagePerTick);
+                Player player = GetComponent<Player>();
+                if (player != null)
+                {
+                    player.TakeDamage(damagePerTick);
+                }
+                Enemy enemy = GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damagePerTick);
+                }
+
+                timeSinceLastTick = 0.0f;
             }
 
-            timeSinceLastTick = 0.0f;
-        }
-
-        if (elapsedTime >= duration)
-        {
-            Destroy(gameObject);
-        }
+            if (elapsedTime >= duration)
+            {
+                isEffectActive = false;
+            }
+        }     
     }
 }
