@@ -18,8 +18,6 @@ public class PickUpScript : MonoBehaviour
     Vector3 distanceToPlayer;
     bool displayKey, playerInRange;
 
-
-
     void Start()
     {
         displayKey = false;

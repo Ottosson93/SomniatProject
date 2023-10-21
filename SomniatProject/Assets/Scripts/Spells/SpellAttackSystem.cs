@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using StarterAssets;
 public class PlayerLuciditySystem : MonoBehaviour
 {
-    [SerializeField] private Spell spellToCast;
+    [SerializeField] private Spell currentSpell;
     [SerializeField] private Transform castPoint;
     [SerializeField] private float timeBetweenCasts = 0.3f;
     private float currentCastTimer;
@@ -38,12 +38,12 @@ public class PlayerLuciditySystem : MonoBehaviour
 
     private void Update()
     {
-        bool hasEnoughLucidity = player.lucidity - spellToCast.SpellToCast.LucidityCost > 0f;
+        bool hasEnoughLucidity = player.lucidity - currentSpell.SpellToCast.LucidityCost > 0f;
         if(!castingSpell && spellInput.triggered && hasEnoughLucidity)
         {
             Debug.Log("Casted Spell");
             castingSpell = true;
-            player.lucidity -= spellToCast.SpellToCast.LucidityCost;
+            player.lucidity -= currentSpell.SpellToCast.LucidityCost;
             currentCastTimer = 0;
             CastSpell();
         }
@@ -59,6 +59,11 @@ public class PlayerLuciditySystem : MonoBehaviour
 
     }
 
+    public void PickUpNewSpell(Spell newSpell)
+    {
+        currentSpell = newSpell;
+    }
+
     private void CastSpell()
     {
         var (success, position) = controller.GetMousePosition();
@@ -67,7 +72,6 @@ public class PlayerLuciditySystem : MonoBehaviour
             // Calculate the direction
             var direction = position - castPoint.position;
 
-            // You might want to delete this line.
             // Ignore the height difference.
             direction.y = 0;
 
@@ -75,6 +79,7 @@ public class PlayerLuciditySystem : MonoBehaviour
             castPoint.forward = direction;
             Debug.Log("Updated forward direction");
         }
-        Instantiate(spellToCast, castPoint.position, castPoint.rotation);
+        Instantiate(currentSpell, castPoint.position, castPoint.rotation);
+        Debug.Log(castPoint.rotation);
     }
 }
