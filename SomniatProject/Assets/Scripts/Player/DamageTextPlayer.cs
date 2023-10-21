@@ -41,7 +41,7 @@ public class DamgeTextPlayer : ScriptableObject
             await Task.Delay(10);
         }
 
-        Destroy(damageText);
+        Destroy(damageText.gameObject);
     }
 
     private Color AddHealthColor(int value)

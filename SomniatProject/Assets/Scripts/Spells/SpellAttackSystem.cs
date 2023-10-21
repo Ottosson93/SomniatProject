@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using StarterAssets;
-public class PlayerLuciditySystem : MonoBehaviour
+public class SpellAttackSystem : MonoBehaviour
 {
     [SerializeField] private Spell currentSpell;
     [SerializeField] private Transform castPoint;
@@ -18,6 +18,12 @@ public class PlayerLuciditySystem : MonoBehaviour
     private bool castingSpell = false;
 
     private InputAction spellInput;
+
+
+    public void UpdateSpell(Spell spell)
+    {
+        spellToCast = spell;
+    }
 
     private void Awake()
     {
@@ -57,6 +63,8 @@ public class PlayerLuciditySystem : MonoBehaviour
             }
         }
 
+
+
     }
 
     public void PickUpNewSpell(Spell newSpell)
@@ -81,5 +89,15 @@ public class PlayerLuciditySystem : MonoBehaviour
         }
         Instantiate(currentSpell, castPoint.position, castPoint.rotation);
         Debug.Log(castPoint.rotation);
+    }
+
+    public void AICastSpell(Spell spell, Transform castPoint, Transform PlayerPos)
+    {
+        Vector3 direction = ( PlayerPos.position - castPoint.position).normalized;
+        direction.y = 0;
+        castPoint.forward = direction;
+
+        Instantiate(spell, castPoint.position, castPoint.rotation);
+
     }
 }

@@ -53,11 +53,15 @@ public class CustomButton : CustomUIComponent
     public void MainMenu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        PauseMenu.GameIsPaused = false;
     }
 
     public void OpenPauseMenu()
@@ -65,4 +69,10 @@ public class CustomButton : CustomUIComponent
         pauseMenu.SetActive(true);
         Debug.Log("CLICKED OPEN PAUSE MENU");
     }
+
+    public void OpenSettingsMenu()
+    {
+        
+    }
+
 }
