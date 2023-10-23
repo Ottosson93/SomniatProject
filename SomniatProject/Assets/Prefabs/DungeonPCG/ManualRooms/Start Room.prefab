@@ -844,8 +844,12 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: dashingPower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: dashingCooldown
-      value: 3
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9148320039206740723, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: useMouseRotation
@@ -900,14 +904,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 750415211029741655}
-  bulletForce: 20
+  bulletForce: 100
   WeaponDamage: 10
   rateOfFire: 0.3
   accuracy: 0
   camera: {fileID: 857980248975007796}
   crosshair: {fileID: 7843834208884357547, guid: b6418aebfdb5272418a34d7975bafdfa, type: 3}
   audioSource: {fileID: 0}
-  projectileForce: 20
   projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
 --- !u!114 &3810547148532738670
 MonoBehaviour:

@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         return baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
     }
 
-    float CalculateAttackSpeed()
+   public float CalculateAttackSpeed()
     {
         return baseAttackSpeed * (1 + (Dexterity.Value));
     }
