@@ -18,12 +18,12 @@ public class ShopManagerScript : MonoBehaviour
     public TextMeshProUGUI currencyText;
     //[SerializeField] GameObject shop;
     // Start is called before the first frame update
-    void Awake()
+    /*void Awake()
     {
         shopView = GameObject.FindGameObjectWithTag("Shop");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         
-    }
+    }*/
 
     public void Init()
     {

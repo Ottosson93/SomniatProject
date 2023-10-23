@@ -6,7 +6,7 @@ using UnityEngine.SocialPlatforms.GameCenter;
 
 public class Doorway
 {
-    bool vertical;
+    public bool vertical;
 
     //if vertical, then pillarONe will always be the lower one otherwise it will be the left one.
     public Vector2 pillarOne;
