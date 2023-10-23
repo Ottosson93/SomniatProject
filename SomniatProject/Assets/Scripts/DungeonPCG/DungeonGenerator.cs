@@ -10,6 +10,8 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor.Experimental.GraphView;
+using System.Net;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -22,12 +24,12 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> preMadeRooms;
     Vector2 largestPreMadeRoom;  //maybe change to two ints: width and height
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
-    private GameObject horizontalWall, verticalWall, pillar;
+    private GameObject horizontalWall5, horizontalWall1, verticalWall5, verticalWall1, pillar;
     //List<Room> allRooms = new List<Room>();
     CorridorGenerator corridorGenerator;
     List<CNode> corridors = new List<CNode>();
 
-    List<PCGObjects> objectsToSPawn = new List<PCGObjects>();
+    List<PCGObjects> objectsToSpawn = new List<PCGObjects>();
     CNode Cnoded;
     int roomID = 1;
 
@@ -39,11 +41,13 @@ public class DungeonGenerator : MonoBehaviour
     //GameObject enemyPrefab = new GameObject();
     List<GameObject> enemyList = new List<GameObject>();
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject horizontalWall, GameObject verticalWall, GameObject pillar, List<GameObject> enemyList, LayerMask layer)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject horizontalWall5, GameObject horizontalWall1, GameObject verticalWall5, GameObject verticalWall1, GameObject pillar, List<GameObject> enemyList, LayerMask layer)
     {
         this.preMadeRooms = pmr;
-        this.verticalWall = verticalWall;
-        this.horizontalWall = horizontalWall;
+        this.verticalWall5 = verticalWall5;
+        this.verticalWall1 = verticalWall1;
+        this.horizontalWall5 = horizontalWall5;
+        this.horizontalWall1 = horizontalWall1;
         this.pillar = pillar;
         this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
@@ -244,7 +248,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             r.UpdateCorners();
         }
-        corridorGenerator = new CorridorGenerator(finishedNodes, pillar);
+        corridorGenerator = new CorridorGenerator(finishedNodes, horizontalWall5, horizontalWall1, verticalWall5, verticalWall1, pillar);
         corridors = corridorGenerator.GenerateCorridors();
         foreach(CNode c in corridors)
         {
@@ -256,7 +260,169 @@ public class DungeonGenerator : MonoBehaviour
     
     public List<PCGObjects> GetCorridorObjects()
     {
-        return corridorGenerator.GetCorridorObjects();
+        objectsToSpawn = corridorGenerator.GetCorridorObjects();
+        foreach (RNode room in finishedNodes)
+        {
+            if (room.bottom == true)
+            {
+                //Place Pillars in corners
+                PCGObjects obj = new PCGObjects(room.bottomLeft, pillar);
+                objectsToSpawn.Add(obj);
+                obj = new PCGObjects(room.bottomRight, pillar);
+                objectsToSpawn.Add(obj);
+                obj = new PCGObjects(room.topLeft, pillar);
+                objectsToSpawn.Add(obj);
+                obj = new PCGObjects(room.topRight, pillar);
+                objectsToSpawn.Add(obj);
+                //build walls vertically 
+                //float wallCenter = 2.5f;
+
+                buildWalls(room);
+            }
+        }
+        return objectsToSpawn;
+        //return corridorGenerator.GetCorridorObjects();
+    }
+
+    void buildWalls(RNode room)
+    {
+        bool doorwayTop = false;
+        Doorway topDoorway;
+        bool doorwayBottom = false;
+        Doorway bottomDoorway;
+        bool doorwayLeft = false;
+        Doorway leftDoorway;
+        bool doorwayRight = false;
+        Doorway rightDoorway; 
+
+
+        foreach (Doorway d in room.doorways)
+        {
+            if (d.vertical == false && room.topRight.y == d.pillarOne.y)
+            {
+                topDoorway = d;
+                doorwayTop = true;
+                PlaceWallsHorizontally(room, d, room.topRight.y, true);
+
+            }
+            else if(d.vertical == false && room.bottomLeft.y == d.pillarOne.y)
+            {
+                doorwayBottom = true;
+                bottomDoorway = d;
+                PlaceWallsHorizontally(room, d, room.bottomLeft.y, true);
+            }
+            else if(d.vertical == true && room.bottomLeft.x == d.pillarOne.x)
+            {
+                leftDoorway = d;
+                doorwayLeft = true;
+                PlaceWallsVertically(room, d, room.bottomLeft.x, true);
+            }
+            else if (d.vertical == true && room.topRight.x == d.pillarOne.x)
+            {
+                rightDoorway = d;
+                doorwayRight = true;
+                PlaceWallsVertically(room, d, room.topRight.x, true);
+            }
+
+        }
+
+        if (!doorwayTop)
+        {
+            PlaceWallsHorizontally(room, null, room.topRight.y, false);
+        }
+        if (!doorwayBottom)
+        {
+            PlaceWallsHorizontally(room, null, room.bottomLeft.y, false);
+        }
+        if (!doorwayLeft)
+        {
+            PlaceWallsVertically(room, null, room.bottomLeft.x, false);
+        }
+        if (!doorwayRight)
+        {
+            PlaceWallsVertically(room, null, room.topRight.x, false);
+        }
+    }
+
+    void PlaceWallsHorizontally(RNode room, Doorway d, float y, bool doorway)
+    {
+        float endPoint;
+        if (doorway == false)
+        {
+            endPoint = room.topRight.x;
+        }
+        else
+        {
+            endPoint = d.pillarOne.x;
+        }
+        float buildPos = room.topLeft.x;
+
+        while (buildPos < room.topRight.x)
+        {
+            if (buildPos + 4.5 < endPoint)
+            {
+                AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), horizontalWall5);
+                buildPos += 5;
+            }
+            else if (buildPos + 0.5 < endPoint)
+            {
+                AddObjectToSpawn(new Vector2(buildPos + 0.5f, y), horizontalWall1);
+                buildPos += 1;
+            }
+            else if(doorway == true)
+            {
+                buildPos += 5; //= topDoorway.pillarTwo.x;
+                endPoint = room.topRight.x;
+            }
+            else if(doorway == false)
+            {
+                break; 
+            }
+        }
+    }
+
+    void PlaceWallsVertically(RNode room, Doorway d, float x, bool doorway)
+    {
+        float endPoint;
+        if (doorway == false)
+        {
+            endPoint = room.topRight.y;
+        }
+        else
+        {
+            endPoint = d.pillarOne.y;
+        }
+        float buildPos = room.bottomLeft.y;
+
+        while (buildPos < room.topRight.y)
+        {
+            if (buildPos + 4.5 < endPoint)
+            {
+                AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), verticalWall5);
+                buildPos += 5;
+            }
+            else if (buildPos + 0.5 < endPoint)
+            {
+                AddObjectToSpawn(new Vector2(x, buildPos + 0.5f), verticalWall1);
+                buildPos += 1;
+            }
+            else if (doorway == true)
+            {
+                buildPos += 5; //= topDoorway.pillarTwo.x;
+                endPoint = room.topRight.y;
+            }
+            else if (doorway == false)
+            {
+                break;
+            }
+        }
+    }
+
+
+    void AddObjectToSpawn(Vector2 pos, GameObject type)
+    {
+        PCGObjects obj = new PCGObjects(pos, type);
+        objectsToSpawn.Add(obj); 
     }
 
     void ShrinkNodes(RNode n)
