@@ -33,19 +33,19 @@ public class BossBT : Tree
     {
         Node root = new Selector(new List<Node>
         {
-            new Sequence(new List<Node>
-            {
-                new BossCheckRangeRushAttack(transform),
-                new BossTaskRushAttack(transform),
-            }),
-
-
             //new Sequence(new List<Node>
             //{
-            //    new BossCheckEnemyInAttackRange(transform, combo),
-            //    new BossTaskMeleeAttack(transform, combo),
-            //    //new BossTaskBoulderAttack(transform, spells, castPos),
+            //    new BossCheckRangeRushAttack(transform),
+            //    new BossTaskRushAttack(transform),
             //}),
+
+
+            new Sequence(new List<Node>
+            {
+                new BossCheckEnemyInAttackRange(transform, combo),
+                new BossTaskMeleeAttack(transform, combo),
+                //new BossTaskBoulderAttack(transform, spells, castPos),
+            }),
 
             new Sequence(new List<Node>
             {

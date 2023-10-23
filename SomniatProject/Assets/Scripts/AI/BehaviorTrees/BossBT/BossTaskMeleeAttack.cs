@@ -62,12 +62,18 @@ public class BossTaskMeleeAttack : Node
         }
         else
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
-
-            foreach (Collider enemy in hitEnemies)
+            foreach (Transform point in enemy.attackPoint)
             {
-                player.TakeDamage(GuardMeleeBT.attackDamage);
+                Collider[] hitEnemies = Physics.OverlapSphere(point.position, enemy.attackRange, enemy.enemyLayer);
+
+                foreach (Collider enemy in hitEnemies)
+                {
+                    player.TakeDamage(GuardMeleeBT.attackDamage);
+                }
             }
+            
+
+            
 
             
             

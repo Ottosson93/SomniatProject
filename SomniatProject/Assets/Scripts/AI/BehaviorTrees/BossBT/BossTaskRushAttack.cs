@@ -43,12 +43,12 @@ public class BossTaskRushAttack : Node
         }
         else
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
+            //Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
 
-            foreach (Collider enemy in hitEnemies)
-            {
-                player.TakeDamage(BossBT.rushDamage);
-            }
+            //foreach (Collider enemy in hitEnemies)
+            //{
+            //    player.TakeDamage(BossBT.rushDamage);
+            //}
 
 
             

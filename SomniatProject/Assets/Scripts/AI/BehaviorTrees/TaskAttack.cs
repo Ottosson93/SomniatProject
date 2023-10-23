@@ -27,7 +27,7 @@ public class TaskMeleeAttack : Node
     public override NodeState Evaluate()
     {
         Transform target = (Transform)GetData("target");
-        if(target != lastTarget)
+        if (target != lastTarget)
         {
             player = target.GetComponent<Player>();
 
@@ -35,7 +35,7 @@ public class TaskMeleeAttack : Node
         }
 
 
-        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint.position, enemy.attackRange, enemy.enemyLayer);
+        Collider[] hitEnemies = Physics.OverlapSphere(enemy.attackPoint[0].position, enemy.attackRange, enemy.enemyLayer);
         
         foreach (Collider enemy in hitEnemies)
         {

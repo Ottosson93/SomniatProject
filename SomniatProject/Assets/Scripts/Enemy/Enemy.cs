@@ -6,7 +6,8 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
-    public Transform attackPoint;
+    public List<Transform> attackPoint;
+
     public LayerMask enemyLayer;
 
     public int health = 100;
@@ -48,10 +49,16 @@ public class Enemy : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+
         if (attackPoint == null)
             return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+        foreach (Transform point in attackPoint)
+        {
+            Gizmos.DrawWireSphere(point.position, attackRange);
+        }
+        
+
     }
 
 

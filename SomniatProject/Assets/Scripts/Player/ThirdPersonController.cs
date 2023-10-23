@@ -565,8 +565,12 @@ namespace StarterAssets
 
                     foreach (Collider enemy in hitEnemies)
                     {
+                        if(_animator.GetCurrentAnimatorStateInfo(1).normalizedTime >= 1)
+                        {
+                            enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
+                        }
                         bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
-                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
+                        
 
                         if (player.empoweredRelic != null)
                         {

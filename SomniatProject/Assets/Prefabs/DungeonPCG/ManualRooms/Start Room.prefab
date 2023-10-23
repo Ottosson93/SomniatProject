@@ -1189,11 +1189,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1376258032062224614, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376258032062224614, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: attackPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 7995031043139082981}
+    - target: {fileID: 1376258032062224614, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: attackPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 3776045719016225539}
+    - target: {fileID: 5590650137497947710, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -133
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590650137497947710, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -296
+      objectReference: {fileID: 0}
+    - target: {fileID: 5590650137497947710, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 225
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+--- !u!4 &3776045719016225539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5590650137497947710, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+  m_PrefabInstance: {fileID: 8787313691580527933}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7995031043139082981 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1659226135123455960, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+  m_PrefabInstance: {fileID: 8787313691580527933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8787313690507629127 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1077356410, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
