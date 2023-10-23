@@ -8,9 +8,8 @@ using StarterAssets;
 public class DashIconScript : MonoBehaviour
 {
     Image adjustableImage;
-    float value = 0;
     float cooldown = 2f;
-    bool onCooldown = true;
+    bool isrefilling = false;
     
     private void Start()
     {
@@ -23,21 +22,31 @@ public class DashIconScript : MonoBehaviour
     {
         if (adjustableImage == null)
             return;
-
+        cooldown = FindObjectOfType<ThirdPersonController>().dashingCooldown;
         adjustableImage.fillAmount = 0;
         await refill();
     }
 
     async Task refill()
     {
-        int delayTime = 50;
+        if (isrefilling)
+            return;
+        isrefilling = true;
+
+        float currentTime =Time.realtimeSinceStartup;
+        float oldTime=currentTime;
+
+        int delayTime = 100;
         while (adjustableImage.fillAmount < 1)
         {
+            currentTime = Time.realtimeSinceStartup;
+            float diff = currentTime - oldTime;
+
+            adjustableImage.fillAmount = adjustableImage.fillAmount + (1 / cooldown) * (diff);
             await Task.Delay(delayTime);
-            
-            adjustableImage.fillAmount = adjustableImage.fillAmount + Time.deltaTime * (1 / cooldown);
-            Debug.Log("Running Refill");
+            oldTime = currentTime;
         }
+        isrefilling=false;
     }
 
 
