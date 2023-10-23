@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Threading.Tasks;
 
 
 
@@ -13,6 +14,8 @@ public class FireWeapon : MonoBehaviour
     [Range(0.01f, 1f)][SerializeField] float rateOfFire = 0.2f;
     [SerializeField] float accuracy = 0f;
     Coroutine firingCoroutine;
+    bool canShoot = true;
+    Player player;
 
     Hud_Attack hud_ranged_attack;
 
@@ -21,8 +24,6 @@ public class FireWeapon : MonoBehaviour
     [SerializeField] GameObject crosshair;
     [SerializeField] AudioSource audioSource;
 
-
-    [SerializeField] float projectileForce = 20f;
     [SerializeField] GameObject projectilePrefab;
 
 
@@ -36,6 +37,7 @@ public class FireWeapon : MonoBehaviour
             if (attacks[i].attackType == AttackType.Ranged)
                 hud_ranged_attack = attacks[i];
         }
+        player = GetComponent<Player>();
     }
 
     void Update()
@@ -49,34 +51,22 @@ public class FireWeapon : MonoBehaviour
 
         //     if (!gamePauser.InMenu) //Man kan inte skjuta när man är i shoppen
         {
-            bool buttonDownRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasPressedThisFrame;
-            bool buttonUpRight = UnityEngine.InputSystem.Mouse.current.rightButton.wasReleasedThisFrame;
+            bool isRightbtnPressed = UnityEngine.InputSystem.Mouse.current.rightButton.isPressed;
 
-            if (buttonDownRight && isShooting == false)
-            {
-                Debug.Log("Fire2");
-                isShooting = true;
-
-                firingCoroutine = StartCoroutine(Fire());
-
-            }
-            else if (buttonDownRight && isShooting == true)
-            {
-                StopCoroutine(firingCoroutine);
-                isShooting = false;
-            }
-            if (buttonUpRight)
-            {
-                StopCoroutine(firingCoroutine);
-                isShooting = false;
+            if (isRightbtnPressed )//&& isShooting == false)
+            {   
+                    Fire();
             }
         }
     }
 
-    IEnumerator Fire()
+    async void Fire()
     {
-        while (true)
-        {
+        
+        if (!canShoot)
+            return;
+        canShoot = false;
+
             hud_ranged_attack.Run();
 
             if (audioSource != null)
@@ -85,8 +75,10 @@ public class FireWeapon : MonoBehaviour
             }
             InstantiateBullet_Projectile();
 
-            yield return new WaitForSeconds(rateOfFire);
-        }
+        int cooldownMs = (int)(1000 / player.CalculateAttackSpeed());
+        await Task.Delay(cooldownMs);
+            canShoot = true;
+        
     }
     private void InstantiateBullet_Projectile()
     {
@@ -105,8 +97,8 @@ public class FireWeapon : MonoBehaviour
         bullet.GetComponent<Bullet>().damage = WeaponDamage;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Vector3 dir = new Vector3(targetPos.x - firePoint.position.x, 0, targetPos.z - firePoint.position.z).normalized;
-        rb.AddForce(dir * projectileForce, ForceMode.Impulse); // KAnske behöver firepoint.forward istället.
+        rb.AddForce(dir * bulletForce, ForceMode.Impulse); 
 
-        Debug.Log("Mouse_screen_pos: " + mousePos.x + " " + mousePos.y + " " + mousePos.z + "  Mouse_world_pos: " + camera.ScreenToWorldPoint(mousePos).x + " " + camera.ScreenToWorldPoint(mousePos).y + " " + camera.ScreenToWorldPoint(mousePos).z);
+        
     }
 }
