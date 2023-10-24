@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  spellType: 1
   DamageAmount: 10
+  DamagePerTick: 5
   LucidityCost: 5
   Lifetime: 2
   Speed: 15
   SpellRadius: 1
+  RotationSpeed: 100
   ExplosionPrefab: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+  LightningImpact: {fileID: 0}
+  LightningStun: {fileID: 0}
+  BurnParticleSystem: {fileID: 7910603292438892066, guid: 43d1d06cf70fcb2488255051aaae40a5, type: 3}
   ExplosionDuration: 2
-  BurnDamagePerTick: 10
+  StunDuration: 2
+  BurnDuration: 5
+  TickInterval: 0.75

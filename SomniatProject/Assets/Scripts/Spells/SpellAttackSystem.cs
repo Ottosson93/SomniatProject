@@ -22,7 +22,7 @@ public class SpellAttackSystem : MonoBehaviour
 
     public void UpdateSpell(Spell spell)
     {
-        spellToCast = spell;
+        currentSpell = spell;
     }
 
     private void Awake()
