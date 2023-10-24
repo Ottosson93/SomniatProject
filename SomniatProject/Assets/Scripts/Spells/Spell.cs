@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -11,9 +12,8 @@ public class Spell : MonoBehaviour
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
 
-    [SerializeField] private GameObject hitParticleEffectPrefab;
+    private ParticleSystem lightningImpactParticleEffect;
 
-    private int damageMultiplier = 1;
 
 
     private void Awake()
@@ -27,6 +27,12 @@ public class Spell : MonoBehaviour
 
 
         Destroy(this.gameObject, SpellToCast.Lifetime);
+
+        if (SpellToCast.LightningImpact != null)
+        {
+            lightningImpactParticleEffect = Instantiate(SpellToCast.LightningImpact, transform.position, Quaternion.identity);
+            lightningImpactParticleEffect.Stop();
+        }
     }
 
     private void Update()
@@ -37,6 +43,8 @@ public class Spell : MonoBehaviour
             if (SpellToCast.name.Equals("Piercing Arrow"))
             {
                 transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime,  Space.Self);
+
+               
             }
         }
         
@@ -50,9 +58,9 @@ public class Spell : MonoBehaviour
         }
         else
         {
+            Enemy enemy = other.GetComponent<Enemy>();
             if (SpellToCast.name.Equals("Fireball"))
             {
-                Enemy enemy = other.GetComponent<Enemy>();
                 if (enemy != null)
                 {
                     BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
@@ -66,27 +74,27 @@ public class Spell : MonoBehaviour
             }
             else if (SpellToCast.name.Equals("Piercing Arrow"))
             {
-                Enemy enemy = other.GetComponent<Enemy>();
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(SpellToCast.DamageAmount * damageMultiplier);
-                    damageMultiplier += SpellToCast.DamageIncrease;
+                    enemy.TakeDamage(SpellToCast.DamageAmount);
+                    PlayLightningImpactAtEnemyPosition(enemy.transform.position);
 
+                    StunEffect stunEffect = enemy.gameObject.AddComponent<StunEffect>();
+                    stunEffect.Initialize(SpellToCast.StunDuration, SpellToCast.LightningStun);
 
-                    InstantiateHitParticleEffect(other.transform.position);
                 }
             }
 
         }
     }
 
-    private void InstantiateHitParticleEffect(Vector3 hitPos)
+    private void PlayLightningImpactAtEnemyPosition(Vector3 position)
     {
-        if (hitParticleEffectPrefab != null)
+        if (lightningImpactParticleEffect != null)
         {
-            GameObject chillParticleEffect = Instantiate(hitParticleEffectPrefab, hitPos, Quaternion.identity);
-
-            Destroy(chillParticleEffect.gameObject, SpellToCast.ChillDuration);
+            lightningImpactParticleEffect.transform.position = position;
+            lightningImpactParticleEffect.Play();
+            lightningImpactParticleEffect.Stop();
         }
     }
 
@@ -96,21 +104,18 @@ public class Spell : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                if (enemy != null)
+                enemy.TakeDamage(SpellToCast.DamageAmount);
+
+                BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
                 {
-                    enemy.TakeDamage(SpellToCast.DamageAmount);
-
-                    BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
-                    if (burnEffect == null)
-                    {
-                        burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
-                    }
-
+                    burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
                 }
 
+                burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
             }
         }
 

@@ -7,7 +7,7 @@ public class SpellScriptableObject : ScriptableObject
 {
     [Header("Damage")]
     public int DamageAmount = 10;
-    public int DamageIncrease = 2;
+    public int DamagePerTick = 5;
 
     [Header("Lucidity")]
     public float LucidityCost = 5f;
@@ -18,10 +18,15 @@ public class SpellScriptableObject : ScriptableObject
     public float SpellRadius;
     public float RotationSpeed = 100f;
 
-    [Header("Prefabs")]
+    [Header("Prefabs & Particle Systems")]
     public GameObject ExplosionPrefab;
+    public ParticleSystem LightningImpact;
+    public ParticleSystem LightningStun;
+    public ParticleSystem BurnParticleSystem;
 
     [Header("Durations")]
     public float ExplosionDuration = 2f;
-    public float ChillDuration = 2f;
+    public float StunDuration = 2f;
+    public float BurnDuration = 5f;
+    public float TickInterval = 0.75f;
 }
