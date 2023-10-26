@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(SphereCollider))]
@@ -11,9 +12,8 @@ public class Spell : MonoBehaviour
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
 
-    private List<GameObject> triggeredGameObjects = new List<GameObject>();
+    private ParticleSystem lightningImpactParticleEffect;
 
-    [SerializeField] private ParticleSystem burnParticleSystem;
 
 
     private void Awake()
@@ -25,61 +25,76 @@ public class Spell : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
+
         Destroy(this.gameObject, SpellToCast.Lifetime);
-    }
 
-
-    void Start()
-    {
-        if (burnParticleSystem != null)
+        if (SpellToCast.LightningImpact != null)
         {
-            Debug.Log("Particle System is assigned.The prefab used: " + burnParticleSystem.name + "Position: " + burnParticleSystem.transform.position);
-        }
-        else
-        {
-            Debug.LogWarning("Particle System is not assigned!");
+            lightningImpactParticleEffect = Instantiate(SpellToCast.LightningImpact, transform.position, Quaternion.identity);
+            lightningImpactParticleEffect.Stop();
         }
     }
-
-
-
 
     private void Update()
     {
         if (SpellToCast.Speed > 0)
         {
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
+            if (SpellToCast.name.Equals("Piercing Arrow"))
+            {
+                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime,  Space.Self);
+
+               
+            }
         }
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject triggeredObject = other.gameObject;
-        triggeredGameObjects.Add(triggeredObject);
-
-        foreach(GameObject gameObject in triggeredGameObjects)
-        {
-            Debug.Log(gameObject);
-        }
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
         }
         else
         {
-
             Enemy enemy = other.GetComponent<Enemy>();
-            if (enemy != null)
+            if (SpellToCast.name.Equals("Fireball"))
             {
-                BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
-                if (burnEffect == null)
+                if (enemy != null)
                 {
-                    burnEffect = other.gameObject.AddComponent<BurnEffect>();
+                    BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
+                    if (burnEffect == null)
+                    {
+                        burnEffect = other.gameObject.AddComponent<BurnEffect>();
+                    }
+                }
+                DealDamageInRadius();
+                CreateExplosionEffect();
+            }
+            else if (SpellToCast.name.Equals("Piercing Arrow"))
+            {
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(SpellToCast.DamageAmount);
+                    PlayLightningImpactAtEnemyPosition(enemy.transform.position);
+
+                    StunEffect stunEffect = enemy.gameObject.AddComponent<StunEffect>();
+                    stunEffect.Initialize(SpellToCast.StunDuration, SpellToCast.LightningStun);
+
                 }
             }
-            DealDamageInRadius();
-            CreateExplosionEffect();
+
+        }
+    }
+
+    private void PlayLightningImpactAtEnemyPosition(Vector3 position)
+    {
+        if (lightningImpactParticleEffect != null)
+        {
+            lightningImpactParticleEffect.transform.position = position;
+            lightningImpactParticleEffect.Play();
+            lightningImpactParticleEffect.Stop();
         }
     }
 
@@ -89,29 +104,23 @@ public class Spell : MonoBehaviour
 
         foreach (Collider hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            if (enemy != null)
             {
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                if (enemy != null)
+                enemy.TakeDamage(SpellToCast.DamageAmount);
+
+                BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
                 {
-                    enemy.TakeDamage(SpellToCast.DamageAmount);
-
-                    BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
-                    if (burnEffect == null)
-                    {
-                        burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
-                    }
-
+                    burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
                 }
 
+                burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
             }
         }
 
         Destroy(this.gameObject);
     }
-
-
-
 
     private void CreateExplosionEffect()
     {

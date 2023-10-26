@@ -6,6 +6,7 @@ using BehaviorTree;
 using UnityEditor.Networking.PlayerConnection;
 using UnityEditor.Rendering;
 using Unity.VisualScripting;
+using UnityEditor.SearchService;
 
 public class CorridorGenerator
 {
@@ -16,15 +17,19 @@ public class CorridorGenerator
     List<RNode> leafs = new List<RNode>();
     List<RNode> currentRooms = new List<RNode>();
     int numberOfCorridors = 0;
-    GameObject pillar;
+    GameObject horizontalWall5, horizontallWall1, verticalWall5, verticalWall1, pillar;
     List<PCGObjects> corridorObjects = new List<PCGObjects>();
 
     int idTracker = 0;
 
-    public CorridorGenerator(List<RNode> rooms, GameObject pillar)
+    public CorridorGenerator(List<RNode> rooms, GameObject horiztonallWall5, GameObject horiztonallWall1, GameObject verticalWall5, GameObject verticalWall1, GameObject pillar)
     {
         this.rooms = rooms;
         this.pillar = pillar;
+        this.horizontalWall5 = horiztonallWall5;
+        this.horizontallWall1 = horiztonallWall1;
+        this.verticalWall5 = verticalWall5;
+        this.verticalWall1 = verticalWall1;
     }
 
     public List<CNode> GenerateCorridors()
@@ -234,15 +239,31 @@ public class CorridorGenerator
         Doorway rdr = new Doorway(new Vector2(c.topRight.x, c.bottomLeft.y), c.topRight, true);
         rightCandidate.doorways.Add(rdr);
 
-        PCGObjects obj = new PCGObjects(ldr.pillarOne, pillar);
-        corridorObjects.Add(obj);
-        obj = new PCGObjects(ldr.pillarTwo, pillar);
-        corridorObjects.Add(obj);
-        obj = new PCGObjects(rdr.pillarOne, pillar);
-        corridorObjects.Add(obj);
-        obj = new PCGObjects(rdr.pillarTwo, pillar);
-        corridorObjects.Add(obj);
+        AddCorridorObject(ldr.pillarOne, pillar);
+        AddCorridorObject(ldr.pillarTwo, pillar);
+        AddCorridorObject(rdr.pillarOne, pillar);
+        AddCorridorObject(rdr.pillarTwo, pillar);
 
+        float buildPos = c.bottomLeft.x;
+        while (buildPos < c.topRight.x)
+        {
+            if(buildPos + 4.5 < c.topRight.x)
+            {
+                AddCorridorObject(new Vector2(buildPos + 2.5f , c.topRight.y), horizontalWall5);
+                AddCorridorObject(new Vector2(buildPos + 2.5f, c.bottomLeft.y), horizontalWall5);
+                buildPos += 5;
+            }
+            else if (buildPos + 0.5 < c.topRight.x)
+            {
+                AddCorridorObject(new Vector2(buildPos + 0.5f, c.topRight.y), horizontallWall1);
+                AddCorridorObject(new Vector2(buildPos + 0.5f, c.bottomLeft.y), horizontallWall1);
+                buildPos += 1;
+            }
+            else
+            {
+                break;
+            }
+        }
     }
     
     void ConnectRoomsVertically(List<RNode> bottomRooms, List<RNode> topRooms)
@@ -311,14 +332,38 @@ public class CorridorGenerator
        Doorway tdr = new Doorway(new Vector2(c.bottomLeft.x, c.topRight.y), c.topRight, false);
        topCandidate.doorways.Add(tdr);
 
-       PCGObjects obj = new PCGObjects(bdr.pillarOne, pillar);
-       corridorObjects.Add(obj);
-       obj = new PCGObjects(bdr.pillarTwo, pillar);
-       corridorObjects.Add(obj);
-       obj = new PCGObjects(tdr.pillarOne, pillar);
-       corridorObjects.Add(obj);
-       obj = new PCGObjects(tdr.pillarTwo, pillar);
-       corridorObjects.Add(obj);
+       
+       AddCorridorObject(bdr.pillarOne, pillar);
+       AddCorridorObject(bdr.pillarTwo, pillar);
+       AddCorridorObject(tdr.pillarOne, pillar);
+       AddCorridorObject(tdr.pillarTwo, pillar);
+
+        float buildPos = c.bottomLeft.y;
+        while (buildPos < c.topRight.y)
+        {
+            if (buildPos + 4.5 < c.topRight.y)
+            {
+                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 2.5f), verticalWall5);
+                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 2.5f), verticalWall5);
+                buildPos += 5;
+            }
+            else if (buildPos + 0.5 < c.topRight.y)
+            {
+                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 0.5f), verticalWall1);
+                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 0.5f), verticalWall1);
+                buildPos += 1;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+
+    void AddCorridorObject(Vector2 pos, GameObject type)
+    {
+        PCGObjects obj = new PCGObjects(pos, type);
+        corridorObjects.Add(obj);
     }
 
     public List<PCGObjects> GetCorridorObjects()

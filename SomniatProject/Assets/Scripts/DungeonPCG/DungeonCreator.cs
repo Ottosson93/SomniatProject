@@ -18,7 +18,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] Material redRoomMaterial;
 
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
-    [SerializeField] private GameObject horizontalWall, verticalWall, pillar;
+    [SerializeField] private GameObject horizontalWall5, horizontalWall1, verticalWall1, verticalWall5, pillar;
     private List<PreMadeRoom> preMadeNodes;
 
     private List<PCGObjects> objects = new List<PCGObjects>();
@@ -40,9 +40,11 @@ public class DungeonCreator : MonoBehaviour
         //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; 
         //Debug.Log(roomSize);
 
+
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
             horizontalWall, verticalWall, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+
 
         generator.Generate();
         generator.BuildRooms();

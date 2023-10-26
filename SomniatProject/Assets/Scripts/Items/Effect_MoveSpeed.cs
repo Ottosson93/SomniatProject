@@ -31,8 +31,12 @@ public class Effect_MoveSpeed : Effect
     public async override void Run()
     {
         player.flatSpeed += speedIncrease;
+        player.controller.MoveSpeed = player.CalculateSpeed();
+        Debug.Log("PlayerSpeed " + player.CalculateSpeed());
         await Timer(duration);
         player.flatSpeed -= speedIncrease;
+        player.controller.MoveSpeed = player.CalculateSpeed();
+        Debug.Log("PlayerSpeed " + player.CalculateSpeed());
     }
 
     async Task Timer(float duration)
