@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
+  m_Name: Berserk
+  m_EditorClassIdentifier: 
+  DamageAmount: 0
+  DamagePerTick: 0
+  LucidityCost: 5
+  Lifetime: 2
+  Speed: 0
+  SpellRadius: 0
+  RotationSpeed: 0
+  ExplosionPrefab: {fileID: 0}
+  LightningImpact: {fileID: 0}
+  LightningStun: {fileID: 0}
+  BurnParticleSystem: {fileID: 0}
+  BerserkParticleSystem: {fileID: 6810471105834413002, guid: 97c43495f80a3244fad1301dfafbe252, type: 3}
+  ExplosionDuration: 0
+  StunDuration: 0
+  BurnDuration: 0
+  TickInterval: 0
+  DamageBoost: 0
+  AttackSpeedBoost: 0
+  MovementSpeedBoost: 0
+  ArmorReduction: 0

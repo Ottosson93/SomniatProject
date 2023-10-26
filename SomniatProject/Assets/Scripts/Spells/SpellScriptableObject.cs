@@ -23,10 +23,17 @@ public class SpellScriptableObject : ScriptableObject
     public ParticleSystem LightningImpact;
     public ParticleSystem LightningStun;
     public ParticleSystem BurnParticleSystem;
+    public ParticleSystem BerserkParticleSystem;
 
     [Header("Durations")]
     public float ExplosionDuration = 2f;
     public float StunDuration = 2f;
     public float BurnDuration = 5f;
     public float TickInterval = 0.75f;
+
+    [Header("Character Stats")]
+    public float DamageBoost;
+    public float AttackSpeedBoost;
+    public float MovementSpeedBoost;
+    public float ArmorReduction;
 }

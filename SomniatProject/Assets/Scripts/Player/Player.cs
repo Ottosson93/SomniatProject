@@ -14,10 +14,19 @@ public class Player : MonoBehaviour
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
+    public float damageReduction = 1.0f;
     public float flatSpeed = 0;
-    private float speed;
+    public float speed;
     public float meleeDamage;
-    private float attackSpeed;
+    public float attackSpeed;
+
+    private float originalMeleeDamage;
+    private float originalAttackSpeed;
+    private float originalSpeed;
+    private float originalArmorAmount;
+
+
+    public float newSpeed;
 
     public ThirdPersonController controller;
     private LuciditySlider luciditySlider;
@@ -44,11 +53,28 @@ public class Player : MonoBehaviour
 
         luciditySlider = GetComponent<LuciditySlider>();
         luciditySlider.SetMaxLucidity(lucidity);
+        
+    }
+
+    public void SetOriginalValues()
+    {
+        originalAttackSpeed = attackSpeed;
+        originalMeleeDamage = meleeDamage;
+        originalSpeed = newSpeed;
+        originalArmorAmount = damageReduction;
+    }
+
+    public void ResetAttributesToOriginal()
+    {
+        meleeDamage = originalMeleeDamage;
+        attackSpeed = originalAttackSpeed;
+        newSpeed = originalSpeed;
+        damageReduction = originalArmorAmount;
     }
 
     public float CalculateSpeed()
     {
-        return baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
+        return newSpeed = baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
     }
 
    public float CalculateAttackSpeed()
@@ -73,6 +99,26 @@ public class Player : MonoBehaviour
         return Strength.Value * 20;
     }
 
+    public void IncreaseDamage(float amount)
+    {
+        meleeDamage *= amount;
+    }
+
+    public void IncreaseAttackSpeed(float amount)
+    {
+        attackSpeed *= amount;
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        newSpeed *= amount;
+    }
+
+    public void ArmorReduction(float amount)
+    {
+        damageReduction *= amount;
+    }
+
 
 
     public void UpdateCharacterStats()
@@ -87,7 +133,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        lucidity -= damage;
+        lucidity -= (damage * damageReduction);
         lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
         luciditySlider.SetLucidity(lucidity);
