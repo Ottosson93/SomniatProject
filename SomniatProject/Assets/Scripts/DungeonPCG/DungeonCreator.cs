@@ -11,18 +11,24 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] private int maxNumberOfRooms;
     [SerializeField] private int minimumRoomSize;
     DungeonGenerator generator;
+    
     [SerializeField] Material material;
+    [SerializeField] Material greenRoomMaterial;
+    [SerializeField] Material orangeRoomMaterial;
+    [SerializeField] Material redRoomMaterial;
+
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
     [SerializeField] private GameObject horizontalWall5, horizontalWall1, verticalWall1, verticalWall5, pillar;
     private List<PreMadeRoom> preMadeNodes;
 
     private List<PCGObjects> objects = new List<PCGObjects>();
 
-    
-    
 
-    //[SerializeField] private GameObject enemyPrefab;
-    [SerializeField]private List<GameObject> enemyList;
+
+
+    [SerializeField] private List<GameObject> greenEnemyPack;
+    [SerializeField] private List<GameObject> orangeEnemyPack;
+    [SerializeField] private List<GameObject> redEnemyPack;
     RNode node;
     
     [SerializeField] NavMeshSurface navSurface;
@@ -30,10 +36,15 @@ public class DungeonCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
+        //this gets the size of the plane
+        //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; 
         //Debug.Log(roomSize);
 
-        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, preMadeRooms, horizontalWall5, horizontalWall1, verticalWall5, verticalWall1, pillar, enemyList, 3);
+
+        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
+            greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
+            horizontalWall, verticalWall, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+
 
         generator.Generate();
         generator.BuildRooms();

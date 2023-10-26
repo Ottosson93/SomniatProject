@@ -10,8 +10,10 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEngine.UIElements;
 using UnityEditor.Experimental.GraphView;
 using System.Net;
+
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -21,16 +23,31 @@ public class DungeonGenerator : MonoBehaviour
     RNode rootNode;
     public List<RNode> nodes = new List<RNode>();
     List<RNode> finishedNodes = new List<RNode>();
+
+    //Room zone variables
+    Material greenRoomMaterial;
+    Material orangeRoomMaterial;
+    Material redRoomMaterial;
+    float distFromCenter;
+    
+
+    //Room variables
     List<GameObject> preMadeRooms;
     Vector2 largestPreMadeRoom;  //maybe change to two ints: width and height
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
     private GameObject horizontalWall5, horizontalWall1, verticalWall5, verticalWall1, pillar;
     //List<Room> allRooms = new List<Room>();
+    
+    //Corridor variables
     CorridorGenerator corridorGenerator;
     List<CNode> corridors = new List<CNode>();
 
     List<PCGObjects> objectsToSpawn = new List<PCGObjects>();
+
     CNode Cnoded;
+
+    List<PCGObjects> objectsToSpawn = new List<PCGObjects>();
+    
     int roomID = 1;
 
     LayerMask Layer;
@@ -38,10 +55,13 @@ public class DungeonGenerator : MonoBehaviour
     Material material;
 
     //Enemy variables
-    //GameObject enemyPrefab = new GameObject();
-    List<GameObject> enemyList = new List<GameObject>();
+    List<GameObject> greenEnemyPack = new List<GameObject>();
+    List<GameObject> orangeEnemyPack = new List<GameObject>();
+    List<GameObject> redEnemyPack = new List<GameObject>();
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject horizontalWall5, GameObject horizontalWall1, GameObject verticalWall5, GameObject verticalWall1, GameObject pillar, List<GameObject> enemyList, LayerMask layer)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial, 
+        List<GameObject> pmr, GameObject horizontalWall5 , GameObject horizontalWall, GameObject verticalWall5 , GameObject verticalWall, GameObject pillar, List<GameObject> greenEnemyPack, List<GameObject> orangeEnemyPack, List<GameObject> redEnemyPack, LayerMask layer)
+
     {
         this.preMadeRooms = pmr;
         this.verticalWall5 = verticalWall5;
@@ -55,8 +75,13 @@ public class DungeonGenerator : MonoBehaviour
         rootNode.parent = null;
         rootNode.sibling = null;
         nodes.Add(rootNode);
-        this.material = material; 
-        this.enemyList = enemyList;
+        this.material = material;
+        this.greenRoomMaterial = greenRoomMaterial;
+        this.orangeRoomMaterial = orangeRoomMaterial;
+        this.redRoomMaterial = redRoomMaterial;
+        this.greenEnemyPack = greenEnemyPack;
+        this.orangeEnemyPack = orangeEnemyPack;
+        this.redEnemyPack = redEnemyPack;
         this.Layer = layer;
     }
 
@@ -144,7 +169,7 @@ public class DungeonGenerator : MonoBehaviour
                 manualRNode.parent = parentNode;
                 manualRNode.sibling = newNode;
                 manualRNode.bottom = true;
-                manualRNode.maunal = true;
+                manualRNode.manual = true;
 
 
                 newNode.parent = parentNode;
@@ -217,7 +242,6 @@ public class DungeonGenerator : MonoBehaviour
 
         finishedNodes.Add(parentNode);
         nodes.Remove(parentNode);
-
     }
 
     bool CheckSize(RNode n)
@@ -233,10 +257,11 @@ public class DungeonGenerator : MonoBehaviour
     {
         for (int i = 0; i < finishedNodes.Count; i++)
         {
-            if (finishedNodes[i].bottom == true && finishedNodes[i].maunal == false)
+            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
             {
                 ShrinkNodes(finishedNodes[i]);
-                CreateMesh(finishedNodes[i], i);
+                DeclareRoom(finishedNodes[i]);
+                CreateRoomMesh(finishedNodes[i], i);
                 SpawnEnemy(finishedNodes[i]);
             }
         }
@@ -253,7 +278,7 @@ public class DungeonGenerator : MonoBehaviour
         foreach(CNode c in corridors)
         {
             c.updateWH();
-            CreateM(c);
+            CreateCorridorMesh(c);
         }
 
     }
@@ -443,7 +468,7 @@ public class DungeonGenerator : MonoBehaviour
         return preMadeRoomNodes;
     }
 
-    void CreateMesh(RNode n, int id)
+    void CreateRoomMesh(RNode n, int id)
     {
         Mesh mesh = new Mesh();
 
@@ -482,13 +507,47 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
-        room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
         
+        //Maybe use an enum instead
+        if (n.isGreenRoom == true)
+        {
+            room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
+        }
+        else if (n.isOrangeRoom == true)
+        {
+            room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
+        }
+        else if (n.isRedRoom == true)
+        {
+            room.GetComponent<MeshRenderer>().material = redRoomMaterial;
+        }
+
     }
-    void CreateM(CNode n)
+
+    private void DeclareRoom(RNode n)
+    {
+        
+        Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
+        distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
+        //Debug.Log(n.id + " " + distFromCenter);
+        if (distFromCenter <= 100)
+        {
+            n.isGreenRoom = true;
+        }
+        else if (distFromCenter > 100 && distFromCenter <= 150)
+        {
+            n.isOrangeRoom = true;
+        }
+        else if (distFromCenter > 150)
+        {
+            n.isRedRoom = true;
+        }
+    }
+
+    void CreateCorridorMesh(CNode n)
     {
         Mesh mesh = new Mesh();
 
@@ -527,25 +586,146 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
-        room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
     }
 
-    public void SpawnEnemy(RNode node)
+    public void SpawnEnemy(RNode n)
     {
-        Vector3 bottomLeftV = new Vector3(node.bottomLeft.x, 0, node.bottomLeft.y);
-        Vector3 center = new Vector3(bottomLeftV.x + node.width / 2, 0, bottomLeftV.z + node.height / 2);
+        Vector3 bottomLeftV = new Vector3(n.bottomLeft.x, 0, n.bottomLeft.y);
+        Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
 
-        for (int i = 0; i < enemyList.Count; i++)
+        if (n.isGreenRoom)
         {
-            //Change this to change spawn position for enemy
-            Vector3 offsetForEnemy = new Vector3(Random.Range(-node.width / 2.5f, node.width / 2.5f), 0, Random.Range(-node.height / 2.5f, node.height / 2.5f));
+            for (int i = 0; i < greenEnemyPack.Count; i++)
+            {
+                //Change this to change spawn position for enemy
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-            Instantiate(enemyList[i], center + offsetForEnemy, Quaternion.identity);
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
 
-            //todo: get a trigger to check if something has spawned at chosen position
+                if (intersecting.Length <= 2)
+                {
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(greenEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                }
+                else if (intersecting.Length > 2)
+                {
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(greenEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
+                }
+            }
         }
+        else if (n.isOrangeRoom)
+        {
+            for (int i = 0; i < orangeEnemyPack.Count; i++)
+            {
+                //Change this to change spawn position for enemy
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+
+                if (intersecting.Length <= 2)
+                {
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(orangeEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                }
+                else if (intersecting.Length > 2)
+                {
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(orangeEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        else if (n.isRedRoom)
+        {
+            for (int i = 0; i < redEnemyPack.Count; i++)
+            {
+                //Change this to change spawn position for enemy
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+                Debug.Log("count red " + intersecting.Length + (center + enemyOffset));
+
+                if (intersecting.Length <= 2)
+                {
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                }
+                else if (intersecting.Length > 2)
+                {
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(redEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
+                }
+
+
+
+                //if (isObjectHere(enemyOffset))
+                //{
+                //    Debug.Log("Theres something here");
+                //    Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                //}
+                //else
+                //{
+                //    Debug.Log("Theres nothing here");
+                //    return;
+                //}
+            }
+        }
+        
     }
+
+    //bool isObjectHere(Vector3 currentPosition)
+    //{
+    //    Collider[] intersecting = Physics.OverlapSphere(currentPosition, 0.01f);
+    //    if (intersecting.Length == 0)
+    //    {
+    //        return false;
+    //    }
+    //    else if (intersecting.Length != 0)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
 }
