@@ -47,7 +47,6 @@ public class SpellAttackSystem : MonoBehaviour
         bool hasEnoughLucidity = player.lucidity - currentSpell.SpellToCast.LucidityCost > 0f;
         if(!castingSpell && spellInput.triggered && hasEnoughLucidity)
         {
-            Debug.Log("Casted Spell");
             castingSpell = true;
             player.lucidity -= currentSpell.SpellToCast.LucidityCost;
             currentCastTimer = 0;

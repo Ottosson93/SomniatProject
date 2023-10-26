@@ -816,7 +816,6 @@ MonoBehaviour:
   camera: {fileID: 0}
   crosshair: {fileID: 0}
   audioSource: {fileID: 0}
-  projectileForce: 20
   projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
 --- !u!114 &2434976405422277944
 MonoBehaviour:
@@ -830,7 +829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd137009aa197b49a351e4a24a9c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 931698871828236919, guid: 7922052a631ad3e4d96cf690c33a0a1b, type: 3}
+  currentSpell: {fileID: -7718931055899551195, guid: 7126678de060e1d4a8e50fd4b92e01be, type: 3}
   castPoint: {fileID: 7694580897280343388}
   timeBetweenCasts: 0.3
 --- !u!114 &4586738781332085182
