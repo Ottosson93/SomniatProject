@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEngine.UIElements;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -51,6 +52,7 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> greenEnemyPack = new List<GameObject>();
     List<GameObject> orangeEnemyPack = new List<GameObject>();
     List<GameObject> redEnemyPack = new List<GameObject>();
+
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial, 
         List<GameObject> pmr, GameObject horizontalWall, GameObject verticalWall, GameObject pillar, List<GameObject> greenEnemyPack, List<GameObject> orangeEnemyPack, List<GameObject> redEnemyPack, LayerMask layer)
@@ -423,24 +425,38 @@ public class DungeonGenerator : MonoBehaviour
     {
         Vector3 bottomLeftV = new Vector3(n.bottomLeft.x, 0, n.bottomLeft.y);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
-        float enemySphere = 4f;
 
         if (n.isGreenRoom)
         {
             for (int i = 0; i < greenEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
-                Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+
+                if (intersecting.Length <= 2)
                 {
-                    Debug.Log("Theres nothing here");
-                    Instantiate(greenEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(greenEnemyPack[i], center + enemyOffset, Quaternion.identity);
                 }
-                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                else if (intersecting.Length > 2)
                 {
-                    Debug.Log("Theres something here");
-                    return;
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(greenEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -449,17 +465,32 @@ public class DungeonGenerator : MonoBehaviour
             for (int i = 0; i < orangeEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
-                Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+
+                if (intersecting.Length <= 2)
                 {
-                    Debug.Log("Theres something here");
-                    Instantiate(orangeEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(orangeEnemyPack[i], center + enemyOffset, Quaternion.identity);
                 }
-                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                else if (intersecting.Length > 2)
                 {
-                    Debug.Log("Theres nothing here");
-                    return;
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(orangeEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
                 }
             }
         }
@@ -468,19 +499,63 @@ public class DungeonGenerator : MonoBehaviour
             for (int i = 0; i < redEnemyPack.Count; i++)
             {
                 //Change this to change spawn position for enemy
-                Vector3 offsetForEnemy = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                Vector3 enemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
 
-                if (Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+                Debug.Log("count red " + intersecting.Length + (center + enemyOffset));
+
+                if (intersecting.Length <= 2)
                 {
-                    Debug.Log("Theres something here");
-                    Instantiate(redEnemyPack[i], center + offsetForEnemy, Quaternion.identity);
+                    Debug.Log("Theres nothing here (red)");
+                    Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
                 }
-                else if (!Physics.CheckSphere(center + offsetForEnemy, enemySphere))
+                else if (intersecting.Length > 2)
                 {
-                    Debug.Log("Theres nothing here");
-                    return;
+                    while (intersecting.Length > 2)
+                    {
+                        Debug.Log("Theres something here! (red) " + (center + enemyOffset));
+                        Vector3 newEnemyOffset = new Vector3(Random.Range(-n.width / 2.5f, n.width / 2.5f), 0, Random.Range(-n.height / 2.5f, n.height / 2.5f));
+                        Debug.Log("New coordinate " + (center + newEnemyOffset));
+
+
+                        intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+
+                        if (intersecting.Length <= 2)
+                        {
+                            Instantiate(redEnemyPack[i], center + newEnemyOffset, Quaternion.identity);
+                            break;
+                        }
+                    }
                 }
+
+
+
+                //if (isObjectHere(enemyOffset))
+                //{
+                //    Debug.Log("Theres something here");
+                //    Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                //}
+                //else
+                //{
+                //    Debug.Log("Theres nothing here");
+                //    return;
+                //}
             }
         }
+        
     }
+
+    //bool isObjectHere(Vector3 currentPosition)
+    //{
+    //    Collider[] intersecting = Physics.OverlapSphere(currentPosition, 0.01f);
+    //    if (intersecting.Length == 0)
+    //    {
+    //        return false;
+    //    }
+    //    else if (intersecting.Length != 0)
+    //    {
+    //        return true;
+    //    }
+    //    return false;
+    //}
 }

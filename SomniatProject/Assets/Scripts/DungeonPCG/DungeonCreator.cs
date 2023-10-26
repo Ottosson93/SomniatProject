@@ -26,8 +26,6 @@ public class DungeonCreator : MonoBehaviour
 
 
 
-    //[SerializeField] private GameObject enemyPrefab;
-    //[SerializeField] private List<GameObject> enemyList;
     [SerializeField] private List<GameObject> greenEnemyPack;
     [SerializeField] private List<GameObject> orangeEnemyPack;
     [SerializeField] private List<GameObject> redEnemyPack;
@@ -38,10 +36,13 @@ public class DungeonCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; //this gets the size of the plane
+        //this gets the size of the plane
+        //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; 
         //Debug.Log(roomSize);
 
-        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, horizontalWall, verticalWall, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+        generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
+            greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
+            horizontalWall, verticalWall, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
 
         generator.Generate();
         generator.BuildRooms();
