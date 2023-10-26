@@ -114,4 +114,24 @@ public class Player : MonoBehaviour
             lucidity = maxLucidity;
         }
     }
+
+    public void Equip(RelicData d)
+    {
+        foreach(StatModifier s in d.GetModifiers())
+        {
+            switch (s.characterStatType)
+            {
+                case StatModifier.CharacterStatType.Dexterity :
+                    Dexterity.AddModifier(s);
+                    break;
+                case StatModifier.CharacterStatType.Strength:
+                    Strength.AddModifier(s);
+                    break;
+                case StatModifier.CharacterStatType.Intelligence:
+                    Intelligence.AddModifier(s);
+                    break;      
+            }
+        }
+        UpdateCharacterStats();
+    }
 }

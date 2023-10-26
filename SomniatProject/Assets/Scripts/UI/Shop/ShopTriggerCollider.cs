@@ -6,25 +6,23 @@ public class ShopTriggerCollider : MonoBehaviour
 {
     [SerializeField] private ShopManagerScript shop;
     [SerializeField] private GameObject shopView;
-    public Transform player;
+    //private bool hasBeenGenerated = false;
+    public Transform playerTransform;
 
     private void Awake()
     {
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         shopView = GameObject.FindGameObjectWithTag("Shop");
         shop.Hide(shopView);
-        //shop.AssignValues();
     }
 
     private void OnTriggerEnter(Collider collider)
     {
-        
         if (collider.tag == "Player")
         {
             Debug.Log("PLAYER ENTERED");
-            //player = player.GetComponent<Transform>();
             shop.Show(shopView);
-            shop.Init();
-            Debug.Log(shop);
+            //shop.GenerateShop();            
         }
     }
 
@@ -38,4 +36,5 @@ public class ShopTriggerCollider : MonoBehaviour
         }
 
     }
+
 }

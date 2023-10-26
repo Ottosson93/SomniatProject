@@ -89,22 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relicData: {fileID: 11400000, guid: e6ffa4368ef7a4b4fb5b7e5753a2b580, type: 2}
   statType: 02000000
   modType: 00000000
   value:
   - 1
-  pickUpScript: {fileID: 6266724973260128785}
---- !u!114 &6266724973260128785 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8770628506346339599, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
-  m_PrefabInstance: {fileID: 3404836772407770910}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1580663253824928426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d0eb3da23422f408ca51cfd8183c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &8048279097115092062 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4679611867838176064, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}

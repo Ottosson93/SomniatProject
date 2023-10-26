@@ -473,6 +473,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 5178686219891051559, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+    - target: {fileID: -2463636181253480118, guid: 02116f559917727498ec00484c7d8668, type: 3}
+      propertyPath: shopView
+      value: 
+      objectReference: {fileID: 6942652339900985341, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
     - target: {fileID: 1904762223958030522, guid: 02116f559917727498ec00484c7d8668, type: 3}
       propertyPath: m_Layer
       value: 6
