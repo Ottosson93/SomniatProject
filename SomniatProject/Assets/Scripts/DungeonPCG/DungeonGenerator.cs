@@ -45,8 +45,6 @@ public class DungeonGenerator : MonoBehaviour
     List<PCGObjects> objectsToSpawn = new List<PCGObjects>();
 
     CNode Cnoded;
-
-    List<PCGObjects> objectsToSpawn = new List<PCGObjects>();
     
     int roomID = 1;
 
@@ -60,7 +58,7 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> redEnemyPack = new List<GameObject>();
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial, 
-        List<GameObject> pmr, GameObject horizontalWall5 , GameObject horizontalWall, GameObject verticalWall5 , GameObject verticalWall, GameObject pillar, List<GameObject> greenEnemyPack, List<GameObject> orangeEnemyPack, List<GameObject> redEnemyPack, LayerMask layer)
+        List<GameObject> pmr, GameObject horizontalWall1, GameObject horizontalWall5, GameObject verticalWall1, GameObject verticalWall5, GameObject pillar, List<GameObject> greenEnemyPack, List<GameObject> orangeEnemyPack, List<GameObject> redEnemyPack, LayerMask layer)
 
     {
         this.preMadeRooms = pmr;

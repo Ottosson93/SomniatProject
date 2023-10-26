@@ -43,7 +43,7 @@ public class DungeonCreator : MonoBehaviour
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
-            horizontalWall, verticalWall, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+            horizontalWall1, horizontalWall5, verticalWall1, verticalWall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
 
 
         generator.Generate();

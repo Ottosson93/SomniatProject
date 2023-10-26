@@ -40,7 +40,8 @@ public class PickUpScript : MonoBehaviour
                 await ChangeKeyOpacity(DecreaseOpacity);
         }
 
-
+        Debug.Log("pickupscript return false");
+        return false;
     }
 
     private async Task ChangeKeyOpacity(Color targetColor)
