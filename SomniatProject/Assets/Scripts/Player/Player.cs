@@ -14,15 +14,21 @@ public class Player : MonoBehaviour
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
+    public float damageReduction = 1.0f;
     public float flatSpeed = 0;
-    private float speed;
+    public float speed;
     public float meleeDamage;
-    private float attackSpeed;
+    public float attackSpeed;
 
-    //Temporär lösning för OnDeathMenu 
-    private GameObject onDeathMenu;
+    private float originalMeleeDamage;
+    private float originalAttackSpeed;
+    private float originalSpeed;
+    private float originalArmorAmount;
 
-    private ThirdPersonController controller;
+
+    public float newSpeed;
+
+    public ThirdPersonController controller;
     private LuciditySlider luciditySlider;
 
     public EmpoweredRelic empoweredRelic;
@@ -47,14 +53,31 @@ public class Player : MonoBehaviour
 
         luciditySlider = GetComponent<LuciditySlider>();
         luciditySlider.SetMaxLucidity(lucidity);
+        
     }
 
-    float CalculateSpeed()
+    public void SetOriginalValues()
     {
-        return baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
+        originalAttackSpeed = attackSpeed;
+        originalMeleeDamage = meleeDamage;
+        originalSpeed = newSpeed;
+        originalArmorAmount = damageReduction;
     }
 
-    float CalculateAttackSpeed()
+    public void ResetAttributesToOriginal()
+    {
+        meleeDamage = originalMeleeDamage;
+        attackSpeed = originalAttackSpeed;
+        newSpeed = originalSpeed;
+        damageReduction = originalArmorAmount;
+    }
+
+    public float CalculateSpeed()
+    {
+        return newSpeed = baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
+    }
+
+   public float CalculateAttackSpeed()
     {
         return baseAttackSpeed * (1 + (Dexterity.Value));
     }
@@ -76,6 +99,26 @@ public class Player : MonoBehaviour
         return Strength.Value * 20;
     }
 
+    public void IncreaseDamage(float amount)
+    {
+        meleeDamage *= amount;
+    }
+
+    public void IncreaseAttackSpeed(float amount)
+    {
+        attackSpeed *= amount;
+    }
+
+    public void IncreaseSpeed(float amount)
+    {
+        newSpeed *= amount;
+    }
+
+    public void ArmorReduction(float amount)
+    {
+        damageReduction *= amount;
+    }
+
 
 
     public void UpdateCharacterStats()
@@ -86,12 +129,11 @@ public class Player : MonoBehaviour
         lucidity = adjuster * maxLucidity;
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
-        Debug.Log("Updating health + movementspeed : " + lucidity + " " + Dexterity.Value);
     }
 
     public void TakeDamage(float damage)
     {
-        lucidity -= damage;
+        lucidity -= (damage * damageReduction);
         lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
         luciditySlider.SetLucidity(lucidity);
@@ -99,7 +141,6 @@ public class Player : MonoBehaviour
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
-            MenuManager._menuManager.onDeath();
         }
     }
 

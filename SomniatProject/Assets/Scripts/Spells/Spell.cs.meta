@@ -3,7 +3,9 @@ guid: 8dc4af72349995d4487e362adcb1962c
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - SpellToCast: {instanceID: 0}
+  - burnParticleSystem: {fileID: 8185350239260671889, guid: 3a4fb7e316c4c0c45beee5a16b14ecbb, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

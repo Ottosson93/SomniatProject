@@ -27,7 +27,7 @@ public class PickUpScript : MonoBehaviour
 
     }
 
-    public async Task Update()
+    public async Task<bool> Update()
     {
         if (InRangeOfPickup)
         {
@@ -40,6 +40,8 @@ public class PickUpScript : MonoBehaviour
                 await ChangeKeyOpacity(DecreaseOpacity);
         }
 
+        Debug.Log("pickupscript return false");
+        return false;
     }
 
     private async Task ChangeKeyOpacity(Color targetColor)
