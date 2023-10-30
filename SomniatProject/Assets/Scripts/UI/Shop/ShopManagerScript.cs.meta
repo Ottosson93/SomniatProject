@@ -5,6 +5,7 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - relic: {instanceID: 0}
+  - relicsRegistry: {fileID: 11400000, guid: 8416dafdf2e2bae4f80f11e948fe8c40, type: 2}
   - shopView: {fileID: 8422779526648998243, guid: 9bc5a85e24f66904399dce469999765a, type: 3}
   - currencyText: {instanceID: 0}
   executionOrder: 0

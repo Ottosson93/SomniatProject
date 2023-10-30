@@ -6,19 +6,12 @@ using UnityEngine;
 public class Relic : Item
 {
     private Player player;
-    public StatModifier.CharacterStatType[] statType;
-    public StatModifier.StatModType[] modType;
-    public float[] value;
-     PickUpScript pickUpScript;
+    public RelicData relicData;
+    PickUpScript pickUpScript;
 
     void CreateStats()
     {
-        stat_arr = new StatModifier[value.Length];
-        for (int i = 0; i < stat_arr.Length; i++)
-        {
-            stat_arr[i] = new StatModifier(value[i], modType[i], this, statType[i]);
-        }
-        
+        stat_arr = relicData.GetModifiers();
     }
 
 

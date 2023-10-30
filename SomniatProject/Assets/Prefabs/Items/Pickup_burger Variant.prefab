@@ -143,17 +143,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4679611867838176064, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
   m_PrefabInstance: {fileID: 5895519257641381146}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2911189783369764885 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8770628506346339599, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
-  m_PrefabInstance: {fileID: 5895519257641381146}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7745868501654595758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1d0eb3da23422f408ca51cfd8183c44, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7745868501654595758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4228824917890696628, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
@@ -171,8 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relicData: {fileID: 11400000, guid: f22042876a42e2042b6e52c90a0e412b, type: 2}
   statType: 01000000
   modType: 00000000
   value:
   - 2
-  pickUpScript: {fileID: 2911189783369764885}
