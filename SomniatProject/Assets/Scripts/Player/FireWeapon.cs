@@ -76,6 +76,10 @@ public class FireWeapon : MonoBehaviour
             InstantiateBullet_Projectile();
 
         int cooldownMs = (int)(1000 / player.CalculateAttackSpeed());
+        if(player.CalculateAttackSpeed() <= 0)
+        {
+            cooldownMs = 10000;
+        }
         await Task.Delay(cooldownMs);
             canShoot = true;
         

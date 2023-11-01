@@ -565,8 +565,12 @@ namespace StarterAssets
 
                     foreach (Collider enemy in hitEnemies)
                     {
+                        if(_animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f)
+                        {
+                            enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
+
+                        }
                         bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
-                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
 
                         if (player.empoweredRelic != null)
                         {
@@ -574,7 +578,7 @@ namespace StarterAssets
                             {
                                 if (effect != null)
                                 {
-                                    if(effect.type == EffectType.MoveSpeed )
+                                    if(effect.type == EffectType.MoveSpeed)
                                     {
                                         if(dead)
                                             effect.Run();
@@ -586,7 +590,6 @@ namespace StarterAssets
                         }
                             
                     }
-
                     if (comboCounter >= combo.Count)
                     {
                         comboCounter = 0;
