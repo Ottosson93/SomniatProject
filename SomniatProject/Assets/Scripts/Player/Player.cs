@@ -33,8 +33,6 @@ public class Player : MonoBehaviour
 
     public EmpoweredRelic empoweredRelic;
 
-
-
     void Start()
     {
         Strength = new CharacterStat();
@@ -172,6 +170,7 @@ public class Player : MonoBehaviour
                     Intelligence.AddModifier(s);
                     break;      
             }
+            d.relicQuantity++;
         }
         UpdateCharacterStats();
     }
