@@ -348,7 +348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -571,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -1071,7 +1071,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -1865,7 +1865,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -2082,6 +2082,7 @@ GameObject:
   - component: {fileID: 570088598}
   - component: {fileID: 570088600}
   - component: {fileID: 570088599}
+  - component: {fileID: 570088601}
   m_Layer: 5
   m_Name: Intelligence
   m_TagString: Untagged
@@ -2149,6 +2150,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 570088597}
   m_CullTransparentMesh: 1
+--- !u!114 &570088601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570088597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cbec08711863f4c96cad24986cf032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statValue: {fileID: 1171856371}
 --- !u!1 &571679823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2385,6 +2399,7 @@ GameObject:
   - component: {fileID: 625513336}
   - component: {fileID: 625513338}
   - component: {fileID: 625513337}
+  - component: {fileID: 625513339}
   m_Layer: 5
   m_Name: Dexterity
   m_TagString: Untagged
@@ -2452,6 +2467,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625513335}
   m_CullTransparentMesh: 1
+--- !u!114 &625513339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625513335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cbec08711863f4c96cad24986cf032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statValue: {fileID: 1795440700}
 --- !u!1 &660615593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
@@ -2907,7 +2935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -3782,7 +3810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3199892088470618484, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3205062875369124043, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
       propertyPath: m_fontSize
@@ -4190,7 +4218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6942652339900985341, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6947747898339947815, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
       propertyPath: m_IsActive
@@ -4870,7 +4898,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -4933,6 +4961,7 @@ GameObject:
   - component: {fileID: 1332614682}
   - component: {fileID: 1332614681}
   - component: {fileID: 1332614683}
+  - component: {fileID: 1332614684}
   m_Layer: 5
   m_Name: Stat Display
   m_TagString: Untagged
@@ -5026,6 +5055,22 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1332614684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332614679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d6b081ace943ee489718e3a54bc25bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStats: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
+  strengthTemplate: {fileID: 1736318421}
+  dexterityTemplate: {fileID: 625513339}
+  intelligenceTemplate: {fileID: 570088601}
 --- !u!1 &1385031714 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
@@ -5403,7 +5448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -5935,7 +5980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -6148,7 +6193,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
@@ -6221,6 +6266,7 @@ GameObject:
   - component: {fileID: 1736318418}
   - component: {fileID: 1736318420}
   - component: {fileID: 1736318419}
+  - component: {fileID: 1736318421}
   m_Layer: 5
   m_Name: Strength
   m_TagString: Untagged
@@ -6288,6 +6334,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1736318417}
   m_CullTransparentMesh: 1
+--- !u!114 &1736318421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736318417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4cbec08711863f4c96cad24986cf032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  statValue: {fileID: 1847244266}
 --- !u!1 &1795440698
 GameObject:
   m_ObjectHideFlags: 0
@@ -6586,7 +6645,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3838114723071364555, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3841955671157865588, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize

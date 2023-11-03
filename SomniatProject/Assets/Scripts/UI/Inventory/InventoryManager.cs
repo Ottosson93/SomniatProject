@@ -34,13 +34,6 @@ public class InventoryManager : MonoBehaviour
         UpdatePanel();
     }
 
-    public void ResetQuantityData()
-    {
-        for(int i = 0; i<inventoryPanelGO.Length; i++)
-        {
-            relicItemsSO[i].relicQuantity = 0;
-        }
-    }
     public void LoadPanels()
     {
         for (int i = 0; i < relicItemsSO.Length; i++)
