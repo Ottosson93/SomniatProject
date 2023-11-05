@@ -12,6 +12,9 @@ public class ItemDropSystem : MonoBehaviour
 
     private List<ItemDropInfo> itemDrops = new List<ItemDropInfo>();
 
+    List<string> usedCategories = new List<string>();
+
+
 
     [System.Serializable]
     public class ItemDropInfo
@@ -20,6 +23,7 @@ public class ItemDropSystem : MonoBehaviour
         public string itemName;
         public float chestDropRate;
         public float enemyDropRate;
+        public string category;
     }
 
     void Start()
@@ -48,13 +52,15 @@ public class ItemDropSystem : MonoBehaviour
                     string itemName = values[1];
                     float chestDropRate = float.Parse(values[2]);
                     float enemyDropRate = float.Parse(values[3]);
+                    string category = values[4];
 
                     ItemDropInfo itemDropInfo = new ItemDropInfo
                     {
                         itemID = itemID,
                         itemName = itemName,
                         chestDropRate = chestDropRate,
-                        enemyDropRate = enemyDropRate
+                        enemyDropRate = enemyDropRate,
+                        category = category
                     };
 
                     itemDrops.Add(itemDropInfo);
@@ -100,16 +106,16 @@ public class ItemDropSystem : MonoBehaviour
         float totalWeight = 0f;
         float randomValue = Random.Range(0f, 1f);
 
-        List<ItemDropInfo> validDrops = itemDrops;
+        List<ItemDropInfo> validDrops = itemDrops
+        .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
+        .Where(drop => !usedCategories.Contains(drop.category))
+        .ToList();
 
-        if (isChestDrop)
+        if (validDrops.Count == 0)
         {
-            validDrops = itemDrops.Where(drop => drop.chestDropRate > 0).ToList();
+            return null;
         }
-        else
-        {
-            validDrops = itemDrops.Where(drop => drop.enemyDropRate > 0).ToList();
-        }
+
 
         foreach (var itemDrop in validDrops)
         {
@@ -119,6 +125,7 @@ public class ItemDropSystem : MonoBehaviour
 
             if (randomValue < totalWeight)
             {
+                totalWeight = 0;
                 return itemDrop.itemName;
             }
         }
@@ -128,25 +135,55 @@ public class ItemDropSystem : MonoBehaviour
 
     public void HandleEnemyDeath(Vector3 enemyPosition)
     {
-        string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false);
+        int numberOfItemsToDrop = Random.Range(0, 3);
 
-        HandleDroppedItem(itemToDrop, enemyPosition);
+        for (int i = 0; i < numberOfItemsToDrop; i++)
+        {
+            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false);
+
+            if (itemToDrop != null)
+            {
+                HandleDroppedItem(itemToDrop, enemyPosition, numberOfItemsToDrop);
+                usedCategories.Add(GetItemCategory(itemToDrop));
+            }
+        }
+
+        usedCategories.Clear();
+    }
+
+    string GetItemCategory(string itemName)
+    {
+
+        var item = itemDrops.Find(itemDrop => itemDrop.itemName == itemName);
+        if (item != null)
+        {
+            return item.category;
+        }
+        else
+        {
+            return "Unknown";
+        }
     }
 
     public void HandleChestOpen(Vector3 chestPosition)
     {
         string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: true);
 
-        HandleDroppedItem(itemToDrop, chestPosition);
+        HandleDroppedItem(itemToDrop, chestPosition, 1);
     }
 
-    private void HandleDroppedItem(string itemToDrop, Vector3 dropLocation)
+    
+
+    private void HandleDroppedItem(string itemToDrop, Vector3 dropLocation, int itemCount)
     {
         GameObject itemPrefab = itemPrefabMapper.GetItemPrefab(itemToDrop);
 
         if (itemPrefab != null)
         {
-            Instantiate(itemPrefab, dropLocation, Quaternion.identity);
+            for (int i = 0; i < itemCount; i++)
+            {
+                Instantiate(itemPrefab, dropLocation, Quaternion.identity);
+            }
         }
         else
         {

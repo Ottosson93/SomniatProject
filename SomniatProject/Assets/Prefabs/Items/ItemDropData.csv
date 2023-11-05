@@ -1,12 +1,11 @@
-﻿ItemID;Name;ChestDropRate;EnemyDropRate
-1;Fireball;0.1;0.2
-2;Piercing Arrow;0.2;0.15
-3;Berserk;0.15;0.1
-4;Lucidity on kills relic;0.6;0.3
-5;Status effect on enemies relic;0.5;0.25
-6;Speed after killing enemy relic;0.8;0.6
-7;10 Coins;0.5;0.1
-8;5 Coins;0.7;0.3
-9;2 Coins;0.6;0.8
-10;1 Coin;0.3;0.9
-11;Nothing;0.3;0.7
+﻿ItemID;Name;ChestDropRate;EnemyDropRate;Category
+1;Fireball;0.1;0.2;Spell
+2;Piercing Arrow;0.2;0.15;Spell
+3;Berserk;0.15;0.1;Spell
+4;Lucidity on kills relic;0.6;0.3;Relic
+5;Status effect on enemies relic;0.5;0.25;Relic
+6;Speed after killing enemy relic;0.8;0.6;Relic
+7;10 Coins;0.5;0.1;Money
+8;5 Coins;0.7;0.3;Money
+9;2 Coins;0.6;0.8;Money
+10;1 Coin;0.3;0.9;Money

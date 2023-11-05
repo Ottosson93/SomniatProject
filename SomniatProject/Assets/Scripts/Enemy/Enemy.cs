@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
+    public ItemDropSystem itemDropSystem;
     public Transform attackPoint;
     public LayerMask enemyLayer;
 
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Die", true);
         GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
+        //itemDropSystem.HandleEnemyDeath(transform.position); Gör så att enemy inte kan dö men är inte heller targetable????
 
         dead = true;                
         Destroy(gameObject);
