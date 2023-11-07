@@ -598,44 +598,49 @@ public class DungeonGenerator : MonoBehaviour
 
     public void SpawnProps(RNode room)
     {
-        Vector3 bottomLeftV = new Vector3(room.bottomLeft.x, 0, room.bottomLeft.y);
-        Vector3 center = new Vector3(bottomLeftV.x + room.width / 2, 0, bottomLeftV.z + room.height / 2);
+        Vector3 center = new Vector3(room.bottomLeft.x + room.width / 2, 0, room.bottomLeft.y + room.height / 2);
 
+        //Spawn the middle pillar (+3 boxes) with a random rotation
         int rndRotation =  Random.Range(0, 3);
         Instantiate(props[0], center, Quaternion.Euler(0, rotationArray[rndRotation], 0));
 
+        //Spawn 4 barrels per room, change this to spawn more depending on room size
+        //and spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < 4; i++)
         {
-            Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+            Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-            Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
-
+            //Checks if the position is occupied, maybe fix so that 2f is instead the size of the object
+            Collider[] intersecting = Physics.OverlapSphere(center + objOffset, 2f);
+            
+            //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (intersecting.Length <= 2)
             {
-                Instantiate(props[1], center + enemyOffset, Quaternion.identity);
+                Instantiate(props[1], center + objOffset, Quaternion.identity);
             }
             else if (intersecting.Length > 2)
             {
                 while (intersecting.Length > 2)
                 {
-                    Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                    intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
+                    intersecting = Physics.OverlapSphere(center + newObjOffset, 2f);
 
                     if (intersecting.Length <= 2)
                     {
-                        Instantiate(props[1], center + newEnemyOffset, Quaternion.identity);
+                        Instantiate(props[2], center + newObjOffset, Quaternion.identity);
                         break;
                     }
                 }
             }
         }
+
+        //todo spawn boxes along some walls 
     }
 
     public void SpawnEnemy(RNode room)
     {
-        Vector3 bottomLeftV = new Vector3(room.bottomLeft.x, 0, room.bottomLeft.y);
-        Vector3 center = new Vector3(bottomLeftV.x + room.width / 2, 0, bottomLeftV.z + room.height / 2);
+        Vector3 center = new Vector3(room.bottomLeft.x + room.width / 2, 0, room.bottomLeft.y + room.height / 2);
 
         if (room.isGreenRoom)
         {
@@ -685,7 +690,6 @@ public class DungeonGenerator : MonoBehaviour
                     {
                         Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
                         
-
                         intersecting = Physics.OverlapSphere(center + newEnemyOffset, 2f);
 
                         if (intersecting.Length <= 2)
@@ -710,6 +714,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     //Debug.Log("Theres nothing here (red)");
                     Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
+                    //AddObjectToSpawn(center + enemyOffset, redEnemyPack[i]);
                 }
                 else if (intersecting.Length > 2)
                 {

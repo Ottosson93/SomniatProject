@@ -249,7 +249,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
@@ -267,6 +267,10 @@ PrefabInstance:
       propertyPath: props.Array.data[1]
       value: 
       objectReference: {fileID: 2465079734990110219, guid: af0251662ce5880478fc4015a2c7df13, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.data[2]
+      value: 
+      objectReference: {fileID: 1252171065491684321, guid: e648d99306ec4b6468ee2981227991ee, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
       value: 2
@@ -2118,7 +2122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1041599430261379833, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -207.84503
+      value: -228.28235
       objectReference: {fileID: 0}
     - target: {fileID: 1238490991931354159, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: m_Name
@@ -2398,7 +2402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6050840150251122019, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -69.28168
+      value: -76.09412
       objectReference: {fileID: 0}
     - target: {fileID: 6295563425918028870, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: ShopManager
