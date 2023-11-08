@@ -28,7 +28,7 @@ public class DungeonGenerator : MonoBehaviour
     Material greenRoomMaterial;
     Material orangeRoomMaterial;
     Material redRoomMaterial;
-    float distFromCenter;
+    double distFromCenter;
     
 
     //Room variables
