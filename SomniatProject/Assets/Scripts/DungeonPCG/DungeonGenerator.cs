@@ -681,7 +681,6 @@ public class DungeonGenerator : MonoBehaviour
 
                 if (intersecting.Length <= 2)
                 {
-                    Debug.Log("Theres nothing here (red)");
                     Instantiate(orangeEnemyPack[i], center + enemyOffset, Quaternion.identity);
                 }
                 else if (intersecting.Length > 2)
