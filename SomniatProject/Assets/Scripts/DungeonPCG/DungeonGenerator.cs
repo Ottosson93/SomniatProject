@@ -62,7 +62,6 @@ public class DungeonGenerator : MonoBehaviour
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial, 
         List<GameObject> pmr, GameObject horizontalWall1, GameObject horizontalWall5, GameObject verticalWall1, GameObject verticalWall5, GameObject pillar, List<GameObject> greenEnemyPack, List<GameObject> orangeEnemyPack, List<GameObject> redEnemyPack, LayerMask layer, List<GameObject> props)
-
     {
         this.preMadeRooms = pmr;
         this.verticalWall5 = verticalWall5;
@@ -86,7 +85,8 @@ public class DungeonGenerator : MonoBehaviour
         this.Layer = layer;
         this.props = props;
     }
-
+    
+    #region Generate BSP dungeon
     public void Generate()
     {
         while (nodes.Count > 0)
@@ -245,6 +245,19 @@ public class DungeonGenerator : MonoBehaviour
         finishedNodes.Add(parentNode);
         nodes.Remove(parentNode);
     }
+    void ShrinkNodes(RNode n)
+    {
+        float shrinkWidth = Random.Range(n.width * 0.1f, n.width * 0.2f);
+        n.bottomLeft.x += shrinkWidth;
+        n.topRight.x -= shrinkWidth;
+        float shrinkheight = Random.Range(n.height * 0.1f, n.height * 0.2f);
+        n.bottomLeft.y += shrinkheight;
+        n.topRight.y -= shrinkheight;
+
+        n.UpdateWH();
+        n.UpdateCorners();
+    }
+    #endregion
 
     //??
     bool CheckSize(RNode n)
@@ -272,6 +285,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
+    #region Corridors
     //Builds connections between rooms
     public void BuildCorridors()
     {
@@ -314,7 +328,9 @@ public class DungeonGenerator : MonoBehaviour
         return objectsToSpawn;
         //return corridorGenerator.GetCorridorObjects();
     }
+    #endregion
 
+    #region Building and placing walls
     void buildWalls(RNode room)
     {
         bool doorwayTop = false;
@@ -448,32 +464,14 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-
-
-    void AddObjectToSpawn(Vector2 pos, GameObject type)
-    {
-        PCGObjects obj = new PCGObjects(pos, type);
-        objectsToSpawn.Add(obj); 
-    }
-
-    void ShrinkNodes(RNode n)
-    {
-        float shrinkWidth = Random.Range(n.width * 0.1f, n.width * 0.2f);
-        n.bottomLeft.x += shrinkWidth;
-        n.topRight.x -= shrinkWidth;
-        float shrinkheight = Random.Range(n.height * 0.1f, n.height * 0.2f);
-        n.bottomLeft.y += shrinkheight;
-        n.topRight.y -= shrinkheight;
-
-        n.UpdateWH();
-        n.UpdateCorners();
-    }
+    #endregion
 
     public List<PreMadeRoom> GetManualCoordinates()
     {
         return preMadeRoomNodes;
     }
 
+    #region Create mesh for pcg rooms and corridors
     void CreateRoomMesh(RNode n, int id)
     {
         Mesh mesh = new Mesh();
@@ -533,25 +531,6 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
-    private void DeclareRoomType(RNode n)
-    {
-        Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
-        distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
-        //Debug.Log(n.id + " " + distFromCenter);
-        if (distFromCenter <= 100)
-        {
-            n.isGreenRoom = true;
-        }
-        else if (distFromCenter > 100 && distFromCenter <= 150)
-        {
-            n.isOrangeRoom = true;
-        }
-        else if (distFromCenter > 150)
-        {
-            n.isRedRoom = true;
-        }
-    }
-
     void CreateCorridorMesh(CNode n)
     {
         Mesh mesh = new Mesh();
@@ -595,6 +574,32 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
     }
+    #endregion
+
+    private void DeclareRoomType(RNode n)
+    {
+        Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
+        distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
+        //Debug.Log(n.id + " " + distFromCenter);
+        if (distFromCenter <= 100)
+        {
+            n.isGreenRoom = true;
+        }
+        else if (distFromCenter > 100 && distFromCenter <= 150)
+        {
+            n.isOrangeRoom = true;
+        }
+        else if (distFromCenter > 150)
+        {
+            n.isRedRoom = true;
+        }
+    }
+
+    void AddObjectToSpawn(Vector2 pos, GameObject type)
+    {
+        PCGObjects obj = new PCGObjects(pos, type);
+        objectsToSpawn.Add(obj); 
+    }
 
     public void SpawnProps(RNode room)
     {
@@ -604,14 +609,15 @@ public class DungeonGenerator : MonoBehaviour
         int rndRotation =  Random.Range(0, 3);
         Instantiate(props[0], center, Quaternion.Euler(0, rotationArray[rndRotation], 0));
 
-        //Spawn 4 barrels per room, change this to spawn more depending on room size
+        //Spawn i amount of barrels per room, change this to spawn more depending on room size
         //and spawn half of the barrels in one half and rest across the room
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-            //Checks if the position is occupied, maybe fix so that 2f is instead the size of the object
-            Collider[] intersecting = Physics.OverlapSphere(center + objOffset, 2f);
+            //Checks if the position is occupied, takes the size of the barrels boxcollider and checks if there's anything inside of it at the spawn position
+            Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
+            Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
             
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (intersecting.Length <= 2)
@@ -628,14 +634,12 @@ public class DungeonGenerator : MonoBehaviour
 
                     if (intersecting.Length <= 2)
                     {
-                        Instantiate(props[2], center + newObjOffset, Quaternion.identity);
+                        Instantiate(props[1], center + newObjOffset, Quaternion.identity);
                         break;
                     }
                 }
             }
         }
-
-        //todo spawn boxes along some walls 
     }
 
     public void SpawnEnemy(RNode room)
@@ -648,7 +652,8 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+                Vector3 gruntBounds = greenEnemyPack[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
+                Collider[] intersecting = Physics.OverlapBox(center + enemyOffset, gruntBounds / 2);
 
                 if (intersecting.Length <= 2)
                 {
@@ -677,7 +682,8 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+                Vector3 gruntBounds = orangeEnemyPack[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
+                Collider[] intersecting = Physics.OverlapBox(center + enemyOffset, gruntBounds / 2);
 
                 if (intersecting.Length <= 2)
                 {
@@ -707,11 +713,13 @@ public class DungeonGenerator : MonoBehaviour
                 //Change this to change spawn position for enemy
                 Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
                 ////Vector3 objPosition = center + enemyOffset;
-                Collider[] intersecting = Physics.OverlapSphere(center + enemyOffset, 2f);
+                
+                Vector3 gruntBounds = redEnemyPack[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
+                Collider[] intersecting = Physics.OverlapBox(center + enemyOffset, gruntBounds  / 2);
 
-                if (intersecting.Length <= 2)
+                if (intersecting.Length <= 2 )
                 {
-                    //Debug.Log("Theres nothing here (red)");
+                    Debug.Log("Theres nothing here (red)");
                     Instantiate(redEnemyPack[i], center + enemyOffset, Quaternion.identity);
                     //AddObjectToSpawn(center + enemyOffset, redEnemyPack[i]);
                 }
