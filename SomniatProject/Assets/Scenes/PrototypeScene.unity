@@ -429,36 +429,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -87.50096
       objectReference: {fileID: 0}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: redRoomMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: props.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: greenRoomMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: 094f7d9a8e0342a4793c171160b24dc1, type: 2}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: orangeRoomMaterial
-      value: 
-      objectReference: {fileID: 2100000, guid: a559c48117f17d648b6c7db4518692ed, type: 2}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: props.Array.data[0]
-      value: 
-      objectReference: {fileID: 3713104444964819695, guid: 82a7c741e386e6d40ba833b7e231cb36, type: 3}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: props.Array.data[1]
-      value: 
-      objectReference: {fileID: 2465079734990110219, guid: af0251662ce5880478fc4015a2c7df13, type: 3}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: props.Array.data[2]
-      value: 
-      objectReference: {fileID: 1252171065491684321, guid: e648d99306ec4b6468ee2981227991ee, type: 3}
-    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
-      propertyPath: enemyList.Array.size
     - target: {fileID: 768999510663497460, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
       propertyPath: m_fontSize
       value: 25
@@ -480,7 +450,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1268047165}
     - target: {fileID: 1903678578625259550, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallStat
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1903678578625259550, guid: eff26c8162f85c14790e3008a4af0c8b, type: 3}
@@ -7182,21 +7152,6 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524907253}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!224 &1674210877 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8464964714021032543, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
-  m_PrefabInstance: {fileID: 1168527040}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1946027118
   m_GameObject: {fileID: 2059466263}
   m_CullTransparentMesh: 1
 --- !u!1 &2074017780 stripped
@@ -8075,7 +8030,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3283980781795422914, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: m_SizeDelta.x
-
       value: 399.99994
       objectReference: {fileID: 0}
     - target: {fileID: 3283980781795422914, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
@@ -8355,4 +8309,3 @@ SceneRoots:
   - {fileID: 414923774}
   - {fileID: 455953144}
   - {fileID: 1946027118}
-  - {fileID: 1168527040}
