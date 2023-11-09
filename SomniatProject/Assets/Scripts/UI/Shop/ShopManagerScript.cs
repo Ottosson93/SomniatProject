@@ -75,7 +75,6 @@ public class ShopManagerScript : MonoBehaviour
 
     public void Show(GameObject shopView)
     {
-        Debug.Log("Shop activated");
         shopView.SetActive(true);
     }
 

@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu]
 public class PlayerStats : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public CharacterStat Strength;
+    public CharacterStat Dexterity;
+    public CharacterStat Intelligence;
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        Strength = new CharacterStat();
+        Dexterity = new CharacterStat();
+        Intelligence = new CharacterStat();
     }
 }
