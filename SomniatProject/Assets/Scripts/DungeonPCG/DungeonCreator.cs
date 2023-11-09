@@ -12,23 +12,15 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] private int minimumRoomSize;
     DungeonGenerator generator;
     
-    [SerializeField] Material material;
-    [SerializeField] Material greenRoomMaterial;
-    [SerializeField] Material orangeRoomMaterial;
-    [SerializeField] Material redRoomMaterial;
+    [SerializeField] Material material, greenRoomMaterial, orangeRoomMaterial, redRoomMaterial;
 
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
     [SerializeField] private GameObject horizontalWall5, horizontalWall1, verticalWall1, verticalWall5, pillar;
     private List<PreMadeRoom> preMadeNodes;
 
     private List<PCGObjects> objects = new List<PCGObjects>();
-
-
-
-
-    [SerializeField] private List<GameObject> greenEnemyPack;
-    [SerializeField] private List<GameObject> orangeEnemyPack;
-    [SerializeField] private List<GameObject> redEnemyPack;
+    [SerializeField] private List<GameObject> greenEnemyPack, orangeEnemyPack, redEnemyPack;
+    [SerializeField] private List<GameObject> props;
     RNode node;
     
     [SerializeField] NavMeshSurface navSurface;
@@ -43,7 +35,7 @@ public class DungeonCreator : MonoBehaviour
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
-            horizontalWall1, horizontalWall5, verticalWall1, verticalWall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+            horizontalWall1, horizontalWall5, verticalWall1, verticalWall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3, props);
 
 
         generator.Generate();
