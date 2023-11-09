@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
     private float originalSpeed;
     private float originalArmorAmount;
 
-
+    public PlayerStats playerStats;
     public float newSpeed;
 
     public ThirdPersonController controller;
@@ -33,13 +33,11 @@ public class Player : MonoBehaviour
 
     public EmpoweredRelic empoweredRelic;
 
-
-
     void Start()
     {
-        Strength = new CharacterStat();
-        Dexterity = new CharacterStat();
-        Intelligence = new CharacterStat();
+        Strength.RemoveAllModifiersFromSource(this);
+        Dexterity.RemoveAllModifiersFromSource(this);
+        Intelligence.RemoveAllModifiersFromSource(this);
         controller = GetComponent<ThirdPersonController>();
 
         speed = baseSpeed;
@@ -53,7 +51,7 @@ public class Player : MonoBehaviour
 
         luciditySlider = GetComponent<LuciditySlider>();
         luciditySlider.SetMaxLucidity(lucidity);
-        
+
     }
 
     public void SetOriginalValues()
@@ -74,12 +72,12 @@ public class Player : MonoBehaviour
 
     public float CalculateSpeed()
     {
-        return newSpeed = baseSpeed * (1 + (Dexterity.Value / baseSpeed))+flatSpeed ;
+        return newSpeed = baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
     }
 
-   public float CalculateAttackSpeed()
+    public float CalculateAttackSpeed()
     {
-        return baseAttackSpeed * (1 + (Dexterity.Value));
+        return baseAttackSpeed * (1 + (playerStats.Dexterity.Value));
     }
 
     float CalculateDamage()
@@ -92,11 +90,11 @@ public class Player : MonoBehaviour
     }
     float CalculateMaxLucity()
     {
-        if(Strength.Value == 0)
+        if (playerStats.Strength.Value == 0)
         {
             return 20f;
         }
-        return Strength.Value * 20;
+        return playerStats.Strength.Value * 20;
     }
 
     public void IncreaseDamage(float amount)
@@ -158,21 +156,29 @@ public class Player : MonoBehaviour
 
     public void Equip(RelicData d)
     {
-        foreach(StatModifier s in d.GetModifiers())
+        foreach (StatModifier s in d.GetModifiers())
         {
             switch (s.characterStatType)
             {
-                case StatModifier.CharacterStatType.Dexterity :
-                    Dexterity.AddModifier(s);
+                case StatModifier.CharacterStatType.Dexterity:
+                    playerStats.Dexterity.AddModifier(s);
                     break;
                 case StatModifier.CharacterStatType.Strength:
-                    Strength.AddModifier(s);
+                    playerStats.Strength.AddModifier(s);
                     break;
                 case StatModifier.CharacterStatType.Intelligence:
-                    Intelligence.AddModifier(s);
-                    break;      
+                    playerStats.Intelligence.AddModifier(s);
+                    break;
             }
+            d.relicQuantity++;
         }
         UpdateCharacterStats();
+    }
+
+    public void Unequip(RelicData d)
+    {
+        playerStats.Strength.RemoveAllModifiersFromSource(d);
+        playerStats.Dexterity.RemoveAllModifiersFromSource(d);
+        playerStats.Intelligence.RemoveAllModifiersFromSource(d);
     }
 }
