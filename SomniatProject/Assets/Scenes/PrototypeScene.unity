@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1226,6 +1226,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 094f7d9a8e0342a4793c171160b24dc1, type: 2}
@@ -1233,6 +1237,14 @@ PrefabInstance:
       propertyPath: orangeRoomMaterial
       value: 
       objectReference: {fileID: 2100000, guid: a559c48117f17d648b6c7db4518692ed, type: 2}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.data[0]
+      value: 
+      objectReference: {fileID: 9212665279368223460, guid: 03d7a5a95f4b08244a0a3eb4a32c185e, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.data[1]
+      value: 
+      objectReference: {fileID: 2465079734990110219, guid: 0f5ac94b3acadfe42878abd9666c78b1, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
       value: 2
