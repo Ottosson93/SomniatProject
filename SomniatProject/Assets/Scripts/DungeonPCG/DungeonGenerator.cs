@@ -616,8 +616,11 @@ public class DungeonGenerator : MonoBehaviour
             Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
             //Checks if the position is occupied, takes the size of the barrels boxcollider and checks if there's anything inside of it at the spawn position
-            Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
-            Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
+
+            //Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
+            //Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
+
+            Collider[] intersecting = Physics.OverlapSphere(center + objOffset, 2f);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (intersecting.Length <= 2)
