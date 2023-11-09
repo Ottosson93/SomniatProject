@@ -852,13 +852,8 @@ MonoBehaviour:
     BaseValue: 1
   Intelligence:
     BaseValue: 1
-  damageReduction: 1
   flatSpeed: 0
-  speed: 0
   meleeDamage: 0
-  attackSpeed: 0
-  playerStats: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
-  newSpeed: 0
   controller: {fileID: 0}
   empoweredRelic: {fileID: 0}
 --- !u!1 &5178686219891413429 stripped
