@@ -751,7 +751,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1198729105}
   m_SourcePrefab: {fileID: 100100000, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
 --- !u!224 &225170636 stripped
 RectTransform:
@@ -914,6 +917,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab331fee1705f894d8af3bdcb527e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &331445634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331445629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: 
 --- !u!1001 &363281032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2076,6 +2092,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab331fee1705f894d8af3bdcb527e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &522401942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522401937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A steak. Permanently increases your characters Intelligence by 2.
 --- !u!1 &570088597
 GameObject:
   m_ObjectHideFlags: 0
@@ -2181,7 +2210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipToShow: 
+  tipToShow: Your current Intelligence value. Intelligence determines your maximum
+    Lucidity aswell as the potency of your spells.
 --- !u!1 &571679823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2405,7 +2435,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 522401942}
   m_SourcePrefab: {fileID: 100100000, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
 --- !u!1 &625513335
 GameObject:
@@ -2512,7 +2545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tipToShow: 
+  tipToShow: Your current Dexterity value. Dexterity determines your attack rate
+    and movement speed.
 --- !u!1 &660615593 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
@@ -3631,7 +3665,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2074017785}
   m_SourcePrefab: {fileID: 100100000, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
 --- !u!1001 &1168527040
 PrefabInstance:
@@ -4657,6 +4694,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab331fee1705f894d8af3bdcb527e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1198729105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198729100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A tasty cupcake. Permanently increases your characters Dexterity by
+    2.
 --- !u!1 &1259688000 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
@@ -5851,6 +5902,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab331fee1705f894d8af3bdcb527e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1639420774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639420768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: A moist burger. Permanently increases your characters Strength by 2.
 --- !u!1001 &1676449438
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7049,8 +7113,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 400, y: -225}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 399.32272, y: -208.06735}
+  m_SizeDelta: {x: 200, y: 66.812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2059466265
 MonoBehaviour:
@@ -7072,8 +7136,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 4e669f22e6bb3a04189282086d3b677e, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -7111,6 +7175,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab331fee1705f894d8af3bdcb527e256, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2074017785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074017780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 019b603b5b34c9544880058f2391a5c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tipToShow: 
 --- !u!1 &2076872676 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6598809658035743236, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
@@ -7288,7 +7365,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 457293753476409261, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 331445634}
   m_SourcePrefab: {fileID: 100100000, guid: 82f7b02807c9f6f48a324eac5fc3bf83, type: 3}
 --- !u!1 &2124167879
 GameObject:
@@ -7324,8 +7404,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 100, y: -25}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 100.000046, y: -24.9999}
+  m_SizeDelta: {x: 170.1986, y: 22.9078}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2124167881
 MonoBehaviour:
@@ -7356,8 +7436,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7683,7 +7763,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6370343419541769429, guid: dfd44cd1cb6e602439e306d6eca56e18, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1259688001}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 886462684445706530, guid: dfd44cd1cb6e602439e306d6eca56e18, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1639420774}
   m_SourcePrefab: {fileID: 100100000, guid: dfd44cd1cb6e602439e306d6eca56e18, type: 3}
 --- !u!1001 &6702034550989234961
 PrefabInstance:
