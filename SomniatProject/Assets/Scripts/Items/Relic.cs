@@ -25,12 +25,19 @@ public class Relic : Item
 
     private void Update()
     {
-        // Dont know what to name it but i simply remade Atalay's update script to return a bool. So that i could use it in this class for my Equip() script. 
-        if (pickUpScript.PickUp)
-        {
-            player.Equip(relicData);
-            gameObject.SetActive(false);
-        }
+
+        if (pickUpScript.PickUp) // Dont know what to name it but i simply remade Atalay's update script to return a bool 
+            Equip(player);        // So that i could use it in this class for my Equip() script.
 
     }
+
+
+    /*private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            Player p = other.GetComponent<Player>();
+            Equip(p);
+        }
+    }*/
 }

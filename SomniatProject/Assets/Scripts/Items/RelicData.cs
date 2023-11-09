@@ -15,7 +15,6 @@ public class RelicData : ScriptableObject
     public StatModifier.StatModType[] modType;
     public float[] value;
     public Sprite icon;
-    public int relicQuantity;
 
     public StatModifier[] GetModifiers()
     {
