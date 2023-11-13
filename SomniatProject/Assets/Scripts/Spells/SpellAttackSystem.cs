@@ -73,6 +73,7 @@ public class SpellAttackSystem : MonoBehaviour
 
     private void CastSpell()
     {
+        Debug.Log("Casting spell");
         var (success, position) = controller.GetMousePosition();
         if (success)
         {

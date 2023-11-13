@@ -21,12 +21,7 @@ public class Spell : MonoBehaviour
 
     private Vector3 playerPos;
 
-    private bool isDropped = false;
 
-    public void SetDroppedState(bool isDropped)
-    {
-        this.isDropped = isDropped;
-    }
 
 
 
@@ -62,24 +57,21 @@ public class Spell : MonoBehaviour
 
     private void Update()
     {
-        if (!isDropped)
+        if (SpellToCast.Speed > 0 && (SpellToCast.name.Equals("Piercing Arrow") || SpellToCast.name.Equals("Fireball")))
         {
-            if(SpellToCast.Speed > 0 && (SpellToCast.name.Equals("Piercing Arrow") || SpellToCast.name.Equals("Fireball")))
-        {
-                transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
-                if (SpellToCast.name.Equals("Piercing Arrow"))
-                {
-                    transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime, Space.Self);
-                }
-            }
-
-            if (player != null)
+            transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
+            if (SpellToCast.name.Equals("Piercing Arrow"))
             {
-                if (berserkParticles != null && SpellToCast.Lifetime >= 0)
-                {
-                    berserkParticles.transform.position = player.transform.position;
-                    playerPos = player.transform.position;
-                }
+                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime, Space.Self);
+            }
+        }
+
+        if (player != null)
+        {
+            if (berserkParticles != null && SpellToCast.Lifetime >= 0)
+            {
+                berserkParticles.transform.position = player.transform.position;
+                playerPos = player.transform.position;
             }
         }
     }

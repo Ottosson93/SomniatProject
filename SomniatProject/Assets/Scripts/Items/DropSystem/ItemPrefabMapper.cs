@@ -9,7 +9,6 @@ public class ItemPrefabMapper : MonoBehaviour
 
         if (prefab != null)
         {
-            Debug.Log(prefab.name);
             return prefab;
         }
         else

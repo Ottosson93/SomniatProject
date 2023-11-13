@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,11 +8,8 @@ public class ItemDropSystem : MonoBehaviour
 {
     public ItemPrefabMapper itemPrefabMapper;
 
-    private Dictionary<int, List<ItemDropInfo>> itemDropTable;
-
     private List<ItemDropInfo> itemDrops = new List<ItemDropInfo>();
-
-    List<string> usedCategories = new List<string>();
+    private List<string> usedCategories = new List<string>();
 
     [System.Serializable]
     public class ItemDropInfo
@@ -101,7 +97,6 @@ public class ItemDropSystem : MonoBehaviour
                     }
                 }
             }
-
         }
         else
         {
@@ -109,49 +104,47 @@ public class ItemDropSystem : MonoBehaviour
         }
     }
 
-    public void DropItem(Vector3 dropLocation, int itemID)
+    public void HandleEnemyDeath(Vector3 enemyPosition)
     {
-        List<ItemDropInfo> itemDrops;
+        int numberOfItemsToDrop = Random.Range(1, 4);
 
-        if (itemDropTable.TryGetValue(itemID, out itemDrops))
+        // Create a local copy of usedCategories for this drop instance
+        List<string> localUsedCategories = new List<string>(usedCategories);
+
+        for (int i = 0; i < numberOfItemsToDrop; i++)
         {
-            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false);
+            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false, localUsedCategories);
 
             if (itemToDrop != null)
             {
-                GameObject itemPrefab = itemPrefabMapper.GetItemPrefab(itemToDrop);
-
-                if (itemPrefab != null)
-                {
-                    Instantiate(itemPrefab, dropLocation, Quaternion.identity);
-                }
-                else
-                {
-                    Debug.LogWarning("Item prefab not found for: " + itemToDrop);
-                }
+                Debug.Log("Dropped item: " + itemToDrop);
+                HandleDroppedItem(itemToDrop, enemyPosition);
+                localUsedCategories.Add(itemToDrop);
             }
         }
-        else
-        {
-            Debug.LogWarning("Item ID not found in item drop mapping: " + itemID);
-        }
+        Debug.Log("Number of items to drop: " + numberOfItemsToDrop);
+        usedCategories.AddRange(localUsedCategories);
+
+        localUsedCategories.Clear();
     }
 
-    string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop)
+
+
+
+    string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop, List<string> usedCategories)
     {
         float totalWeight = 0f;
         float randomValue = Random.Range(0f, 1f);
 
         List<ItemDropInfo> validDrops = itemDrops
-        .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
-        .Where(drop => !usedCategories.Contains(drop.category))
-        .ToList();
+            .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
+            .Where(drop => !usedCategories.Contains(drop.category))
+            .ToList();
 
         if (validDrops.Count == 0)
         {
             return null;
         }
-
 
         foreach (var itemDrop in validDrops)
         {
@@ -161,8 +154,8 @@ public class ItemDropSystem : MonoBehaviour
 
             if (randomValue < totalWeight)
             {
+                usedCategories.Add(itemDrop.category);
                 totalWeight = 0;
-                Debug.Log("Determined item " + itemDrop.itemName);
                 return itemDrop.itemName;
             }
         }
@@ -170,73 +163,41 @@ public class ItemDropSystem : MonoBehaviour
         return null;
     }
 
-    public void HandleEnemyDeath(Vector3 enemyPosition)
+    void HandleDroppedItem(string itemToDrop, Vector3 dropLocation)
     {
-        Debug.Log("Handling enemy death");
-        int numberOfItemsToDrop = Random.Range(0, 3);
-
-        for (int i = 0; i < numberOfItemsToDrop; i++)
+        if (itemToDrop == null)
         {
-            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false);
-
-            if (itemToDrop != null)
-            {
-                Debug.Log("Item Drop is not null");
-                HandleDroppedItem(itemToDrop, enemyPosition, numberOfItemsToDrop);
-                usedCategories.Add(GetItemCategory(itemToDrop));
-            }
+            Debug.Log("No item to drop.");
+            return;
         }
 
-        usedCategories.Clear();
-    }
-
-    string GetItemCategory(string itemName)
-    {
-
-        var item = itemDrops.Find(itemDrop => itemDrop.itemName == itemName);
-        if (item != null)
-        {
-            return item.category;
-        }
-        else
-        {
-            return "Unknown";
-        }
-    }
-
-    public void HandleChestOpen(Vector3 chestPosition)
-    {
-        string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: true);
-
-        HandleDroppedItem(itemToDrop, chestPosition, 1);
-    }
-
-    
-
-    private void HandleDroppedItem(string itemToDrop, Vector3 dropLocation, int itemCount)
-    {
         GameObject itemPrefab = itemPrefabMapper.GetItemPrefab(itemToDrop);
 
+        
         if (itemPrefab != null)
         {
-            for (int i = 0; i < itemCount; i++)
+            Vector3 randomOffset = new Vector3(Random.Range(-2f, 2f), 0f, Random.Range(-2f, 2f));
+            Vector3 adjustedDropLocation = dropLocation + randomOffset;
+
+
+            GameObject instantiatedItem = Instantiate(itemPrefab, adjustedDropLocation, Quaternion.identity);
+
+            Rigidbody rigidbody = instantiatedItem.GetComponent<Rigidbody>();
+            if (rigidbody != null)
             {
-                GameObject instantiatedItem = Instantiate(itemPrefab, dropLocation, Quaternion.identity);
-
-                Spell spellComponent = instantiatedItem.GetComponent<Spell>();
-                if(spellComponent != null)
-                {
-                    spellComponent.SetDroppedState(true);
-                }
-                if (itemCount == 0)
-                    Debug.Log("0 items were dropped");
-
-                Debug.Log("Dropped item: " + instantiatedItem.name);
+                rigidbody.isKinematic = true;
+                rigidbody.velocity = Vector3.zero;
             }
+
+            float destroyTimer = 10f;
+            Destroy(instantiatedItem, destroyTimer);
+
+            Debug.Log("Dropped item: " + instantiatedItem.name + " at position: " + adjustedDropLocation);
         }
         else
         {
             Debug.LogWarning("Item prefab not found for: " + itemToDrop);
         }
     }
+
 }
