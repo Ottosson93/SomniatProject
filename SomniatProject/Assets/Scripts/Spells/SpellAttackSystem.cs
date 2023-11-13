@@ -97,6 +97,7 @@ public class SpellAttackSystem : MonoBehaviour
         castPoint.forward = direction;
 
         Instantiate(spell, castPoint.position, castPoint.rotation);
+        currentSpell.SpellToCast.IsInstantiatedByAbilityCast = true;
 
     }
 }

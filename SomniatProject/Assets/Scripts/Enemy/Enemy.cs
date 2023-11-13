@@ -19,6 +19,13 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         current = health;
+
+        itemDropSystem = GetComponent<ItemDropSystem>();
+
+        if (itemDropSystem == null)
+        {
+            Debug.LogError("ItemDropSystem component not found on the same GameObject or its parents.");
+        }
     }
 
 
@@ -41,7 +48,7 @@ public class Enemy : MonoBehaviour
         animator.SetBool("Die", true);
         GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
-        //itemDropSystem.HandleEnemyDeath(transform.position); Gör så att enemy inte kan dö men är inte heller targetable????
+        itemDropSystem.HandleEnemyDeath(transform.position);
 
         dead = true;                
         Destroy(gameObject);

@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ItemPrefabMapper : MonoBehaviour
 {
-    public Dictionary<string, GameObject> itemPrefabs = new Dictionary<string, GameObject>();
-
     public GameObject GetItemPrefab(string itemName)
     {
-        if (itemPrefabs.ContainsKey(itemName))
+        string path = "Prefabs/Items/" + itemName;
+        GameObject prefab = Resources.Load<GameObject>(path);
+
+        if (prefab != null)
         {
-            return itemPrefabs[itemName];
+            Debug.Log(prefab.name);
+            return prefab;
         }
         else
         {
-            Debug.LogWarning("Item not found in item prefab mapping: " + itemName);
+            Debug.LogWarning("Prefab not found at path: " + path);
             return null;
         }
     }

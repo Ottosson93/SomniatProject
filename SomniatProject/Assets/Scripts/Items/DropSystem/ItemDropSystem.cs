@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 
 public class ItemDropSystem : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class ItemDropSystem : MonoBehaviour
     private List<ItemDropInfo> itemDrops = new List<ItemDropInfo>();
 
     List<string> usedCategories = new List<string>();
-
-
 
     [System.Serializable]
     public class ItemDropInfo
@@ -28,7 +27,14 @@ public class ItemDropSystem : MonoBehaviour
 
     void Start()
     {
-        LoadItemDropRatesFromCSV("Prefabs/Items/ItemDropRates.csv");
+        itemPrefabMapper = GetComponent<ItemPrefabMapper>();
+        if (itemPrefabMapper == null)
+        {
+            Debug.LogError("ItemPrefabMapper component not found on the same GameObject or attached to the script manually.");
+            return;
+        }
+
+        LoadItemDropRatesFromCSV("Resources/Prefabs/Items/ItemDropData.csv");
     }
 
     void LoadItemDropRatesFromCSV(string csvFileName)
@@ -48,24 +54,54 @@ public class ItemDropSystem : MonoBehaviour
                     string line = reader.ReadLine();
                     string[] values = line.Split(';');
 
-                    int itemID = int.Parse(values[0]);
-                    string itemName = values[1];
-                    float chestDropRate = float.Parse(values[2]);
-                    float enemyDropRate = float.Parse(values[3]);
-                    string category = values[4];
-
-                    ItemDropInfo itemDropInfo = new ItemDropInfo
+                    if (values.Length >= 5)
                     {
-                        itemID = itemID,
-                        itemName = itemName,
-                        chestDropRate = chestDropRate,
-                        enemyDropRate = enemyDropRate,
-                        category = category
-                    };
+                        int itemID;
+                        if (int.TryParse(values[0], out itemID))
+                        {
+                            string itemName = values[1];
 
-                    itemDrops.Add(itemDropInfo);
+                            float chestDropRate;
+                            if (float.TryParse(values[2], NumberStyles.Float, CultureInfo.InvariantCulture, out chestDropRate))
+                            {
+                                float enemyDropRate;
+                                if (float.TryParse(values[3], NumberStyles.Float, CultureInfo.InvariantCulture, out enemyDropRate))
+                                {
+                                    string category = values[4];
+
+                                    ItemDropInfo itemDropInfo = new ItemDropInfo
+                                    {
+                                        itemID = itemID,
+                                        itemName = itemName,
+                                        chestDropRate = chestDropRate,
+                                        enemyDropRate = enemyDropRate,
+                                        category = category
+                                    };
+
+                                    itemDrops.Add(itemDropInfo);
+                                }
+                                else
+                                {
+                                    Debug.LogWarning("Failed to parse enemyDropRate for line: " + line);
+                                }
+                            }
+                            else
+                            {
+                                Debug.LogWarning("Failed to parse chestDropRate for line: " + line);
+                            }
+                        }
+                        else
+                        {
+                            Debug.LogWarning("Failed to parse itemID for line: " + line);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Skipping invalid line: " + line);
+                    }
                 }
             }
+
         }
         else
         {
@@ -126,6 +162,7 @@ public class ItemDropSystem : MonoBehaviour
             if (randomValue < totalWeight)
             {
                 totalWeight = 0;
+                Debug.Log("Determined item " + itemDrop.itemName);
                 return itemDrop.itemName;
             }
         }
@@ -135,6 +172,7 @@ public class ItemDropSystem : MonoBehaviour
 
     public void HandleEnemyDeath(Vector3 enemyPosition)
     {
+        Debug.Log("Handling enemy death");
         int numberOfItemsToDrop = Random.Range(0, 3);
 
         for (int i = 0; i < numberOfItemsToDrop; i++)
@@ -143,6 +181,7 @@ public class ItemDropSystem : MonoBehaviour
 
             if (itemToDrop != null)
             {
+                Debug.Log("Item Drop is not null");
                 HandleDroppedItem(itemToDrop, enemyPosition, numberOfItemsToDrop);
                 usedCategories.Add(GetItemCategory(itemToDrop));
             }
@@ -182,7 +221,17 @@ public class ItemDropSystem : MonoBehaviour
         {
             for (int i = 0; i < itemCount; i++)
             {
-                Instantiate(itemPrefab, dropLocation, Quaternion.identity);
+                GameObject instantiatedItem = Instantiate(itemPrefab, dropLocation, Quaternion.identity);
+
+                Spell spellComponent = instantiatedItem.GetComponent<Spell>();
+                if(spellComponent != null)
+                {
+                    spellComponent.SetDroppedState(true);
+                }
+                if (itemCount == 0)
+                    Debug.Log("0 items were dropped");
+
+                Debug.Log("Dropped item: " + instantiatedItem.name);
             }
         }
         else

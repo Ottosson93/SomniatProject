@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3494906085471048007}
   - component: {fileID: 931698871828236919}
   m_Layer: 0
-  m_Name: Arrow_Regular
+  m_Name: Piercing Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

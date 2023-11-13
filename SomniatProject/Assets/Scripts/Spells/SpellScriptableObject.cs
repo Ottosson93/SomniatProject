@@ -36,4 +36,7 @@ public class SpellScriptableObject : ScriptableObject
     public float AttackSpeedBoost;
     public float MovementSpeedBoost;
     public float ArmorReduction;
+
+    [Header("Other")]
+    public bool IsInstantiatedByAbilityCast = true;
 }
