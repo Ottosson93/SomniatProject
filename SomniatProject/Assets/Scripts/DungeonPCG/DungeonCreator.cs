@@ -23,12 +23,7 @@ public class DungeonCreator : MonoBehaviour
 
     private List<PCGObjects> objects = new List<PCGObjects>();
 
-
-
-
-    [SerializeField] private List<GameObject> greenEnemyPack;
-    [SerializeField] private List<GameObject> orangeEnemyPack;
-    [SerializeField] private List<GameObject> redEnemyPack;
+    [SerializeField] private List<GameObject> listOfAllEnemies;
     RNode node;
 
     [SerializeField] private List<GameObject> props = new List<GameObject>();
@@ -52,7 +47,7 @@ public class DungeonCreator : MonoBehaviour
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material,
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+            wall1, wall5, pillar, listOfAllEnemies, 3, props);
 
         Debug.Log("Rooms to place: " + generator.preMadeRooms.Count);
 
