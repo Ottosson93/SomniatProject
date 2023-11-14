@@ -10,6 +10,7 @@ TagManager:
   - Shop
   - UpgradeRoom
   - OnDeathMenu
+  - BossRoom
   layers:
   - Default
   - TransparentFX

@@ -176,13 +176,20 @@ public class DungeonGenerator : MonoBehaviour
                         manualInsertionPossible = true;
                         break;
                     }
-                    else if (manualRoom.name == "Corridor Room")
+                    else if (manualRoom.name == "Corridor Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 125))
                     {
                         Debug.Log("Corridor Room was inserted with the distance of " + (int)distanceFromOrigo);
                         SplitRoomManually(parentNode, manualRoom);
                         manualInsertionPossible = true;
                         break;
 
+                    }
+                    else if (manualRoom.name == "Battle Room" && (distanceFromOrigo > 75 && distanceFromOrigo < 150))
+                    {
+                        Debug.Log("Battle Room was inteserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom);
+                        manualInsertionPossible = true;
+                        break;
                     }
                 }
             }
