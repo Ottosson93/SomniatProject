@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SomniatProject/Assets/Scripts/UI/HoverOver.meta
 guid: fa63cd8ad20440b4ca7696a35cee6d8e
 folderAsset: yes
 DefaultImporter:
+========
+guid: 4d096224ff5b3ad4a88fc13666f86c18
+PrefabImporter:
+>>>>>>>> PCG-Main:SomniatProject/Assets/Resources/Prefabs/DungeonPCG/Props/Pillar.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

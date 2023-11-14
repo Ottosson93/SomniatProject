@@ -1,7 +1,9 @@
 fileFormatVersion: 2
-guid: 1f36168361bdf37459e4654fbfdfd146
+guid: 4d096224ff5b3ad4a88fc13666f86c18
 PrefabImporter:
+PCG-Main:SomniatProject/Assets/Resources/Prefabs/DungeonPCG/Props/Pillar.prefab.meta
+PCG-Main:SomniatProject/Assets/Prefabs/DungeonPCG/Props/Pillar.prefab.meta
   externalObjects: {}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  userData:
+  assetBundleName:
+  assetBundleVariant:
