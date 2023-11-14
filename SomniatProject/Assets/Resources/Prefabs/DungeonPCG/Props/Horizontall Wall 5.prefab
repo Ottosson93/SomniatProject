@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5912901034457572012}
   - component: {fileID: 4738395269697606827}
   - component: {fileID: 2548153261551811169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cube 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6581375296686889501}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Horizontall Wall 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +153,7 @@ GameObject:
   - component: {fileID: 6504171806718373041}
   - component: {fileID: 4070447086634209725}
   - component: {fileID: 7131429255221985108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cube 0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -258,7 +258,7 @@ GameObject:
   - component: {fileID: 3961172521138081514}
   - component: {fileID: 4640929377450828597}
   - component: {fileID: 7738207509216739107}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cube 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   - component: {fileID: 1588015521649244128}
   - component: {fileID: 6982925445226978007}
   - component: {fileID: 2811991064576559950}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cube 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -507,6 +507,10 @@ PrefabInstance:
     - target: {fileID: 7030994941266997987, guid: 725d9061657be724facf6fda9fe05b4f, type: 3}
       propertyPath: m_Name
       value: WallDecor_05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7030994941266997987, guid: 725d9061657be724facf6fda9fe05b4f, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

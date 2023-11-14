@@ -49,11 +49,9 @@ public class DungeonCreator : MonoBehaviour
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
             wall1, wall5, pillar, listOfAllEnemies, 3, props);
 
-        Debug.Log("Rooms to place: " + generator.preMadeRooms.Count);
 
         generator.Generate();
 
-        Debug.Log(generator.preMadeRooms.Count + " Rooms did not get placed");
         while (generator.preMadeRooms.Count > 0)
         {
             preMadeRoomsBackUp.Clear();
@@ -62,12 +60,12 @@ public class DungeonCreator : MonoBehaviour
                 preMadeRoomsBackUp.Add(obj);
             }
             //preMadeRoomsBackUp = preMadeRooms;
-            Debug.Log("PreMadeRoomsCount: " + preMadeRooms.Count + " PreMadeRoomsBackUpCount: " + preMadeRoomsBackUp.Count);
             Debug.Log("Rebuilding Dungeon to fit all rooms");
+
             generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material,
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
-            Debug.Log("PreMadeRoomsCount: " + preMadeRooms.Count + " PreMadeRoomsBackUpCount: " + preMadeRoomsBackUp.Count);
+            wall1, wall5, pillar, listOfAllEnemies, 3, props);
+
             generator.Generate();
         }
         //generator.PlaceStartingRoomInCenter();
@@ -75,12 +73,22 @@ public class DungeonCreator : MonoBehaviour
         generator.BuildCorridors();
 
         preMadeNodes = generator.GetManualCoordinates();
+
+        foreach (PreMadeRoom p in preMadeNodes)
+        {
+            if (p.preMadeRoom.name == "Upgrade Room")
+            {
+                preMadeNodes.Remove(p);
+                preMadeNodes.Add(p);
+                break;
+            }
+        }
+
         foreach(PreMadeRoom p in preMadeNodes)
         {
             //fix Locations
             Instantiate(p.preMadeRoom, p.centerPos, Quaternion.identity);
         }
-        Debug.Log("MADE IT");
         objects = generator.GetCorridorObjects();
         foreach(PCGObjects obj in objects)
         {
@@ -88,10 +96,4 @@ public class DungeonCreator : MonoBehaviour
         }
         navSurface.BuildNavMesh();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
 }
