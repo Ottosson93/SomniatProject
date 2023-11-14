@@ -17,19 +17,19 @@ public class CorridorGenerator
     List<RNode> leafs = new List<RNode>();
     List<RNode> currentRooms = new List<RNode>();
     int numberOfCorridors = 0;
-    GameObject horizontalWall5, horizontallWall1, verticalWall5, verticalWall1, pillar;
+    GameObject Wall5, Wall1, pillar;
     List<PCGObjects> corridorObjects = new List<PCGObjects>();
+
+    List<RNode> recentlyConnectedRnodes = new List<RNode>();
 
     int idTracker = 0;
 
-    public CorridorGenerator(List<RNode> rooms, GameObject horiztonallWall5, GameObject horiztonallWall1, GameObject verticalWall5, GameObject verticalWall1, GameObject pillar)
+    public CorridorGenerator(List<RNode> rooms, GameObject Wall5, GameObject Wall1, GameObject pillar)
     {
         this.rooms = rooms;
         this.pillar = pillar;
-        this.horizontalWall5 = horiztonallWall5;
-        this.horizontallWall1 = horiztonallWall1;
-        this.verticalWall5 = verticalWall5;
-        this.verticalWall1 = verticalWall1;
+        this.Wall5 = Wall5;
+        this.Wall1 = Wall1;
     }
 
     public List<CNode> GenerateCorridors()
@@ -121,24 +121,42 @@ public class CorridorGenerator
             //Debug.Log("Right");
             
             ConnectRoomsHorizontally(leftRoomsChildren, rightRoomsChildren);
+            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            {
+                ConnectRoomsHorizontally(leftRoomsChildren, rightRoomsChildren);
+            }
         }
         else if ((angle > 45 && angle < 135))
         {
             //Debug.Log("Up");
             ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
+            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            {
+                ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
+            }
         }
         else if ((angle > -135 && angle < -45))
         {
             //Debug.Log("Down");
             ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
+            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            {
+                ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
+            }
         }
         else
         {
             //Debug.Log("Left");
             
             ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
-        }
+            if(leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            {
+                ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
+            }
 
+            
+        }
+        recentlyConnectedRnodes.Clear();
         r1.connectedWithSibling = true;
         r2.connectedWithSibling = true;
 
@@ -156,7 +174,7 @@ public class CorridorGenerator
         {
             foreach (RNode node in leftRooms)
             {
-                if (node.topRight.x > leftCandidate.topRight.x)
+                if (node.topRight.x > leftCandidate.topRight.x && !recentlyConnectedRnodes.Contains(node))
                 {
                     leftBackUp = leftCandidate;
                     leftCandidate = node;
@@ -239,24 +257,24 @@ public class CorridorGenerator
         Doorway rdr = new Doorway(new Vector2(c.topRight.x, c.bottomLeft.y), c.topRight, true);
         rightCandidate.doorways.Add(rdr);
 
-        AddCorridorObject(ldr.pillarOne, pillar);
-        AddCorridorObject(ldr.pillarTwo, pillar);
-        AddCorridorObject(rdr.pillarOne, pillar);
-        AddCorridorObject(rdr.pillarTwo, pillar);
+        AddCorridorObject(ldr.pillarOne, pillar, Vector3.zero);
+        AddCorridorObject(ldr.pillarTwo, pillar, Vector3.zero);
+        AddCorridorObject(rdr.pillarOne, pillar, Vector3.zero);
+        AddCorridorObject(rdr.pillarTwo, pillar, Vector3.zero);
 
         float buildPos = c.bottomLeft.x;
         while (buildPos < c.topRight.x)
         {
             if(buildPos + 4.5 < c.topRight.x)
             {
-                AddCorridorObject(new Vector2(buildPos + 2.5f , c.topRight.y), horizontalWall5);
-                AddCorridorObject(new Vector2(buildPos + 2.5f, c.bottomLeft.y), horizontalWall5);
+                AddCorridorObject(new Vector2(buildPos + 2.5f , c.topRight.y), Wall5, Vector3.zero);
+                AddCorridorObject(new Vector2(buildPos + 2.5f, c.bottomLeft.y), Wall5, new Vector3(0, 180, 0));
                 buildPos += 5;
             }
             else if (buildPos + 0.5 < c.topRight.x)
             {
-                AddCorridorObject(new Vector2(buildPos + 0.5f, c.topRight.y), horizontallWall1);
-                AddCorridorObject(new Vector2(buildPos + 0.5f, c.bottomLeft.y), horizontallWall1);
+                AddCorridorObject(new Vector2(buildPos + 0.5f, c.topRight.y), Wall1, Vector3.zero);
+                AddCorridorObject(new Vector2(buildPos + 0.5f, c.bottomLeft.y), Wall1, new Vector3(0, 180, 0));
                 buildPos += 1;
             }
             else
@@ -264,6 +282,8 @@ public class CorridorGenerator
                 break;
             }
         }
+        recentlyConnectedRnodes.Add(leftCandidate);
+        recentlyConnectedRnodes.Add(rightCandidate);
     }
     
     void ConnectRoomsVertically(List<RNode> bottomRooms, List<RNode> topRooms)
@@ -277,7 +297,7 @@ public class CorridorGenerator
         {
             foreach (RNode node in bottomRooms)
             {
-                if (node.topRight.y > bottomCandidate.topRight.y)
+                if (node.topRight.y > bottomCandidate.topRight.y && !recentlyConnectedRnodes.Contains(node))
                 {
                     bottomCandidate = node;
                 }
@@ -333,24 +353,24 @@ public class CorridorGenerator
        topCandidate.doorways.Add(tdr);
 
        
-       AddCorridorObject(bdr.pillarOne, pillar);
-       AddCorridorObject(bdr.pillarTwo, pillar);
-       AddCorridorObject(tdr.pillarOne, pillar);
-       AddCorridorObject(tdr.pillarTwo, pillar);
+       AddCorridorObject(bdr.pillarOne, pillar, Vector3.zero);
+       AddCorridorObject(bdr.pillarTwo, pillar, Vector3.zero);
+       AddCorridorObject(tdr.pillarOne, pillar, Vector3.zero);
+       AddCorridorObject(tdr.pillarTwo, pillar, Vector3.zero);
 
         float buildPos = c.bottomLeft.y;
         while (buildPos < c.topRight.y)
         {
             if (buildPos + 4.5 < c.topRight.y)
             {
-                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 2.5f), verticalWall5);
-                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 2.5f), verticalWall5);
+                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 2.5f), Wall5, new Vector3(0, 90, 0));
+                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 2.5f), Wall5, new Vector3(0, 270, 0));
                 buildPos += 5;
             }
             else if (buildPos + 0.5 < c.topRight.y)
             {
-                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 0.5f), verticalWall1);
-                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 0.5f), verticalWall1);
+                AddCorridorObject(new Vector2(c.topRight.x, buildPos + 0.5f), Wall1, new Vector3(0, 90, 0));
+                AddCorridorObject(new Vector2(c.bottomLeft.x, buildPos + 0.5f), Wall1, new Vector3(0, 270, 0));
                 buildPos += 1;
             }
             else
@@ -360,9 +380,10 @@ public class CorridorGenerator
         }
     }
 
-    void AddCorridorObject(Vector2 pos, GameObject type)
+    void AddCorridorObject(Vector2 pos, GameObject type, Vector3 rotation)
     {
-        PCGObjects obj = new PCGObjects(pos, type);
+        //Vector3 rotation = new Vector3(0, 0, 0);
+        PCGObjects obj = new PCGObjects(pos, type, rotation);
         corridorObjects.Add(obj);
     }
 

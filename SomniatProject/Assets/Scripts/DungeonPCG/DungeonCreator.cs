@@ -18,7 +18,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] Material redRoomMaterial;
 
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
-    [SerializeField] private GameObject horizontalWall5, horizontalWall1, verticalWall1, verticalWall5, pillar;
+    [SerializeField] private GameObject wall5, wall1, pillar;
     private List<PreMadeRoom> preMadeNodes;
 
     private List<PCGObjects> objects = new List<PCGObjects>();
@@ -36,19 +36,47 @@ public class DungeonCreator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        List<GameObject> preMadeRoomsBackUp = new List<GameObject>();
+        foreach(GameObject obj in preMadeRooms)
+        {
+            preMadeRoomsBackUp.Add(obj);
+        }
+
+
         //this gets the size of the plane
         //Vector3 roomSize = preMadeRooms[1].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size; 
         //Debug.Log(roomSize);
 
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, 
-            greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRooms, 
-            horizontalWall1, horizontalWall5, verticalWall1, verticalWall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+            greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp, 
+            wall1, wall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
 
+        Debug.Log("Rooms to place: " + generator.preMadeRooms.Count);
 
         generator.Generate();
+
+        Debug.Log(generator.preMadeRooms.Count + " Rooms did not get placed");
+        while (generator.preMadeRooms.Count > 0)
+        {
+            preMadeRoomsBackUp.Clear();
+            foreach (GameObject obj in preMadeRooms)
+            {
+                preMadeRoomsBackUp.Add(obj);
+            }
+            //preMadeRoomsBackUp = preMadeRooms;
+            Debug.Log("PreMadeRoomsCount: " + preMadeRooms.Count + " PreMadeRoomsBackUpCount: " + preMadeRoomsBackUp.Count);
+            Debug.Log("Rebuilding Dungeon to fit all rooms");
+            generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material,
+            greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
+            wall1, wall5, pillar, greenEnemyPack, orangeEnemyPack, redEnemyPack, 3);
+            Debug.Log("PreMadeRoomsCount: " + preMadeRooms.Count + " PreMadeRoomsBackUpCount: " + preMadeRoomsBackUp.Count);
+            generator.Generate();
+        }
+        //generator.PlaceStartingRoomInCenter();
         generator.BuildRooms();
         generator.BuildCorridors();
+
         preMadeNodes = generator.GetManualCoordinates();
         foreach(PreMadeRoom p in preMadeNodes)
         {
@@ -59,7 +87,7 @@ public class DungeonCreator : MonoBehaviour
         objects = generator.GetCorridorObjects();
         foreach(PCGObjects obj in objects)
         {
-            Instantiate(obj.objectType, obj.spawnPoint, Quaternion.identity);
+            Instantiate(obj.objectType, obj.spawnPoint, obj.angle);
         }
         navSurface.BuildNavMesh();
     }

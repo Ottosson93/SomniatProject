@@ -10,6 +10,7 @@ public class RNode
 {
     public float height, width;
     public Vector2 topLeft, topRight, bottomLeft, bottomRight;
+    public Vector2 centerPos; 
     public RNode parent, sibling;
     public List<RNode> children = new List<RNode>();
     public bool manual = false;
@@ -60,6 +61,10 @@ public class RNode
         //this.width = bottomLeft.x + topRight.x; // not Correct
         //this.childOne = childOne;
         //this.childTwo = childTwo;
+
+        centerPos.x = this.bottomLeft.x + this.width / 2;
+        centerPos.y = this.bottomLeft.y + this.height / 2;
+
     }
 
     public void UpdateCorners()
@@ -92,7 +97,8 @@ public class RNode
         }
         else
             height = topRight.y - bottomLeft.y;
-    }
 
-    
+        centerPos.x = bottomLeft.x + width / 2;
+        centerPos.y = bottomLeft.y + height / 2;
+    }
 }
