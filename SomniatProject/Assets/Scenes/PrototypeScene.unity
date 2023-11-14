@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1180,11 +1180,11 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: wall1
       value: 
-      objectReference: {fileID: 1907700878174624045, guid: c614898e1fcdfc64e9d85c9a9f6e107e, type: 3}
+      objectReference: {fileID: 3781241329913157495, guid: d227d8a1d66fd4f4c84fe9abf83af5cc, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: wall5
       value: 
-      objectReference: {fileID: 5817554983899466588, guid: 788b7a15a61fe2f47a4c4bb5b70a0c41, type: 3}
+      objectReference: {fileID: 593884011335473866, guid: 71e25b58a4be7dd4483c8f97c20d7ee0, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: pillar
       value: 
@@ -1299,7 +1299,7 @@ PrefabInstance:
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.size
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: redEnemyPack.Array.size
@@ -1492,7 +1492,7 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.data[4]
       value: 
-      objectReference: {fileID: 7489163079534264297, guid: c180ee33a66d40445832a4aa71a9903b, type: 3}
+      objectReference: {fileID: 7217815780039541087, guid: 98251ac758099174ea48c416c008c420, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: redEnemyPack.Array.data[0]
       value: 
@@ -2638,6 +2638,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &774415413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 774415414}
+  m_Layer: 0
+  m_Name: Pivot Point Boss
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &774415414
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774415413}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.99623775, y: 1.13, z: -0.047999978}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &842105166
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8303,3 +8334,4 @@ SceneRoots:
   - {fileID: 2085230169}
   - {fileID: 414923774}
   - {fileID: 455953144}
+  - {fileID: 774415414}
