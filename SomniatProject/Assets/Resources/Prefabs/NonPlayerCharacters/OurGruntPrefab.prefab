@@ -338,6 +338,8 @@ GameObject:
   - component: {fileID: 8611573942179307939}
   - component: {fileID: 606327360922671928}
   - component: {fileID: -8208281938850205785}
+  - component: {fileID: 7054142460237944947}
+  - component: {fileID: -2307249283120497686}
   m_Layer: 9
   m_Name: OurGruntPrefab
   m_TagString: Enemy
@@ -519,6 +521,31 @@ MonoBehaviour:
   current: 0
   attackRange: 0.8
   dead: 0
+--- !u!114 &7054142460237944947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664211645506664793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7832e7f359bbaac41a4e566443923f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabMapper: {fileID: -2307249283120497686}
+--- !u!114 &-2307249283120497686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664211645506664793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfd6a22df8b5ae4ebaaad34866aafd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2226753920156996051
 GameObject:
   m_ObjectHideFlags: 0

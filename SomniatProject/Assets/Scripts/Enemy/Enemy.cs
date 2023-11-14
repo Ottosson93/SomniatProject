@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public ItemDropSystem itemDropSystem;
     public Animator animator;
     public DamgeTextPlayer damageTextPlayer;
     public Transform attackPoint;
@@ -13,11 +14,14 @@ public class Enemy : MonoBehaviour
     public int current;
     public float attackRange;
 
+
     public bool dead = false;
 
     private void Start()
     {
         current = health;
+
+        itemDropSystem = GetComponent<ItemDropSystem>();
     }
 
 
@@ -43,6 +47,11 @@ public class Enemy : MonoBehaviour
 
         dead = true;                
         Destroy(gameObject);
+
+        if (itemDropSystem != null)
+        {
+            itemDropSystem.HandleEnemyDeath(transform.position);
+        }
     }
 
 
