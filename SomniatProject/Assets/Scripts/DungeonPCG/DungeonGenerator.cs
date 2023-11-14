@@ -156,7 +156,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     if (manualRoom.name == "Start Room" && distanceFromOrigo < 75)
                     {
-                        Debug.Log("Start Room was inserted with the distance of " + distanceFromOrigo);
+                        Debug.Log("Start Room was inserted with the distance of " + (int)distanceFromOrigo);
                         SplitRoomManually(parentNode, manualRoom);
                         manualInsertionPossible = true;
                         Debug.DrawLine(new Vector3(parentNode.centerPos.x, 0.2f, parentNode.centerPos.y), Vector3.zero, UnityEngine.Color.white, 500);
@@ -164,21 +164,21 @@ public class DungeonGenerator : MonoBehaviour
                     }
                     else if (manualRoom.name == "Boss Room" && distanceFromOrigo > 100)
                     {
-                        Debug.Log("Boss Room was inserted with the distance of " + distanceFromOrigo);
+                        Debug.Log("Boss Room was inserted with the distance of " + (int)distanceFromOrigo);
                         SplitRoomManually(parentNode, manualRoom);
                         manualInsertionPossible = true;
                         break;
                     }
                     else if (manualRoom.name == "Upgrade Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 150))
                     {
-                        Debug.Log("Upgrade Room was inserted with the distance of " + distanceFromOrigo);
+                        Debug.Log("Upgrade Room was inserted with the distance of " + (int)distanceFromOrigo);
                         SplitRoomManually(parentNode, manualRoom);
                         manualInsertionPossible = true;
                         break;
                     }
                     else if (manualRoom.name == "Corridor Room")
                     {
-                        Debug.Log("Corridor Room was inserted with the distance of " + distanceFromOrigo);
+                        Debug.Log("Corridor Room was inserted with the distance of " + (int)distanceFromOrigo);
                         SplitRoomManually(parentNode, manualRoom);
                         manualInsertionPossible = true;
                         break;
@@ -189,7 +189,7 @@ public class DungeonGenerator : MonoBehaviour
 
             if (!manualInsertionPossible)
             {
-                Debug.Log("No match for manual insertion");
+                //Debug.Log("No match for manual insertion");
                 SplitRoom(parentNode);
             }
 
@@ -250,7 +250,6 @@ public class DungeonGenerator : MonoBehaviour
         preMadeRoomNodes.Add(pmr);
 
         RNode manualRNode = new RNode(bl, tr, roomID++);
-        Debug.Log(manualRoom.name.ToString() + " " + manualRNode.id);
         manualRNode.parent = parentNode;
         manualRNode.sibling = newNode;
         manualRNode.bottom = true;

@@ -34,7 +34,6 @@ public class CorridorGenerator
 
     public List<CNode> GenerateCorridors()
     {
-        Debug.Log("total: " + rooms.Count);
         foreach(RNode node in rooms)
         {
             if (node.bottom == true)
@@ -43,8 +42,6 @@ public class CorridorGenerator
                 leafCounter++;
             }
         }
-        Debug.Log("leafs: " + leafCounter);
-        Debug.Log("parents: " + (rooms.Count - leafCounter));
 
         while (currentRooms.Count > 0)
         {
@@ -79,13 +76,7 @@ public class CorridorGenerator
                 currentRooms.Remove(node.sibling);
                 numberOfCorridors++;
             }
-            else 
-            {
-                Debug.Log("this was the root node");
-            }
         }
-
-        Debug.Log("Number of Corridors created: " + numberOfCorridors);
         return corridors;
     }
 
