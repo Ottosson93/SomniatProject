@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PostProcess : MonoBehaviour
@@ -5,7 +6,7 @@ public class PostProcess : MonoBehaviour
     public Shader shader;
     private Material material;
     public Player player;
-
+    public Transform circle;
     public float initialRadius = 0.5f; // Initial radius when lucidity is at max
     public float minRadius = 0.01f;    // Minimum radius when lucidity is at its lowest
 
@@ -13,6 +14,7 @@ public class PostProcess : MonoBehaviour
     {
         material = new Material(shader);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        circle = transform.Find("MaskCircle");
     }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
