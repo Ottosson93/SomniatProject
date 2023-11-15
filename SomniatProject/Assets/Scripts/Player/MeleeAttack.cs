@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     public Animator animator;
     public int maxCombo = 3;
