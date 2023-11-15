@@ -152,7 +152,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d0eb3da23422f408ca51cfd8183c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   pickUpRange: 1.5
 --- !u!114 &1464659302629337403
 MonoBehaviour:
@@ -166,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 648f49003539609428bb6f4c759a46f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spell: {fileID: -2328625356953407616, guid: a337f9c0512c15b42af049ecac6dab92, type: 3}
+  spell: {fileID: 674473231596236386, guid: a337f9c0512c15b42af049ecac6dab92, type: 3}
 --- !u!1 &8812291336392491186
 GameObject:
   m_ObjectHideFlags: 0

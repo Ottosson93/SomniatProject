@@ -185,14 +185,24 @@ public class ItemDropSystem : MonoBehaviour
             Rigidbody rigidbody = instantiatedItem.GetComponent<Rigidbody>();
             if (rigidbody != null)
             {
-                rigidbody.isKinematic = true;
+                rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+                rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 rigidbody.velocity = Vector3.zero;
             }
 
-            float destroyTimer = 10f;
-            Destroy(instantiatedItem, destroyTimer);
+            //float destroyTimer = 10f;
+            //Destroy(instantiatedItem, destroyTimer);
 
             Debug.Log("Dropped item: " + instantiatedItem.name + " at position: " + adjustedDropLocation);
+
+            if (instantiatedItem.GetComponent<Collider>() != null)
+            {
+                Debug.Log("Item collider bounds: " + instantiatedItem.GetComponent<Collider>().bounds);
+            }
+            else
+            {
+                Debug.LogWarning("Item has no collider.");
+            }
         }
         else
         {
