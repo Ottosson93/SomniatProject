@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 4122276373789597662}
   - component: {fileID: 3106456634001428597}
   - component: {fileID: 1621023305406927600}
-  m_Layer: 6
+  - component: {fileID: 357537658301416945}
+  m_Layer: 10
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,3 +123,23 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.49800003, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &357537658301416945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465079734990110219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7655bf0239ad345a780592ea7e7a1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  currentHealth: 0
+  health: 5
+  damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
+  SpellToCast: {fileID: 11400000, guid: cb00f20852dea4b4288bfd5a03b6606e, type: 2}
+  explosionEffect: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}

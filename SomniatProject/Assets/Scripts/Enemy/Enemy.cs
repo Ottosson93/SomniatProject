@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public ItemDropSystem itemDropSystem;
     public Animator animator;
-    public DamgeTextPlayer damageTextPlayer;
+    public DamageTextPlayer damageTextPlayer;
     public Transform attackPoint;
     public LayerMask enemyLayer;
 
