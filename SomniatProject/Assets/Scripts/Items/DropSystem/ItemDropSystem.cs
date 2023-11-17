@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+using System.Collections;
 
 public class ItemDropSystem : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ItemDropSystem : MonoBehaviour
 
     private List<ItemDropInfo> itemDrops = new List<ItemDropInfo>();
     private List<string> usedCategories = new List<string>();
+
+    private int numberOfItemsToDrop;
 
     [System.Serializable]
     public class ItemDropInfo
@@ -106,9 +109,8 @@ public class ItemDropSystem : MonoBehaviour
 
     public void HandleEnemyDeath(Vector3 enemyPosition)
     {
-        int numberOfItemsToDrop = Random.Range(1, 4);
+        numberOfItemsToDrop = Random.Range(1, 4);
 
-        // Create a local copy of usedCategories for this drop instance
         List<string> localUsedCategories = new List<string>(usedCategories);
 
         for (int i = 0; i < numberOfItemsToDrop; i++)
@@ -128,7 +130,41 @@ public class ItemDropSystem : MonoBehaviour
         localUsedCategories.Clear();
     }
 
+    public void HandleChestOpen(Vector3 chestPosition)
+    {
+        if(this.gameObject.name == "ChestGreen")
+        {
+            numberOfItemsToDrop = Random.Range(0, 3);
+        }
+        else if(this.gameObject.name == "ChestYellow")
+        {
+            numberOfItemsToDrop = Random.Range(1, 4);
+        }
+        else if(this.gameObject.name == "ChestRed")
+        {
+            numberOfItemsToDrop = Random.Range(2, 5);
+        }
 
+        List<string> localUsedCategories = new List<string>(usedCategories);
+
+        for (int i = 0; i < numberOfItemsToDrop; i++)
+        {
+            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false, localUsedCategories);
+
+            if (itemToDrop != null)
+            {
+                Debug.Log("Dropped item: " + itemToDrop);
+                HandleDroppedItem(itemToDrop, chestPosition);
+                localUsedCategories.Add(itemToDrop);
+            }
+        }
+        Debug.Log("Number of items to drop: " + numberOfItemsToDrop);
+        usedCategories.AddRange(localUsedCategories);
+
+        localUsedCategories.Clear();
+
+
+    }
 
 
     string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop, List<string> usedCategories)
@@ -154,7 +190,10 @@ public class ItemDropSystem : MonoBehaviour
 
             if (randomValue < totalWeight)
             {
-                usedCategories.Add(itemDrop.category);
+                if(itemDrop.category != "Money")
+                {
+                    usedCategories.Add(itemDrop.category);
+                }
                 totalWeight = 0;
                 return itemDrop.itemName;
             }
@@ -190,8 +229,8 @@ public class ItemDropSystem : MonoBehaviour
                 rigidbody.velocity = Vector3.zero;
             }
 
-            //float destroyTimer = 10f;
-            //Destroy(instantiatedItem, destroyTimer);
+            float destroyTimer = 10f;
+            Destroy(instantiatedItem, destroyTimer);
 
             Debug.Log("Dropped item: " + instantiatedItem.name + " at position: " + adjustedDropLocation);
 
@@ -209,5 +248,4 @@ public class ItemDropSystem : MonoBehaviour
             Debug.LogWarning("Item prefab not found for: " + itemToDrop);
         }
     }
-
 }
