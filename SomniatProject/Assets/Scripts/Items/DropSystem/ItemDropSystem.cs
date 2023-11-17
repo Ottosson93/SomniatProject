@@ -174,7 +174,7 @@ public class ItemDropSystem : MonoBehaviour
 
         List<ItemDropInfo> validDrops = itemDrops
             .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
-            .Where(drop => !usedCategories.Contains(drop.category))
+            .Where(drop => !usedCategories.Contains(drop.category) || drop.category == "Money")
             .ToList();
 
         if (validDrops.Count == 0)
@@ -190,10 +190,7 @@ public class ItemDropSystem : MonoBehaviour
 
             if (randomValue < totalWeight)
             {
-                if(itemDrop.category != "Money")
-                {
-                    usedCategories.Add(itemDrop.category);
-                }
+                usedCategories.Add(itemDrop.category);
                 totalWeight = 0;
                 return itemDrop.itemName;
             }

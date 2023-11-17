@@ -40,7 +40,7 @@ public class PickUpScript : MonoBehaviour
                 await ChangeKeyOpacity(DecreaseOpacity);
         }
 
-        Debug.Log("pickupscript return false");
+        //Debug.Log("pickupscript return false");
         return false;
     }
 

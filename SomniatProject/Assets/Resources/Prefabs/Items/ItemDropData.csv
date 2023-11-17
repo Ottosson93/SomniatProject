@@ -6,4 +6,8 @@ ItemID;Name;ChestDropRate;EnemyDropRate;Category
 4;BurgerRelic;0.5;0.5;Relic
 5;SteakRelic;0.5;0.5;Relic
 6;CupcakeRelic;0.5;0.5;Relic
+7;1 coin;0.5;0.5;Money
+8;2 coins;0.5;0.5;Money
+9;5 coins;0.5;0.5;Money
+10;10 coins;0.5;0.5;Money
 
