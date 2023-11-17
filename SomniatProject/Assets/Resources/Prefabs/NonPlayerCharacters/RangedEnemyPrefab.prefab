@@ -396,6 +396,7 @@ GameObject:
   - component: {fileID: -5897000466478401937}
   - component: {fileID: 2625885900072077414}
   - component: {fileID: -3822866027384753344}
+  - component: {fileID: 8271735563622068179}
   m_Layer: 9
   m_Name: RangedEnemyPrefab
   m_TagString: Enemy
@@ -457,6 +458,7 @@ MonoBehaviour:
   animator: {fileID: 1695502807779455699}
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   attackPoint: {fileID: 1695502807786446139}
+  firePoint: {fileID: 1695502807786446139}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -497,7 +499,7 @@ NavMeshAgent:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695502807786733843}
   m_Enabled: 1
-  m_AgentTypeID: 1479372276
+  m_AgentTypeID: -1372625422
   m_Radius: 0.5
   m_Speed: 2
   m_Acceleration: 8
@@ -553,6 +555,23 @@ MonoBehaviour:
   - {fileID: 0}
   combo:
   - {fileID: 11400000, guid: 6e58b412dc14772489fa6782df410a3d, type: 2}
+  enemyShoot: {fileID: 8271735563622068179}
+--- !u!114 &8271735563622068179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1695502807786733843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e20b9879d785eae48b586967f650e2d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 7824386720229001689, guid: f4412359859c9eb448f87477f99094b3, type: 3}
+  bulletPos: {fileID: 1695502807786446139}
+  timer: 0
+  cooldownTime: 2
 --- !u!1 &1695502807786733845
 GameObject:
   m_ObjectHideFlags: 0

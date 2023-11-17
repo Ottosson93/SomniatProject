@@ -6,15 +6,15 @@ public class RangedEnemyBT : Tree
 {
     public UnityEngine.Transform[] waypoints;
     public List<AttackSO> combo;
-
+    public RangedEnemyShoot enemyShoot;
 
     public static float speed = 2f;
     public static float targetedSpeed = 4f;
-    public static float fovRange = 7f;
-    public static float distance = 9f;
-    public static float attackRange = 2f;
+    public static float fovRange = 10f;
+    public static float distance = 10f;
+    public static float attackRange = 10f;
     public static float rotationSpeed = 3f;
-    public static float attackDamage = 0.10f;
+    public static float attackDamage = 2f;
     public static bool canAttack = true;
 
     public static float lastClickedTime;
@@ -31,7 +31,7 @@ public class RangedEnemyBT : Tree
             new Sequence(new List<Node>
             {
                 new RangedCheckEnemyInRange(transform, combo),
-                new TaskMeleeAttack(transform, combo), /* Ranged task attack goes here*/
+                new RangedTaskRangedAttack(transform, enemyShoot), /* Ranged task attack goes here*/
             }),
 
             new Sequence(new List<Node>
@@ -39,7 +39,7 @@ public class RangedEnemyBT : Tree
                 new RangedCheckEnemyInFOVRange(transform),
                 new RangedTaskGoToTarget(transform),
             }),
-            //new TaskPatrol(transform, waypoints),
+            new TaskPatrol(transform, waypoints),
         });
 
         return root;
