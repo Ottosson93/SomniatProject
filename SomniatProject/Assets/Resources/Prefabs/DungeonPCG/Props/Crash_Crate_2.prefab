@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8972346622805641525}
   - component: {fileID: 4262418605540733613}
   - component: {fileID: 1147476833384679800}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: Crash_Crate_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

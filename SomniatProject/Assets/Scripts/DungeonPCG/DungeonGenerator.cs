@@ -59,8 +59,8 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> listOfAllEnemies = new List<GameObject>();
 
 
-    Collider[] colliders = new Collider[5];
-    int intersecting = 0;
+    Collider[] enemyColliders = new Collider[5];
+    int overlapCount = 0;
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
 
@@ -338,7 +338,6 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
-    //??
     public void PlaceStartingRoomInCenter()
     {
         Vector2 origo = new Vector2(0,0);
@@ -377,6 +376,8 @@ public class DungeonGenerator : MonoBehaviour
 
         finishedNodes.Remove(mostCenteredRoom);
     }
+
+    //Ska denna bort Arvid?
     bool CheckSize(RNode n)
     {
         if (n.width < minRoomSize && n.height < minRoomSize)
@@ -731,6 +732,8 @@ public class DungeonGenerator : MonoBehaviour
     private void DeclareRoomType(RNode n)
     {
         Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
+
+        //Ändra center till n.center
         distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
         //Debug.Log(n.id + " " + distFromCenter);
         if (distFromCenter <= 100)
@@ -798,24 +801,24 @@ public class DungeonGenerator : MonoBehaviour
             //Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
             //Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
 
-            intersecting = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, enemyColliders);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
-            if (intersecting <= 2)
+            if (overlapCount <= 2)
             {
                 Instantiate(props[1], new Vector3(center.x + objOffset.x, props[1].transform.position.y, center.z + objOffset.z), Quaternion.identity);
             }
-            else if (intersecting > 2)
+            else if (overlapCount > 2)
             {
-                while (intersecting > 2)
+                while (overlapCount > 2)
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                    intersecting = Physics.OverlapSphereNonAlloc(center + newObjOffset, 2f, colliders);
+                    overlapCount = Physics.OverlapSphereNonAlloc(center + newObjOffset, 2f, enemyColliders);
 
-                    if (intersecting <= 2)
+                    if (overlapCount <= 2)
                     {
-                        Instantiate(props[1], new Vector3(center.x + newObjOffset.x, props[1].transform.position.y, center.z + newObjOffset.z), Quaternion.identity);
+                        Instantiate(props[2], new Vector3(center.x + newObjOffset.x, props[1].transform.position.y, center.z + newObjOffset.z), Quaternion.identity);
                         break;
                     }
                 }
@@ -852,21 +855,21 @@ public class DungeonGenerator : MonoBehaviour
 
             Vector3 gruntBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
             //Debug.Log("Bounding box for enemy: " + gruntBounds);
-            int intersecting = Physics.OverlapBoxNonAlloc(center + enemyOffset, gruntBounds / 2, colliders);
+            int overlapCount = Physics.OverlapBoxNonAlloc(center + enemyOffset, gruntBounds / 2, enemyColliders);
 
-            if (intersecting <= 2)
+            if (overlapCount <= 2)
             {
                 Instantiate(listOfAllEnemies[i], center + enemyOffset, Quaternion.identity);
             }
-            else if (intersecting > 2)
+            else if (overlapCount > 2)
             {
-                while (intersecting > 2)
+                while (overlapCount > 2)
                 {
                     Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                    intersecting = Physics.OverlapSphereNonAlloc(center + newEnemyOffset, 2f, colliders);
+                    overlapCount = Physics.OverlapSphereNonAlloc(center + newEnemyOffset, 2f, enemyColliders);
 
-                    if (intersecting <= 2)
+                    if (overlapCount <= 2)
                     {
                         Instantiate(listOfAllEnemies[i], center + newEnemyOffset, Quaternion.identity);
                         break;

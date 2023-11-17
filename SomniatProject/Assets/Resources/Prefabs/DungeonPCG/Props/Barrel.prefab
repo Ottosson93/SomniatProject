@@ -135,11 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc7655bf0239ad345a780592ea7e7a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLayer:
+  targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1664
   currentHealth: 0
   health: 5
-  damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   SpellToCast: {fileID: 11400000, guid: cb00f20852dea4b4288bfd5a03b6606e, type: 2}
   explosionEffect: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
+  explosionColliders: []
