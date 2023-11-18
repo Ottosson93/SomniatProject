@@ -1,5 +1,7 @@
+using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Collections;
 
 public class Chest : MonoBehaviour
 {
@@ -53,7 +55,7 @@ public class Chest : MonoBehaviour
 
     private bool InRangeOfPlayer()
     {
-        return (PlayerPosition() - transform.position).magnitude <= 3f;
+        return (PlayerPosition() - transform.position).magnitude <= 4f;
     }
 
     private Vector3 PlayerPosition()
@@ -75,14 +77,23 @@ public class Chest : MonoBehaviour
                 targetRotation = initialRotation * Quaternion.Euler(rotationAngle, 0, 0);
                 if (itemDropSystem != null)
                 {
-                    Vector3 chestOffset = new Vector3(Random.Range(1f,4f), 0f, Random.Range(1f,4f));
-                    itemDropSystem.HandleChestOpen(transform.position + chestOffset);
+                    StartCoroutine(DelayedItemDrops(0.5f));
                 }
 
                 isOpen = true;
             }
         }
     }
+
+    private IEnumerator DelayedItemDrops(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        Vector3 chestOffset = new Vector3(UnityEngine.Random.Range(1f, 3f), 0f, UnityEngine.Random.Range(1f, 3f));
+        itemDropSystem.HandleChestOpen(transform.position + chestOffset);
+    }
+
+
     private void ChangeKeyOpacity(Color targetColor)
     {
         displayKey = true;

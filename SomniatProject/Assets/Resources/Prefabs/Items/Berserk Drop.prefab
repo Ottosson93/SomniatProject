@@ -9622,7 +9622,7 @@ GameObject:
   - component: {fileID: 95000014012712158}
   m_Layer: 0
   m_Name: bottle_green
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9728,7 +9728,7 @@ GameObject:
   - component: {fileID: 4958364925017103529}
   m_Layer: 0
   m_Name: Berserk Drop
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9809,7 +9809,7 @@ GameObject:
   - component: {fileID: 4000012602005092}
   m_Layer: 0
   m_Name: bottle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

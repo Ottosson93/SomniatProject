@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 95000010596400782}
   m_Layer: 0
   m_Name: bottle_blue
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 4000012798377608}
   m_Layer: 0
   m_Name: bottle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4956,7 +4956,7 @@ GameObject:
   - component: {fileID: 7059774201376755885}
   m_Layer: 0
   m_Name: Piercing Arrow Drop
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

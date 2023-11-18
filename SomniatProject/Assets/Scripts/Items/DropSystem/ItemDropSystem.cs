@@ -166,6 +166,19 @@ public class ItemDropSystem : MonoBehaviour
 
     }
 
+    public void HandleBoxDrop(Vector3 dropLocation)
+    {
+        int numberOfCoinsToDrop = Random.Range(0, 3);
+
+        for(int i = 0;i < numberOfCoinsToDrop;i++)
+        {
+            string coinToDrop = Random.Range(0, 2) == 0 ? "1 coin" : "2 coins";
+
+            Debug.Log("Dropped coin: " + coinToDrop);
+            HandleDroppedItem(coinToDrop, dropLocation);
+        }
+    }
+
 
     string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop, List<string> usedCategories)
     {

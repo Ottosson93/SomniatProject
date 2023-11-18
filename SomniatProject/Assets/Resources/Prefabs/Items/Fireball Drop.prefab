@@ -4815,7 +4815,7 @@ GameObject:
   - component: {fileID: 4000013521377066}
   m_Layer: 0
   m_Name: bottle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4850,7 +4850,7 @@ GameObject:
   - component: {fileID: 95000013129880336}
   m_Layer: 0
   m_Name: bottle_red
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9760,7 +9760,7 @@ GameObject:
   - component: {fileID: 6648288911443777822}
   m_Layer: 0
   m_Name: Fireball Drop
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
