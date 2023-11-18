@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3797104187358167367}
   - component: {fileID: -8461689173835582032}
-  - component: {fileID: 8957342532645829268}
   - component: {fileID: -6416044986772579779}
   - component: {fileID: -9208773246583458515}
   m_Layer: 0
@@ -54,27 +53,6 @@ MonoBehaviour:
   rotationSpeed: 5
   chestTop: {fileID: 8653685417294817878}
   itemDropSystem: {fileID: -6416044986772579779}
---- !u!95 &8957342532645829268
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3149164065580326566}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e3699f9df42244c36acd77ae47b69a7c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &-6416044986772579779
 MonoBehaviour:
   m_ObjectHideFlags: 0

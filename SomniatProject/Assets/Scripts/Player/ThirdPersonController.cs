@@ -88,7 +88,6 @@ namespace StarterAssets
         public float attackRange = 0.5f;
         public LayerMask enemyLayers;
 
-
         public float attackRate = 4f;
 
         //-------------
@@ -212,6 +211,7 @@ namespace StarterAssets
 
             ExitAttack();
         }
+
 
         private void LateUpdate()
         {
@@ -545,7 +545,6 @@ namespace StarterAssets
 
         private void Attack()
         {
-
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
 
             hud_melee_script.Run();

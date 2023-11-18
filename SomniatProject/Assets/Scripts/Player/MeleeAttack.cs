@@ -14,6 +14,7 @@ public class MeleeAttack : MonoBehaviour
     private int comboCount = 0;
     private InputAction attackAction;
     private float comboTimer;
+    public ParticleSystem swordSlashParticles;
 
     private void Awake()
     {
@@ -61,10 +62,30 @@ public class MeleeAttack : MonoBehaviour
 
             comboTimer = 0.0f;
 
-
+            ActivateSwordSlashParticles();
+        }
+        else
+        {
+            DeactivateSwordSlashParticles();
         }
 
 
+    }
+
+    private void DeactivateSwordSlashParticles()
+    {
+        if (swordSlashParticles != null)
+        {
+            swordSlashParticles.Stop();
+        }
+    }
+
+    private void ActivateSwordSlashParticles()
+    {
+        if (swordSlashParticles != null)
+        {
+            swordSlashParticles.Play();
+        }
     }
 
     private int CalculateAnimationIndex()

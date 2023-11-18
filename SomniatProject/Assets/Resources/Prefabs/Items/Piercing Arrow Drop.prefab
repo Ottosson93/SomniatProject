@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 95000010596400782}
   m_Layer: 0
   m_Name: bottle_blue
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4921,7 +4921,7 @@ GameObject:
   - component: {fileID: 4000012798377608}
   m_Layer: 0
   m_Name: bottle
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4953,9 +4953,10 @@ GameObject:
   - component: {fileID: 4000011650569256}
   - component: {fileID: -7150257794995306058}
   - component: {fileID: -1129278671553252736}
+  - component: {fileID: 7059774201376755885}
   m_Layer: 0
   m_Name: Piercing Arrow Drop
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4969,7 +4970,7 @@ Transform:
   m_GameObject: {fileID: 1000013317980782}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.51, y: 0, z: 0}
+  m_LocalPosition: {x: 0.51, y: 0.432, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5003,7 +5004,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1d0eb3da23422f408ca51cfd8183c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickUpRange: 5
+  pickUpRange: 1.5
+--- !u!135 &7059774201376755885
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000013317980782}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1000013970829164
 GameObject:
   m_ObjectHideFlags: 0

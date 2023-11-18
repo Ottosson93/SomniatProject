@@ -11,6 +11,7 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Item
   layers:
   - Default
   - TransparentFX
