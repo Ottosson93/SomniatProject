@@ -68,11 +68,8 @@ public class BossTaskMeleeAttack : Node
             {
                 player.TakeDamage(GuardMeleeBT.attackDamage);
             }
-
-            
-            
+    
             animator.SetBool("Walk", false);
-            BossBT.attackCounter = 0;
         }
 
             

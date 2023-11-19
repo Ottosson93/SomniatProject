@@ -12,17 +12,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: RockMesh
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalPosition.x
@@ -114,8 +118,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1.1932504
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.15
+  m_Center: {x: -0.09, y: -0.02, z: 0}
 --- !u!54 &3668905383003527261
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -155,4 +159,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc4af72349995d4487e362adcb1962c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: 522fec80c953c3244962a97c542c84cb, type: 2}
+  SpellToCast: {fileID: 11400000, guid: cb00f20852dea4b4288bfd5a03b6606e, type: 2}

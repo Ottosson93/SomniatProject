@@ -34,7 +34,7 @@ public class BossCheckEnemyInAttackRange : Node
 
         Transform target = (Transform)t;
 
-        if (Vector3.Distance(transform.position, target.position) <= BossBT.attackRange && BossBT.canAttack)
+        if (Vector3.Distance(transform.position, target.position) <= BossBT.attackRange)
         {
             if (Time.time - BossBT.lastClickedTime > 2.5f && BossBT.comboCounter <= combo.Count)
             {
@@ -60,6 +60,8 @@ public class BossCheckEnemyInAttackRange : Node
 
 
         }
+
+        BossBT.comboCounter = 0;
 
         state = NodeState.FAILURE;
         return state;
