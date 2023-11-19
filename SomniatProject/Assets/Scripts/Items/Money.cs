@@ -7,6 +7,7 @@ public class Money : MonoBehaviour
 {
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
+    [SerializeField] private ShopManagerScript shop;
 
     private void Awake()
     {
@@ -15,13 +16,18 @@ public class Money : MonoBehaviour
 
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
+
+        if (shop == null)
+        {
+            Debug.LogError("ShopManagerScript not assigned in the Inspector!");
+        }
     }
-        private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if(other.CompareTag("Player") && shop != null)
         {
             int coinValue = ExtractCoinValue(gameObject.name);
-            //Shop.HandleMoneyInput or something
+            shop.AddCoins(coinValue);
             Destroy(gameObject);
         }
     }
