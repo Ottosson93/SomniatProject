@@ -46,10 +46,9 @@ public class Bullet : MonoBehaviour
             other.GetComponent<Player>().TakeDamage(damage);
         else if (targetTag == "Enemy")
             other.GetComponent<Enemy>().TakeDamage(damage);
-
-        if (other.gameObject.layer == LayerMask.NameToLayer("DestructibleObject"))
+        else if (targetTag == "DestructibleObject")
             other.GetComponent<ExplosiveObject>().TakeDamage(damage);
-        else if (other.gameObject.layer == LayerMask.NameToLayer("Obstacle"))
+        else if (targetTag == "Obstacle")
             Destroy(gameObject);
 
 

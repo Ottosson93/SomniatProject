@@ -11,6 +11,8 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Wall
+  - DestructibleObject
   layers:
   - Default
   - TransparentFX
