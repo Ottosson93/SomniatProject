@@ -118,29 +118,29 @@ public class Spell : MonoBehaviour
             }
 
 
-            if (SpellToCast.name.Equals("Boulder"))
-            {
-                player = other.GetComponent<Player>();
-
-                if (player != null)
-                {
-                    BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
-                    if (burnEffect == null)
-                    {
-                        burnEffect = player.gameObject.AddComponent<BurnEffect>();
-                    }
-                }
-                BossDealDamageInRadius();
-                CreateExplosionEffect();
-            }
+            
 
             
 
         }
 
-          
+        if (SpellToCast.name.Equals("Boulder"))
+        {
+            player = other.GetComponent<Player>();
 
-        
+            if (player != null)
+            {
+                BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
+                {
+                    burnEffect = player.gameObject.AddComponent<BurnEffect>();
+                }
+            }
+            BossDealDamageInRadius();
+            CreateExplosionEffect();
+        }
+
+
     }
 
     private void PlayLightningImpactAtEnemyPosition(Vector3 position)
