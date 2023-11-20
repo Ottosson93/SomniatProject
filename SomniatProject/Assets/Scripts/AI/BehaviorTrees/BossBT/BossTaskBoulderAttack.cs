@@ -22,6 +22,7 @@ public class BossTaskBoulderAttack : Node
         this.castPos = castPos;
         animator = transform.GetComponent<Animator>();
         spell = transform.GetComponent<SpellAttackSystem>();
+        agent = transform.GetComponent<NavMeshAgent>();
     }
 
 
@@ -35,11 +36,32 @@ public class BossTaskBoulderAttack : Node
             lastTarget = target;
         }
 
+       
+            
+
+        if (Time.time - BossBT.lastClickedTime > 2.5f )
+        {
+            if (Time.time - BossBT.lastClickedTime >= 2f)
+            {
+
+                animator.SetBool("Walk", false);
+
+                BossBT.comboCounter = BossBT.comboCounter + 1;
+                BossBT.lastClickedTime = Time.time;
+
+                spell.AICastSpell(spells[0], castPos.transform, player.transform);
 
 
-        spell.AICastSpell(spells[0], castPos.transform, player.transform);
+                agent.speed = 0f;
 
 
+            }
+
+        }
+
+
+
+        animator.SetBool("Walk", true);
 
 
 
@@ -48,13 +70,10 @@ public class BossTaskBoulderAttack : Node
         if (player.lucidity <= 0f)
         {
             ClearData("target");
-            animator.SetBool("Walk", true);
+            state = NodeState.FAILURE;
+            return state;
         }
-        else
-        {
-            animator.SetBool("Walk", false);
-
-        }
+        
 
 
 

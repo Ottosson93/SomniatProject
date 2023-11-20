@@ -55,7 +55,7 @@ public class Spell : MonoBehaviour
 
     private void Update()
     {
-        if (SpellToCast.Speed > 0 && (SpellToCast.name.Equals("Piercing Arrow") || SpellToCast.name.Equals("Fireball")))
+        if (SpellToCast.Speed > 0 && (SpellToCast.name.Equals("Piercing Arrow") || SpellToCast.name.Equals("Fireball")) || SpellToCast.name.Equals("Boulder"))
         {
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
             if (SpellToCast.name.Equals("Piercing Arrow"))
@@ -78,6 +78,7 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
@@ -111,7 +112,35 @@ public class Spell : MonoBehaviour
                 }
             }
 
+            if (other.gameObject.CompareTag("Enemy") && transform.gameObject.CompareTag("Boulder"))
+            {
+                Physics.IgnoreCollision(myCollider, enemy.GetComponent<Collider>());
+            }
+
+
+            if (SpellToCast.name.Equals("Boulder"))
+            {
+                player = other.GetComponent<Player>();
+
+                if (player != null)
+                {
+                    BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
+                    if (burnEffect == null)
+                    {
+                        burnEffect = player.gameObject.AddComponent<BurnEffect>();
+                    }
+                }
+                BossDealDamageInRadius();
+                CreateExplosionEffect();
+            }
+
+            
+
         }
+
+          
+
+        
     }
 
     private void PlayLightningImpactAtEnemyPosition(Vector3 position)
@@ -213,6 +242,31 @@ public class Spell : MonoBehaviour
 
         Destroy(this.gameObject);
     }
+
+    private void BossDealDamageInRadius()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius * 2);
+
+        foreach (Collider hitCollider in hitColliders)
+        {
+            player = hitCollider.GetComponent<Player>();
+            if (player != null)
+            {
+                player.TakeDamage(SpellToCast.DamageAmount);
+
+                BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
+                {
+                    burnEffect = hitCollider.gameObject.AddComponent<BurnEffect>();
+                }
+
+                burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
+            }
+        }
+
+        Destroy(this.gameObject);
+    }
+
 
     private void CreateExplosionEffect()
     {
