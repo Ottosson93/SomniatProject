@@ -24,6 +24,9 @@ public class BossCheckEnemyInAttackRange : Node
 
     public override NodeState Evaluate()
     {
+        
+
+
         object t = GetData("target");
 
         if (t == null)
@@ -36,6 +39,8 @@ public class BossCheckEnemyInAttackRange : Node
 
         if (Vector3.Distance(transform.position, target.position) <= BossBT.attackRange)
         {
+            
+
             if (Time.time - BossBT.lastClickedTime > 2.5f && BossBT.comboCounter <= combo.Count)
             {
                 if (Time.time - BossBT.lastClickedTime >= 2f)

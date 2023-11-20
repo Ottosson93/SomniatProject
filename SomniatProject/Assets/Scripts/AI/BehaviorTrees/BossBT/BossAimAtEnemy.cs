@@ -24,6 +24,9 @@ public class BossAimAtEnemy : Node
 
     public override NodeState Evaluate()
     {
+
+
+
         Transform target = (Transform)GetData("target");
 
         // Calculate the direction to the waypoint
@@ -41,10 +44,13 @@ public class BossAimAtEnemy : Node
         {
             float currentTime = Time.deltaTime - followStartTime;
 
+            
+
 
 
             if (Vector3.Distance(transform.position, target.position) > 20f || currentTime > maxFollowTime)
             {
+                
                 animator.SetBool("Walk", false);
                 agent.speed = BossBT.speed;
                 ClearData("target");

@@ -23,6 +23,9 @@ public class BossTaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
+        
+
+
         Transform target = (Transform)GetData("target");
 
         // Calculate the direction to the waypoint

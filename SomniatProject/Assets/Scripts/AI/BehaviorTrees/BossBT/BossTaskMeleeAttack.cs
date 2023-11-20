@@ -25,6 +25,8 @@ public class BossTaskMeleeAttack : Node
 
     public override NodeState Evaluate()
     {
+        
+
         Transform target = (Transform)GetData("target");
         if (target != lastTarget)
         {
@@ -57,6 +59,7 @@ public class BossTaskMeleeAttack : Node
 
         if (player.lucidity <= 0f)
         {
+            
             ClearData("target");
             animator.SetBool("Walk", true);
         }

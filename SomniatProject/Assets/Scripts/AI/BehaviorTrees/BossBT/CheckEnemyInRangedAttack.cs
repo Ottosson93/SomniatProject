@@ -22,6 +22,8 @@ public class CheckEnemyInRangedAttack : Node
     public override NodeState Evaluate()
     {
 
+        
+
         object t = GetData("target");
 
         if (t == null)

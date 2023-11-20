@@ -12,6 +12,7 @@ TagManager:
   - OnDeathMenu
   - BossRoom
   - Item
+  - BossSpell
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - Spell
   - Enemy
-  - 
+  - BossSpell
   - 
   - 
   - 

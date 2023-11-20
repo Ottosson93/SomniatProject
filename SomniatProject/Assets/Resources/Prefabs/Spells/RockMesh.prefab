@@ -14,7 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
+      propertyPath: m_TagString
+      value: BossSpell
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalScale.x
@@ -159,4 +163,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc4af72349995d4487e362adcb1962c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: cb00f20852dea4b4288bfd5a03b6606e, type: 2}
+  SpellToCast: {fileID: 11400000, guid: 522fec80c953c3244962a97c542c84cb, type: 2}
