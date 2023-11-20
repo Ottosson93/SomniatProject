@@ -11,6 +11,8 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Wall
+  - DestructibleObject
   - Item
   layers:
   - Default
@@ -23,7 +25,7 @@ TagManager:
   - Player
   - Spell
   - Enemy
-  - 
+  - DestructibleObject
   - 
   - 
   - 

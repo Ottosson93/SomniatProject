@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  DamageAmount: 100
+  DamageAmount: 5
   DamagePerTick: 5
   LucidityCost: 1
   Lifetime: 2
