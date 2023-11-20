@@ -24,6 +24,7 @@ public class SpellScriptableObject : ScriptableObject
     public ParticleSystem LightningStun;
     public ParticleSystem BurnParticleSystem;
     public ParticleSystem BerserkParticleSystem;
+    public Sprite SpellIcon;
 
     [Header("Durations")]
     public float ExplosionDuration = 2f;

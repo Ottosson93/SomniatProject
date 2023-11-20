@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Globalization;
+using System.Collections;
 
 public class ItemDropSystem : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ItemDropSystem : MonoBehaviour
 
     private List<ItemDropInfo> itemDrops = new List<ItemDropInfo>();
     private List<string> usedCategories = new List<string>();
+
+    private int numberOfItemsToDrop;
 
     [System.Serializable]
     public class ItemDropInfo
@@ -106,9 +109,8 @@ public class ItemDropSystem : MonoBehaviour
 
     public void HandleEnemyDeath(Vector3 enemyPosition)
     {
-        int numberOfItemsToDrop = Random.Range(1, 4);
+        numberOfItemsToDrop = Random.Range(1, 4);
 
-        // Create a local copy of usedCategories for this drop instance
         List<string> localUsedCategories = new List<string>(usedCategories);
 
         for (int i = 0; i < numberOfItemsToDrop; i++)
@@ -128,7 +130,54 @@ public class ItemDropSystem : MonoBehaviour
         localUsedCategories.Clear();
     }
 
+    public void HandleChestOpen(Vector3 chestPosition)
+    {
+        if(this.gameObject.name == "ChestGreen")
+        {
+            numberOfItemsToDrop = Random.Range(0, 3);
+        }
+        else if(this.gameObject.name == "ChestYellow")
+        {
+            numberOfItemsToDrop = Random.Range(1, 4);
+        }
+        else if(this.gameObject.name == "ChestRed")
+        {
+            numberOfItemsToDrop = Random.Range(2, 5);
+        }
 
+        List<string> localUsedCategories = new List<string>(usedCategories);
+
+        for (int i = 0; i < numberOfItemsToDrop; i++)
+        {
+            string itemToDrop = DetermineItemToDrop(itemDrops, isChestDrop: false, localUsedCategories);
+
+            if (itemToDrop != null)
+            {
+                Debug.Log("Dropped item: " + itemToDrop);
+                HandleDroppedItem(itemToDrop, chestPosition);
+                localUsedCategories.Add(itemToDrop);
+            }
+        }
+        Debug.Log("Number of items to drop: " + numberOfItemsToDrop);
+        usedCategories.AddRange(localUsedCategories);
+
+        localUsedCategories.Clear();
+
+
+    }
+
+    public void HandleBoxDrop(Vector3 dropLocation)
+    {
+        int numberOfCoinsToDrop = Random.Range(0, 3);
+
+        for(int i = 0;i < numberOfCoinsToDrop;i++)
+        {
+            string coinToDrop = Random.Range(0, 2) == 0 ? "1 coin" : "2 coins";
+
+            Debug.Log("Dropped coin: " + coinToDrop);
+            HandleDroppedItem(coinToDrop, dropLocation);
+        }
+    }
 
 
     string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop, List<string> usedCategories)
@@ -138,7 +187,7 @@ public class ItemDropSystem : MonoBehaviour
 
         List<ItemDropInfo> validDrops = itemDrops
             .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
-            .Where(drop => !usedCategories.Contains(drop.category))
+            .Where(drop => !usedCategories.Contains(drop.category) || drop.category == "Money")
             .ToList();
 
         if (validDrops.Count == 0)
@@ -185,7 +234,8 @@ public class ItemDropSystem : MonoBehaviour
             Rigidbody rigidbody = instantiatedItem.GetComponent<Rigidbody>();
             if (rigidbody != null)
             {
-                rigidbody.isKinematic = true;
+                rigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+                rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 rigidbody.velocity = Vector3.zero;
             }
 
@@ -193,11 +243,19 @@ public class ItemDropSystem : MonoBehaviour
             Destroy(instantiatedItem, destroyTimer);
 
             Debug.Log("Dropped item: " + instantiatedItem.name + " at position: " + adjustedDropLocation);
+
+            if (instantiatedItem.GetComponent<Collider>() != null)
+            {
+                Debug.Log("Item collider bounds: " + instantiatedItem.GetComponent<Collider>().bounds);
+            }
+            else
+            {
+                Debug.LogWarning("Item has no collider.");
+            }
         }
         else
         {
             Debug.LogWarning("Item prefab not found for: " + itemToDrop);
         }
     }
-
 }

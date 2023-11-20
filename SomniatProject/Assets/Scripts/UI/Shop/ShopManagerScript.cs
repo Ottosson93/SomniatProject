@@ -49,6 +49,13 @@ public class ShopManagerScript : MonoBehaviour
         CheckPurchasable();
     }
 
+    public void AddCoins(int coins)
+    {
+        currencyAmount += coins;
+        currencyTxt.text = "Currency: " + currencyAmount.ToString();
+        CheckPurchasable();
+    }
+
     public void LoadPanels()
     {
         for (int i = 0; i < relicItemsSO.Length; i++)
