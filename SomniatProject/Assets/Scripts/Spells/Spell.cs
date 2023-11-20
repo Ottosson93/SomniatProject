@@ -8,7 +8,7 @@ using UnityEngine.Assertions.Must;
 public class Spell : MonoBehaviour
 {
     public SpellScriptableObject SpellToCast;
-
+    private Collider[] spellColliders = new Collider[5];
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
 
@@ -16,7 +16,7 @@ public class Spell : MonoBehaviour
 
     private Player player;
     private bool berserkApplied;
-
+    
     private ParticleSystem berserkParticles;
 
     private Vector3 playerPos;
@@ -78,7 +78,8 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !SpellToCast.name.Equals("Boulder") || other.gameObject.CompareTag("Weapon") )
+
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
         }
@@ -198,7 +199,7 @@ public class Spell : MonoBehaviour
 
     private void DealDamageInRadius()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*2);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*6);
 
         foreach (Collider hitCollider in hitColliders)
         {
@@ -216,6 +217,28 @@ public class Spell : MonoBehaviour
                 burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
             }
         }
+
+        //int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 2, spellColliders);
+
+        //if (overlapCount > 0)
+        //{
+        //    for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
+        //    {
+        //        Enemy enemy = GetComponent<Enemy>();
+        //        if (enemy != null)
+        //        {
+        //            enemy.TakeDamage(SpellToCast.DamageAmount);
+
+        //            BurnEffect burnEffect = gameObject.GetComponent<BurnEffect>();
+        //            if (burnEffect == null)
+        //            {
+        //                burnEffect = gameObject.AddComponent<BurnEffect>();
+        //            }
+
+        //            burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
+        //        }
+        //    }
+        //}
 
         Destroy(this.gameObject);
     }
