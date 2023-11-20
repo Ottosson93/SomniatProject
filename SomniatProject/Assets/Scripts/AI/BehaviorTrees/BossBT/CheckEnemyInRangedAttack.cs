@@ -1,17 +1,22 @@
-using BehaviorTree;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
-public class BossCheckEnemyInFOVRange : Node
+using UnityEngine.AI;
+using BehaviorTree;
+public class CheckEnemyInRangedAttack : Node
 {
-
     private Transform transform;
     private Animator animator;
+    private NavMeshAgent agent;
 
 
-    public BossCheckEnemyInFOVRange(Transform transform)
+
+    public CheckEnemyInRangedAttack(Transform transform)
     {
         this.transform = transform;
-        this.animator = transform.GetComponent<Animator>();
+        animator = transform.GetComponent<Animator>();
+        agent = transform.GetComponent<NavMeshAgent>();
+
     }
 
     public override NodeState Evaluate()
@@ -23,34 +28,32 @@ public class BossCheckEnemyInFOVRange : Node
 
         if (t == null)
         {
+            Collider[] colliders = Physics.OverlapSphere(transform.position, 12f);
+
 
             
-
-            Collider[] colliders = Physics.OverlapSphere(transform.position, BossBT.fovRange);
-
             foreach (Collider collider in colliders)
             {
-
-                animator.SetLayerWeight(1, 1);
 
                 // Check if the collider's game object is the player
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+
                     state = NodeState.SUCCESS;
                     return state;
                 }
-                
-                
+
+
             }
+
 
             
 
-            state = NodeState.FAILURE;
-            return state;
+            
         }
-
-            state = NodeState.SUCCESS;
+        state = NodeState.FAILURE;
         return state;
+
     }
 }

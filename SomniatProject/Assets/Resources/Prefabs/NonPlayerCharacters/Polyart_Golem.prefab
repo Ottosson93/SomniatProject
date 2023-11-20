@@ -201,6 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831724753}
+  - component: {fileID: 3233928767618342781}
   m_Layer: 9
   m_Name: Head
   m_TagString: Untagged
@@ -225,6 +226,19 @@ Transform:
   - {fileID: 5841089883432334600}
   m_Father: {fileID: 1565357287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3233928767618342781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831724752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3922cc832c9ccd94aa9c69a959107b4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childObject: {fileID: 5841089883432334600}
 --- !u!1 &834585473
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,15 +440,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7113c1e93d23d8d4e9059340d8ea3ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDropSystem: {fileID: 0}
   animator: {fileID: 1077356409}
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   attackPoint: {fileID: 1659226135123455960}
+  firePoint: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
   health: 300
   current: 0
-  attackRange: 0.92
+  attackRange: 3.65
   dead: 0
 --- !u!114 &-9166232515405935649
 MonoBehaviour:
@@ -512,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd137009aa197b49a351e4a24a9c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 6265623028904570207, guid: 5fdebec7a2fbd2140acc26b930daba91, type: 3}
+  currentSpell: {fileID: 0}
   castPoint: {fileID: 5841089883432334600}
   timeBetweenCasts: 10
 --- !u!1 &1099011281
@@ -963,7 +979,7 @@ Transform:
   m_GameObject: {fileID: 8146902534621191831}
   serializedVersion: 2
   m_LocalRotation: {x: -0.25210536, y: -0.6606383, z: -0.25210536, w: 0.6606383}
-  m_LocalPosition: {x: -386, y: 48, z: 2}
+  m_LocalPosition: {x: -254, y: -61, z: 0}
   m_LocalScale: {x: 99.99997, y: 100, z: 99.99998}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -994,7 +1010,7 @@ Transform:
   m_GameObject: {fileID: 8856772665034678073}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6387508, y: -0.64281785, z: 0.0058650514, w: 0.4227863}
-  m_LocalPosition: {x: -43.660324, y: -11.254469, z: 7.648627}
+  m_LocalPosition: {x: 34, y: -196, z: -85}
   m_LocalScale: {x: 99.99998, y: 99.99998, z: 99.99998}
   m_ConstrainProportionsScale: 0
   m_Children: []

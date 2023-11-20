@@ -96,7 +96,7 @@ public class SpellAttackSystem : MonoBehaviour
         direction.y = 0;
         castPoint.forward = direction;
 
-        Instantiate(spell, castPoint.position, castPoint.rotation);
 
+        Instantiate(spell, castPoint.position, castPoint.rotation);
     }
 }

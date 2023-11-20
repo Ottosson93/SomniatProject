@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using BehaviorTree;
-public class BossTaskGoToTarget : Node
+
+public class BossAimAtEnemy : Node
 {
     private Transform transform;
     private Animator animator;
@@ -14,7 +15,7 @@ public class BossTaskGoToTarget : Node
 
 
 
-    public BossTaskGoToTarget(Transform transform)
+    public BossAimAtEnemy(Transform transform)
     {
         this.transform = transform;
         animator = transform.GetComponent<Animator>();
@@ -23,7 +24,7 @@ public class BossTaskGoToTarget : Node
 
     public override NodeState Evaluate()
     {
-        
+
 
 
         Transform target = (Transform)GetData("target");
@@ -39,18 +40,17 @@ public class BossTaskGoToTarget : Node
 
 
 
-        if (Vector3.Distance(transform.position, target.position) > BossBT.attackRange)
+        if (Vector3.Distance(transform.position, target.position) > 20f)
         {
-            agent.SetDestination(target.position);
-
-
             float currentTime = Time.deltaTime - followStartTime;
-            agent.speed = GuardMeleeBT.targetedSpeed;
 
-            animator.SetBool("Walk", true);
+            
 
-            if (Vector3.Distance(transform.position, target.position) > BossBT.distance || currentTime > maxFollowTime)
+
+
+            if (Vector3.Distance(transform.position, target.position) > 20f || currentTime > maxFollowTime)
             {
+                
                 animator.SetBool("Walk", false);
                 agent.speed = BossBT.speed;
                 ClearData("target");
@@ -61,11 +61,14 @@ public class BossTaskGoToTarget : Node
 
         followStartTime += Time.deltaTime;
 
-
+        if(BossBT.bossSpellCounter >= 3)
+        {
+            state = NodeState.FAILURE;
+            return state;
+        } 
 
 
         state = NodeState.RUNNING;
         return state;
     }
 }
-
