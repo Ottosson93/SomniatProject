@@ -12,6 +12,8 @@ TagManager:
   - OnDeathMenu
   - BossRoom
   - Item
+  - Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -23,8 +25,8 @@ TagManager:
   - Player
   - Spell
   - Enemy
-  - 
-  - 
+  - Bullet
+  - EnemyBullet
   - 
   - 
   - 
