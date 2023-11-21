@@ -3,33 +3,19 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CinemachineTarget
-  - Enemy
-  - Weapon
-  - Shop
-  - UpgradeRoom
-  - OnDeathMenu
-  - BossRoom
-  - Mask
-  - Wall
-  - DestructibleObject
-  - Item
-  - BossSpell
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Floor
+  - 
   - Water
   - UI
-  - Obstacle
-  - Player
-  - Spell
-  - Enemy
-  - Lucid
-  - Awoken
-  - BossSpell
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

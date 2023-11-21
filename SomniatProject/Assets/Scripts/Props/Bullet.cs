@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+
 public class Bullet : MonoBehaviour
 {
+
     public enum Type
     {
         Player,
-        Enemy,
-        DestructibleObject,
-        Obstacle
+        Enemy
     };
-
     public Type type;
     private string targetTag;
     public int damage;
     // Start is called before the first frame update
-
     void Start()
     {
         switch (type)
@@ -27,12 +25,6 @@ public class Bullet : MonoBehaviour
                 break;
             case Type.Enemy:
                 targetTag = "Player";
-                break;
-            case Type.DestructibleObject:
-                targetTag = "DestructibleObject";
-                break;
-            case Type.Obstacle:
-                targetTag = "Obstacle";
                 break;
         }
     }
@@ -44,16 +36,11 @@ public class Bullet : MonoBehaviour
 
         if (targetTag == "Player")
             other.GetComponent<Player>().TakeDamage(damage);
-        else if (targetTag == "Enemy")
+        else
             other.GetComponent<Enemy>().TakeDamage(damage);
-        else if (targetTag == "DestructibleObject")
-            other.GetComponent<ExplosiveObject>().TakeDamage(damage);
-        else if (targetTag == "Obstacle")
-            Destroy(gameObject);
 
 
         gameObject.SetActive(false);
     }
-
 }
 
