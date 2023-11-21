@@ -7,7 +7,7 @@ using TMPro;
 
 public class ShopManagerScript : MonoBehaviour
 {
-    public static int currencyAmount;
+    public int currencyAmount;
     public TMP_Text currencyTxt;
 
     public RelicData[] relicItemsSO;
@@ -20,7 +20,7 @@ public class ShopManagerScript : MonoBehaviour
 
     public void Start()
     {
-
+       
         currencyTxt.text = "Currency: " + currencyAmount.ToString();
 
         LoadPanels();
@@ -54,13 +54,6 @@ public class ShopManagerScript : MonoBehaviour
         currencyAmount += coins;
         currencyTxt.text = "Currency: " + currencyAmount.ToString();
         CheckPurchasable();
-    }
-
-    public int ReturnCurrency(int currency)
-    {
-        currency = currencyAmount;
-        return currency;
-
     }
 
     public void LoadPanels()

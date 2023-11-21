@@ -13,24 +13,14 @@ MonoBehaviour:
   m_Name: Piercing Arrow
   m_EditorClassIdentifier: 
   DamageAmount: 2
-  DamagePerTick: 5
   LucidityCost: 1
   Lifetime: 5
   Speed: 15
-  SpellRadius: 1
+  SpellRadius: 0
   RotationSpeed: 100
-  FreeChargeAmount: 2
   ExplosionPrefab: {fileID: 0}
   LightningImpact: {fileID: 4033287822461114141, guid: a164e676dbbd6e54587237e619372c98, type: 3}
   LightningStun: {fileID: 6469354921825657977, guid: 4d9a3b35b3bc07649b697df7fb497b6d, type: 3}
   BurnParticleSystem: {fileID: 0}
-  BerserkParticleSystem: {fileID: 0}
-  SpellIcon: {fileID: 21300000, guid: c7983f142b364304a82bb8158574b413, type: 3}
   ExplosionDuration: 2
   StunDuration: 5
-  BurnDuration: 5
-  TickInterval: 0.75
-  DamageBoost: 0
-  AttackSpeedBoost: 0
-  MovementSpeedBoost: 0
-  ArmorReduction: 0
