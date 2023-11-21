@@ -19,13 +19,12 @@ MonoBehaviour:
   Speed: 15
   SpellRadius: 1
   RotationSpeed: 100
-  FreeChargeAmount: 2
   ExplosionPrefab: {fileID: 100000, guid: 15ca5b8fa431dc04291a79cadcd19874, type: 3}
   LightningImpact: {fileID: 0}
   LightningStun: {fileID: 0}
   BurnParticleSystem: {fileID: 7910603292438892066, guid: 43d1d06cf70fcb2488255051aaae40a5, type: 3}
   BerserkParticleSystem: {fileID: 0}
-  SpellIcon: {fileID: 21300000, guid: 8f8e130d3d0c9c247b78be9804308002, type: 3}
+  SpellIcon: {fileID: 21300000, guid: fb651b4e9385d1b4ab05eae3424dc1b3, type: 3}
   ExplosionDuration: 2
   StunDuration: 2
   BurnDuration: 5
