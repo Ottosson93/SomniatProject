@@ -11,6 +11,7 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Mask
   - Wall
   - DestructibleObject
   - Item
@@ -26,6 +27,8 @@ TagManager:
   - Player
   - Spell
   - Enemy
+  - Lucid
+  - Awoken
   - BossSpell
   - 
   - 

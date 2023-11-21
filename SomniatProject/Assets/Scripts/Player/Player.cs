@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     public float newSpeed;
 
     public ThirdPersonController controller;
-    private LuciditySlider luciditySlider;
+    public LucidityPostProcess lucidityPostProcess;
 
     public EmpoweredRelic empoweredRelic;
 
@@ -49,8 +49,6 @@ public class Player : MonoBehaviour
         lucidity = maxLucidity;
         controller.MoveSpeed = CalculateSpeed();
 
-        luciditySlider = GetComponent<LuciditySlider>();
-        luciditySlider.SetMaxLucidity(lucidity);
 
     }
 
@@ -123,8 +121,8 @@ public class Player : MonoBehaviour
     {
         float adjuster = lucidity / maxLucidity;
         maxLucidity = CalculateMaxLucity();
-        luciditySlider.SetMaxLucidity(maxLucidity);
         lucidity = adjuster * maxLucidity;
+        lucidityPostProcess.UpdateLucidityMask(lucidity);
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
 
     }
@@ -134,8 +132,8 @@ public class Player : MonoBehaviour
         lucidity -= (damage * damageReduction);
         lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
-        luciditySlider.SetLucidity(lucidity);
-
+        lucidityPostProcess.UpdateLucidityMask(lucidity);
+        
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
@@ -146,8 +144,8 @@ public class Player : MonoBehaviour
     {
         lucidity += amountHealed;
 
-        luciditySlider.SetLucidity(lucidity);
-
+        lucidityPostProcess.UpdateLucidityMask(lucidity);
+        
         if (lucidity > maxLucidity)
         {
             lucidity = maxLucidity;
