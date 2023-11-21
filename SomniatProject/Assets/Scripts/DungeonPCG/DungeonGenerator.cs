@@ -60,7 +60,6 @@ public class DungeonGenerator : MonoBehaviour
 
 
     Collider[] colliders = new Collider[5];
-    int overlapCount = 0;
     List<GameObject> interactableProps = new List<GameObject>();
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
@@ -801,14 +800,35 @@ public class DungeonGenerator : MonoBehaviour
         //may want to change it to spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < amountOfInteractableProps; i++)
         {
+            int overlapCount = 0;
+
             Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
+            int rndProp = Random.Range(0, interactableProps.Count);
+
             //Checks if the position is occupied, takes the size of the barrels boxcollider and checks if there's anything inside of it at the spawn position
-            //Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
-            //Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
+            //Vector3 propBounds = props[rndProp].transform.GetChild(0).gameObject.GetComponent<MeshCollider>().bounds.size;
+            Vector3 propBounds = props[rndProp].transform.gameObject.GetComponentsInChildren<Collider>().bounds.size;
+
+
+            //Collider[] intersecting = Physics.OverlapBox(center + objOffset, propBounds);
 
             overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
-            int rndProp = Random.Range(0, interactableProps.Count);
+
+            //if (propBounds.y < propBounds.z && propBounds.y < propBounds.x)
+            //{
+            //    overlapCount = Physics.OverlapBoxNonAlloc(center + objOffset, propBounds, colliders);
+            //}
+            //else if (propBounds.y < propBounds.z || propBounds.y < propBounds.x)
+            //{
+            //    overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, propBounds.y, colliders);
+            //}
+            //else if (propBounds == null)
+            //{
+            //    overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            //} 
+
+            Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (overlapCount <= 2)
