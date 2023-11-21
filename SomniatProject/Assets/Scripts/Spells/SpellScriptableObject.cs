@@ -17,7 +17,6 @@ public class SpellScriptableObject : ScriptableObject
     public float Speed = 15f;
     public float SpellRadius;
     public float RotationSpeed = 100f;
-    public int FreeChargeAmount = 2;
 
     [Header("Prefabs & Particle Systems")]
     public GameObject ExplosionPrefab;

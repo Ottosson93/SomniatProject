@@ -5,24 +5,55 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    public enum Type
+    {
+        Player,
+        Enemy,
+        DestructibleObject,
+        Obstacle
+    };
+
+    public Type type;
+    private string targetTag;
     public int damage;
     // Start is called before the first frame update
+
     void Start()
     {
-        Collider collider = this.gameObject.GetComponent<Collider>();
+        switch (type)
+        {
+            case Type.Player:
+                targetTag = "Enemy";
+                break;
+            case Type.Enemy:
+                targetTag = "Player";
+                break;
+            case Type.DestructibleObject:
+                targetTag = "DestructibleObject";
+                break;
+            case Type.Obstacle:
+                targetTag = "Obstacle";
+                break;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
+        if (other.gameObject.tag != targetTag)
+            return;
+
+        if (targetTag == "Player")
+            other.GetComponent<Player>().TakeDamage(damage);
+        else if (targetTag == "Enemy")
             other.GetComponent<Enemy>().TakeDamage(damage);
-        }
-        else if (other.gameObject.CompareTag("Obstacle"))
-        {
-            Destroy(this.gameObject);
-        }
-        Destroy(this.gameObject);
+        else if (targetTag == "DestructibleObject")
+            other.GetComponent<ExplosiveObject>().TakeDamage(damage);
+        else if (targetTag == "Obstacle")
+            Destroy(gameObject);
+
+
+        gameObject.SetActive(false);
     }
 
 }
+

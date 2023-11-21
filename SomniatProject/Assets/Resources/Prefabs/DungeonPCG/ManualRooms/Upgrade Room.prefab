@@ -155,10 +155,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6439738197424703124, guid: 73ab1adbc8202684dbe8dae01d27383b, type: 3}
-      propertyPath: shop
-      value: 
-      objectReference: {fileID: 4623637700096481025, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
     - target: {fileID: 8339671140022550836, guid: 73ab1adbc8202684dbe8dae01d27383b, type: 3}
       propertyPath: m_Name
       value: ShopPrefab

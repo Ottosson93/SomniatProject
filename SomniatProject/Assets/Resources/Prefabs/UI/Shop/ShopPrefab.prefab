@@ -141,6 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3df3278dba2ed18488f31b98a539203f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shop: {fileID: 4623637700096481025, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
+  shop: {fileID: 3899592631940888398, guid: ce35473d2a2b3e442b80de088d81ba8d, type: 3}
   shopView: {fileID: 6942652339900985341, guid: cb9f418d11e38f64380080e071279bb8, type: 3}
   playerTransform: {fileID: 0}
