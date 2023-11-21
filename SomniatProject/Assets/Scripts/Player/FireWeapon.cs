@@ -9,10 +9,10 @@ public class FireWeapon : MonoBehaviour
 {
     [SerializeField] Transform firePoint;
     private bool isShooting;
-    [SerializeField] float bulletForce = 100f;
-    [SerializeField] int WeaponDamage = 10;
-    [Range(0.01f, 1f)][SerializeField] float rateOfFire = 0.2f;
-    [SerializeField] float accuracy = 0f;
+    [SerializeField] float bulletForce;
+    [SerializeField] int WeaponDamage;
+    [Range(0.01f, 1f)] [SerializeField] float rateOfFire;
+    [SerializeField] float accuracy;
     Coroutine firingCoroutine;
     bool canShoot = true;
     Player player;
@@ -53,34 +53,34 @@ public class FireWeapon : MonoBehaviour
         {
             bool isRightbtnPressed = UnityEngine.InputSystem.Mouse.current.rightButton.isPressed;
 
-            if (isRightbtnPressed )//&& isShooting == false)
-            {   
-                    Fire();
+            if (isRightbtnPressed)//&& isShooting == false)
+            {
+                Fire();
             }
         }
     }
 
     async void Fire()
     {
-        
+
         if (!canShoot)
             return;
         canShoot = false;
 
-            hud_ranged_attack.Run();
+        hud_ranged_attack.Run();
 
-            if (audioSource != null)
-            {
-                audioSource.Play();
-            }
-            InstantiateBullet_Projectile();
+        if (audioSource != null)
+        {
+            audioSource.Play();
+        }
+        InstantiateBullet_Projectile();
 
         int cooldownMs = (int)(1000 / player.CalculateAttackSpeed());
         await Task.Delay(cooldownMs);
-            canShoot = true;
-        
+        canShoot = true;
+
     }
-    private void InstantiateBullet_Projectile()
+    public void InstantiateBullet_Projectile()
     {
         Vector3 mousePos = new Vector3(UnityEngine.InputSystem.Mouse.current.position.value.x % UnityEngine.Screen.width, UnityEngine.InputSystem.Mouse.current.position.value.y % Screen.height, 0);
         //Prevents the bullet trail from going to far when not hitting anything
@@ -94,11 +94,13 @@ public class FireWeapon : MonoBehaviour
 
 
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        //bullet.transform.Translate(Vector3.forward * bulletForce * Time.deltaTime);
         bullet.GetComponent<Bullet>().damage = WeaponDamage;
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Vector3 dir = new Vector3(targetPos.x - firePoint.position.x, 0, targetPos.z - firePoint.position.z).normalized;
+        rb.mass = 5;
         rb.AddForce(dir * bulletForce, ForceMode.Impulse); 
 
-        
+
     }
 }
