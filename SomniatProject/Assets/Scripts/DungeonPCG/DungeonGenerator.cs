@@ -53,19 +53,20 @@ public class DungeonGenerator : MonoBehaviour
     Material orangeRoomMaterial;
     Material redRoomMaterial;
     double distFromCenter;
-    int amountOfProps, amountOfEnemies;
+    int amountOfInteractableProps, amountOfProps, amountOfEnemies;
 
     //Populate room variables
     List<GameObject> listOfAllEnemies = new List<GameObject>();
 
 
     Collider[] colliders = new Collider[5];
-    int intersecting = 0;
+    int overlapCount = 0;
+    List<GameObject> interactableProps = new List<GameObject>();
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial,
-        List<GameObject> pmr, GameObject wall1, GameObject wall5, GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> props)
+        List<GameObject> pmr, GameObject wall1, GameObject wall5, GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
         /*
@@ -93,6 +94,7 @@ public class DungeonGenerator : MonoBehaviour
         this.redRoomMaterial = redRoomMaterial;
         this.listOfAllEnemies = listOfAllEnemies;
         this.Layer = layer;
+        this.interactableProps = interactableProps;
         this.props = props;
     }
 
@@ -338,7 +340,6 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
-    //??
     public void PlaceStartingRoomInCenter()
     {
         Vector2 origo = new Vector2(0,0);
@@ -377,6 +378,8 @@ public class DungeonGenerator : MonoBehaviour
 
         finishedNodes.Remove(mostCenteredRoom);
     }
+
+    //Ska denna bort Arvid?
     bool CheckSize(RNode n)
     {
         if (n.width < minRoomSize && n.height < minRoomSize)
@@ -731,6 +734,8 @@ public class DungeonGenerator : MonoBehaviour
     private void DeclareRoomType(RNode n)
     {
         Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
+
+        //Ändra center till n.center
         distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
         //Debug.Log(n.id + " " + distFromCenter);
         if (distFromCenter <= 100)
@@ -757,40 +762,44 @@ public class DungeonGenerator : MonoBehaviour
     public void SpawnProps(RNode room)
     {
         Vector3 center = new Vector3(room.bottomLeft.x + room.width / 2, 0, room.bottomLeft.y + room.height / 2);
-
-        //Spawn a pillar (+3 boxes) with a random rotation
-        int rndRotation = Random.Range(0, 3);
-        Instantiate(props[0], center, Quaternion.Euler(0, rotationArray[rndRotation], 0));
+        
+        CreateProps(room, center, amountOfProps);
 
         double roomSize = CalculateRoomSize(room);
 
+        //Place a specific amount of props depending on the size of the room
         if (roomSize <= 35.0)
         {
-            amountOfProps = 2;
-            InstantiateProps(room, center, amountOfProps);
+            amountOfInteractableProps = 2;
         }
         else if (roomSize <= 50.0)
         {
-            amountOfProps = 3;
-            InstantiateProps(room, center, amountOfProps);
+            amountOfInteractableProps = 3;
         }
         else if (roomSize <= 70.0)
         {
-            amountOfProps = 4;
-            InstantiateProps(room, center, amountOfProps);
+            amountOfInteractableProps = 4;
         }
         else
         {
-            amountOfProps = 7;
-            InstantiateProps(room, center, amountOfProps);
+            amountOfInteractableProps = 7;
         }
+        
+        CreateInteractableProps(room, center, amountOfInteractableProps);
     }
 
-    private void InstantiateProps(RNode room, Vector3 center, int amountOfProps)
+    private void CreateProps(RNode room, Vector3 center, int amountOfProps)
     {
-        //Spawn amountOfProps amount of barrels per room, change this to spawn more depending on room size
-        //and spawn half of the barrels in one half and rest across the room
-        for (int i = 0; i < amountOfProps; i++)
+        //Spawn a pillar (+3 boxes) with a random rotation
+        int rndRotation = Random.Range(0, 3);
+        Instantiate(props[0], new Vector3(center.x, props[0].transform.position.y, center.z), Quaternion.Euler(0, rotationArray[rndRotation], 0));
+    }
+
+    private void CreateInteractableProps(RNode room, Vector3 center, int amountOfInteractableProps)
+    {
+        //This will spawn interactable objects = to the amountOfProps value per room
+        //may want to change it to spawn half of the barrels in one half and rest across the room
+        for (int i = 0; i < amountOfInteractableProps; i++)
         {
             Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
@@ -798,24 +807,25 @@ public class DungeonGenerator : MonoBehaviour
             //Vector3 barrelBounds = props[1].transform.GetChild(0).gameObject.GetComponent<BoxCollider>().bounds.size;
             //Collider[] intersecting = Physics.OverlapBox(center + objOffset, barrelBounds);
 
-            intersecting = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            int rndProp = Random.Range(0, interactableProps.Count);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
-            if (intersecting <= 2)
+            if (overlapCount <= 2)
             {
-                Instantiate(props[1], new Vector3(center.x + objOffset.x, props[1].transform.position.y, center.z + objOffset.z), Quaternion.identity);
+                Instantiate(interactableProps[rndProp], new Vector3(center.x + objOffset.x, interactableProps[rndProp].transform.position.y, center.z + objOffset.z), Quaternion.identity);
             }
-            else if (intersecting > 2)
+            else if (overlapCount > 2)
             {
-                while (intersecting > 2)
+                while (overlapCount > 2)
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                    intersecting = Physics.OverlapSphereNonAlloc(center + newObjOffset, 2f, colliders);
+                    overlapCount = Physics.OverlapSphereNonAlloc(center + newObjOffset, 2f, colliders);
 
-                    if (intersecting <= 2)
+                    if (overlapCount <= 2)
                     {
-                        Instantiate(props[1], new Vector3(center.x + newObjOffset.x, props[1].transform.position.y, center.z + newObjOffset.z), Quaternion.identity);
+                        Instantiate(interactableProps[rndProp], new Vector3(center.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, center.z + newObjOffset.z), Quaternion.identity);
                         break;
                     }
                 }
@@ -852,21 +862,21 @@ public class DungeonGenerator : MonoBehaviour
 
             Vector3 gruntBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
             //Debug.Log("Bounding box for enemy: " + gruntBounds);
-            int intersecting = Physics.OverlapBoxNonAlloc(center + enemyOffset, gruntBounds / 2, colliders);
+            int overlapCount = Physics.OverlapBoxNonAlloc(center + enemyOffset, gruntBounds / 2, colliders);
 
-            if (intersecting <= 2)
+            if (overlapCount <= 2)
             {
                 Instantiate(listOfAllEnemies[i], center + enemyOffset, Quaternion.identity);
             }
-            else if (intersecting > 2)
+            else if (overlapCount > 2)
             {
-                while (intersecting > 2)
+                while (overlapCount > 2)
                 {
                     Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
-                    intersecting = Physics.OverlapSphereNonAlloc(center + newEnemyOffset, 2f, colliders);
+                    overlapCount = Physics.OverlapSphereNonAlloc(center + newEnemyOffset, 2f, colliders);
 
-                    if (intersecting <= 2)
+                    if (overlapCount <= 2)
                     {
                         Instantiate(listOfAllEnemies[i], center + newEnemyOffset, Quaternion.identity);
                         break;
@@ -875,10 +885,4 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-
-    //Collider[] isObjectHere(Vector3 objPosition )
-    //{
-    //    Collider[] intersecting = Physics.OverlapSphere(objPosition, 2f);
-    //    return intersecting;
-    //}
 }

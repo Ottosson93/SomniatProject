@@ -6,8 +6,9 @@ public class Enemy : MonoBehaviour
 {
     public ItemDropSystem itemDropSystem;
     public Animator animator;
-    public DamgeTextPlayer damageTextPlayer;
+    public DamageTextPlayer damageTextPlayer;
     public Transform attackPoint;
+    public Transform firePoint;
     public LayerMask enemyLayer;
 
     public int health = 100;
@@ -20,7 +21,6 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         current = health;
-
         itemDropSystem = GetComponent<ItemDropSystem>();
     }
 

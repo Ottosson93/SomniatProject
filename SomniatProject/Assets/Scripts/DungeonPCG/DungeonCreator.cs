@@ -26,6 +26,7 @@ public class DungeonCreator : MonoBehaviour
     [SerializeField] private List<GameObject> listOfAllEnemies;
     RNode node;
 
+    [SerializeField] private List<GameObject> interactableProps = new List<GameObject>();
     [SerializeField] private List<GameObject> props = new List<GameObject>();
 
     [SerializeField] NavMeshSurface navSurface;
@@ -47,7 +48,7 @@ public class DungeonCreator : MonoBehaviour
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material,
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, listOfAllEnemies, 3, props);
+            wall1, wall5, pillar, listOfAllEnemies, 3, interactableProps, props);
 
 
         generator.Generate();
@@ -64,7 +65,7 @@ public class DungeonCreator : MonoBehaviour
 
             generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material,
             greenRoomMaterial, orangeRoomMaterial, redRoomMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, listOfAllEnemies, 3, props);
+            wall1, wall5, pillar, listOfAllEnemies, 3, interactableProps, props);
 
             generator.Generate();
         }

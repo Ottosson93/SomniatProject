@@ -1235,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
@@ -1252,7 +1252,15 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[1]
       value: 
-      objectReference: {fileID: 2465079734990110219, guid: 0f5ac94b3acadfe42878abd9666c78b1, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.data[2]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: props.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
       value: 2
@@ -1586,6 +1594,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: interactableProps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: orangeEnemyPack.Array.data[0]
       value: 
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
@@ -1617,6 +1629,14 @@ PrefabInstance:
       propertyPath: listOfAllEnemies.Array.data[4]
       value: 
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: interactableProps.Array.data[0]
+      value: 
+      objectReference: {fileID: 9065924571364506927, guid: 0071951014318e5478294234e2aa96b0, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: interactableProps.Array.data[1]
+      value: 
+      objectReference: {fileID: 2465079734990110219, guid: 0f5ac94b3acadfe42878abd9666c78b1, type: 3}
     - target: {fileID: 3222016400277921939, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5691,7 +5711,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.5
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6431,6 +6451,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1734718874
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1734718876}
+  - component: {fileID: 1734718875}
+  m_Layer: 0
+  m_Name: NavmeshRanged
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1734718875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734718874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 1479372276
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 712
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: d56f74cc255ddcc4d9e0eca81e4ced85, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &1734718876
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1734718874}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.837515, y: -26.264666, z: -25.020473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1736318417
 GameObject:
   m_ObjectHideFlags: 0
@@ -8327,6 +8410,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1524907255}
   - {fileID: 17179277}
+  - {fileID: 1734718876}
   - {fileID: 1084462510}
   - {fileID: 571679827}
   - {fileID: 6702034550989234961}

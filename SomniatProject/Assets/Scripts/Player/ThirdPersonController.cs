@@ -29,7 +29,7 @@ namespace StarterAssets
         public float RotationSmoothTime = 0.12f;
 
         [Tooltip("Acceleration and deceleration")]
-        public float SpeedChangeRate = 10.0f;
+        public float SpeedChangeRate = 100.0f;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -86,8 +86,7 @@ namespace StarterAssets
 
         public Transform attackPoint;
         public float attackRange = 0.5f;
-        public LayerMask enemyLayers;
-
+        public LayerMask enemyLayers, destructibleObjectLayers;
 
         public float attackRate = 4f;
 
@@ -212,6 +211,7 @@ namespace StarterAssets
 
             ExitAttack();
         }
+
 
         private void LateUpdate()
         {
@@ -545,8 +545,8 @@ namespace StarterAssets
 
         private void Attack()
         {
-
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
+            Collider[] hitDestructibleObjects = Physics.OverlapSphere(attackPoint.position, attackRange, destructibleObjectLayers);
 
             hud_melee_script.Run();
 
@@ -562,6 +562,11 @@ namespace StarterAssets
                     player.meleeDamage = combo[comboCounter].damage;
                     comboCounter = comboCounter + 1;
                     lastClickedTime = Time.time;
+
+                    foreach (Collider destructibleObject in hitDestructibleObjects)
+                    {
+                        destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
+                    }
 
                     foreach (Collider enemy in hitEnemies)
                     {

@@ -332,7 +332,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5276592867460521514}
   - component: {fileID: 8442482085988791223}
-  - component: {fileID: 6629684541128406666}
   - component: {fileID: 189437958377128477}
   - component: {fileID: 2209933729498995069}
   - component: {fileID: 8611573942179307939}
@@ -385,36 +384,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6629684541128406666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1664211645506664793}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: 0}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: 
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &189437958377128477
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7113c1e93d23d8d4e9059340d8ea3ddc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemDropSystem: {fileID: 0}
   animator: {fileID: 8442482085988791223}
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   attackPoint: {fileID: 9133735220745032056}

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  DamageAmount: 100
+  DamageAmount: 5
   DamagePerTick: 5
-  LucidityCost: 5
+  LucidityCost: 1
   Lifetime: 2
   Speed: 15
   SpellRadius: 1
@@ -24,6 +24,7 @@ MonoBehaviour:
   LightningStun: {fileID: 0}
   BurnParticleSystem: {fileID: 7910603292438892066, guid: 43d1d06cf70fcb2488255051aaae40a5, type: 3}
   BerserkParticleSystem: {fileID: 0}
+  SpellIcon: {fileID: 21300000, guid: fb651b4e9385d1b4ab05eae3424dc1b3, type: 3}
   ExplosionDuration: 2
   StunDuration: 2
   BurnDuration: 5

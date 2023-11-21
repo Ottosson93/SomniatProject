@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class MeleeAttack : MonoBehaviour
 {
     public Animator animator;
     public int maxCombo = 3;
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     private int comboCount = 0;
     private InputAction attackAction;
     private float comboTimer;
+    public ParticleSystem swordSlashParticles;
 
     private void Awake()
     {
@@ -61,10 +62,30 @@ public class PlayerController : MonoBehaviour
 
             comboTimer = 0.0f;
 
-
+            ActivateSwordSlashParticles();
+        }
+        else
+        {
+            DeactivateSwordSlashParticles();
         }
 
 
+    }
+
+    private void DeactivateSwordSlashParticles()
+    {
+        if (swordSlashParticles != null)
+        {
+            swordSlashParticles.Stop();
+        }
+    }
+
+    private void ActivateSwordSlashParticles()
+    {
+        if (swordSlashParticles != null)
+        {
+            swordSlashParticles.Play();
+        }
     }
 
     private int CalculateAnimationIndex()
