@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using StarterAssets;
 public class SpellAttackSystem : MonoBehaviour
 {
-    [SerializeField] private Spell currentSpell;
+    [SerializeField] public Spell currentSpell;
     [SerializeField] private Transform castPoint;
     [SerializeField] private float timeBetweenCasts = 0.3f;
     private float currentCastTimer;
@@ -14,15 +14,18 @@ public class SpellAttackSystem : MonoBehaviour
 
     // Added player so that lucidity is fetched from this class.
     private Player player;
+    public int currentSpellFreeCharges;
 
     private bool castingSpell = false;
 
     private InputAction spellInput;
+    private LucidityPostProcess lucidityPostProcess;
 
 
     public void UpdateSpell(Spell spell)
     {
         currentSpell = spell;
+        currentSpellFreeCharges = 2;
     }
 
     private void Awake()
@@ -30,6 +33,8 @@ public class SpellAttackSystem : MonoBehaviour
         controller = GetComponent<ThirdPersonController>();
         spellInput = new InputAction("Spell Cast", binding: "<Keyboard>/q");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        lucidityPostProcess = GetComponent<LucidityPostProcess>();
+        currentSpellFreeCharges = currentSpell.SpellToCast.FreeChargeAmount;
     }
 
     private void OnEnable()
@@ -45,10 +50,19 @@ public class SpellAttackSystem : MonoBehaviour
     private void Update()
     {
         bool hasEnoughLucidity = player.lucidity - currentSpell.SpellToCast.LucidityCost > 0f;
-        if(!castingSpell && spellInput.triggered && hasEnoughLucidity)
+
+        if(currentSpellFreeCharges > 0 && !castingSpell && spellInput.triggered)
+        {
+            castingSpell = true;
+            currentCastTimer = 0;
+            CastSpell();
+            currentSpellFreeCharges--;
+        }
+        else if(!castingSpell && spellInput.triggered && hasEnoughLucidity && currentSpellFreeCharges <= 0)
         {
             castingSpell = true;
             player.lucidity -= currentSpell.SpellToCast.LucidityCost;
+            lucidityPostProcess.UpdateLucidityMask(player.lucidity);
             currentCastTimer = 0;
             CastSpell();
         }
@@ -56,7 +70,7 @@ public class SpellAttackSystem : MonoBehaviour
         {
             currentCastTimer += Time.deltaTime;
 
-            if(currentCastTimer > timeBetweenCasts)
+            if (currentCastTimer > timeBetweenCasts)
             {
                 castingSpell = false;
             }
@@ -69,11 +83,13 @@ public class SpellAttackSystem : MonoBehaviour
     public void PickUpNewSpell(Spell newSpell)
     {
         currentSpell = newSpell;
+        currentSpellFreeCharges = currentSpell.SpellToCast.FreeChargeAmount;
     }
 
     private void CastSpell()
     {
         var (success, position) = controller.GetMousePosition();
+
         if (success)
         {
             // Calculate the direction
@@ -87,16 +103,15 @@ public class SpellAttackSystem : MonoBehaviour
             Debug.Log("Updated forward direction");
         }
         Instantiate(currentSpell, castPoint.position, castPoint.rotation);
-        Debug.Log(castPoint.rotation);
     }
 
     public void AICastSpell(Spell spell, Transform castPoint, Transform PlayerPos)
     {
-        Vector3 direction = ( PlayerPos.position - castPoint.position).normalized;
+        Vector3 direction = (PlayerPos.position - castPoint.position).normalized;
         direction.y = 0;
         castPoint.forward = direction;
 
-        Instantiate(spell, castPoint.position, castPoint.rotation);
 
+        Instantiate(spell, castPoint.position, castPoint.rotation);
     }
 }

@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 1033906477445040309}
   m_Layer: 7
   m_Name: AttackPoint
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,7 +56,7 @@ Transform:
   m_GameObject: {fileID: 3215651029940748606}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.056, y: 1.487, z: 0}
+  m_LocalPosition: {x: 0.045, y: 0.835, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,6 +171,10 @@ PrefabInstance:
     - target: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 6358568393392945801, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,6 +367,10 @@ PrefabInstance:
     - target: {fileID: 2066896392038628070, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_Layer
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2066896392038628070, guid: 45288819fde2143449a96207b14db0bb, type: 3}
+      propertyPath: m_TagString
+      value: Weapon
       objectReference: {fileID: 0}
     - target: {fileID: 2066896392038628072, guid: 45288819fde2143449a96207b14db0bb, type: 3}
       propertyPath: m_Layer
@@ -759,6 +767,9 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 512
+  destructibleObjectLayers:
+    serializedVersion: 2
+    m_Bits: 1024
   attackRate: 1.5
   useMouseRotation: 1
 --- !u!96 &8448971290705006888
@@ -878,7 +889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1033906477445040309}
-  bulletForce: 100
+  bulletForce: 1
   WeaponDamage: 10
   rateOfFire: 0.4
   accuracy: 0
@@ -901,6 +912,7 @@ MonoBehaviour:
   currentSpell: {fileID: 674473231596236386, guid: a337f9c0512c15b42af049ecac6dab92, type: 3}
   castPoint: {fileID: 7694580897280343388}
   timeBetweenCasts: 0.3
+  currentSpellFreeCharges: 0
 --- !u!114 &4586738781332085182
 MonoBehaviour:
   m_ObjectHideFlags: 0

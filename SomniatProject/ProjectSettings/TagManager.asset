@@ -11,7 +11,13 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Mask
+  - Wall
+  - DestructibleObject
   - Item
+  - BossSpell
+  - Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -23,28 +29,31 @@ TagManager:
   - Player
   - Spell
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Lucid
+  - Awoken
+  - BossSpell
+  - Bullet
+  - EnemyBullet
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
