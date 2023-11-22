@@ -890,7 +890,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1033906477445040309}
   bulletForce: 1
-  WeaponDamage: 10
+  WeaponDamage: 2
   rateOfFire: 0.4
   accuracy: 0
   camera: {fileID: 0}
@@ -926,6 +926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLucidity: 100
+  originalMaxLucidity: 0
   lucidity: 0
   Strength:
     BaseValue: 1
@@ -937,10 +938,15 @@ MonoBehaviour:
   flatSpeed: 0
   speed: 0
   meleeDamage: 0
-  attackSpeed: 0
+  attackSpeed: 1
+  originalMeleeDamage: 0
+  originalAttackSpeed: 1
+  originalSpeed: 0
+  originalArmorAmount: 0
   playerStats: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
   newSpeed: 0
   controller: {fileID: 0}
+  lucidityPostProcess: {fileID: 0}
   empoweredRelic: {fileID: 0}
 --- !u!1 &5178686219891413429 stripped
 GameObject:
