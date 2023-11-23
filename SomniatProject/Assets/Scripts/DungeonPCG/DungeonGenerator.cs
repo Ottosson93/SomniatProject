@@ -734,7 +734,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         Vector2 center = new Vector2(n.bottomLeft.x + n.width / 2, n.bottomLeft.y + n.height / 2);
 
-        //Ändra center till n.center
+        //Ändra center till n.center, startroom.center
         distFromCenter = Vector2.Distance(center, new Vector2(0, 0));
         //Debug.Log(n.id + " " + distFromCenter);
         if (distFromCenter <= 100)
@@ -781,7 +781,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
-            amountOfInteractableProps = 7;
+            amountOfInteractableProps = 10;
         }
         
         CreateInteractableProps(room, center, amountOfInteractableProps);
@@ -800,33 +800,28 @@ public class DungeonGenerator : MonoBehaviour
         //may want to change it to spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < amountOfInteractableProps; i++)
         {
-            int overlapCount = 0;
+            int overlapCount;
 
             Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
             int rndProp = Random.Range(0, interactableProps.Count);
 
-            //Checks if the position is occupied, takes the size of the barrels boxcollider and checks if there's anything inside of it at the spawn position
-            //Vector3 propBounds = props[rndProp].transform.GetChild(0).gameObject.GetComponent<MeshCollider>().bounds.size;
-            Vector3 propBounds = props[rndProp].transform.gameObject.GetComponentsInChildren<Collider>().bounds.size;
-
+            //Checks if the position is occupied, takes the size of the objects meshrenderer and checks if there's anything inside of it at the spawn position
+            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponent<MeshRenderer>().bounds.size + Vector3.one;
 
             //Collider[] intersecting = Physics.OverlapBox(center + objOffset, propBounds);
 
-            overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            //overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
+            overlapCount = Physics.OverlapBoxNonAlloc(center + objOffset, propBounds, colliders);
 
-            //if (propBounds.y < propBounds.z && propBounds.y < propBounds.x)
-            //{
-            //    overlapCount = Physics.OverlapBoxNonAlloc(center + objOffset, propBounds, colliders);
-            //}
-            //else if (propBounds.y < propBounds.z || propBounds.y < propBounds.x)
-            //{
-            //    overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, propBounds.y, colliders);
-            //}
-            //else if (propBounds == null)
-            //{
-            //    overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
-            //} 
+            if (propBounds.y < propBounds.z && propBounds.y < propBounds.x)
+            {
+                overlapCount = Physics.OverlapBoxNonAlloc(center + objOffset, propBounds, colliders);
+            }
+            else if (propBounds.y < propBounds.z || propBounds.y < propBounds.x)
+            {
+                overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, propBounds.y, colliders);
+            }
 
             Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
@@ -881,7 +876,7 @@ public class DungeonGenerator : MonoBehaviour
             Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
 
             Vector3 gruntBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
-            //Debug.Log("Bounding box for enemy: " + gruntBounds);
+            Debug.Log("Bounding box for enemy: " + gruntBounds);
             int overlapCount = Physics.OverlapBoxNonAlloc(center + enemyOffset, gruntBounds / 2, colliders);
 
             if (overlapCount <= 2)
