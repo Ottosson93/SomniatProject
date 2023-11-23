@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3111219058107006982}
   m_Layer: 0
-  m_Name: New Prefab
+  m_Name: LampDrawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,19 +137,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
-      propertyPath: m_LocalRotation.y
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -157,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000010843767580, guid: 1720e624c9e003d4b9a2bc12cbff6d43, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

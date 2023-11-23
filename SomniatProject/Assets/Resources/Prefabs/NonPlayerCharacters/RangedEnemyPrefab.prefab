@@ -548,11 +548,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eea6bf053e68a7c4abce9a4094023439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   combo:
   - {fileID: 11400000, guid: 6e58b412dc14772489fa6782df410a3d, type: 2}
   enemyShoot: {fileID: 8271735563622068179}
