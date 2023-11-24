@@ -31,7 +31,7 @@ public class SpellAttackSystem : MonoBehaviour
         controller = GetComponent<ThirdPersonController>();
         spellInput = new InputAction("Spell Cast", binding: "<Keyboard>/q");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        lucidityPostProcess = GetComponent<LucidityPostProcess>();
+        lucidityPostProcess = player.GetComponent<LucidityPostProcess>();
     }
 
     private void OnEnable()

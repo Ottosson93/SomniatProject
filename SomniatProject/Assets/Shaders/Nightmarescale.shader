@@ -3,7 +3,7 @@ Shader "Custom/NightmareScale"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _Center ("Circle Center", Vector) = (0.5, 0.525, 0, 0)
+        _Center ("Circle Center", Vector) = (0.5, 0.5, 0, 0)
         _Radius ("Circle Radius", Range(0, 0.5)) = 0.2
         
 
@@ -51,12 +51,12 @@ Shader "Custom/NightmareScale"
                 float2 center = _Center.xy;
                 float2 distance = i.uv - center;
 
-                distance.y *= 0.525;
+                distance.y *= 0.5;
 
                 float distanceFromCenter = length(distance);
 
                 // Add horror pulsating effect
-                float pulsateAmount =    0.003;
+                float pulsateAmount = sin(_Time.y * 6) * 0.003;
 
                 // Adjust the radius based on pulsating effect
                 float adjustedRadius = _Radius + pulsateAmount;
@@ -68,7 +68,7 @@ Shader "Custom/NightmareScale"
                 {
                     // Apply distortion
 
-                    float distortion = sin(distanceFromCenter * 10) * 0.02; // Adjust the distortion intensity
+                    float distortion = sin(distanceFromCenter * 40) * 0.02; // Adjust the distortion intensity
                     float2 distortedUV = i.uv + distance * distortion;
 
                     // Sample the texture with distorted UV
@@ -82,7 +82,7 @@ Shader "Custom/NightmareScale"
 
                     // Apply the grayscale color
                     // Apply a bluish tint
-                    col = fixed4(intensity * 0.2, intensity * 0.3, intensity * 0.3, 1);;
+                    col = fixed4(intensity * 0.2, intensity * 0.3, intensity * 0.3, 0.5);;
 
                     return col;
                 }

@@ -16,6 +16,7 @@ TagManager:
   - DestructibleObject
   - Item
   - BossSpell
+  - LucidMesh
   layers:
   - Default
   - TransparentFX
@@ -30,9 +31,7 @@ TagManager:
   - Lucid
   - Awoken
   - BossSpell
-  - 
-  - 
-  - 
+  - BothWorlds
   - 
   - 
   - 

@@ -7,6 +7,7 @@ public class TaskGoToTarget : Node
 {
     private Transform transform;
     private Animator animator;
+    private Animator lucidAnimator;
     private NavMeshAgent agent;
 
     private float maxFollowTime = 3f;   // Adjust as needed
@@ -19,6 +20,7 @@ public class TaskGoToTarget : Node
         this.transform = transform;
         animator = transform.GetComponent<Animator>();
         agent = transform.GetComponent<NavMeshAgent>();
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
@@ -45,10 +47,12 @@ public class TaskGoToTarget : Node
             agent.speed = GuardMeleeBT.targetedSpeed;
 
             animator.SetBool("Walk", true);
+            lucidAnimator.SetBool("Walk", true);
 
             if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.distance || currentTime > maxFollowTime)
             {
                 animator.SetBool("Walk", false);
+                lucidAnimator.SetBool("Walk", false);
                 agent.speed = GuardMeleeBT.speed;
                 ClearData("target");
             }
