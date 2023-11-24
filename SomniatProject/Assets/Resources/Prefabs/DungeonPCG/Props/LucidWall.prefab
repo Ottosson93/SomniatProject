@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6752888406500542446}
-  m_Layer: 0
-  m_Name: Wall Prefab v1
-  m_TagString: Obstacle
+  m_Layer: 6
+  m_Name: LucidWall
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,8 +29,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4922742943564533785}
   - {fileID: 5198004810954893459}
+  - {fileID: 5246120113339914400}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3872937979150532322
@@ -107,7 +107,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9051238300485817969, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
   m_PrefabInstance: {fileID: 3872937979150532322}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4616581904944494867
+--- !u!1001 &5516216966423490986
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -195,8 +195,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
---- !u!4 &4922742943564533785 stripped
+--- !u!4 &5246120113339914400 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-  m_PrefabInstance: {fileID: 4616581904944494867}
+  m_PrefabInstance: {fileID: 5516216966423490986}
   m_PrefabAsset: {fileID: 0}
