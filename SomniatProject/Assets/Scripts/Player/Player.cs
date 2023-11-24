@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float meleeDamage;
     public float attackSpeed;
+    public static bool isDead = false;
 
     private float originalMeleeDamage;
     private float originalAttackSpeed;
@@ -137,6 +138,7 @@ public class Player : MonoBehaviour
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
+            isDead = true;
         }
     }
 

@@ -34,7 +34,7 @@ public class MenuManager : MonoBehaviour
         }
     }
 
-    public void onDeath()
+    public void OnDeath()
     {
         onDeathMenuView.SetActive(true);
         Time.timeScale = 0f;
@@ -117,18 +117,29 @@ public class MenuManager : MonoBehaviour
 
         for(int i=0; i <_menus.Length; i++)
         {
-            _menus[i].Initialize();
+            if(_menus[i] != null)
+            {
+                _menus[i].Initialize();
 
-            _menus[i].Hide();
+                _menus[i].Hide();
+            }
+            
         }
 
-        if(_startingMenu != null)
+        if (_startingMenu != null)
         {
             Show(_startingMenu, true);
         }
 
         onDeathMenuView.SetActive(false);
+    }
 
+    private void Update()
+    {
+        if(Player.isDead == true)
+        {
+            OnDeath();
+        }
     }
 
 }
