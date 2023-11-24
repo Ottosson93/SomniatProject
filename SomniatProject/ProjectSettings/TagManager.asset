@@ -17,6 +17,9 @@ TagManager:
   - Item
   - BossSpell
   - LucidMesh
+  - Wall
+  - Obstacle
+
   layers:
   - Default
   - TransparentFX
@@ -32,24 +35,8 @@ TagManager:
   - Awoken
   - BossSpell
   - BothWorlds
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Bullet
+  - EnemyBullet
   m_SortingLayers:
   - name: Default
     uniqueID: 0
