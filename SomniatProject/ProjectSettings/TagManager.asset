@@ -19,7 +19,6 @@ TagManager:
   - LucidMesh
   - Wall
   - Obstacle
-
   layers:
   - Default
   - TransparentFX
@@ -37,6 +36,26 @@ TagManager:
   - BothWorlds
   - Bullet
   - EnemyBullet
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0
