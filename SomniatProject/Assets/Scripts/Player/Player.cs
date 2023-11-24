@@ -39,6 +39,7 @@ public class Player : MonoBehaviour
         Dexterity.RemoveAllModifiersFromSource(this);
         Intelligence.RemoveAllModifiersFromSource(this);
         controller = GetComponent<ThirdPersonController>();
+        lucidityPostProcess = GetComponent<LucidityPostProcess>();
 
         speed = baseSpeed;
         attackSpeed = baseAttackSpeed;
