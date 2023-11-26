@@ -1235,7 +1235,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
@@ -1248,23 +1248,23 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[0]
       value: 
-      objectReference: {fileID: 1118479492852309050, guid: 1315b714a6f10594ea3dc16189de8b76, type: 3}
+      objectReference: {fileID: 1000013698201512, guid: 1696f15d6e3acd846a387b7c2be92d72, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[1]
       value: 
-      objectReference: {fileID: 2405554486394081598, guid: 9e618811c2767254c8669300355b6a4b, type: 3}
+      objectReference: {fileID: 7515951779249253956, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[2]
       value: 
-      objectReference: {fileID: 1000013985145586, guid: 0ac81ff6fbda33e4e851b666446d18c8, type: 3}
+      objectReference: {fileID: 2405554486394081598, guid: 9e618811c2767254c8669300355b6a4b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[3]
       value: 
-      objectReference: {fileID: 7515951779249253956, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
+      objectReference: {fileID: 1000013985145586, guid: 0ac81ff6fbda33e4e851b666446d18c8, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[4]
       value: 
-      objectReference: {fileID: 2405554486394081598, guid: 9e618811c2767254c8669300355b6a4b, type: 3}
+      objectReference: {fileID: 1075916112564106240, guid: 82c1d619b0d907f47866866e418ccb8b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
       value: 2
