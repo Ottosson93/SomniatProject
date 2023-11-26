@@ -11,10 +11,14 @@ TagManager:
   - UpgradeRoom
   - OnDeathMenu
   - BossRoom
+  - Mask
   - Wall
   - DestructibleObject
   - Item
   - BossSpell
+  - LucidMesh
+  - Wall
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -26,13 +30,13 @@ TagManager:
   - Player
   - Spell
   - Enemy
+  - Lucid
+  - Awoken
   - BossSpell
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - BothWorlds
+  - Bullet
+  - EnemyBullet
+  - MinimapIcon
   - 
   - 
   - 

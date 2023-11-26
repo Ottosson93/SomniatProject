@@ -7,7 +7,7 @@ public class LuciditySlider : MonoBehaviour
 {
 
     private Slider slider;
-
+    public LucidityPostProcess lucidityPostProcess;
     public void Start()
     {
         slider = FindAnyObjectByType<Slider>();
@@ -22,6 +22,7 @@ public class LuciditySlider : MonoBehaviour
     public void SetLucidity(float lucidity)
     {
         slider.value = lucidity;
+        lucidityPostProcess.UpdateLucidityMask(lucidity);
     }
 
 }
