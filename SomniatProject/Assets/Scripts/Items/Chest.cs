@@ -50,7 +50,7 @@ public class Chest : MonoBehaviour
             HandleChestInteraction();
         }
 
-        chestTop.rotation = Quaternion.Lerp(chestTop.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        //chestTop.rotation = Quaternion.Lerp(chestTop.rotation, targetRotation, rotationSpeed * Time.deltaTime);
     }
 
     private bool InRangeOfPlayer()
