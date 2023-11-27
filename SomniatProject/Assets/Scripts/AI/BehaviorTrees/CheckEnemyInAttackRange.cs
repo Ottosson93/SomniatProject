@@ -9,6 +9,7 @@ public class CheckEnemyInAttackRange : Node
     private Transform transform;
     private List<AttackSO> combo;
     private Animator animator;
+    private Animator lucidAnimator;
     private NavMeshAgent agent;
 
     
@@ -18,6 +19,7 @@ public class CheckEnemyInAttackRange : Node
         this.transform = transform;
         this.combo = combo;
         animator = transform.GetComponent<Animator>();
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
         agent = transform.GetComponent<NavMeshAgent>();
         
     }
@@ -43,6 +45,7 @@ public class CheckEnemyInAttackRange : Node
                 {
                     animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
                     animator.Play("Attack", 1, 0);
+                  //  lucidAnimator.Play("Attack", 1, 0);
                     GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
 
 
@@ -51,8 +54,8 @@ public class CheckEnemyInAttackRange : Node
                     GuardMeleeBT.lastClickedTime = Time.time;
 
                     agent.speed = 0f;
-                    animator.SetBool("Run", false);
-
+                    animator.SetBool("Run", false); 
+                    lucidAnimator.SetBool("Run", false);
                     state = NodeState.SUCCESS;
                     return state;
 

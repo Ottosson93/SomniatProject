@@ -11,6 +11,7 @@ public class TaskMeleeAttack : Node
     private NavMeshAgent agent;
     private Player player;
     private Animator animator;
+    private Animator lucidAnimator;
     private List<AttackSO> combo;
     private Enemy enemy;
 
@@ -19,6 +20,7 @@ public class TaskMeleeAttack : Node
     {
         this.combo = combo;
         animator = transform.GetComponent<Animator>();
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
         enemy = transform.GetComponent<Enemy>();
 
     }
@@ -67,6 +69,7 @@ public class TaskMeleeAttack : Node
         {
             ClearData("target");
             animator.SetBool("Walk", true);
+            lucidAnimator.SetBool("Walk", true);
         }
         else
             GuardMeleeBT.attackCounter = 0;

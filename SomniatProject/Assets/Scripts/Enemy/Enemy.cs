@@ -55,14 +55,11 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
-    {
-        if (attackPoint == null)
-            return;
+    //private void OnDrawGizmos()
+    //{
+    //    if (attackPoint == null)
+    //        return;
 
-        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
-    }
-
-
-
+    //    Gizmos.DrawWireSphere(attackPoint.position, attackRange);
+    //}
 }

@@ -16,6 +16,7 @@ TagManager:
   - DestructibleObject
   - Item
   - BossSpell
+  - LucidMesh
   - Wall
   - Obstacle
   layers:
@@ -32,28 +33,25 @@ TagManager:
   - Lucid
   - Awoken
   - BossSpell
+  - BothWorlds
   - Bullet
   - EnemyBullet
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - MinimapIcon
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

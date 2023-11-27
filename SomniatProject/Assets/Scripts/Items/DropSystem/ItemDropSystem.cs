@@ -182,9 +182,6 @@ public class ItemDropSystem : MonoBehaviour
 
     string DetermineItemToDrop(List<ItemDropInfo> itemDrops, bool isChestDrop, List<string> usedCategories)
     {
-        float totalWeight = 0f;
-        float randomValue = Random.Range(0f, 1f);
-
         List<ItemDropInfo> validDrops = itemDrops
             .Where(drop => (isChestDrop ? drop.chestDropRate : drop.enemyDropRate) > 0)
             .Where(drop => !usedCategories.Contains(drop.category) || drop.category == "Money")
@@ -195,22 +192,29 @@ public class ItemDropSystem : MonoBehaviour
             return null;
         }
 
+        float totalWeight = validDrops.Sum(drop => isChestDrop ? drop.chestDropRate : drop.enemyDropRate);
+        float randomValue = Random.Range(0f, totalWeight);
+
+        float cumulativeWeight = 0f;
+
         foreach (var itemDrop in validDrops)
         {
             float dropRate = isChestDrop ? itemDrop.chestDropRate : itemDrop.enemyDropRate;
+            cumulativeWeight += dropRate;
 
-            totalWeight += dropRate;
-
-            if (randomValue < totalWeight)
+            if (randomValue <= cumulativeWeight)
             {
-                usedCategories.Add(itemDrop.category);
-                totalWeight = 0;
+                if (itemDrop.category != "Money" || !usedCategories.Contains("Money"))
+                {
+                    usedCategories.Add(itemDrop.category);
+                }
                 return itemDrop.itemName;
             }
         }
 
         return null;
     }
+
 
     void HandleDroppedItem(string itemToDrop, Vector3 dropLocation)
     {
