@@ -35,7 +35,7 @@ public class Spell : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
-        spellDamage = SpellToCast.DamageAmount + player.CalculateSpellDamage();
+        spellDamage = player.spellDamage;
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
@@ -52,6 +52,10 @@ public class Spell : MonoBehaviour
         if (SpellToCast.name.Equals("Berserk"))
         {
             berserkApplied = false;
+            player.SetOriginalValues();
+            Debug.Log("original Speed: " + player.originalSpeed + " original Attack Speed: " + player.originalAttackSpeed + " original Damage Amount: " + player.originalMeleeDamage + " original Armor Amount: " + player.damageReduction);
+            player.StartBerserk();
+            Debug.Log("new Speed: " + player.newSpeed + " new Attack Speed: " + player.attackSpeed + " new Damage Amount: " + player.meleeDamage + " new Armor Amount: " + player.damageReduction);
             StartCoroutine(ApplyBerserkEffects());
         }
     }
@@ -161,20 +165,6 @@ public class Spell : MonoBehaviour
         if (berserkApplied)
             yield break;
         
-        if (player != null)//modify stats
-        {
-            player.SetOriginalValues();
-            Debug.Log("original Speed: " + player.originalSpeed + " original Attack Speed: " + player.originalAttackSpeed + " original Damage Amount: " + player.originalMeleeDamage + " original Armor Amount: " + player.damageReduction);
-
-            player.IncreaseDamage(SpellToCast.DamageBoost);
-            player.IncreaseAttackSpeed(SpellToCast.AttackSpeedBoost);
-            player.IncreaseSpeed(SpellToCast.MovementSpeedBoost);
-            player.ArmorReduction(SpellToCast.ArmorReduction);
-            player.UpdateCharacterStats();
-            Debug.Log("new Speed: " + player.newSpeed + " new Attack Speed: " + player.attackSpeed + " new Damage Amount: " + player.meleeDamage + " new Armor Amount: " + player.damageReduction);
-        }
-
-
         if(player != null)
         {
             berserkParticles = Instantiate(SpellToCast.BerserkParticleSystem, player.transform);
@@ -189,9 +179,8 @@ public class Spell : MonoBehaviour
             }
 
             //reset stats
-            player.ResetAttributesToOriginal();
-            player.UpdateCharacterStats();
-            Debug.Log("reset Speed: " + player.newSpeed + " reset Attack Speed: " + player.attackSpeed + " reset Damage Amount: " + player.meleeDamage + " reset Armor Amount: " + player.damageReduction);
+            player.EndBerserk();
+            Debug.Log("reset Speed: " + player.originalSpeed + " reset Attack Speed: " + player.originalAttackSpeed + " reset Damage Amount: " + player.originalMeleeDamage + " reset Armor Amount: " + player.originalArmorAmount);
         }
 
 

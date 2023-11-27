@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using StarterAssets;
+using System;
 
 public class Player : MonoBehaviour
 {
@@ -20,13 +21,20 @@ public class Player : MonoBehaviour
     public float speed;
     public float meleeDamage;
     public float attackSpeed;
+    public int spellDamage;
 
     public float originalMeleeDamage;
     public float originalAttackSpeed;
     public float originalSpeed;
     public float originalArmorAmount;
 
+    public float temporaryAttackSpeedModifier;
+    public float temporaryMeleeDamageModifier;
+    public float temporarySpeedModifier;
+    public float temporaryArmorReductionModifier;
+
     public PlayerStats playerStats;
+    public SpellScriptableObject SpellToCast;
     public float newSpeed;
 
     public ThirdPersonController controller;
@@ -40,99 +48,194 @@ public class Player : MonoBehaviour
         Dexterity.RemoveAllModifiersFromSource(this);
         Intelligence.RemoveAllModifiersFromSource(this);
         controller = GetComponent<ThirdPersonController>();
+        lucidityPostProcess = GetComponent<LucidityPostProcess>();
+        SpellToCast = GetComponent<SpellScriptableObject>();
 
         speed = baseSpeed;
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
+        spellDamage = SpellToCast.DamageAmount;
 
 
         lucidity = maxLucidity;
         originalMaxLucidity = maxLucidity;
-        controller.MoveSpeed = CalculateSpeed();
+        controller.MoveSpeed = speed;
 
+        temporaryArmorReductionModifier = 1.0f;
+        temporaryAttackSpeedModifier = 1.0f;
+        temporaryMeleeDamageModifier = 1.0f;
+        temporarySpeedModifier = 1.0f;
+    }
 
+    public void StartBerserk()
+    {
+        temporaryArmorReductionModifier = SpellToCast.ArmorReduction;
+        temporaryAttackSpeedModifier = SpellToCast.AttackSpeedBoost;
+        temporaryMeleeDamageModifier = SpellToCast.DamageBoost;
+        temporarySpeedModifier = SpellToCast.MovementSpeedBoost;
     }
 
     public void SetOriginalValues()
     {
-        originalAttackSpeed = attackSpeed;
-        originalMeleeDamage = meleeDamage;
-        originalSpeed = newSpeed;
+        ResetBersekModifers();
+        originalAttackSpeed = baseAttackSpeed;
+        originalMeleeDamage = baseMeleeDamage;
+        originalSpeed = baseSpeed;
         originalArmorAmount = damageReduction;
+        UpdateCharacterStats();
     }
 
-    public void ResetAttributesToOriginal()
+    public void EndBerserk()
     {
-        meleeDamage = originalMeleeDamage;
-        attackSpeed = originalAttackSpeed;
-        newSpeed = originalSpeed;
-        damageReduction = originalArmorAmount;
+        ResetBersekModifers();
+        UpdateCharacterStats();
     }
 
-    public float CalculateSpeed()
+    private void ResetBersekModifers()
+    {
+        temporaryArmorReductionModifier = 1.0f;
+        temporaryAttackSpeedModifier = 1.0f;
+        temporaryMeleeDamageModifier = 1.0f;
+        temporarySpeedModifier = 1.0f;
+    }
+
+    public void ApplyRelicUpgrades()
+    {
+        float relicSpeedModifier = CalculateSpeedModifierFromRelics();
+        float relicAttackSpeedModifier = CalculateAttackSpeedModifierFromRelics();
+        float relicAttackDamageModifier = CalculateAttackDamageModifierFromRelics();
+        int relicSpellDamageModifier = CalculateSpellDamageModifierFromRelics();
+        float relicMaxLucidityModifier = CalculateMaxLucidityModifierFromRelics();
+
+        float lucidityPercentage = lucidity / maxLucidity;
+
+        speed *= relicSpeedModifier;
+        attackSpeed += relicAttackSpeedModifier;
+        meleeDamage *= relicAttackDamageModifier;
+        spellDamage = SpellToCast.DamageAmount + relicSpellDamageModifier;
+
+        maxLucidity += relicMaxLucidityModifier;
+        lucidity = maxLucidity * lucidityPercentage;
+        lucidityPostProcess.UpdateLucidityMask(lucidity);
+
+
+        UpdateCharacterStats();
+    }
+
+    private float CalculateSpeedModifierFromRelics()
     {
         return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
     }
 
-    public float CalculateAttackSpeed()
+    private float CalculateAttackSpeedModifierFromRelics()
     {
         return baseAttackSpeed / (1 + (playerStats.Dexterity.Value));
     }
 
-    public float CalculateAttackDamage()
+    private float CalculateAttackDamageModifierFromRelics()
     {
-        return meleeDamage + (playerStats.Strength.Value);
+        return playerStats.Strength.Value;
     }
-    public int CalculateSpellDamage()
+
+    private int CalculateSpellDamageModifierFromRelics()
     {
         return (int)playerStats.Intelligence.Value * 2;
     }
 
-    float CalculateMaxLucity()
+    private float CalculateMaxLucidityModifierFromRelics()
     {
         if (playerStats.Intelligence.Value == 0)
-            return 1f;
+            return 0f;
         else
             return playerStats.Intelligence.Value * 5;
     }
 
-    public void IncreaseDamage(float amount)
-    {
-        meleeDamage *= amount;
-    }
+    //public float CalculateSpeed()
+    //{
+    //    return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
+    //}
 
-    public void IncreaseAttackSpeed(float amount)
-    {
-        attackSpeed *= amount;
-    }
+    //public float CalculateAttackSpeed()
+    //{
+    //    return baseAttackSpeed / (1 + (playerStats.Dexterity.Value));
+    //}
 
-    public void IncreaseSpeed(float amount)
-    {
-        newSpeed *= amount;
-    }
+    //public float CalculateAttackDamage()
+    //{
+    //    return playerStats.Strength.Value;
+    //}
+    //public int CalculateSpellDamage()
+    //{
+    //    return (int)playerStats.Intelligence.Value * 2;
+    //}
 
-    public void ArmorReduction(float amount)
-    {
-        damageReduction *= amount;
-    }
+    //float CalculateMaxLucity()
+    //{
+    //    if (playerStats.Intelligence.Value == 0)
+    //        return 1f;
+    //    else
+    //        return playerStats.Intelligence.Value * 5;
+    //}
+
+    //public void IncreaseDamage(float amount)
+    //{
+    //    meleeDamage *= amount;
+    //}
+
+    //public void IncreaseAttackSpeed(float amount)
+    //{
+    //    attackSpeed *= amount;
+    //}
+
+    //public void IncreaseSpeed(float amount)
+    //{
+    //    newSpeed *= amount;
+    //}
+
+    //public void ArmorReduction(float amount)
+    //{
+    //    damageReduction *= amount;
+    //}
 
 
 
     public void UpdateCharacterStats()
     {
-        maxLucidity = originalMaxLucidity + CalculateMaxLucity();
-        lucidity += CalculateMaxLucity();
-        lucidityPostProcess.UpdateLucidityMask(lucidity);
-        originalAttackSpeed = CalculateAttackSpeed();
-        originalMeleeDamage = CalculateAttackDamage();
-        GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
-        Debug.Log("Lucidity: " + lucidity + "Max Lucidity: " + originalMaxLucidity + "Attack Speed: " + originalAttackSpeed + "Melee Damage: " + originalMeleeDamage);
+        float modifiedAttackSpeed = originalAttackSpeed * temporaryAttackSpeedModifier;
+        float modifiedMeleeDamage = originalMeleeDamage * temporaryMeleeDamageModifier;
+        float modifiedSpeed = baseSpeed * temporarySpeedModifier;
+        float modifiedArmorReduction = originalArmorAmount * temporaryArmorReductionModifier;
+
+
+        attackSpeed = modifiedAttackSpeed;
+        meleeDamage = modifiedMeleeDamage;
+        speed = modifiedSpeed;
+        damageReduction = modifiedArmorReduction;
+
+        controller.MoveSpeed = speed;
+
+        Debug.Log("Lucidity: " + lucidity + " Max Lucidity: " + maxLucidity + " Attack Speed: " + attackSpeed + " Melee Damage: " + meleeDamage + " Speed: " + speed + " Damage Reduction: " + damageReduction);
+
+
+        //originalAttackSpeed = CalculateAttackSpeed();
+        //originalMeleeDamage += CalculateAttackDamage();
+        //controller.MoveSpeed = CalculateSpeed();
+        //Debug.Log("Lucidity: " + lucidity + "Max Lucidity: " + originalMaxLucidity + "Attack Speed: " + originalAttackSpeed + "Melee Damage: " + originalMeleeDamage);
+
+        //float modifiedAttackSpeed = originalAttackSpeed * temporaryAttackSpeedModifier;
+        //float modifiedMeleeDamage = originalMeleeDamage * temporaryMeleeDamageModifier;
+        //float modifiedMovementSpeed = baseSpeed * temporarySpeedModifier;
+        //float modifiedArmorReduction = originalArmorAmount * temporaryArmorReductionModifier;
+
+        //attackSpeed = modifiedAttackSpeed;
+        //meleeDamage = modifiedMeleeDamage;
+        //speed = modifiedMovementSpeed;
+        //damageReduction = modifiedArmorReduction;
     }
 
     public void TakeDamage(float damage)
-    {
-        lucidity -= (damage * damageReduction);
-        lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
+    {       
+        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
         
@@ -172,6 +275,7 @@ public class Player : MonoBehaviour
             }
             d.relicQuantity++;
         }
+        ApplyRelicUpgrades();
         UpdateCharacterStats();
     }
 
