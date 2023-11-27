@@ -49,7 +49,7 @@ public class FireWeapon : MonoBehaviour
         //crosshair.transform.position = mouseWorldPos;
 
 
-        //     if (!gamePauser.InMenu) //Man kan inte skjuta när man är i shoppen
+        //     if (!gamePauser.InMenu) //Man kan inte skjuta nï¿½r man ï¿½r i shoppen
         {
             bool isRightbtnPressed = UnityEngine.InputSystem.Mouse.current.rightButton.isPressed;
 
@@ -69,11 +69,9 @@ public class FireWeapon : MonoBehaviour
 
         hud_ranged_attack.Run();
 
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
-        InstantiateBullet_Projectile();
+        //Audio
+        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttack, transform.position);
+            InstantiateBullet_Projectile();
 
         int cooldownMs = (int)(1000 * player.CalculateAttackSpeed());
         await Task.Delay(cooldownMs);
@@ -99,7 +97,7 @@ public class FireWeapon : MonoBehaviour
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
         Vector3 dir = new Vector3(targetPos.x - firePoint.position.x, 0, targetPos.z - firePoint.position.z).normalized;
         rb.mass = 5;
-        rb.AddForce(dir * bulletForce, ForceMode.Impulse); 
+        rb.AddForce(dir * bulletForce, ForceMode.Impulse);
 
 
     }

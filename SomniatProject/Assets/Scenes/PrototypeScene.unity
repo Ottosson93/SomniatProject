@@ -4384,44 +4384,324 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <dash>k__BackingField.Path
+      value: event:/SFX/Dash
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <death>k__BackingField.Path
-      value: event:/Music/MusicTest
+      value: event:/SFX/Berzerk
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <music>k__BackingField.Path
-      value: event:/Music/100% Music
+      value: event:/Music/MusicEventFull
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <potion>k__BackingField.Path
+      value: event:/SFX/Potion
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <berzerk>k__BackingField.Path
+      value: event:/SFX/Berzerk
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <fireball>k__BackingField.Path
+      value: event:/SFX/FireBall
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMelee>k__BackingField.Path
+      value: event:/SFX/BossMelee
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMusic>k__BackingField.Path
+      value: event:/Music/BossMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossThrow>k__BackingField.Path
+      value: event:/SFX/BossThrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <idleMusic>k__BackingField.Path
+      value: event:/Music/IdleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <dash>k__BackingField.Guid.Data1
+      value: -857348789
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <dash>k__BackingField.Guid.Data2
+      value: 1340555412
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <dash>k__BackingField.Guid.Data3
+      value: 2006400443
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <dash>k__BackingField.Guid.Data4
+      value: -1530144638
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <boxCollapse>k__BackingField.Path
+      value: event:/SFX/BoxCollapse
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <death>k__BackingField.Guid.Data1
-      value: 1363464782
+      value: -975879129
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <death>k__BackingField.Guid.Data2
-      value: 1185617391
+      value: 1292123125
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <death>k__BackingField.Guid.Data3
-      value: 659879862
+      value: -2108321091
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <death>k__BackingField.Guid.Data4
-      value: -1045805568
+      value: -877536688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeAttack>k__BackingField.Path
+      value: event:/SFX/meleeAttack
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <music>k__BackingField.Guid.Data1
-      value: 2125914709
+      value: 394121399
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <music>k__BackingField.Guid.Data2
-      value: 1141697323
+      value: 1166693431
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <music>k__BackingField.Guid.Data3
-      value: 948379829
+      value: -735041367
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <music>k__BackingField.Guid.Data4
-      value: -1690740314
+      value: -2078359217
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <potion>k__BackingField.Guid.Data1
+      value: -193567625
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <potion>k__BackingField.Guid.Data2
+      value: 1102738376
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <potion>k__BackingField.Guid.Data3
+      value: 761496251
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <potion>k__BackingField.Guid.Data4
+      value: 1753193181
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedAttack>k__BackingField.Path
+      value: event:/SFX/RangedAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <berzerk>k__BackingField.Guid.Data1
+      value: -975879129
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <berzerk>k__BackingField.Guid.Data2
+      value: 1292123125
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <berzerk>k__BackingField.Guid.Data3
+      value: -2108321091
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <berzerk>k__BackingField.Guid.Data4
+      value: -877536688
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <piercingArrow>k__BackingField.Path
+      value: event:/SFX/PiercingArrow
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <fireball>k__BackingField.Guid.Data1
+      value: -2144049597
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <fireball>k__BackingField.Guid.Data2
+      value: 1257401608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <fireball>k__BackingField.Guid.Data3
+      value: -469303671
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <fireball>k__BackingField.Guid.Data4
+      value: 1552402299
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMelee>k__BackingField.Guid.Data1
+      value: 549557229
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMelee>k__BackingField.Guid.Data2
+      value: 1172102940
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMelee>k__BackingField.Guid.Data3
+      value: 1600342463
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMelee>k__BackingField.Guid.Data4
+      value: -1303608608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMusic>k__BackingField.Guid.Data1
+      value: -2017303826
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMusic>k__BackingField.Guid.Data2
+      value: 1128874789
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMusic>k__BackingField.Guid.Data3
+      value: 1436609450
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossMusic>k__BackingField.Guid.Data4
+      value: -1253310860
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossThrow>k__BackingField.Guid.Data1
+      value: -58615570
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossThrow>k__BackingField.Guid.Data2
+      value: 1146505914
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossThrow>k__BackingField.Guid.Data3
+      value: 67462063
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <bossThrow>k__BackingField.Guid.Data4
+      value: -1808434871
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <idleMusic>k__BackingField.Guid.Data1
+      value: 1354769608
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <idleMusic>k__BackingField.Guid.Data2
+      value: 1334612628
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <idleMusic>k__BackingField.Guid.Data3
+      value: -1482240852
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <idleMusic>k__BackingField.Guid.Data4
+      value: -561117215
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeGruntAttack>k__BackingField.Path
+      value: event:/SFX/GruntMeleeAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <boxCollapse>k__BackingField.Guid.Data1
+      value: -513472617
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <boxCollapse>k__BackingField.Guid.Data2
+      value: 1310134498
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <boxCollapse>k__BackingField.Guid.Data3
+      value: 1366317967
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <boxCollapse>k__BackingField.Guid.Data4
+      value: 409510980
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeAttack>k__BackingField.Guid.Data1
+      value: -1765253578
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeAttack>k__BackingField.Guid.Data2
+      value: 1113902241
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeAttack>k__BackingField.Guid.Data3
+      value: 811890093
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeAttack>k__BackingField.Guid.Data4
+      value: -582308630
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedGruntAttack>k__BackingField.Path
+      value: event:/SFX/GruntRangedAttack
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedAttack>k__BackingField.Guid.Data1
+      value: 1588730303
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedAttack>k__BackingField.Guid.Data2
+      value: 1080370777
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedAttack>k__BackingField.Guid.Data3
+      value: -967043948
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedAttack>k__BackingField.Guid.Data4
+      value: 370240150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <piercingArrow>k__BackingField.Guid.Data1
+      value: 593174697
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <piercingArrow>k__BackingField.Guid.Data2
+      value: 1105696368
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <piercingArrow>k__BackingField.Guid.Data3
+      value: -1340723823
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <piercingArrow>k__BackingField.Guid.Data4
+      value: 450079072
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeGruntAttack>k__BackingField.Guid.Data1
+      value: -335538770
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeGruntAttack>k__BackingField.Guid.Data2
+      value: 1121494655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeGruntAttack>k__BackingField.Guid.Data3
+      value: -1073427288
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <meleeGruntAttack>k__BackingField.Guid.Data4
+      value: 1816562815
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedGruntAttack>k__BackingField.Guid.Data1
+      value: -1393068089
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedGruntAttack>k__BackingField.Guid.Data2
+      value: 1238719327
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedGruntAttack>k__BackingField.Guid.Data3
+      value: 1361796491
+      objectReference: {fileID: 0}
+    - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: <rangedGruntAttack>k__BackingField.Guid.Data4
+      value: 1393469217
       objectReference: {fileID: 0}
     - target: {fileID: 1408904666720293327, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: m_LocalPosition.x
