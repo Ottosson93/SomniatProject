@@ -7,7 +7,9 @@ using FMOD.Studio;
 public class AudioManager : MonoBehaviour
 {
     private List<EventInstance> eventInstances;
-    private EventInstance musicEventInstance; 
+    public EventInstance musicEventInstance;
+
+    public int enemiesEngaged = 0;
 
     public static AudioManager instance { get; private set; }
     private void Awake()
@@ -34,6 +36,14 @@ public class AudioManager : MonoBehaviour
         
     }
 
+    public void RestartMusic(EventReference musicEventReference)
+    {
+        musicEventInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        musicEventInstance = CreateEventInstance(musicEventReference);
+        musicEventInstance.start();
+
+    }
+
     public void PlaySingleSFX(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
@@ -52,6 +62,22 @@ public class AudioManager : MonoBehaviour
         {
             inst.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             inst.release();
+        }
+    }
+    public void AddEnemyEngage()
+    {
+        enemiesEngaged++;
+        if(enemiesEngaged == 1)
+        {
+            musicEventInstance.setParameterByName("Combat", 1f);
+        }
+    }
+    public void removeEnemyEngage()
+    {
+        enemiesEngaged--;
+        if (enemiesEngaged == 0)
+        {
+            musicEventInstance.setParameterByName("Combat", 1f);
         }
     }
 

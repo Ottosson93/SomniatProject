@@ -36,6 +36,7 @@ public class CheckEnemyInAttackRange : Node
 
         if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange &&  GuardMeleeBT.canAttack)
         {
+
             if (Time.time - GuardMeleeBT.lastClickedTime > 2f && GuardMeleeBT.comboCounter <= combo.Count)
             {   
                 if(Time.time - GuardMeleeBT.lastClickedTime >= 2f)
@@ -43,6 +44,8 @@ public class CheckEnemyInAttackRange : Node
                     animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
                     animator.Play("Attack", 1, 0);
                     GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
+
+
 
                     GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
                     GuardMeleeBT.lastClickedTime = Time.time;

@@ -484,6 +484,7 @@ MonoBehaviour:
   animator: {fileID: 8442482085988791223}
   damageTextPlayer: {fileID: 11400000, guid: d2bb1cc4792abd6418919efb276562d1, type: 2}
   attackPoint: {fileID: 9133735220745032056}
+  firePoint: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128

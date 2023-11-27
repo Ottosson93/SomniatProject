@@ -181,4 +181,13 @@ public class Player : MonoBehaviour
         playerStats.Dexterity.RemoveAllModifiersFromSource(d);
         playerStats.Intelligence.RemoveAllModifiersFromSource(d);
     }
+
+    public void FixedUpdate()
+    {
+        
+        float lucidityProcentage = lucidity / maxLucidity * 100;
+        //Debug.Log("Lucidity %: " +lucidityProcentage);
+        AudioManager.instance.musicEventInstance.setParameterByName("Lucidity", lucidityProcentage);
+        
+    }
 }

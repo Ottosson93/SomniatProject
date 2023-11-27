@@ -69,10 +69,8 @@ public class FireWeapon : MonoBehaviour
 
             hud_ranged_attack.Run();
 
-            if (audioSource != null)
-            {
-                audioSource.Play();
-            }
+        //Audio
+        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttack, transform.position);
             InstantiateBullet_Projectile();
 
         int cooldownMs = (int)(1000 / player.CalculateAttackSpeed());
