@@ -8,7 +8,7 @@ using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using UnityEngine.Rendering.Universal;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/DamgeTextPlayer", fileName = "DamgeTextPlayer")]
-public class DamgeTextPlayer : ScriptableObject
+public class DamageTextPlayer : ScriptableObject
 {
     public TextMeshPro textMeshPro;
 

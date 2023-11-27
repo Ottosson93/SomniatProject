@@ -10,7 +10,7 @@ public class BossBT : Tree
 
     public static float speed = 1f;
     public static float targetedSpeed = 4f;
-    public static float fovRange = 10f;
+    public static float fovRange = 6f;
     public static float distance = 9f;
     public static float attackRange = 4f;
     public static float rotationSpeed = 3f;
@@ -23,17 +23,29 @@ public class BossBT : Tree
 
     public static float attackRate = 2f;
     public static float attackCounter = 0f;
+    public static int bossSpellCounter = 0;
 
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>
         {
-            new Sequence(new List<Node>
+
+             new Sequence(new List<Node>
             {
                 new BossCheckEnemyInAttackRange(transform, combo),
                 new BossTaskMeleeAttack(transform, combo),
                 //new BossTaskBoulderAttack(transform, spells, castPos),
             }),
+
+
+            new Sequence (new List<Node>
+            {
+                new CheckEnemyInRangedAttack(transform),
+                new BossAimAtEnemy(transform),
+                new BossTaskBoulderAttack(transform, spells, castPos)
+            }),
+
+           
 
             new Sequence(new List<Node>
             {
@@ -41,8 +53,12 @@ public class BossBT : Tree
                 new BossTaskGoToTarget(transform),
             }),
             //new TaskPatrol(transform, waypoints),
+
+
+            
         });
 
         return root;
+
     }
 }

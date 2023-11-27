@@ -23,15 +23,14 @@ public class EnemyBullet : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        targetTag = "Player";
-        if (other.gameObject.tag != targetTag)
-            return;
-
-        if(targetTag == "Player")
+        if (other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<Player>().TakeDamage(damage);
         }
-
-        gameObject.SetActive(false);
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(this.gameObject);
+        }
+        Destroy(gameObject);
     }
 }
