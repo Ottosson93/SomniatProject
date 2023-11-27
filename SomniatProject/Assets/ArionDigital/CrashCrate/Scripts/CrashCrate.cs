@@ -21,6 +21,7 @@
             navMeshObstacle.enabled = false;
             fracturedCrate.SetActive(true);
             crashAudioClip.Play();
+            Destroy(gameObject, 4f);
         }
 
         [ContextMenu("Test")]
