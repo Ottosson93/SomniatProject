@@ -1,4 +1,8 @@
+#if UNITY_EDITOR
+
 using Palmmedia.ReportGenerator.Core;
+#endif
+
 using System.Collections;
 using System.Collections.Generic;
 using Unity.AI.Navigation;

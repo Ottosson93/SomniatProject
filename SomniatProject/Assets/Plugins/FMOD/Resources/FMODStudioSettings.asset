@@ -283,8 +283,8 @@ MonoBehaviour:
   switchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: ../../../School Work/FMOD/AudioSystem Somniat/AudioSystem Somniat.fspro
-  sourceBankPath: ../../../School Work/FMOD/AudioSystem Somniat/Build
+  sourceProjectPath: Assets/Resources/Lol/EmptyTemplate.fspro
+  sourceBankPath: Assets/Resources/Lol/Build
   sourceBankPathUnformatted: 
   BankRefreshCooldown: 5
   ShowBankRefreshWindow: 1
@@ -307,9 +307,7 @@ MonoBehaviour:
   Plugins: []
   MasterBanks:
   - Master
-  Banks:
-  - Music
-  - SFX
+  Banks: []
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

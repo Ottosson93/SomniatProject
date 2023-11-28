@@ -1,19 +1,23 @@
-﻿using Packages.Rider.Editor.UnitTesting;
+﻿#if UNITY_EDITOR
+using UnityEngine.InputSystem.Android;
+using UnityEditor.Scripting;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
+using UnityEditor.Experimental.GraphView;
+using Packages.Rider.Editor.UnitTesting;
+#endif
+
+
 using System.Collections.Generic;
 using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.Scripting;
 using UnityEngine;
-using UnityEngine.InputSystem.Android;
 using UnityEngine.Rendering.Universal;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine.UIElements;
-using UnityEditor.Experimental.GraphView;
 using System.Net;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 using BehaviorTree;
 
 

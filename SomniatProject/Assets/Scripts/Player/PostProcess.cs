@@ -1,5 +1,8 @@
 using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor.Networking.PlayerConnection;
+#endif
+
 using UnityEngine;
 
 public class PostProcess : MonoBehaviour
