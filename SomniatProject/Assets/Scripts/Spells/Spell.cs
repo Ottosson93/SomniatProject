@@ -54,7 +54,7 @@ public class Spell : MonoBehaviour
             player.EndBerserk();
             Debug.Log("original Speed: " + player.speed + " original Attack Speed: " + player.attackSpeed + " original Damage Amount: " + player.meleeDamage + " original Armor Amount: " + player.damageReduction);
             player.StartBerserk(SpellToCast.ArmorReduction, SpellToCast.AttackSpeedBoost, SpellToCast.DamageBoost, SpellToCast.MovementSpeedBoost);
-            Debug.Log("new Speed: " + player.newSpeed + " new Attack Speed: " + player.attackSpeed + " new Damage Amount: " + player.meleeDamage + " new Armor Amount: " + player.damageReduction);
+            Debug.Log("new Speed: " + player.speed + " new Attack Speed: " + player.attackSpeed + " new Damage Amount: " + player.meleeDamage + " new Armor Amount: " + player.damageReduction);
             StartCoroutine(ApplyBerserkEffects());
         }
     }
