@@ -51,7 +51,7 @@ Shader "Custom/NightmareScale"
                 float2 center = _Center.xy;
                 float2 distance = i.uv - center;
 
-                distance.y *= 0.5;
+              //  distance.y *= 0.5;
 
                 float distanceFromCenter = length(distance);
 

@@ -19,7 +19,7 @@ public class LucidityPostProcess : MonoBehaviour
     {
         float radius = Mathf.Lerp(minScale, maxScale, lucidty / player.maxLucidity);
        
-        lucidCamera.localScale = new Vector3(radius, radius, radius);
+        lucidCamera.localScale = new Vector3(radius, radius*0.5F, radius);
     }
 
     
