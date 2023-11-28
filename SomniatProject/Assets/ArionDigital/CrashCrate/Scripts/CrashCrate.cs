@@ -28,6 +28,7 @@
             fracturedCrate.SetActive(true);
             itemDropSystem.HandleBoxDrop(transform.position);
             crashAudioClip.Play();
+            Destroy(gameObject, 4f);
         }
 
         [ContextMenu("Test")]

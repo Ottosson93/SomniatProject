@@ -10,7 +10,7 @@ public class RNode
 {
     public float height, width;
     public Vector2 topLeft, topRight, bottomLeft, bottomRight;
-    public Vector2 centerPos; 
+    public Vector3 centerPos; 
     public RNode parent, sibling;
     public List<RNode> children = new List<RNode>();
     public bool manual = false;

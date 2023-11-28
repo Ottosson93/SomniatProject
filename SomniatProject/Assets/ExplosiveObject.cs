@@ -4,23 +4,20 @@ using UnityEngine;
 
 public class ExplosiveObject : MonoBehaviour
 {
-    public LayerMask targetLayer;
-    public int currentHealth, health;
+    public int health, explosionDamage, explosionDamageToPlayer;
     public SpellScriptableObject SpellToCast;
     public Collider[] explosionColliders;
 
     private void Start()
     {
-        health = 5;
-        currentHealth = health;
         explosionColliders = new Collider[10];
     }
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        health -= damage;
 
-        if (currentHealth <= 0)
+        if (health <= 0)
         {
             Die();
         }
@@ -52,15 +49,15 @@ public class ExplosiveObject : MonoBehaviour
                 Collider hitCollider = explosionColliders[overlapIndex];
                 Enemy enemy = hitCollider.GetComponent<Enemy>();
                 Player player = hitCollider.GetComponent<Player>();
-                ExplosiveObject explosion = hitCollider.GetComponent<ExplosiveObject>();
+                ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
 
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(SpellToCast.DamageAmount);
+                    enemy.TakeDamage(explosionDamage);
                 }
                 else if (player != null)
                 {
-                    player.TakeDamage(SpellToCast.DamageAmount);
+                    player.TakeDamage(explosionDamageToPlayer);
                 }
                 //else if (gameObject != null)
                 //{
@@ -68,22 +65,5 @@ public class ExplosiveObject : MonoBehaviour
                 //}
             }
         }
-
-        //Collider[] overlapCount = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius * 2);
-
-        //foreach (Collider hitCollider in overlapCount)
-        //{
-        //    Enemy enemy = hitCollider.GetComponent<Enemy>();
-        //    Player player = hitCollider.GetComponent<Player>();
-
-        //    if (enemy != null)
-        //    {
-        //        enemy.TakeDamage(SpellToCast.DamageAmount);
-        //    }
-        //    else if (player != null)
-        //    {
-        //        player.TakeDamage(SpellToCast.DamageAmount);
-        //    }
-        //}
     }
 }

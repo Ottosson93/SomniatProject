@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6752888406500542446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall Prefab v1
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -25,12 +25,12 @@ Transform:
   m_GameObject: {fileID: 593884011335473866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 124.254944, y: -17.939028, z: -52.356743}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4922742943564533785}
   - {fileID: 5198004810954893459}
+  - {fileID: 4922742943564533785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &3872937979150532322
@@ -49,6 +49,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 8112832757842210709, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cdb27ec780dce274e8e52c7057ef5616, type: 2}
     - target: {fileID: 9051238300485817969, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.25
@@ -117,15 +121,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.52095884
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.7796667
+      value: 2.8
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalScale.z
-      value: 4.9875193
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -133,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.011002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.06
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -174,6 +178,10 @@ PrefabInstance:
     - target: {fileID: 1907700878174624045, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907700878174624045, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 3110913104017512285, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalScale.y

@@ -126,8 +126,9 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamage(float damage)
-    {       
-        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  // Ensure lucidity is within the valid range
+    {      
+        // Ensure lucidity is within the valid range
+        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 

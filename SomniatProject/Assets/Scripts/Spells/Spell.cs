@@ -95,6 +95,7 @@ public class Spell : MonoBehaviour
         else
         {
             Enemy enemy = other.GetComponent<Enemy>();
+            ExplosiveObject explosiveObject = other.GetComponent<ExplosiveObject>();
             if (SpellToCast.name.Equals("Fireball"))
             {
                 if (enemy != null)
@@ -118,6 +119,11 @@ public class Spell : MonoBehaviour
                     StunEffect stunEffect = enemy.gameObject.AddComponent<StunEffect>();
                     stunEffect.Initialize(SpellToCast.StunDuration, SpellToCast.LightningStun);
 
+                }
+
+                if (explosiveObject != null)
+                {
+                    explosiveObject.TakeDamage(spellDamage);
                 }
             }
 
@@ -192,10 +198,17 @@ public class Spell : MonoBehaviour
     private void DealDamageInRadius()
     {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*6);
-
+        
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
+            ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
+            
+            if (explosiveObject != null)
+            {
+                explosiveObject.TakeDamage(spellDamage);
+            }
+
             if (enemy != null)
             {
                 enemy.TakeDamage(SpellToCast.DamageAmount + player.CalculateSpellDamageModifierFromRelics());

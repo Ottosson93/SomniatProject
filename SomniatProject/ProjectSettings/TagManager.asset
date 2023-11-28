@@ -12,7 +12,6 @@ TagManager:
   - OnDeathMenu
   - BossRoom
   - Mask
-  - Wall
   - DestructibleObject
   - Item
   - BossSpell
@@ -39,21 +38,22 @@ TagManager:
   - Bullet
   - EnemyBullet
   - MinimapIcon
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
-  -
+  - DestructibleObject
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+
   m_SortingLayers:
   - name: Default
     uniqueID: 0

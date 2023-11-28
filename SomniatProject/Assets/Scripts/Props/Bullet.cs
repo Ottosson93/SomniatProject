@@ -18,6 +18,10 @@ public class Bullet : MonoBehaviour
         {
             other.GetComponent<Enemy>().TakeDamage(damage);
         }
+        else if (other.gameObject.CompareTag("DestructibleObject"))
+        {
+            other.GetComponent<ExplosiveObject>().TakeDamage(damage);
+        }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
             Destroy(this.gameObject);

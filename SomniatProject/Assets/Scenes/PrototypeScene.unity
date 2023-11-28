@@ -959,6 +959,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
+--- !u!1 &265804183 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1238490991931354159, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
+  m_PrefabInstance: {fileID: 6702034550989234961}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &323455339
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,11 +1475,11 @@ PrefabInstance:
       objectReference: {fileID: 726456087417395236, guid: 4d096224ff5b3ad4a88fc13666f86c18, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: size.x
-      value: 400
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: size.y
-      value: 400
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: material
@@ -1505,32 +1511,32 @@ PrefabInstance:
       objectReference: {fileID: 5817554983899466588, guid: 788b7a15a61fe2f47a4c4bb5b70a0c41, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: minimumRoomSize
-      value: 80
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: redRoomMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: ab2c07a6f29954e46aa41571ceed983d, type: 2}
+      objectReference: {fileID: 2100000, guid: a313ef5bef4301842928e8b87d351fb6, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.size
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: 094f7d9a8e0342a4793c171160b24dc1, type: 2}
+      objectReference: {fileID: 2100000, guid: a313ef5bef4301842928e8b87d351fb6, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: orangeRoomMaterial
       value: 
-      objectReference: {fileID: 2100000, guid: a559c48117f17d648b6c7db4518692ed, type: 2}
+      objectReference: {fileID: 2100000, guid: a313ef5bef4301842928e8b87d351fb6, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[0]
       value: 
-      objectReference: {fileID: 1000013698201512, guid: 1696f15d6e3acd846a387b7c2be92d72, type: 3}
+      objectReference: {fileID: 2013420277293291620, guid: 7fa4baf7b12b5ab448060a0300879196, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[1]
       value: 
-      objectReference: {fileID: 7515951779249253956, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
+      objectReference: {fileID: 2013420277293291620, guid: 7fa4baf7b12b5ab448060a0300879196, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[2]
       value: 
@@ -1918,7 +1924,7 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: interactableProps.Array.data[1]
       value: 
-      objectReference: {fileID: 2465079734990110219, guid: 0f5ac94b3acadfe42878abd9666c78b1, type: 3}
+      objectReference: {fileID: 2465079734990110219, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
     - target: {fileID: 3222016400277921939, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -11445,7 +11451,11 @@ PrefabInstance:
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    - target: {fileID: 4111708718239790196, guid: 002ea0a557ec37e49ae9ddefda3b9810, type: 3}
+    - target: {fileID: 828854672895164302, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e30d7baabfb292c4f9687033f726d8a4, type: 3}
+    - target: {fileID: 1041599430261379833, guid: f488b1980222b5542ae7763f49af8afa, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
