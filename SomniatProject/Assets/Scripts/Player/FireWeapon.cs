@@ -73,7 +73,7 @@ public class FireWeapon : MonoBehaviour
         AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttack, transform.position);
             InstantiateBullet_Projectile();
 
-        int cooldownMs = (int)(1000 * player.CalculateAttackSpeed());
+        int cooldownMs = (int)(1000 * player.attackSpeed);
         await Task.Delay(cooldownMs);
         canShoot = true;
 

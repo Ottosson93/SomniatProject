@@ -541,7 +541,7 @@ namespace StarterAssets
 
         private IEnumerator AttackCooldown()
         {
-            yield return new WaitForSeconds(player.originalAttackSpeed);
+            yield return new WaitForSeconds(player.attackSpeed);
             canAttack = true;  // Re-enable attack after cooldown
         }
 
@@ -569,14 +569,13 @@ namespace StarterAssets
 
                     foreach (Collider destructibleObject in hitDestructibleObjects)
                     {
-                        destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.originalMeleeDamage);
+                        destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
                     }
 
                     foreach (Collider enemy in hitEnemies)
                     {
-                      
-                        bool dead = enemy.GetComponent<Enemy>().current - player.originalMeleeDamage <= 0;
-                        enemy.GetComponent<Enemy>().TakeDamage((int)player.originalMeleeDamage); ;
+                        bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
+                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage); ;
 
                         if (player.empoweredRelic != null)
                         {
