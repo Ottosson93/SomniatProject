@@ -123,7 +123,7 @@ public class Spell : MonoBehaviour
 
                 if (explosiveObject != null)
                 {
-                    explosiveObject.TakeDamage(spellDamage);
+                    explosiveObject.TakeDamage(SpellToCast.DamageAmount);
                 }
             }
 
@@ -206,7 +206,7 @@ public class Spell : MonoBehaviour
             
             if (explosiveObject != null)
             {
-                explosiveObject.TakeDamage(spellDamage);
+                explosiveObject.TakeDamage(SpellToCast.DamageAmount);
             }
 
             if (enemy != null)

@@ -556,7 +556,7 @@ namespace StarterAssets
             //Checks if the collided object is a destructible object
             foreach (Collider destructibleObject in hitDestructibleObjects)
             {
-                destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.originalMeleeDamage);
+                destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
             }
 
             if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
@@ -574,8 +574,8 @@ namespace StarterAssets
 
                     foreach (Collider enemy in hitEnemies)
                     {
-                        bool dead = enemy.GetComponent<Enemy>().current - player.originalMeleeDamage <= 0;
-                        enemy.GetComponent<Enemy>().TakeDamage((int)player.originalMeleeDamage);
+                        bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
+                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
 
                         //If you have the empowered relic, you gain movementspeed after killing an enemy
                         if (player.empoweredRelic != null)
