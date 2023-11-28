@@ -19,7 +19,7 @@ MonoBehaviour:
     Data3: -2108321091
     Data4: -877536688
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -46,7 +46,7 @@ MonoBehaviour:
     Data3: 761496251
     Data4: 1753193181
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -54,6 +54,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-7543424905581644262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/SFX.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638367865939964553
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-7426464976493990417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +91,7 @@ MonoBehaviour:
     Data3: 1361796491
     Data4: 1393469217
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -81,26 +99,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7371388930476427687
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Music.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../School Work/FMOD/AudioSystem Somniat/Build/Desktop/Music.bank
-  Name: Music
-  StudioPath: bank:/Music
-  lastModified: 638367016494602911
-  FileSizes:
-  - Name: Desktop
-    Value: 4367808
-  Exists: 1
 --- !u!114 &-7042060489213880626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,7 +118,7 @@ MonoBehaviour:
     Data3: 948379829
     Data4: -1690740314
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -128,6 +126,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 27429
+--- !u!114 &-6990523184734356313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Music.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMODBanks/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638367865939341153
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-6934887412510341724
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +187,7 @@ MonoBehaviour:
     Data3: -857811013
     Data4: -1018504014
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -200,7 +216,7 @@ MonoBehaviour:
     Data3: 67462063
     Data4: -1808434871
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -227,7 +243,7 @@ MonoBehaviour:
     Data3: -967043948
     Data4: 370240150
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -254,7 +270,7 @@ MonoBehaviour:
     Data3: 1366317967
     Data4: 409510980
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -305,7 +321,7 @@ MonoBehaviour:
     Data3: -735041367
     Data4: -2078359217
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -334,7 +350,7 @@ MonoBehaviour:
     Data3: -1073427288
     Data4: 1816562815
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -361,7 +377,7 @@ MonoBehaviour:
     Data3: 811890093
     Data4: -582308630
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -388,7 +404,7 @@ MonoBehaviour:
     Data3: -469303671
     Data4: 1552402299
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -415,7 +431,7 @@ MonoBehaviour:
     Data3: 659879862
     Data4: -1045805568
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -423,26 +439,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 27428
---- !u!114 &-582482893266678818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../School Work/FMOD/AudioSystem Somniat/Build/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-  lastModified: 638367010338249588
-  FileSizes:
-  - Name: Desktop
-    Value: 1754
-  Exists: 1
 --- !u!114 &-25275746761902063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,7 +458,7 @@ MonoBehaviour:
     Data3: 1600342463
     Data4: -1303608608
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -483,10 +479,10 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -582482893266678818}
-  - {fileID: 5231068261966757137}
-  - {fileID: -7371388930476427687}
-  - {fileID: 3340333166144460957}
+  - {fileID: 1406891261558693147}
+  - {fileID: 1767678488881080903}
+  - {fileID: -6990523184734356313}
+  - {fileID: -7543424905581644262}
   EditorEvents:
   - {fileID: -1324456838648049517}
   - {fileID: -7042060489213880626}
@@ -508,10 +504,10 @@ MonoBehaviour:
   - {fileID: -2869549970991574501}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5231068261966757137}
+  - {fileID: 1767678488881080903}
   StringsBanks:
-  - {fileID: -582482893266678818}
-  cacheTime: 638367016494602911
+  - {fileID: 1406891261558693147}
+  cacheTime: 638367865939964553
   cacheVersion: 131609
 --- !u!114 &557703924612928245
 MonoBehaviour:
@@ -532,7 +528,7 @@ MonoBehaviour:
     Data3: -1340723823
     Data4: 450079072
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -559,7 +555,7 @@ MonoBehaviour:
     Data3: -1482240852
     Data4: -561117215
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -567,6 +563,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 54857
+--- !u!114 &1406891261558693147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638367865938463860
+  FileSizes:
+  - Name: 
+    Value: 1754
+  Exists: 1
 --- !u!114 &1484031491248893459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -586,7 +602,7 @@ MonoBehaviour:
     Data3: 2006400443
     Data4: -1530144638
   Banks:
-  - {fileID: 3340333166144460957}
+  - {fileID: -7543424905581644262}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -613,7 +629,7 @@ MonoBehaviour:
     Data3: 1436609450
     Data4: -1253310860
   Banks:
-  - {fileID: -7371388930476427687}
+  - {fileID: -6990523184734356313}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -621,6 +637,24 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 57600
+--- !u!114 &1767678488881080903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMODBanks/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638367865938453852
+  FileSizes: []
+  Exists: 1
 --- !u!114 &2369836404346232022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,26 +679,6 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
---- !u!114 &3340333166144460957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../School Work/FMOD/AudioSystem Somniat/Build/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638366959853152217
-  FileSizes:
-  - Name: Desktop
-    Value: 117440
-  Exists: 1
 --- !u!114 &5174227234577464082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -688,24 +702,4 @@ MonoBehaviour:
   Type: 0
   IsGlobal: 0
   Labels: []
-  Exists: 1
---- !u!114 &5231068261966757137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/Master.bank
-  m_EditorClassIdentifier: 
-  Path: ../../../School Work/FMOD/AudioSystem Somniat/Build/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638367010338229570
-  FileSizes:
-  - Name: Desktop
-    Value: 1036
   Exists: 1
