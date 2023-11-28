@@ -188,11 +188,11 @@ public class MenuManager : MonoBehaviour
             OnDeath();
         }
 
-        if (boss == null)
-        {
-            playerStatsSO.ResetStats();
-            OnVictory();
-        }
+        //if (boss == null)
+        //{
+        //    playerStatsSO.ResetStats();
+        //    OnVictory();
+        //}
 
         Debug.Log("Time: " + Time.timeScale);
     }
