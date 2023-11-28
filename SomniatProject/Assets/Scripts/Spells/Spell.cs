@@ -34,6 +34,10 @@ public class Spell : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
+        if (SpellToCast.name.Equals("Fireball"))
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireball, player.transform.position);
+        if(SpellToCast.name.Equals("Piercing Arrow"))
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.piercingArrow, player.transform.position);
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
@@ -83,7 +87,7 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+       
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
@@ -162,6 +166,8 @@ public class Spell : MonoBehaviour
         if(player != null)
         {
             berserkParticles = Instantiate(SpellToCast.BerserkParticleSystem, player.transform);
+            //Berserk SFX
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.berzerk, player.transform.position);
             berserkParticles.Play();
 
             yield return new WaitForSeconds(SpellToCast.Lifetime);

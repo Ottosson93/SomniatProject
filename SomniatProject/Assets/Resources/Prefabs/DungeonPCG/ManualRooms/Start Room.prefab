@@ -1037,6 +1037,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8193948903390200831, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8193948903390200831, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 8218011096781584704, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
@@ -1580,6 +1588,10 @@ PrefabInstance:
       propertyPath: lucidityPostProcess
       value: 
       objectReference: {fileID: 5565298475421484974}
+    - target: {fileID: 4586738781332085182, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: originalMaxLucidity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5178686219891051559, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.26
