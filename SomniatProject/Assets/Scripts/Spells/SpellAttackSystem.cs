@@ -108,8 +108,12 @@ public class SpellAttackSystem : MonoBehaviour
 
     public void AICastSpell(Spell spell, Transform castPoint, Transform PlayerPos)
     {
-        Vector3 direction = (PlayerPos.position - castPoint.position).normalized;
-        direction.y = 0;
+        float yOffset = 1.1F;
+
+        Vector3 direction =  (new Vector3(PlayerPos.position.x, PlayerPos.position.y + yOffset, PlayerPos.position.z) - castPoint.position).normalized;
+
+        //direction.y = 0;
+
         castPoint.forward = direction;
 
 
