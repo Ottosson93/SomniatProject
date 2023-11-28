@@ -48,15 +48,12 @@ public class DungeonGenerator : MonoBehaviour
 
     Material material;
 
-    //Room zone variables
-    Material greenRoomMaterial;
-    Material orangeRoomMaterial;
-    Material redRoomMaterial;
     double distFromCenter;
     int amountOfInteractableProps, amountOfProps, amountOfEnemies;
 
     //Populate room variables
     List<GameObject> listOfAllEnemies = new List<GameObject>();
+    float spawnOffset = 3f, boundOffset = 2.5f;
 
 
     Collider[] colliders = new Collider[5];
@@ -64,8 +61,8 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, Material greenRoomMaterial, Material orangeRoomMaterial, Material redRoomMaterial,
-        List<GameObject> pmr, GameObject wall1, GameObject wall5, GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
+    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject wall1, GameObject wall5, 
+        GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
         /*
@@ -88,9 +85,6 @@ public class DungeonGenerator : MonoBehaviour
         rootNode.sibling = null;
         nodes.Add(rootNode);
         this.material = material;
-        this.greenRoomMaterial = greenRoomMaterial;
-        this.orangeRoomMaterial = orangeRoomMaterial;
-        this.redRoomMaterial = redRoomMaterial;
         this.listOfAllEnemies = listOfAllEnemies;
         this.Layer = layer;
         this.interactableProps = interactableProps;
@@ -337,8 +331,7 @@ public class DungeonGenerator : MonoBehaviour
         n.UpdateWH();
         n.UpdateCorners();
     }
-    #endregion
-
+    
     public void PlaceStartingRoomInCenter()
     {
         Vector2 origo = new Vector2(0,0);
@@ -377,6 +370,9 @@ public class DungeonGenerator : MonoBehaviour
 
         finishedNodes.Remove(mostCenteredRoom);
     }
+    #endregion
+
+    
 
     //Ska denna bort Arvid?
     bool CheckSize(RNode n)
@@ -644,7 +640,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0; i < uvs.Length; i++)
         {
-            uvs[i] = new Vector2(vertices[i].x, vertices[i].y);
+            uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
         }
 
         int[] triangles = new int[]
@@ -658,7 +654,7 @@ public class DungeonGenerator : MonoBehaviour
 
 
         //GameObject room = new GameObject("floor" + id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider));
-        GameObject room = new GameObject("floor" + n.id.ToString() + " sibling " + n.sibling.id.ToString() + " parent " + n.parent.id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider), typeof(MeshCollider));
+        GameObject room = new GameObject("floor" + n.id.ToString() + " sibling " + n.sibling.id.ToString() + " parent " + n.parent.id.ToString(), typeof(MeshFilter), typeof(MeshRenderer), typeof(BoxCollider), typeof(MeshCollider), typeof(Texture));
         //room.transform.position = Vector3.zero;
         //room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
@@ -666,23 +662,22 @@ public class DungeonGenerator : MonoBehaviour
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
         room.GetComponent<MeshRenderer>().material = material;
+        //room.GetComponent<MeshRenderer>().material.mainTexture = texFloor;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
 
-        //Maybe use an enum instead
-        if (n.isGreenRoom == true)
-        {
-            room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
-        }
-        else if (n.isOrangeRoom == true)
-        {
-            room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
-        }
-        else if (n.isRedRoom == true)
-        {
-            room.GetComponent<MeshRenderer>().material = redRoomMaterial;
-        }
-
+        //if (n.isGreenRoom == true)
+        //{
+        //    room.GetComponent<MeshRenderer>().material = greenRoomMaterial;
+        //}
+        //else if (n.isOrangeRoom == true)
+        //{
+        //    room.GetComponent<MeshRenderer>().material = orangeRoomMaterial;
+        //}
+        //else if (n.isRedRoom == true)
+        //{
+        //    room.GetComponent<MeshRenderer>().material = redRoomMaterial;
+        //}
     }
 
     void CreateCorridorMesh(CNode n)
@@ -703,7 +698,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0; i < uvs.Length; i++)
         {
-            uvs[i] = new Vector2(vertices[i].x, vertices[i].y);
+            uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
         }
 
         int[] triangles = new int[]
@@ -767,12 +762,12 @@ public class DungeonGenerator : MonoBehaviour
         if (roomSize <= 30)
         {
             amountOfInteractableProps = 2;
-            amountOfProps = 2;
+            amountOfProps = 1;
         }
         else if (roomSize <= 40)
         {
             amountOfInteractableProps = 3;
-            amountOfProps = 3;
+            amountOfProps = 2;
         }
         else
         {
@@ -792,7 +787,6 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 1; i < amountOfProps; i++)
         {
-            float spawnOffset = 2.5f, boundOffset = 2f;
             Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
             int rndProp = Random.Range(1, props.Count);
@@ -813,8 +807,9 @@ public class DungeonGenerator : MonoBehaviour
                 propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
                 Debug.Log("Got the mesh of " + props[rndProp].name + " " + propBounds);
             }
-            
+
             int overlapCount;
+            
 
             //Creates a sphere collider or box depending on whether the object is larger in the Y-direction
             if (propBounds.y > propBounds.z * 1.5 && propBounds.y > propBounds.x * 1.5)
@@ -837,7 +832,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 while (overlapCount > 2)
                 {
-                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
                     overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + newObjOffset, 2f, colliders);
 
@@ -857,19 +852,18 @@ public class DungeonGenerator : MonoBehaviour
         //may want to change it to spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < amountOfInteractableProps; i++)
         {
-            int overlapCount;
 
-            Vector3 objOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+            Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
             int rndProp = Random.Range(0, interactableProps.Count);
 
             //Checks if the position is occupied, takes the size of the objects meshrenderer (+X in every dimension to get some more distance) and checks if there's anything at the spawn position
-            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(3f, 3f, 3f);
+            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
 
             //Collider[] intersecting = Physics.OverlapBox(center + objOffset, propBounds);
 
             //overlapCount = Physics.OverlapSphereNonAlloc(center + objOffset, 2f, colliders);
-            overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds, colliders);
+            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds, colliders);
 
             if (propBounds.y < propBounds.z && propBounds.y < propBounds.x)
             {
@@ -891,7 +885,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 while (overlapCount > 2)
                 {
-                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
                     overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + newObjOffset, 2f, colliders);
 
@@ -930,7 +924,7 @@ public class DungeonGenerator : MonoBehaviour
     {
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            Vector3 enemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+            Vector3 enemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
             Vector3 enemyBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
             //Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
@@ -945,7 +939,7 @@ public class DungeonGenerator : MonoBehaviour
             {
                 while (overlapCount > 2)
                 {
-                    Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / 2.5f, room.width / 2.5f), 0, Random.Range(-room.height / 2.5f, room.height / 2.5f));
+                    Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
                     overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + newEnemyOffset, 2f, colliders);
 
