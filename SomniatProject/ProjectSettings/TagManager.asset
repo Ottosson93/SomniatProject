@@ -18,6 +18,8 @@ TagManager:
   - LucidMesh
   - Wall
   - Obstacle
+  - Boss
+  - VictoryMenu
   layers:
   - Default
   - TransparentFX
@@ -51,6 +53,7 @@ TagManager:
   - 
   - 
   - 
+
   m_SortingLayers:
   - name: Default
     uniqueID: 0

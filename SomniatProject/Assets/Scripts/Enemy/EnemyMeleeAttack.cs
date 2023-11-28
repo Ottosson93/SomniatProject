@@ -28,6 +28,7 @@ namespace Assets.Eric_folder
             if (Vector3.Distance(transform.position, playerPos.position) < distance)
             {
                 animator.Play("Alien8_MeleeAttack");
+
             }
             else
             {

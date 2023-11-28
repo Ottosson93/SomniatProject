@@ -13,6 +13,12 @@
         [Header("Audio")]
         public AudioSource crashAudioClip;
         public NavMeshObstacle navMeshObstacle;
+        public ItemDropSystem itemDropSystem;
+
+        private void Start()
+        {
+            itemDropSystem = GetComponent<ItemDropSystem>();
+        }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -20,6 +26,7 @@
             boxCollider.enabled = false;
             navMeshObstacle.enabled = false;
             fracturedCrate.SetActive(true);
+            itemDropSystem.HandleBoxDrop(transform.position);
             crashAudioClip.Play();
             Destroy(gameObject, 4f);
         }

@@ -55,6 +55,7 @@ MonoBehaviour:
   fracturedCrate: {fileID: 1801761146947824276}
   crashAudioClip: {fileID: 4262418605540733613}
   navMeshObstacle: {fileID: 1147476833384679800}
+  itemDropSystem: {fileID: -96520594346108990}
 --- !u!65 &1417637340330785042
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -238,6 +239,31 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &-4041778360629848546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065924571364506927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcfd6a22df8b5ae4ebaaad34866aafd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-96520594346108990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9065924571364506927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7832e7f359bbaac41a4e566443923f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemPrefabMapper: {fileID: -4041778360629848546}
 --- !u!1001 &8656203522329876022
 PrefabInstance:
   m_ObjectHideFlags: 0

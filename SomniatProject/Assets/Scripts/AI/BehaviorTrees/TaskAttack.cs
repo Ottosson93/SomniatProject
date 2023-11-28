@@ -41,6 +41,8 @@ public class TaskMeleeAttack : Node
         
         foreach (Collider enemy in hitEnemies)
         {
+            //Audio
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeGruntAttack, enemy.transform.position);
             player.TakeDamage(GuardMeleeBT.attackDamage);
         }
 

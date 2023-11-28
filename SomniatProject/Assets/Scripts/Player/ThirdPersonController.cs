@@ -517,6 +517,9 @@ namespace StarterAssets
             _controller.Move((targetDirection.normalized * (Time.fixedDeltaTime) +
                                  new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.fixedDeltaTime) * dashingPower);
 
+            //Calling Audio
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.dash, transform.position);
+
             tr.emitting = true;
 
             await Task.Delay((int)(dashingTime*1000));
@@ -538,7 +541,7 @@ namespace StarterAssets
 
         private IEnumerator AttackCooldown()
         {
-            yield return new WaitForSeconds(player.originalAttackSpeed);
+            yield return new WaitForSeconds(player.attackSpeed);
             canAttack = true;  // Re-enable attack after cooldown
         }
 
@@ -562,6 +565,8 @@ namespace StarterAssets
 
                 if (Time.time - lastClickedTime >= 0.9f)
                 {
+                    //Audio attack
+                    AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeAttack, transform.position);
                     _animator.runtimeAnimatorController = combo[comboCounter].animatorOV;
                     _animator.Play("Attack", 1, 0);
                     comboCounter = comboCounter + 1;
