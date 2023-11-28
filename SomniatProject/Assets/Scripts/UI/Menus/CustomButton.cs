@@ -12,8 +12,6 @@ public class CustomButton : CustomUIComponent
     public Style style;
     public UnityEvent onClick;
     public GameObject pauseMenu;
-    public GameObject victoryMenu;
-    public GameObject onDeathMenu;
 
     private Button button;
     private TextMeshProUGUI buttonText;
@@ -49,24 +47,14 @@ public class CustomButton : CustomUIComponent
 
     public void NewGame()
     {
-        Time.timeScale = 1f;
-        Player.isDead = false;
         SceneManager.LoadScene(1);
-        
-    }
-
-    public void RestartGame()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(1);
-        victoryMenu.SetActive(false);
-        
     }
 
     public void MainMenu()
     {
-        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+
     }
 
     public void Resume()
@@ -84,7 +72,7 @@ public class CustomButton : CustomUIComponent
 
     public void OpenSettingsMenu()
     {
-
+        
     }
 
 }

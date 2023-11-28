@@ -15,11 +15,4 @@ public class PlayerStats : ScriptableObject
         Dexterity = new CharacterStat();
         Intelligence = new CharacterStat();
     }
-
-    public void ResetStats()
-    {
-        Strength = new CharacterStat();
-        Dexterity = new CharacterStat();
-        Intelligence = new CharacterStat();
-    }
 }
