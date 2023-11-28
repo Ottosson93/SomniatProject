@@ -7,9 +7,10 @@ using StarterAssets;
 public class Player : MonoBehaviour
 {
     public float maxLucidity;
+    public float originalMaxLucidity;
     public float lucidity;
     public readonly float baseSpeed = 2.0f;
-    public readonly float baseMeleeDamage = 5.0f;
+    public readonly float baseMeleeDamage = 10f;
     public readonly float baseAttackSpeed = 1.0f;
     public float damageReduction = 1.0f;
     public float flatSpeed = 0;
@@ -18,10 +19,10 @@ public class Player : MonoBehaviour
     public float attackSpeed;
     public static bool isDead = false;
 
-    private float originalMeleeDamage;
-    private float originalAttackSpeed;
-    private float originalSpeed;
-    private float originalArmorAmount;
+    public float originalMeleeDamage;
+    public float originalAttackSpeed;
+    public float originalSpeed;
+    public float originalArmorAmount;
 
     public PlayerStats playerStats;
     public float newSpeed;
@@ -35,14 +36,15 @@ public class Player : MonoBehaviour
     {
         Time.timeScale = 1f;
         controller = GetComponent<ThirdPersonController>();
+        lucidityPostProcess = GetComponent<LucidityPostProcess>();
 
         speed = baseSpeed;
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
 
 
-        maxLucidity = CalculateMaxLucity();
         lucidity = maxLucidity;
+        originalMaxLucidity = maxLucidity;
         controller.MoveSpeed = CalculateSpeed();
 
 
@@ -66,29 +68,29 @@ public class Player : MonoBehaviour
 
     public float CalculateSpeed()
     {
-        return newSpeed = baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
+        return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
     }
 
     public float CalculateAttackSpeed()
     {
-        return baseAttackSpeed * (1 + (playerStats.Dexterity.Value));
+        return baseAttackSpeed / (1 + (playerStats.Dexterity.Value));
     }
 
-    float CalculateDamage()
+    public float CalculateAttackDamage()
     {
-        return 1.0f;
+        return meleeDamage + (playerStats.Strength.Value);
     }
-    float CalculateArmor()
+    public int CalculateSpellDamage()
     {
-        return 1.0f;
+        return (int)playerStats.Intelligence.Value * 2;
     }
+
     float CalculateMaxLucity()
     {
-        if (playerStats.Strength.Value == 0)
-        {
-            return 20f;
-        }
-        return playerStats.Strength.Value * 20;
+        if (playerStats.Intelligence.Value == 0)
+            return 1f;
+        else
+            return playerStats.Intelligence.Value * 5;
     }
 
     public void IncreaseDamage(float amount)
@@ -115,20 +117,22 @@ public class Player : MonoBehaviour
 
     public void UpdateCharacterStats()
     {
-        float adjuster = lucidity / maxLucidity;
-        maxLucidity = CalculateMaxLucity();
-        lucidity = adjuster * maxLucidity;
+        maxLucidity = originalMaxLucidity + CalculateMaxLucity();
+        lucidity += CalculateMaxLucity();
         lucidityPostProcess.UpdateLucidityMask(lucidity);
+        originalAttackSpeed = CalculateAttackSpeed();
+        originalMeleeDamage = CalculateAttackDamage();
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
     }
 
     public void TakeDamage(float damage)
     {
-        lucidity -= (damage * damageReduction);
-        lucidity = Mathf.Clamp(lucidity, 0f, maxLucidity);  // Ensure lucidity is within the valid range
+        //lucidity -= (damage * damageReduction);
+
+        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
-        
+
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
@@ -141,7 +145,7 @@ public class Player : MonoBehaviour
         lucidity += amountHealed;
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
-        
+
         if (lucidity > maxLucidity)
         {
             lucidity = maxLucidity;
@@ -167,5 +171,21 @@ public class Player : MonoBehaviour
             d.relicQuantity++;
         }
         UpdateCharacterStats();
+    }
+
+    public void Unequip(RelicData d)
+    {
+        playerStats.Strength.RemoveAllModifiersFromSource(d);
+        playerStats.Dexterity.RemoveAllModifiersFromSource(d);
+        playerStats.Intelligence.RemoveAllModifiersFromSource(d);
+    }
+
+    public void FixedUpdate()
+    {
+
+        float lucidityProcentage = lucidity / maxLucidity * 100;
+        //Debug.Log("Lucidity %: " +lucidityProcentage);
+        AudioManager.instance.musicEventInstance.setParameterByName("Lucidity", lucidityProcentage);
+
     }
 }

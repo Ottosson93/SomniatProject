@@ -4,7 +4,6 @@ using BehaviorTree;
 
 public class RangedEnemyBT : Tree
 {
-    public UnityEngine.Transform[] waypoints;
     public List<AttackSO> combo;
     public RangedEnemyShoot enemyShoot;
 
@@ -39,7 +38,6 @@ public class RangedEnemyBT : Tree
                 new RangedCheckEnemyInFOVRange(transform),
                 new RangedTaskGoToTarget(transform),
             }),
-            new TaskPatrol(transform, waypoints),
         });
 
         return root;

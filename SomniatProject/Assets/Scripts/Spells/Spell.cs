@@ -20,6 +20,7 @@ public class Spell : MonoBehaviour
     private ParticleSystem berserkParticles;
 
     private Vector3 playerPos;
+    private int spellDamage;
 
 
 
@@ -33,6 +34,8 @@ public class Spell : MonoBehaviour
 
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
+
+        spellDamage = SpellToCast.DamageAmount + player.CalculateSpellDamage();
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
@@ -103,7 +106,7 @@ public class Spell : MonoBehaviour
             {
                 if (enemy != null)
                 {
-                    enemy.TakeDamage(SpellToCast.DamageAmount);
+                    enemy.TakeDamage(spellDamage);
                     PlayLightningImpactAtEnemyPosition(enemy.transform.position);
 
                     StunEffect stunEffect = enemy.gameObject.AddComponent<StunEffect>();
@@ -161,7 +164,7 @@ public class Spell : MonoBehaviour
         if (player != null)//modify stats
         {
             player.SetOriginalValues();
-            Debug.Log("original Speed: " + player.newSpeed + " original Attack Speed: " + player.attackSpeed + " original Damage Amount: " + player.meleeDamage + " original Armor Amount: " + player.damageReduction);
+            Debug.Log("original Speed: " + player.originalSpeed + " original Attack Speed: " + player.originalAttackSpeed + " original Damage Amount: " + player.originalMeleeDamage + " original Armor Amount: " + player.damageReduction);
 
             player.IncreaseDamage(SpellToCast.DamageBoost);
             player.IncreaseAttackSpeed(SpellToCast.AttackSpeedBoost);
@@ -206,7 +209,7 @@ public class Spell : MonoBehaviour
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.TakeDamage(SpellToCast.DamageAmount);
+                enemy.TakeDamage(spellDamage);
 
                 BurnEffect burnEffect = hitCollider.gameObject.GetComponent<BurnEffect>();
                 if (burnEffect == null)
