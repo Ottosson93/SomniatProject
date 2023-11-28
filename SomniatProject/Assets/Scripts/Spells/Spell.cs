@@ -34,10 +34,7 @@ public class Spell : MonoBehaviour
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
-        if (SpellToCast.name.Equals("Fireball"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireball, player.transform.position);
-        if(SpellToCast.name.Equals("Piercing Arrow"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.piercingArrow, player.transform.position);
+        
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
