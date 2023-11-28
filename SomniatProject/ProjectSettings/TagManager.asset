@@ -19,6 +19,7 @@ TagManager:
   - Wall
   - Obstacle
   - Boss
+  - VictoryMenu
   layers:
   - Default
   - TransparentFX

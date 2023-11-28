@@ -8,9 +8,6 @@ public class Player : MonoBehaviour
 {
     public float maxLucidity;
     public float lucidity;
-    public CharacterStat Strength;
-    public CharacterStat Dexterity;
-    public CharacterStat Intelligence;
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 5.0f;
     public readonly float baseAttackSpeed = 1.0f;
@@ -36,9 +33,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Strength.RemoveAllModifiersFromSource(this);
-        Dexterity.RemoveAllModifiersFromSource(this);
-        Intelligence.RemoveAllModifiersFromSource(this);
+        Time.timeScale = 1f;
         controller = GetComponent<ThirdPersonController>();
 
         speed = baseSpeed;
@@ -125,7 +120,6 @@ public class Player : MonoBehaviour
         lucidity = adjuster * maxLucidity;
         lucidityPostProcess.UpdateLucidityMask(lucidity);
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
-
     }
 
     public void TakeDamage(float damage)
@@ -173,12 +167,5 @@ public class Player : MonoBehaviour
             d.relicQuantity++;
         }
         UpdateCharacterStats();
-    }
-
-    public void Unequip(RelicData d)
-    {
-        playerStats.Strength.RemoveAllModifiersFromSource(d);
-        playerStats.Dexterity.RemoveAllModifiersFromSource(d);
-        playerStats.Intelligence.RemoveAllModifiersFromSource(d);
     }
 }
