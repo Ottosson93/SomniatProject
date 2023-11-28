@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
         lucidity = maxLucidity;
+        originalMaxLucidity = maxLucidity;
 
         controller.MoveSpeed = speed;
 
@@ -107,58 +108,8 @@ public class Player : MonoBehaviour
         if (playerStats.Intelligence.Value == 0)
             return 0f;
         else
-            return playerStats.Intelligence.Value * 5;
+            return originalMaxLucidity + playerStats.Intelligence.Value * 5;
     }
-
-    //public float CalculateSpeed()
-    //{
-    //    return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed)) + flatSpeed;
-    //}
-
-    //public float CalculateAttackSpeed()
-    //{
-    //    return baseAttackSpeed / (1 + (playerStats.Dexterity.Value));
-    //}
-
-    //public float CalculateAttackDamage()
-    //{
-    //    return playerStats.Strength.Value;
-    //}
-    //public int CalculateSpellDamage()
-    //{
-    //    return (int)playerStats.Intelligence.Value * 2;
-    //}
-
-    //float CalculateMaxLucity()
-    //{
-    //    if (playerStats.Intelligence.Value == 0)
-    //        return 1f;
-    //    else
-    //        return playerStats.Intelligence.Value * 5;
-    //}
-
-    //public void IncreaseDamage(float amount)
-    //{
-    //    meleeDamage *= amount;
-    //}
-
-    //public void IncreaseAttackSpeed(float amount)
-    //{
-    //    attackSpeed *= amount;
-    //}
-
-    //public void IncreaseSpeed(float amount)
-    //{
-    //    newSpeed *= amount;
-    //}
-
-    //public void ArmorReduction(float amount)
-    //{
-    //    damageReduction *= amount;
-    //}
-
-
-
     public void UpdateCharacterStats()
     {
 
@@ -168,7 +119,7 @@ public class Player : MonoBehaviour
         attackSpeed = CalculateAttackSpeedModifierFromRelics() / temporaryAttackSpeedModifier;
         meleeDamage = (baseMeleeDamage + CalculateAttackDamageModifierFromRelics())*temporaryMeleeDamageModifier;
 
-        maxLucidity += CalculateMaxLucidityModifierFromRelics();
+        maxLucidity = CalculateMaxLucidityModifierFromRelics();
         lucidity = maxLucidity * lucidityPercentage;
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 
@@ -178,21 +129,6 @@ public class Player : MonoBehaviour
 
         Debug.Log("Lucidity: " + lucidity + " Max Lucidity: " + maxLucidity + " Attack Speed: " + attackSpeed + " Melee Damage: " + meleeDamage + " Speed: " + speed + " Damage Reduction: " + damageReduction);
 
-
-        //originalAttackSpeed = CalculateAttackSpeed();
-        //originalMeleeDamage += CalculateAttackDamage();
-        //controller.MoveSpeed = CalculateSpeed();
-        //Debug.Log("Lucidity: " + lucidity + "Max Lucidity: " + originalMaxLucidity + "Attack Speed: " + originalAttackSpeed + "Melee Damage: " + originalMeleeDamage);
-
-        //float modifiedAttackSpeed = originalAttackSpeed * temporaryAttackSpeedModifier;
-        //float modifiedMeleeDamage = originalMeleeDamage * temporaryMeleeDamageModifier;
-        //float modifiedMovementSpeed = baseSpeed * temporarySpeedModifier;
-        //float modifiedArmorReduction = originalArmorAmount * temporaryArmorReductionModifier;
-
-        //attackSpeed = modifiedAttackSpeed;
-        //meleeDamage = modifiedMeleeDamage;
-        //speed = modifiedMovementSpeed;
-        //damageReduction = modifiedArmorReduction;
     }
 
     public void TakeDamage(float damage)
