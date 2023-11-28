@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7249165413850240679}
   m_Layer: 10
   m_Name: LucidPlaceHolder
-  m_TagString: BossSpell
+  m_TagString: Boulder
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,11 +97,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_TagString
-      value: BossSpell
+      value: Boulder
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 61d36fd741d737440a1141db2542d983, type: 3}
       propertyPath: m_LocalScale.x

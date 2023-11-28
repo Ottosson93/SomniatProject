@@ -957,6 +957,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Polyart_Golem (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1077356408, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 1077356410, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.326479
@@ -1021,8 +1025,22 @@ PrefabInstance:
       propertyPath: enemyLayer.m_Bits
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3233928767618342781, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939363429433797034, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939363429433797034, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8218011096781584704, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
+    - {fileID: 4446312335927933464, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1077356410, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}
       insertIndex: -1
