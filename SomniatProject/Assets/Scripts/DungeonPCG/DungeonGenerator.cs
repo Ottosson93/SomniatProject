@@ -53,7 +53,7 @@ public class DungeonGenerator : MonoBehaviour
 
     //Populate room variables
     List<GameObject> listOfAllEnemies = new List<GameObject>();
-    float spawnOffset = 3f, boundOffset = 2.5f;
+    float spawnOffset = 4f, boundOffset = 5f;
 
 
     Collider[] colliders = new Collider[5];
