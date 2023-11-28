@@ -8,7 +8,7 @@ using System;
 public class Player : MonoBehaviour
 {
     public float maxLucidity;
-    public float originalMaxLucidity;
+    public float originalMaxLucidity = 100f;
     public float lucidity;
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 10f;
@@ -43,8 +43,8 @@ public class Player : MonoBehaviour
         speed = baseSpeed;
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
-        lucidity = maxLucidity;
-        originalMaxLucidity = maxLucidity;
+        lucidity = originalMaxLucidity;
+        maxLucidity = originalMaxLucidity;
 
         controller.MoveSpeed = speed;
 
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
     private float CalculateMaxLucidityModifierFromRelics()
     {
         if (playerStats.Intelligence.Value == 0)
-            return 0f;
+            return originalMaxLucidity;
         else
             return originalMaxLucidity + playerStats.Intelligence.Value * 5;
     }
@@ -110,6 +110,7 @@ public class Player : MonoBehaviour
     {
 
         float lucidityPercentage = lucidity / maxLucidity;
+
 
         speed = (baseSpeed + CalculateSpeedModifierFromRelics()) * temporarySpeedModifier;
         attackSpeed = CalculateAttackSpeedModifierFromRelics() / temporaryAttackSpeedModifier;
@@ -122,9 +123,6 @@ public class Player : MonoBehaviour
         damageReduction *= temporaryArmorReductionModifier;
 
         controller.MoveSpeed = speed;
-
-        Debug.Log("Lucidity: " + lucidity + " Max Lucidity: " + maxLucidity + " Attack Speed: " + attackSpeed + " Melee Damage: " + meleeDamage + " Speed: " + speed + " Damage Reduction: " + damageReduction);
-
     }
 
     public void TakeDamage(float damage)

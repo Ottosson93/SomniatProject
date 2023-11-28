@@ -15,9 +15,9 @@ public class LucidityPostProcess : MonoBehaviour
         lucidCamera = GameObject.FindGameObjectWithTag("Mask").GetComponent<Transform>();
     }
 
-    public void UpdateLucidityMask(float lucidty)
+    public void UpdateLucidityMask(float lucidity)
     {
-        float radius = Mathf.Lerp(minScale, maxScale, lucidty / player.maxLucidity);
+        float radius = Mathf.Lerp(minScale, maxScale, lucidity / player.maxLucidity);
        
         lucidCamera.localScale = new Vector3(radius, radius*0.5F, radius);
     }
