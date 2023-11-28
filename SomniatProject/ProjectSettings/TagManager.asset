@@ -19,6 +19,8 @@ TagManager:
   - LucidMesh
   - Wall
   - Obstacle
+  - Boss
+  - VictoryMenu
   layers:
   - Default
   - TransparentFX
@@ -37,21 +39,21 @@ TagManager:
   - Bullet
   - EnemyBullet
   - MinimapIcon
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
+  -
   m_SortingLayers:
   - name: Default
     uniqueID: 0

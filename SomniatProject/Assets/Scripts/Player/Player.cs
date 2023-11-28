@@ -9,9 +9,6 @@ public class Player : MonoBehaviour
     public float maxLucidity;
     public float originalMaxLucidity;
     public float lucidity;
-    public CharacterStat Strength;
-    public CharacterStat Dexterity;
-    public CharacterStat Intelligence;
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 10f;
     public readonly float baseAttackSpeed = 1.0f;
@@ -20,6 +17,7 @@ public class Player : MonoBehaviour
     public float speed;
     public float meleeDamage;
     public float attackSpeed;
+    public static bool isDead = false;
 
     public float originalMeleeDamage;
     public float originalAttackSpeed;
@@ -36,9 +34,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        Strength.RemoveAllModifiersFromSource(this);
-        Dexterity.RemoveAllModifiersFromSource(this);
-        Intelligence.RemoveAllModifiersFromSource(this);
+        Time.timeScale = 1f;
         controller = GetComponent<ThirdPersonController>();
         lucidityPostProcess = GetComponent<LucidityPostProcess>();
 
@@ -127,20 +123,20 @@ public class Player : MonoBehaviour
         originalAttackSpeed = CalculateAttackSpeed();
         originalMeleeDamage = CalculateAttackDamage();
         GetComponent<ThirdPersonController>().MoveSpeed = CalculateSpeed();
-        Debug.Log("Lucidity: " + lucidity + "Max Lucidity: " + originalMaxLucidity + "Attack Speed: " + originalAttackSpeed + "Melee Damage: " + originalMeleeDamage);
     }
 
     public void TakeDamage(float damage)
     {
         //lucidity -= (damage * damageReduction);
-       
+
         lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  // Ensure lucidity is within the valid range
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
-        
+
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
+            isDead = true;
         }
     }
 
@@ -149,7 +145,7 @@ public class Player : MonoBehaviour
         lucidity += amountHealed;
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
-        
+
         if (lucidity > maxLucidity)
         {
             lucidity = maxLucidity;
@@ -186,10 +182,10 @@ public class Player : MonoBehaviour
 
     public void FixedUpdate()
     {
-        
+
         float lucidityProcentage = lucidity / maxLucidity * 100;
         //Debug.Log("Lucidity %: " +lucidityProcentage);
         AudioManager.instance.musicEventInstance.setParameterByName("Lucidity", lucidityProcentage);
-        
+
     }
 }

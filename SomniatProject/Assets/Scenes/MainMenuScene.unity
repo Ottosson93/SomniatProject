@@ -662,7 +662,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1577803490963418569, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.605
+      value: -40.333
       objectReference: {fileID: 0}
     - target: {fileID: 1595219755883208946, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
       propertyPath: m_Pivot.x
@@ -936,6 +936,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -264
       objectReference: {fileID: 0}
+    - target: {fileID: 8841525611919355751, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
+      propertyPath: m_FlexibleHeight
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8962741938501785849, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 300
@@ -962,14 +966,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8984728546222212034, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 673.2
+      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 8984728546222212034, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -50.605
+      value: -40.333
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3262828859709210187, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d64470101773ef74798ed4ef0f2498e3, type: 3}
@@ -1012,6 +1017,10 @@ PrefabInstance:
     - target: {fileID: 946065853526782000, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1266893793725636451, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1938856253834237007, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1092,6 +1101,26 @@ PrefabInstance:
     - target: {fileID: 3294943582292865517, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713910559214961979, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713910559214961979, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenSettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713910559214961979, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CustomButton, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5713910559214961979, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5738377194839378556, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5987324011005371695, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1266,6 +1295,10 @@ PrefabInstance:
       propertyPath: _startingMenu
       value: 
       objectReference: {fileID: 495470070}
+    - target: {fileID: 4698420545536189612, guid: 31c1a1b47645a7245b843c8fb4306adf, type: 3}
+      propertyPath: playerStatsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
     - target: {fileID: 4698420545536189612, guid: 31c1a1b47645a7245b843c8fb4306adf, type: 3}
       propertyPath: _menus.Array.data[0]
       value: 
