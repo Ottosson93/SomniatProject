@@ -115,7 +115,7 @@ public class Spell : MonoBehaviour
                 }
             }
 
-            if (other.gameObject.CompareTag("Enemy") && transform.gameObject.CompareTag("Boulder"))
+            if (other.gameObject.CompareTag("Boss") && transform.gameObject.CompareTag("Boulder") || other.gameObject.CompareTag("Enemy") && transform.gameObject.CompareTag("Boulder"))
             {
                 Physics.IgnoreCollision(myCollider, enemy.GetComponent<Collider>());
             }
