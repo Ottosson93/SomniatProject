@@ -151,7 +151,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 20
+  m_CameraDistance: 10
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -476,7 +476,7 @@ Transform:
   m_GameObject: {fileID: 4810651007436223222}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 12.507448, y: 10.850001, z: -12.117448}
+  m_LocalPosition: {x: 6.383724, y: 5.8500004, z: -5.993724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -522,7 +522,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 15351
+    m_Bits: 195583
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -575,7 +575,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4810651007436223222}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c314006f670e1cf4cb480b7b7fc381bb, type: 3}
   m_Name: 
@@ -623,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 5949676255278032641}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23911765, y: -0.3696438, z: 0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: 12.507448, y: 10.850001, z: -12.117448}
+  m_LocalPosition: {x: 6.383724, y: 5.8500004, z: -5.993724}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1103,7 +1103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3287713902551577882, guid: 5b36bedf60c58804eb54d42b8fc555be, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 42430
+      value: 15798
       objectReference: {fileID: 0}
     - target: {fileID: 3793989064105931988, guid: 5b36bedf60c58804eb54d42b8fc555be, type: 3}
       propertyPath: m_LocalScale.x

@@ -13,7 +13,8 @@ public class Player : MonoBehaviour
     public readonly float baseSpeed = 2.0f;
     public readonly float baseMeleeDamage = 10f;
     public readonly float baseAttackSpeed = 1.0f;
-    public float damageReduction = 1.0f;
+    public readonly float baseArmor = 1.0f;
+    public float damageReduction;
     public float flatSpeed = 0;
     public float speed;
     public float meleeDamage;
@@ -25,6 +26,7 @@ public class Player : MonoBehaviour
     public float temporaryMeleeDamageModifier;
     public float temporarySpeedModifier;
     public float temporaryArmorReductionModifier;
+    float  armor;
 
     public PlayerStats playerStats;
     public float newSpeed;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
         meleeDamage = baseMeleeDamage;
         lucidity = originalMaxLucidity;
         maxLucidity = originalMaxLucidity;
+        damageReduction = baseArmor;
 
         controller.MoveSpeed = speed;
 
@@ -60,7 +63,9 @@ public class Player : MonoBehaviour
         temporaryAttackSpeedModifier = attackSpeedBoost;
         temporaryMeleeDamageModifier = damageBoost;
         temporarySpeedModifier = movementSpeedBoost;
-        Debug.Log("Berserk values: Armor Reduction" + temporaryArmorReductionModifier + " Attack Speed Boost: " + temporaryAttackSpeedModifier + " Melee Damage Boost " + temporaryMeleeDamageModifier + " Speed Boost " + temporarySpeedModifier);
+
+
+        UpdateCharacterStats();
     }
     public void EndBerserk()
     {
@@ -74,6 +79,7 @@ public class Player : MonoBehaviour
         temporaryAttackSpeedModifier = 1.0f;
         temporaryMeleeDamageModifier = 1.0f;
         temporarySpeedModifier = 1.0f;
+        damageReduction = baseArmor;
     }
 
     private float CalculateSpeedModifierFromRelics()
@@ -123,11 +129,14 @@ public class Player : MonoBehaviour
         damageReduction *= temporaryArmorReductionModifier;
 
         controller.MoveSpeed = speed;
+
+        Debug.Log("Melee Damage: " + meleeDamage + ", attack speed: " + attackSpeed + ", movement speed: " + speed + ", armor amount: " + damageReduction);
     }
 
     public void TakeDamage(float damage)
-    {       
-        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  // Ensure lucidity is within the valid range
+    {      
+        // Ensure lucidity is within the valid range
+        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 

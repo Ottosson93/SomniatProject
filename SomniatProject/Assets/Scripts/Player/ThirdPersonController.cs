@@ -553,6 +553,11 @@ namespace StarterAssets
 
             hud_melee_script.Run();
 
+            //Checks if the collided object is a destructible object
+            foreach (Collider destructibleObject in hitDestructibleObjects)
+            {
+                destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
+            }
 
             if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)
             {
@@ -567,25 +572,21 @@ namespace StarterAssets
                     comboCounter = comboCounter + 1;
                     lastClickedTime = Time.time;
 
-                    foreach (Collider destructibleObject in hitDestructibleObjects)
-                    {
-                        destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
-                    }
-
                     foreach (Collider enemy in hitEnemies)
                     {
                         bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
-                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage); ;
+                        enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
 
+                        //If you have the empowered relic, you gain movementspeed after killing an enemy
                         if (player.empoweredRelic != null)
                         {
                             foreach (Effect effect in player.empoweredRelic.effects)
                             {
                                 if (effect != null)
                                 {
-                                    if(effect.type == EffectType.MoveSpeed )
+                                    if (effect.type == EffectType.MoveSpeed)
                                     {
-                                        if(dead)
+                                        if (dead)
                                             effect.Run();
                                     }
                                     else
@@ -593,7 +594,6 @@ namespace StarterAssets
                                 }
                             }
                         }
-                            
                     }
 
                     if (comboCounter >= combo.Count)
@@ -601,9 +601,7 @@ namespace StarterAssets
                         comboCounter = 0;
                     }
                 }
-
             }
-
         }
 
         private void ExitAttack()

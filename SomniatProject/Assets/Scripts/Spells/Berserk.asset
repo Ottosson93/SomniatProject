@@ -30,7 +30,7 @@ MonoBehaviour:
   StunDuration: 0
   BurnDuration: 0
   TickInterval: 0
-  DamageBoost: 0
-  AttackSpeedBoost: 0
-  MovementSpeedBoost: 0
-  ArmorReduction: 0
+  DamageBoost: 1.5
+  AttackSpeedBoost: 1.5
+  MovementSpeedBoost: 1.5
+  ArmorReduction: 1.5
