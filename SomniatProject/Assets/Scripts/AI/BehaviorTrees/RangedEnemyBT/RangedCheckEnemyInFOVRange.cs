@@ -28,7 +28,10 @@ public class RangedCheckEnemyInFOVRange : Node
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+                    AudioManager.instance.AddEnemyEngage();
+
                     state = NodeState.SUCCESS;
+                    tempStates = NodeState.SUCCESS;
                     return state;
                 }
 
@@ -38,6 +41,11 @@ public class RangedCheckEnemyInFOVRange : Node
 
 
             state = NodeState.FAILURE;
+            if (state == NodeState.FAILURE && tempStates == NodeState.SUCCESS)
+            {
+                tempStates = NodeState.FAILURE;
+                AudioManager.instance.removeEnemyEngage();
+            }
             return state;
         }
 

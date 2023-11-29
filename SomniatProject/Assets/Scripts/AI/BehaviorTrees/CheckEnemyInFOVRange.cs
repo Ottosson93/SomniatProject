@@ -19,6 +19,7 @@ public class CheckEnemyInFOVRange : Node
 
         if (t == null)
         {
+            
             Collider[] colliders = Physics.OverlapSphere(transform.position, GuardMeleeBT.fovRange);
 
             foreach (Collider collider in colliders)
@@ -28,9 +29,14 @@ public class CheckEnemyInFOVRange : Node
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+
+                    AudioManager.instance.AddEnemyEngage();
+
                     state = NodeState.SUCCESS;
+                    tempStates = NodeState.SUCCESS;
                     return state;
                 }
+               
                 
                 
             }
@@ -38,6 +44,11 @@ public class CheckEnemyInFOVRange : Node
             
 
             state = NodeState.FAILURE;
+            if(state == NodeState.FAILURE && tempStates == NodeState.SUCCESS)
+            {
+                tempStates = NodeState.FAILURE;
+                AudioManager.instance.removeEnemyEngage();
+            }
             return state;
         }
 
