@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: -8840798879754143075}
   - component: {fileID: 8115044526200306908}
   m_Layer: 0
-  m_Name: ChestYellow
+  m_Name: ChestOrange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -196,7 +196,7 @@ public class MenuManager : MonoBehaviour
             playerStatsSO.ResetStats();
             OnVictory();
         }
-        
+
         if (victoryMenuView != null && boss != null)
         {
 
