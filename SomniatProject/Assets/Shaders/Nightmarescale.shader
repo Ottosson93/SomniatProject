@@ -56,7 +56,7 @@ Shader "Custom/NightmareScale"
                 float distanceFromCenter = length(distance);
 
                 // Add horror pulsating effect
-                float pulsateAmount = sin(_Time.y * 6) * 0.001;
+                float pulsateAmount = sin(_Time.y * 6) * 0.003;
 
                 // Adjust the radius based on pulsating effect
                 float adjustedRadius = _Radius + pulsateAmount;

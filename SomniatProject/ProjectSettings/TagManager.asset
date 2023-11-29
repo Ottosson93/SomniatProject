@@ -20,7 +20,6 @@ TagManager:
   - Obstacle
   - Boss
   - VictoryMenu
-  - Boulder
   layers:
   - Default
   - TransparentFX
@@ -40,7 +39,6 @@ TagManager:
   - EnemyBullet
   - MinimapIcon
   - DestructibleObject
-  - SeeThrough
   - 
   - 
   - 
@@ -54,6 +52,8 @@ TagManager:
   - 
   - 
   - 
+  - 
+
   m_SortingLayers:
   - name: Default
     uniqueID: 0
