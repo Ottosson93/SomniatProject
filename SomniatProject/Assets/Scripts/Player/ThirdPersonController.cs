@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-#if ENABLE_INPUT_SYSTEM 
+using System.Threading;
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -143,8 +144,9 @@ namespace StarterAssets
         }
 
 
-        private void Awake()
+        private async void Awake()
         {
+
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -190,7 +192,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-           
+
 
             if (_input.dash)
             {
@@ -522,7 +524,7 @@ namespace StarterAssets
 
             tr.emitting = true;
 
-            await Task.Delay((int)(dashingTime*1000));
+            await Task.Delay((int)(dashingTime * 1000));
 
             isDashing = false;  // Reset dashing flag
 
@@ -535,7 +537,7 @@ namespace StarterAssets
             await Task.Delay((int)(dashingCooldown * 1000));
             canDash = true;
         }
-        
+
 
 
 
@@ -606,10 +608,13 @@ namespace StarterAssets
 
         private void ExitAttack()
         {
-            if (_animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
-                && _animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+            if (_animator != null)
             {
-                Invoke("EndCombo", 1);
+                if (_animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+                    && _animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
+                {
+                    Invoke("EndCombo", 1);
+                }
             }
         }
 

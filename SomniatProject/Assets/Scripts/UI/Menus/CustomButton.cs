@@ -44,7 +44,9 @@ public class CustomButton : CustomUIComponent
 
     public void ExitGame()
     {
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 
     public void NewGame()
@@ -52,7 +54,7 @@ public class CustomButton : CustomUIComponent
         Time.timeScale = 1f;
         Player.isDead = false;
         SceneManager.LoadScene(1);
-        
+
     }
 
     public void RestartGame()
@@ -60,8 +62,8 @@ public class CustomButton : CustomUIComponent
         Time.timeScale = 1f;
         //victoryMenu.SetActive(false);
         SceneManager.LoadScene(1);
-        
-        
+
+
     }
 
     public void MainMenu()
