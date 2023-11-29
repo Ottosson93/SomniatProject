@@ -194,7 +194,7 @@ public class MenuManager : MonoBehaviour
         //    OnVictory();
         //}
 
-        Debug.Log("Time: " + Time.timeScale);
+        //Debug.Log("Time: " + Time.timeScale);
     }
 
 }
