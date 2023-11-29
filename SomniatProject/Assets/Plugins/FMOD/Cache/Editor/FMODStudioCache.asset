@@ -506,8 +506,6 @@ MonoBehaviour:
   MasterBanks:
   - {fileID: 1767678488881080903}
   StringsBanks:
-  - {fileID: 1406891261558693147}
-  cacheTime: 638368508393794569
   cacheVersion: 131609
 --- !u!114 &557703924612928245
 MonoBehaviour:

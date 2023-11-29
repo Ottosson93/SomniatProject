@@ -1545,6 +1545,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: lucidMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1b6832114df9172439724f0a0584bb17, type: 2}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: verticalWall1
       value: 
       objectReference: {fileID: 1907700878174624045, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
@@ -3736,7 +3740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edd137009aa197b49a351e4a24a9c3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSpell: {fileID: 0}
+  currentSpell: {fileID: -2328625356953407616, guid: 0cf1e1400a903f34c9e62986b5c4ed3f, type: 3}
   castPoint: {fileID: 0}
   timeBetweenCasts: 0.3
   currentSpellFreeCharges: 0
