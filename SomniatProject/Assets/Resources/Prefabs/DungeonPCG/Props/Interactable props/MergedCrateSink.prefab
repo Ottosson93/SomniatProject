@@ -143,19 +143,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crash_Crate_2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1801761146941522978, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522976, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522982, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522980, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941523002, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941523000, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941523006, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941523004, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522994, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522992, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522998, guid: 0071951014318e5478294234e2aa96b0, type: 3}
-    - {fileID: 1801761146941522996, guid: 0071951014318e5478294234e2aa96b0, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
