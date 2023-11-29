@@ -31,7 +31,8 @@ public class DungeonGenerator : MonoBehaviour
 
     LayerMask Layer;
 
-    Material material;
+    Material material, lucidMaterial;
+
 
     double distFromCenter;
     int amountOfInteractableProps, amountOfProps, amountOfEnemies;
@@ -45,7 +46,7 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
 
-    public DungeonGenerator(Vector2 size, int nbrOfRoom,int roomSize, Material material, List<GameObject> pmr, GameObject wall1, GameObject wall5, 
+    public DungeonGenerator(Vector2 size, int nbrOfRoom, int roomSize, Material material, Material lucidMaterial, List<GameObject> pmr, GameObject wall1, GameObject wall5,
         GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
@@ -69,6 +70,7 @@ public class DungeonGenerator : MonoBehaviour
         rootNode.sibling = null;
         nodes.Add(rootNode);
         this.material = material;
+        this.lucidMaterial = lucidMaterial;
         this.listOfAllEnemies = listOfAllEnemies;
         this.Layer = layer;
         this.interactableProps = interactableProps;
@@ -179,18 +181,18 @@ public class DungeonGenerator : MonoBehaviour
                 SplitRoom(parentNode);
             }
 
-           /*
+            /*
 
-            if ((parentNode.width > (largestPreMadeRoom.x) && parentNode.width < (largestPreMadeRoom.x * 2) && parentNode.height >= largestPreMadeRoom.y)
-            || (parentNode.height > (largestPreMadeRoom.y) && parentNode.height < (largestPreMadeRoom.y * 2) && parentNode.width >= largestPreMadeRoom.x))
-            {
-                SplitRoomManually(parentNode, manualRoom);
-            }
-            else
-            {
-                SplitRoom(parentNode);
-            }
-           */
+             if ((parentNode.width > (largestPreMadeRoom.x) && parentNode.width < (largestPreMadeRoom.x * 2) && parentNode.height >= largestPreMadeRoom.y)
+             || (parentNode.height > (largestPreMadeRoom.y) && parentNode.height < (largestPreMadeRoom.y * 2) && parentNode.width >= largestPreMadeRoom.x))
+             {
+                 SplitRoomManually(parentNode, manualRoom);
+             }
+             else
+             {
+                 SplitRoom(parentNode);
+             }
+            */
         }
         else
         {
@@ -315,15 +317,15 @@ public class DungeonGenerator : MonoBehaviour
         n.UpdateWH();
         n.UpdateCorners();
     }
-    
+
     public void PlaceStartingRoomInCenter()
     {
-        Vector2 origo = new Vector2(0,0);
+        Vector2 origo = new Vector2(0, 0);
         float startRoomWidth = startRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
         float startRoomheight = startRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
 
-        float lowestDistance = Vector2.Distance(finishedNodes[finishedNodes.Count-1].centerPos, origo);
-        RNode mostCenteredRoom = finishedNodes[finishedNodes.Count-1];
+        float lowestDistance = Vector2.Distance(finishedNodes[finishedNodes.Count - 1].centerPos, origo);
+        RNode mostCenteredRoom = finishedNodes[finishedNodes.Count - 1];
         foreach (RNode node in finishedNodes)
         {
             if (node.bottom && node.manual == false)
@@ -356,7 +358,7 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
-    
+
 
     //Ska denna bort Arvid?
     bool CheckSize(RNode n)
@@ -507,7 +509,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (buildPos + 4.5 < endPoint)
             {
-                if(y == room.topRight.y)
+                if (y == room.topRight.y)
                 {
                     AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), wall5, Vector3.zero);
                 }
@@ -559,7 +561,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (buildPos + 4.5 < endPoint)
             {
-                if(x == room.bottomLeft.x)
+                if (x == room.bottomLeft.x)
                 {
                     AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 270, 0));
                 }
@@ -571,7 +573,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else if (buildPos + 0.5 < endPoint)
             {
-                if(x == room.bottomLeft.x)
+                if (x == room.bottomLeft.x)
                 {
                     AddObjectToSpawn(new Vector2(x, buildPos + 0.5f), wall1, new Vector3(0, 270, 0));
                 }
@@ -662,6 +664,20 @@ public class DungeonGenerator : MonoBehaviour
         //{
         //    room.GetComponent<MeshRenderer>().material = redRoomMaterial;
         //}
+
+        GameObject lucidObject = new GameObject("lucidMesh");
+
+        Mesh lucidMesh = new Mesh();
+        lucidMesh.vertices = room.GetComponent<MeshFilter>().mesh.vertices;
+        lucidMesh.uv = room.GetComponent<MeshFilter>().mesh.uv;
+        lucidMesh.triangles = room.GetComponent<MeshFilter>().mesh.triangles;
+
+        lucidObject.AddComponent<MeshFilter>().mesh = lucidMesh;
+        lucidObject.AddComponent<MeshRenderer>().material = lucidMaterial;
+
+        lucidObject.transform.parent = room.transform;
+        lucidObject.layer = 10;
+
     }
 
     void CreateCorridorMesh(CNode n)
@@ -706,6 +722,20 @@ public class DungeonGenerator : MonoBehaviour
         room.GetComponent<MeshRenderer>().material = material;
         room.GetComponent<MeshCollider>().convex = true;
         room.layer = 3;
+
+        GameObject lucidObject = new GameObject("lucidMesh");
+
+        Mesh lucidMesh = new Mesh();
+        lucidMesh.vertices = room.GetComponent<MeshFilter>().mesh.vertices;
+        lucidMesh.uv = room.GetComponent<MeshFilter>().mesh.uv;
+        lucidMesh.triangles = room.GetComponent<MeshFilter>().mesh.triangles;
+
+        lucidObject.AddComponent<MeshFilter>().mesh = lucidMesh;
+        lucidObject.AddComponent<MeshRenderer>().material = lucidMaterial;
+
+        lucidObject.transform.parent = room.transform;
+        lucidObject.layer = 10;
+
     }
     #endregion
 
@@ -744,7 +774,7 @@ public class DungeonGenerator : MonoBehaviour
     public void SpawnProps(RNode room)
     {
         //Vector3 center = new Vector3(room.bottomLeft.x + room.width / 2, 0, room.bottomLeft.y + room.height / 2);
-        
+
         float roomSize = CalculateRoomArea(room);
 
         //amountOfInteractableProps = 1;
