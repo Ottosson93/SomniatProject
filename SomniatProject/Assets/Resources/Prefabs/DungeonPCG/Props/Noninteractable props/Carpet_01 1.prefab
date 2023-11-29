@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5103338399203997468}
   - component: {fileID: 7004861542663111638}
   m_Layer: 0
-  m_Name: Carpet_01
+  m_Name: Carpet_01 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
