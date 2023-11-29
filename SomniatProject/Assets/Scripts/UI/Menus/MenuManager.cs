@@ -18,7 +18,7 @@ public class MenuManager : MonoBehaviour
 
     public static bool GameIsPaused = false;
 
-    private GameObject boss;
+    private Enemy boss;
     private Player player;
 
     public GameObject pauseMenuView;
@@ -86,7 +86,7 @@ public class MenuManager : MonoBehaviour
             victoryMenuView.SetActive(true);
         }
 
-        //GameIsPaused = true;
+        GameIsPaused = true;
     }
     public static T GetMenu<T>() where T : Menu
     {
@@ -169,31 +169,39 @@ public class MenuManager : MonoBehaviour
         if (onDeathMenuView != null)
             onDeathMenuView.SetActive(false);
 
-        if (victoryMenuView != null)
-            victoryMenuView.SetActive(false);
+        try
+        {
+            boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Enemy>();
+        }
+        catch
+        {
+
+        }
+
     }
 
     private void Update()
     {
-        boss = GameObject.FindGameObjectWithTag("Boss");
 
-        if (player == null)
-        {
-            player = GetComponent<Player>();
-        }
-
+        Debug.Log("Boss detected");
+        player = GetComponent<Player>();
 
         if (Player.isDead == true)
         {
             OnDeath();
         }
 
-        //if (boss == null)
-        //{
-        //    playerStatsSO.ResetStats();
-        //    OnVictory();
-        //}
+        if (boss == null)
+        {
+            playerStatsSO.ResetStats();
+            OnVictory();
+        }
+        
+        if (victoryMenuView != null && boss != null)
+        {
 
+            victoryMenuView.SetActive(false);
+        }
         Debug.Log("Time: " + Time.timeScale);
     }
 
