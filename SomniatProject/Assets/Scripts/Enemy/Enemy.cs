@@ -15,6 +15,8 @@ public class Enemy : MonoBehaviour
     public int current;
     public float attackRange;
 
+    public bool engaged = false; 
+
 
     public bool dead = false;
 
@@ -48,12 +50,23 @@ public class Enemy : MonoBehaviour
         dead = true;                
         Destroy(gameObject);
 
+        RemoveEngagementOnKill();
+
         if (itemDropSystem != null)
         {
             itemDropSystem.HandleEnemyDeath(transform.position);
         }
     }
 
+    public void RemoveEngagementOnKill()
+    {
+        //Player player = FindObjectOfType<Player>();
+        if (engaged)
+        {
+            AudioManager.instance.removeEnemyEngage();
+        }
+
+    }
 
     //private void OnDrawGizmos()
     //{
