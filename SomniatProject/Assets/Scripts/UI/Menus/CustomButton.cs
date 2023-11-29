@@ -58,14 +58,16 @@ public class CustomButton : CustomUIComponent
     public void RestartGame()
     {
         Time.timeScale = 1f;
+        //victoryMenu.SetActive(false);
         SceneManager.LoadScene(1);
-        victoryMenu.SetActive(false);
+        
         
     }
 
     public void MainMenu()
     {
         Time.timeScale = 1f;
+        //victoryMenu.SetActive(false);
         SceneManager.LoadScene(0);
     }
 

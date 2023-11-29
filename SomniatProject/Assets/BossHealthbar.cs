@@ -14,6 +14,7 @@ public class BossHealthbar : MonoBehaviour
     [SerializeField]
     private GameObject healthbar;
 
+    public static bool bossDead = false;
     private float bossHealth;
     private Player player;
     private Transform playerTransform;
@@ -34,8 +35,11 @@ public class BossHealthbar : MonoBehaviour
         bossHealth = boss.current;
         healthbarFill.type = Image.Type.Filled;
         healthbarFill.fillAmount = bossHealth / boss.health;
-        if (bossHealth <= 0 && victoryMenu != null)
+        
+        if (boss == null)
         {
+            Debug.Log("Is boss dead?: " + bossDead);
+            bossDead = true;
             victoryMenu.SetActive(true);
         }
     }
