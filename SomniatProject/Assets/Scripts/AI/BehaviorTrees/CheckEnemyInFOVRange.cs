@@ -5,11 +5,13 @@ public class CheckEnemyInFOVRange : Node
 {
 
     private Transform transform;
+    private Enemy enemy;
 
 
     public CheckEnemyInFOVRange(Transform transform)
     {
         this.transform = transform;
+        enemy = transform.GetComponent<Enemy>();
     }
 
     public override NodeState Evaluate()
@@ -31,7 +33,7 @@ public class CheckEnemyInFOVRange : Node
                     parent.parent.SetData("target", collider.transform);
 
                     AudioManager.instance.AddEnemyEngage();
-
+                    enemy.engaged = true;
                     state = NodeState.SUCCESS;
                     tempStates = NodeState.SUCCESS;
                     return state;
@@ -47,6 +49,7 @@ public class CheckEnemyInFOVRange : Node
             if(state == NodeState.FAILURE && tempStates == NodeState.SUCCESS)
             {
                 tempStates = NodeState.FAILURE;
+                enemy.engaged = false;
                 AudioManager.instance.removeEnemyEngage();
             }
             return state;
