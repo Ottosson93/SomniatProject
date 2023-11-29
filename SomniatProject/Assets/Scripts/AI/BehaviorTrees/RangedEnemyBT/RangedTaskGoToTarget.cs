@@ -50,6 +50,7 @@ public class RangedTaskGoToTarget : Node
             {
                 animator.SetBool("Walk", false);
                 agent.speed = RangedEnemyBT.speed;
+                Debug.Log("Clearing Target");
                 ClearData("target");
             }
         }

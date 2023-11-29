@@ -9,8 +9,8 @@ public class RangedEnemyBT : Tree
 
     public static float speed = 2f;
     public static float targetedSpeed = 4f;
-    public static float fovRange = 10f;
-    public static float distance = 10f;
+    public static float fovRange = 11f;
+    public static float distance = 12f;
     public static float attackRange = 10f;
     public static float rotationSpeed = 3f;
     public static float attackDamage = 2f;
