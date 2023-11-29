@@ -77,7 +77,7 @@ public class AudioManager : MonoBehaviour
         enemiesEngaged--;
         if (enemiesEngaged == 0)
         {
-            musicEventInstance.setParameterByName("Combat", 1f);
+            musicEventInstance.setParameterByName("Combat", 0f);
         }
     }
 

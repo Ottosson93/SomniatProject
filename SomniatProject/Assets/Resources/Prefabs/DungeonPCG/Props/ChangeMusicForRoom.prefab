@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8323890022148778219}
   - component: {fileID: 5413951178691427186}
   m_Layer: 0
-  m_Name: ChangeToIdleMusic
+  m_Name: ChangeMusicForRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,11 +5,12 @@ public class RangedCheckEnemyInFOVRange : Node
 {
 
     private Transform transform;
-
+    private Enemy enemy;
 
     public RangedCheckEnemyInFOVRange(Transform transform)
     {
         this.transform = transform;
+        enemy = transform.GetComponent<Enemy>();
     }
 
     public override NodeState Evaluate()
@@ -28,7 +29,10 @@ public class RangedCheckEnemyInFOVRange : Node
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+                    AudioManager.instance.AddEnemyEngage();
+                    enemy.engaged = true;
                     state = NodeState.SUCCESS;
+                    tempStates = NodeState.SUCCESS;
                     return state;
                 }
 
@@ -38,6 +42,12 @@ public class RangedCheckEnemyInFOVRange : Node
 
 
             state = NodeState.FAILURE;
+            if (state == NodeState.FAILURE && tempStates == NodeState.SUCCESS)
+            {
+                tempStates = NodeState.FAILURE;
+                enemy.engaged = false;
+                AudioManager.instance.removeEnemyEngage();
+            }
             return state;
         }
 

@@ -14,6 +14,7 @@ namespace BehaviorTree
     public class Node
     {
         protected NodeState state;
+        protected NodeState tempStates;
 
         public Node parent;
         protected List<Node> children = new List<Node>();
