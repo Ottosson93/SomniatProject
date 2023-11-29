@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFB, Stack Size: 98304, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Affinity: 0x4000000000000001, Priority: 0xFFFF7FFA, Stack Size: 81920, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 0000021F44DBCE08 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002D3985C0988 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Affinity: 0x4000000000000003, Priority: 0xFFFF7FFD, Stack Size: 98304, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -20,34 +20,6 @@
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
 [LOG] Manager::readBank                        : fileversion = 142, compatVersion = 140 (oldest = 44, newest = 142)
-[LOG] SoundI::release                          : Somniat 60 _  (0000021FB2BE58E8)
-[LOG] SoundI::release                          :     Somniat 60 _  (0000021FB2C8D2F8)
-[LOG] SoundI::release                          :     Somniat 60 _  (0000021F23A9C968)
-[LOG] SoundI::release                          : Somniat 40 _  (0000021FB2BE5228)
-[LOG] SoundI::release                          :     Somniat 40 _  (0000021FB2C92F98)
-[LOG] SoundI::release                          :     Somniat 40 _  (0000021F23A9D388)
-[LOG] SoundI::release                          : Somniat 20 _  (0000021FB2BE64B8)
-[LOG] SoundI::release                          :     Somniat 20 _  (0000021FB2C91DB8)
-[LOG] SoundI::release                          :     Somniat 20 _  (0000021F23A9CCC8)
-[LOG] SoundI::release                          : Somniat 80 _  (0000021FB2BE6308)
-[LOG] SoundI::release                          :     Somniat 80 _  (0000021FB2C91A78)
-[LOG] SoundI::release                          :     Somniat 80 _  (0000021F23A9D028)
-[LOG] SoundI::release                          : Somniat -fight  (0000021FB2BE5738)
-[LOG] SoundI::release                          :     Somniat -fight  (0000021FB2C91598)
-[LOG] SoundI::release                          :     Somniat -fight  (0000021F23A9CE78)
-[LOG] SoundI::release                          : Somniat 100 _  (0000021FB2BE6668)
-[LOG] SoundI::release                          :     Somniat 100 _  (0000021FB2C913F8)
-[LOG] SoundI::release                          :     Somniat 100 _  (0000021F23A9D6E8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Thread::callback                         : FMOD Studio sample load thread finished.
 [LOG] LiveUpdate::release                      : 
@@ -55,5 +27,3 @@
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
 [LOG] SystemI::close                           : Closed.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
