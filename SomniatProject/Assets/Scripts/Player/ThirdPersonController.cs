@@ -148,7 +148,7 @@ namespace StarterAssets
             // get a reference to our main camera
             if (_mainCamera == null)
             {
-                _mainCamera = FindAnyObjectByType<Camera>();
+                _mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
             }
         }
 
