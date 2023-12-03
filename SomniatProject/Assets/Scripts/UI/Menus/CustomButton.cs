@@ -20,6 +20,7 @@ public class CustomButton : CustomUIComponent
 
     public override void Setup()
     {
+        BossBT.isAlive = true;
         button = GetComponentInChildren<Button>();
         button.onClick.AddListener(OnClick);
         buttonText = GetComponentInChildren<TextMeshProUGUI>();
@@ -50,15 +51,17 @@ public class CustomButton : CustomUIComponent
     public void NewGame()
     {
         Time.timeScale = 1f;
-        Player.isDead = false;
         SceneManager.LoadScene(1);
-        
+        Player.isDead = false;
+        BossBT.isAlive = true;
     }
 
     public void RestartGame()
     {
         Time.timeScale = 1f;
         //victoryMenu.SetActive(false);
+        BossBT.isAlive = true;
+        Player.isDead = false;
         SceneManager.LoadScene(1);
         
         
@@ -68,6 +71,8 @@ public class CustomButton : CustomUIComponent
     {
         Time.timeScale = 1f;
         //victoryMenu.SetActive(false);
+        BossBT.isAlive = true;
+        Player.isDead = false;
         SceneManager.LoadScene(0);
     }
 
@@ -81,12 +86,6 @@ public class CustomButton : CustomUIComponent
     public void OpenPauseMenu()
     {
         pauseMenu.SetActive(true);
-        Debug.Log("CLICKED OPEN PAUSE MENU");
-    }
-
-    public void OpenSettingsMenu()
-    {
-
     }
 
 }

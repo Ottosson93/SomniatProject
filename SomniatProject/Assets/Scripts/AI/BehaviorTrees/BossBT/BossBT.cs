@@ -25,6 +25,8 @@ public class BossBT : Tree
     public static float attackCounter = 0f;
     public static int bossSpellCounter = 0;
 
+    public static bool isAlive = true;
+
     protected override Node SetupTree()
     {
         Node root = new Selector(new List<Node>

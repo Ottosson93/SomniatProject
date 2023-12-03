@@ -35,7 +35,7 @@ public class SettingsMenuView : Menu
     }
     public override void Initialize()
     {
-        _backButton.onClick.AddListener(() => MenuManager.ShowLast());
+        _backButton.onClick.AddListener(() => MainMenuManager.ShowLast());
     }
 
     public void SetVolume(float volume)
