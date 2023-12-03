@@ -8,7 +8,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.Animations;
 using Random = UnityEngine.Random;
 using Unity.VisualScripting;
+#if UNITY_EDITOR
 using UnityEditor.Timeline.Actions;
+#endif
 
 public class PickUpScript : MonoBehaviour
 {

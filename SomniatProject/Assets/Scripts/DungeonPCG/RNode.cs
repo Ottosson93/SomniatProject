@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using System.Runtime.InteropServices.WindowsRuntime;
+#if UNITY_EDITOR
 using UnityEditor.ShaderGraph.Internal;
+#endif
 using UnityEngine;
 
 public class RNode

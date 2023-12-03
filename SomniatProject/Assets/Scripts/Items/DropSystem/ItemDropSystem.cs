@@ -33,7 +33,7 @@ public class ItemDropSystem : MonoBehaviour
             return;
         }
 
-        LoadItemDropRatesFromCSV("Resources/Prefabs/Items/ItemDropData.csv");
+        LoadItemDropRatesFromCSV("Resources/ItemDropData.csv");
     }
 
     void LoadItemDropRatesFromCSV(string csvFileName)

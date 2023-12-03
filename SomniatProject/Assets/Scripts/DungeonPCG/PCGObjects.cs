@@ -2,7 +2,9 @@
 using System;
 using UnityEngine;
 using Unity.Mathematics;
+#if UNITY_EDITOR
 using UnityEngine.SocialPlatforms.GameCenter;
+#endif
 public class PCGObjects
 {
     public GameObject objectType;
