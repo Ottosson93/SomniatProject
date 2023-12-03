@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
 using System.Threading;
+using Unity.VisualScripting;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -150,7 +151,8 @@ namespace StarterAssets
             // get a reference to our main camera
             if (_mainCamera == null)
             {
-                _mainCamera = FindAnyObjectByType<Camera>();
+                _mainCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+
             }
         }
 
