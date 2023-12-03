@@ -739,6 +739,7 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
+    #region Prop placement
     private void DeclareRoomType(RNode room)
     {
 
@@ -801,6 +802,7 @@ public class DungeonGenerator : MonoBehaviour
         CreateNoninteractableProps(room, amountOfProps, roomSize);
         CreateInteractableProps(room, amountOfInteractableProps);
     }
+
 
     private void CreateNoninteractableProps(RNode room, int amountOfProps, double roomSize)
     {
@@ -934,6 +936,7 @@ public class DungeonGenerator : MonoBehaviour
     }
 
 
+
     public void SpawnEnemy(RNode room)
     {
         //amountofenemies cannot exceed the size of listofallenemies
@@ -994,5 +997,5 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-
+    #endregion
 }
