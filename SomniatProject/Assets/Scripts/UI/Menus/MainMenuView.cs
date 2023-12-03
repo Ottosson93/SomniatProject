@@ -11,6 +11,6 @@ public class MainMenuView : Menu
     [SerializeField] private Button _exitGameButton;
     public override void Initialize()
     {
-        _settingsButton.onClick.AddListener(() => MenuManager.Show<SettingsMenuView>());
+        _settingsButton.onClick.AddListener(() => MainMenuManager.Show<SettingsMenuView>());
     }
 }

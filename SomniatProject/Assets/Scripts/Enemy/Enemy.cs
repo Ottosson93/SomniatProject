@@ -43,6 +43,11 @@ public class Enemy : MonoBehaviour
 
     void Die() {
 
+        if (this.gameObject.CompareTag("Boss"))
+        {
+            BossBT.isAlive = false;
+        }
+
         animator.SetBool("Die", true);
         GetComponent<CapsuleCollider>().enabled = false;
         this.enabled = false;
