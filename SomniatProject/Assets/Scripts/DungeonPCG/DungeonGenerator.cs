@@ -50,16 +50,6 @@ public class DungeonGenerator : MonoBehaviour
         GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
-        /*
-        foreach ( GameObject room in this.preMadeRooms)
-        {
-            if (room.name == "Start Room")
-            {
-                this.startRoom = room;
-                preMadeRooms.Remove(room);
-                break;
-            }
-        }*/
         this.wall5 = wall5;
         this.wall1 = wall1;
         this.pillar = pillar;
@@ -84,25 +74,20 @@ public class DungeonGenerator : MonoBehaviour
         {
             int takeRandom = Random.Range(0, nodes.Count);
             RNode node = nodes[0];
-            //Debug.Log("nr of nodes in list: " + nodes.Count);
-            //REVERT BACK TO PREVIOUS VERSION WITHOUT MANUAL ROOMS THAT WORKS: JUST CHANGE "ManageSplit()" with "SplitRoom()";
             if (node.width > minRoomSize && node.height > minRoomSize)
             {
                 ManageSplit(node);
-                //SplitRoom(node);
             }
-            else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize) //REMOVE?
+            else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize)
             {
 
                 node.vertical = false;
                 ManageSplit(node);
-                //SplitRoom(node);
             }
-            else if (node.width < minRoomSize && node.height > minRoomSize * 1.5) //REMOVE?
+            else if (node.width < minRoomSize && node.height > minRoomSize * 1.5)
             {
                 node.vertical = true;
                 ManageSplit(node);
-                //SplitRoom(node);
             }
             else
             {
@@ -138,7 +123,7 @@ public class DungeonGenerator : MonoBehaviour
                     if (manualRoom.name == "Start Room" && distanceFromOrigo < 75)
                     {
                         Debug.Log("Start Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
                         Debug.DrawLine(new Vector3(parentNode.centerPos.x, 0.2f, parentNode.centerPos.y), Vector3.zero, UnityEngine.Color.white, 500);
                         break;
@@ -146,21 +131,21 @@ public class DungeonGenerator : MonoBehaviour
                     else if (manualRoom.name == "Boss Room" && distanceFromOrigo > 100)
                     {
                         Debug.Log("Boss Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        SplitRoomManually(parentNode, manualRoom, false);
                         manualInsertionPossible = true;
                         break;
                     }
-                    else if (manualRoom.name == "Upgrade Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 150))
+                    else if (manualRoom.name == "Upgrade Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 125))
                     {
                         Debug.Log("Upgrade Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
                         break;
                     }
                     else if (manualRoom.name == "Corridor Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 125))
                     {
                         Debug.Log("Corridor Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
                         break;
 
@@ -168,7 +153,7 @@ public class DungeonGenerator : MonoBehaviour
                     else if (manualRoom.name == "Battle Room" && (distanceFromOrigo > 75 && distanceFromOrigo < 150))
                     {
                         Debug.Log("Battle Room was inteserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        SplitRoomManually(parentNode, manualRoom, false);
                         manualInsertionPossible = true;
                         break;
                     }
@@ -200,41 +185,72 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    void SplitRoomManually(RNode parentNode, GameObject manualRoom)
+    //splitting parent node into a procedural room and a manual room
+    void SplitRoomManually(RNode parentNode, GameObject manualRoom, bool placeCentered)
     {
         largestPreMadeRoom.x = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
         largestPreMadeRoom.y = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
         float offsetWidth = Random.Range(largestPreMadeRoom.x * 0.25f, largestPreMadeRoom.x * 0.4f);
         float offsetHeight = Random.Range(largestPreMadeRoom.y * 0.25f, largestPreMadeRoom.y * 0.4f);
         PreMadeRoom pmr;
-        Vector3 posM;
+        Vector3 PosManual;
         RNode newNode;
         Vector2 bl;
         Vector2 tr;
         if (parentNode.width - largestPreMadeRoom.x > parentNode.height - largestPreMadeRoom.y)
         {
-            float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
-            //this is the node that hold the object and and coordinates of the manual room;
-            posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
-            bl = new Vector2(parentNode.bottomLeft.x + offsetWidth, parentNode.bottomLeft.y + btheight);
-            tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
+            Debug.Log("Splitting " + manualRoom.name + " room vertically");
+            //Doing vertical Splitt
+            if ((placeCentered && parentNode.centerPos.x < 0) || (!placeCentered && parentNode.centerPos.x > 0))
+            {
+                float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
+                //this is the node that hold the object and and coordinates of the manual room;
+                PosManual = new Vector3(parentNode.topRight.x - largestPreMadeRoom.x / 2 - offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
+                bl = new Vector2(parentNode.topRight.x - largestPreMadeRoom.x - offsetWidth, parentNode.bottomLeft.y + btheight);
+                tr = new Vector2(parentNode.topRight.x - offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
 
-            newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
-            //Change ^ if adding another node of remaining space
+                //placing pcg room to the left
+                newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x - largestPreMadeRoom.x - offsetWidth, parentNode.topRight.y), roomID++);
+                //Change ^ if adding another node of remaining space
+            }
+            else
+            {
+                float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
+                //this is the node that hold the object and and coordinates of the manual room;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
+                bl = new Vector2(parentNode.bottomLeft.x + offsetWidth, parentNode.bottomLeft.y + btheight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
+
+                newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
+                //Change ^ if adding another node of remaining space
+            }
 
         }
         else
         {
-            float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
-            posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
-            bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.bottomLeft.y + offsetHeight);
-            tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight);
+            Debug.Log("Splitting " + manualRoom.name + " room horionztally");
+            if ((placeCentered && parentNode.centerPos.y < 0) || (!placeCentered && parentNode.centerPos.y > 0))
+            {
+                float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.topRight.y - largestPreMadeRoom.y / 2 - offsetHeight);
+                bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.topRight.y - largestPreMadeRoom.y - offsetHeight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.topRight.y - offsetHeight);
 
-            newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
-            //Change ^ if adding another node of remaining space
+                newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x, parentNode.topRight.y - largestPreMadeRoom.y - offsetHeight), roomID++);
+                //Change ^ if adding another node of remaining space
+            }
+            else
+            {
+                float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
+                bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.bottomLeft.y + offsetHeight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight);
 
+                newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
+                //Change ^ if adding another node of remaining space
+            }
         }
-        pmr = new PreMadeRoom(posM, manualRoom);
+        pmr = new PreMadeRoom(PosManual, manualRoom);
         preMadeRoomNodes.Add(pmr);
 
         RNode manualRNode = new RNode(bl, tr, roomID++);
@@ -266,7 +282,7 @@ public class DungeonGenerator : MonoBehaviour
         //splitting Vertically
         if (parentNode.vertical == false)
         {
-            float splitV = Random.Range(parentNode.width * 0.25f, parentNode.width * 0.75f);
+            float splitV = Random.Range(parentNode.width * 0.3f, parentNode.width * 0.7f);
 
             newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x - (int)splitV, parentNode.topRight.y), roomID++);
             newNode.parent = parentNode;
