@@ -10,8 +10,8 @@ public class PostProcess : MonoBehaviour
     public Shader shader;
     private Material material;
     public Player player;
-    public float initialRadius = 3f; // Initial radius when lucidity is at max
-    public float minRadius = 0.5f;    // Minimum radius when lucidity is at its lowest
+    public float initialRadius; // Initial radius when lucidity is at max
+    public float minRadius;    // Minimum radius when lucidity is at its lowest
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class PostProcess : MonoBehaviour
         // Update shader properties based on lucidity
 
         float radius = Mathf.Lerp(minRadius, initialRadius, lucidCamera.localScale.x / 3);
-
+        Debug.Log($"INITIAL RADIUS: {radius}");
         // Pass the radius to the shader
         material.SetFloat("_Radius", radius);
 
