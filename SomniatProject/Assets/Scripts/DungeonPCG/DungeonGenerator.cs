@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -41,7 +42,7 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> listOfAllEnemies = new List<GameObject>();
 
 
-    Collider[] colliders = new Collider[10];
+    Collider[] objectCollider = new Collider[15];
     List<GameObject> interactableProps = new List<GameObject>();
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
@@ -762,14 +763,14 @@ public class DungeonGenerator : MonoBehaviour
 
     private float CalculateRoomArea(RNode room)
     {
-        float calcDiagonal = Vector2.Distance(room.bottomLeft, room.topRight);
-        Debug.Log("Area " + calcDiagonal + "ID " + room.id);
-        return calcDiagonal;
+        //float calcDiagonal = Vector2.Distance(room.bottomLeft, room.topRight);
+        //Debug.Log("Area " + calcDiagonal + "ID " + room.id);
+        //return calcDiagonal;
 
         //Need work on using roomSize
-        //float calcArea = room.width * room.height;
+        float calcArea = room.width * room.height;
         //Debug.Log("Area " + calcArea + "ID " + room.id);
-        //return calcArea;
+        return calcArea;
     }
 
     public void SpawnProps(RNode room)
@@ -778,29 +779,56 @@ public class DungeonGenerator : MonoBehaviour
 
         float roomSize = CalculateRoomArea(room);
 
-        //amountOfInteractableProps = 1;
-        //amountOfProps = 1;
+        amountOfInteractableProps = 1;
+        amountOfProps = 1;
 
         //Place a specific amount of props depending on the size of the room
-        if (roomSize <= 30)
+
+        //Measurements for diagonal 
+        //if (roomSize <= 30)
+        //{
+        //    amountOfInteractableProps = 2;
+        //    amountOfProps = 1;
+        //}
+        //else if (roomSize > 30 && roomSize < 50)
+        //{
+        //    amountOfInteractableProps = 3;
+        //    amountOfProps = 2;
+        //}
+        //else if (roomSize >= 50)
+        //{
+        //    amountOfInteractableProps = 4;
+        //    amountOfProps = 3;
+        //}
+
+        if (roomSize <= 300)
+        {
+            amountOfInteractableProps = 2;
+            amountOfProps = 0;
+        }
+        else if (roomSize > 300 && roomSize < 450)
         {
             amountOfInteractableProps = 2;
             amountOfProps = 1;
         }
-        else if (roomSize > 30 && roomSize < 50)
+        else if (roomSize >= 450 && roomSize < 800)
         {
             amountOfInteractableProps = 3;
-            amountOfProps = 2;
+            amountOfProps = 1;
         }
-        else if (roomSize >= 50)
+        else if (roomSize >= 800 && roomSize < 1100)
         {
             amountOfInteractableProps = 4;
-            amountOfProps = 3;
+            amountOfProps = 2;
+        }
+        else if (roomSize >= 1100)
+        {
+            amountOfInteractableProps = 5;
+            amountOfProps = 5;
         }
 
-
         CreateNoninteractableProps(room, amountOfProps, roomSize);
-        CreateInteractableProps(room, amountOfInteractableProps);
+        //CreateInteractableProps(room, amountOfInteractableProps);
     }
 
 
@@ -808,7 +836,8 @@ public class DungeonGenerator : MonoBehaviour
     {
         int rndRotation = Random.Range(0, 3);
 
-        if (roomSize >= 45)
+        //Create a pillar in the middle of the room if the roomsize exceeds the condition
+        if (roomSize > 500)
         {
             if (room.isGreenRoom == true)
             {
@@ -826,9 +855,12 @@ public class DungeonGenerator : MonoBehaviour
                 Instantiate(props[0], new Vector3(room.centerPos.x, props[0].transform.position.y, room.centerPos.y), Quaternion.Euler(0, rotationArray[rndRotation], 0));
         }
 
-        for (int i = 1; i < amountOfProps; i++)
+        for (int i = 0; i < amountOfProps; i++)
         {
-            float spawnOffset = 3f, boundOffset = 3f;
+            float spawnOffset = 2.5f, boundOffset = 0f;
+            int overlapCount = 0;
+
+            //Could need a distance check so objects dont spawn too close to center 
             Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
             int rndProp = Random.Range(3, props.Count);
@@ -839,43 +871,74 @@ public class DungeonGenerator : MonoBehaviour
             //Checks if the object has a collider and if it does it collects the size and assigns it to propBounds
             if (props[rndProp].transform.gameObject.GetComponent<BoxCollider>() != null)
             {
-                propBounds = props[rndProp].transform.gameObject.GetComponent<BoxCollider>().size + new Vector3(boundOffset, boundOffset, boundOffset);
-                //Debug.Log("Got the collider of " + props[rndProp].name + " " + propBounds);
+                propBounds = props[rndProp].transform.gameObject.GetComponent<BoxCollider>().size;
+                Debug.Log("Got the collider of " + props[rndProp].name + " " + propBounds);
             }
 
-            //If the object doesnt have a collider then we instead get the meshrenderer (+ an offset to give the objects some space inbetween)
+            //If the object doesnt have a collider then we instead get the meshrenderer 
             if (propBounds == Vector3.zero)
             {
-                propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
-                //Debug.Log("Got the mesh of " + props[rndProp].name + " " + propBounds);
+                //propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size;
+                propBounds = props[rndProp].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size;
+                Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
             }
 
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
+            if (propBounds.x > propBounds.z)
+            {
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
+                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
+            }
+            else if (propBounds.z > propBounds.x)
+            {
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z + boundOffset, objectCollider);
+                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
+            }
+            else
+            {
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
+                Debug.Log("Using ELSE STATEMENT " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x + boundOffset);
+            }
+
+            //overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), colliders);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (overlapCount <= 2)
             {
                 Instantiate(props[rndProp], new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
+                Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
             }
             else if (overlapCount > 2)
             {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
+                Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
 
 
                 while (overlapCount > 2)
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
+                    if (propBounds.x > propBounds.z)
+                    {
+                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
+                        Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
+                    }
+                    else if (propBounds.z > propBounds.x)
+                    {
+                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z + boundOffset, objectCollider);
+                        Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
+                    }
+                    else
+                    {
+                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
+                        Debug.Log("Using ELSE STATEMENT " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x + boundOffset);
+                    }
 
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
+                    Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
 
                     if (overlapCount <= 2)
                     {
                         Instantiate(props[rndProp], new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
 
-                        //Debug.Log("overlapCount: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
+                        Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
 
                         break;
                     }
@@ -891,42 +954,42 @@ public class DungeonGenerator : MonoBehaviour
         //may want to change it to spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < amountOfInteractableProps; i++)
         {
-            float spawnOffset = 3f, boundOffset = 2f;
+            float spawnOffset = 2.5f, boundOffset = 6f;
             Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
             int rndProp = Random.Range(0, interactableProps.Count);
 
             //Checks if the position is occupied, takes the size of the objects meshrenderer (+X in every dimension to get some more distance) and checks if there's anything at the spawn position
-            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
+            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size;
 
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds, colliders);
+            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), objectCollider);
 
-            //Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
+            Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             if (overlapCount <= 2)
             {
                 Instantiate(interactableProps[rndProp], new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
+                Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
 
             }
             else if (overlapCount > 2)
             {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
+                Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
 
                 while (overlapCount > 2)
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds, colliders);
+                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), objectCollider);
 
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
+                    Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
 
 
                     if (overlapCount <= 2)
                     {
                         Instantiate(interactableProps[rndProp], new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
-                        //Debug.Log("overlapCount: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
+                        Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
 
                         break;
                     }
@@ -943,54 +1006,53 @@ public class DungeonGenerator : MonoBehaviour
         if (room.isGreenRoom)
         {
             amountOfEnemies = 2;
-            CreateEnemies(room, amountOfEnemies);
         }
         else if (room.isOrangeRoom)
         {
             amountOfEnemies = 3;
-            CreateEnemies(room, amountOfEnemies);
         }
         else if (room.isRedRoom)
         {
             amountOfEnemies = 4;
-            CreateEnemies(room, amountOfEnemies);
         }
+        //CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateEnemies(RNode room, int amountOfEnemies)
     {
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            float spawnOffset = 3f, boundOffset = 2f;
+            float spawnOffset = 3f, boundOffset = 4f;
             Vector3 enemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
-            Vector3 enemyBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
-            //Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
+            
+            Vector3 enemyBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size;
+            Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
 
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + enemyOffset, enemyBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
+            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + enemyOffset, enemyBounds + new Vector3(boundOffset, 0, boundOffset), objectCollider);
 
             if (overlapCount <= 2)
             {
                 Instantiate(listOfAllEnemies[i], new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
+                Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
             }
             else if (overlapCount > 2)
             {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
+                Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
 
                 while (overlapCount > 2)
                 {
                     Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newEnemyOffset, enemyBounds, colliders);
+                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newEnemyOffset, enemyBounds + new Vector3(boundOffset, 0, boundOffset), objectCollider);
 
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
+                    Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
 
 
                     if (overlapCount <= 2)
                     {
                         Instantiate(listOfAllEnemies[i], new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z), Quaternion.identity);
-                        //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
+                        Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
                         break;
                     }
                 }
