@@ -7,11 +7,12 @@ public class StunEffect : MonoBehaviour
     private float stunDuration;
     private NavMeshAgent navMeshAgent;
     private Vector3 originalDestination;
+    private Animator animator;
 
-
-    public void Initialize(float duration, ParticleSystem stunParticleEffect)
+    public void Initialize(float duration, ParticleSystem stunParticleEffect, Animator enemyAnimator)
     {
         stunDuration = duration;
+        animator = enemyAnimator;
 
         if (stunParticleEffect != null)
         {
@@ -25,6 +26,11 @@ public class StunEffect : MonoBehaviour
         {
             originalDestination = navMeshAgent.destination;
             navMeshAgent.isStopped = true;
+
+            if(animator != null)
+            {
+                animator.SetTrigger("StunTrigger");
+            }
         }
 
 
@@ -46,6 +52,11 @@ public class StunEffect : MonoBehaviour
         {
             navMeshAgent.destination = originalDestination;
             navMeshAgent.isStopped= false;
+
+            if(animator != null)
+            {
+                animator.ResetTrigger("StunTrigger");
+            }
         }
 
 
