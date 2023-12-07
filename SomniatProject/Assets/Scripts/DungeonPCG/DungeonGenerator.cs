@@ -42,7 +42,7 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> listOfAllEnemies = new List<GameObject>();
 
 
-    Collider[] objectCollider = new Collider[15];
+    Collider[] objectCollider = new Collider[10];
     List<GameObject> interactableProps = new List<GameObject>();
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
@@ -763,11 +763,6 @@ public class DungeonGenerator : MonoBehaviour
 
     private float CalculateRoomArea(RNode room)
     {
-        //float calcDiagonal = Vector2.Distance(room.bottomLeft, room.topRight);
-        //Debug.Log("Area " + calcDiagonal + "ID " + room.id);
-        //return calcDiagonal;
-
-        //Need work on using roomSize
         float calcArea = room.width * room.height;
         //Debug.Log("Area " + calcArea + "ID " + room.id);
         return calcArea;
@@ -783,24 +778,6 @@ public class DungeonGenerator : MonoBehaviour
         amountOfProps = 1;
 
         //Place a specific amount of props depending on the size of the room
-
-        //Measurements for diagonal 
-        //if (roomSize <= 30)
-        //{
-        //    amountOfInteractableProps = 2;
-        //    amountOfProps = 1;
-        //}
-        //else if (roomSize > 30 && roomSize < 50)
-        //{
-        //    amountOfInteractableProps = 3;
-        //    amountOfProps = 2;
-        //}
-        //else if (roomSize >= 50)
-        //{
-        //    amountOfInteractableProps = 4;
-        //    amountOfProps = 3;
-        //}
-
         if (roomSize <= 300)
         {
             amountOfInteractableProps = 2;
@@ -857,7 +834,7 @@ public class DungeonGenerator : MonoBehaviour
 
         for (int i = 0; i < amountOfProps; i++)
         {
-            float spawnOffset = 2.5f, boundOffset = 0f;
+            float spawnOffset = 2.5f, boundOffset = 3f;
             int overlapCount = 0;
 
             //Could need a distance check so objects dont spawn too close to center 
@@ -882,22 +859,23 @@ public class DungeonGenerator : MonoBehaviour
                 propBounds = props[rndProp].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size;
                 Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
             }
-
-            if (propBounds.x > propBounds.z)
+            
+            if (boundOffset > propBounds.x && boundOffset > propBounds.z)
             {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
-                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, boundOffset, objectCollider);
+                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " boundoffset " + propBounds.x + boundOffset);
             }
-            else if (propBounds.z > propBounds.x)
+            else if (propBounds.x > propBounds.z)
             {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z + boundOffset, objectCollider);
-                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x, objectCollider);
+                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
             }
             else
             {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
-                Debug.Log("Using ELSE STATEMENT " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x + boundOffset);
+                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z, objectCollider);
+                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
             }
+            
 
             //overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), colliders);
 
