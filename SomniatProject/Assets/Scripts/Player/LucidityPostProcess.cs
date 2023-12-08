@@ -17,9 +17,9 @@ public class LucidityPostProcess : MonoBehaviour
 
     public void UpdateLucidityMask(float lucidity)
     {
-        Debug.Log($"KVOTEN: {lucidity / player.maxLucidity}");
+      //  Debug.Log($"KVOTEN: {lucidity / player.maxLucidity}");
         float radius = Mathf.Lerp(minScale, maxScale, lucidity / player.maxLucidity);
-        Debug.Log($"KVOTEN: {lucidity / player.maxLucidity} RADIUS: {radius}");
+ //       Debug.Log($"KVOTEN: {lucidity / player.maxLucidity} RADIUS: {radius}");
         lucidCamera.localScale = new Vector3(radius*1.10F, radius*0.65F, radius);   
     }
 
