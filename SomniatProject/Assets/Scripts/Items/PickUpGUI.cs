@@ -19,31 +19,44 @@ public class PickUpScript : MonoBehaviour
     private Transform eKeyPlane;
     private Material material;
     bool displayKey;
+    bool showGUI;
 
     void Start()
     {
+        showGUI = true;
         displayKey = false;
         eKeyPlane = transform.GetChild(0);
         material = eKeyPlane.GetComponent<MeshRenderer>().material;
+        material.color = new Color(material.color.r, material.color.g, material.color.b, 0.01F);
         player = GameObject.FindGameObjectWithTag("Player").transform;
 
     }
 
+    public void TurnOffGUI()
+    {
+        showGUI = false;
+    }
+
     public async Task<bool> Update()
     {
-        if (InRangeOfPickup)
+        if (showGUI)
         {
-            if (!displayKey && CanIncreaseOpacity)
-                await ChangeKeyOpacity(IncreaseOpacity);
-        }
-        else
-        {
-            if (!displayKey && CanDecreaseOpacity)
-                await ChangeKeyOpacity(DecreaseOpacity);
+
+            if (InRangeOfPickup)
+            {
+                if (!displayKey && CanIncreaseOpacity)
+                    await ChangeKeyOpacity(IncreaseOpacity);
+            }
+            else
+            {
+                if (!displayKey && CanDecreaseOpacity)
+                    await ChangeKeyOpacity(DecreaseOpacity);
+            }
+
+            
         }
 
-        //Debug.Log("pickupscript return false");
-        return false;
+        return true;
     }
 
     private async Task ChangeKeyOpacity(Color targetColor)
@@ -59,7 +72,8 @@ public class PickUpScript : MonoBehaviour
 
         displayKey = false;
     }
-    public bool PickUp => InRangeOfPickup ? Keyboard.current.eKey.wasReleasedThisFrame ? true : false : false;
+    public bool PickUpItem => InRangeOfPickup ? true : false;
+    public bool PickUpButtonPressed => InRangeOfPickup ? Keyboard.current.eKey.wasReleasedThisFrame ? true : false : false;
     public bool InRangeOfPickup => (player.position - transform.position).magnitude <= pickUpRange;
     private Color DecreaseOpacity => CanDecreaseOpacity ? new Color(material.color.r, material.color.g, material.color.b, (material.color.a - 0.01F)) : material.color;
     private Color IncreaseOpacity => CanIncreaseOpacity ? new Color(material.color.r, material.color.g, material.color.b, (material.color.a + 0.01F)) : material.color;

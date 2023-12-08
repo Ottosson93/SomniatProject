@@ -21,13 +21,15 @@ public class Relic : Item
         CreateStats();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         pickUpScript = GetComponent<PickUpScript>();
+        pickUpScript.TurnOffGUI();
     }
 
     private void Update()
     {
         // Dont know what to name it but i simply remade Atalay's update script to return a bool. So that i could use it in this class for my Equip() script. 
-        if (pickUpScript.PickUp)
+        if (pickUpScript.PickUpItem)
         {
+            Debug.Log("Atalay");
             player.Equip(relicData);
             gameObject.SetActive(false);
         }

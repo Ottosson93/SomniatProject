@@ -31,7 +31,7 @@ public class EmpoweredRelic : MonoBehaviour
 
     private void Update()
     {
-        if (pickUpScript.PickUp)
+        if (pickUpScript.PickUpButtonPressed)
         {
             player.empoweredRelic = this;
             gameObject.SetActive(false);
