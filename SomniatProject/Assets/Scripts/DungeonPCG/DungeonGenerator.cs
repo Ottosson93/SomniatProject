@@ -800,7 +800,7 @@ public class DungeonGenerator : MonoBehaviour
         else if (roomSize >= 1100)
         {
             amountOfInteractableProps = 5;
-            amountOfProps = 10;
+            amountOfProps = 2;
         }
         else
         {
@@ -808,7 +808,7 @@ public class DungeonGenerator : MonoBehaviour
             amountOfProps = 1;
         }
 
-        //CreateNoninteractableProps(room, amountOfProps, roomSize);
+        CreateNoninteractableProps(room, amountOfProps, roomSize);
         CreateInteractableProps(room, amountOfInteractableProps);
     }
 
@@ -859,6 +859,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, boundOffset, objectCollider);
                     Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " boundoffset " + propBounds.x + boundOffset);
+
                 }
                 else if (propBounds.x > propBounds.z)
                 {
@@ -985,7 +986,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             amountOfEnemies = 4;
         }
-        //CreateEnemies(room, amountOfEnemies);
+        CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateEnemies(RNode room, int amountOfEnemies)
