@@ -801,7 +801,7 @@ public class DungeonGenerator : MonoBehaviour
         else if (roomSize >= 1100)
         {
             amountOfInteractableProps = 5;
-            amountOfProps = 5;
+            amountOfProps = 10;
         }
 
         CreateNoninteractableProps(room, amountOfProps, roomSize);
@@ -846,73 +846,63 @@ public class DungeonGenerator : MonoBehaviour
             Vector3 propBounds = Vector3.zero;
 
             //Checks if the object has a collider and if it does it collects the size and assigns it to propBounds
-            if (props[rndProp].transform.gameObject.GetComponent<BoxCollider>() != null)
+            if (props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>() != null)
             {
-                propBounds = props[rndProp].transform.gameObject.GetComponent<BoxCollider>().size;
+                propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>().size;
                 Debug.Log("Got the collider of " + props[rndProp].name + " " + propBounds);
+                
+                overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds, objectCollider);
             }
-
-            //If the object doesnt have a collider then we instead get the meshrenderer 
-            if (propBounds == Vector3.zero)
+            else if (propBounds == Vector3.zero) //If the object doesnt have a collider then we instead get the meshrenderer
             {
-                //propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size;
-                propBounds = props[rndProp].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size;
+                propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size;
                 Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
+                
+                if (boundOffset > propBounds.x && boundOffset > propBounds.z)
+                {
+                    overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, boundOffset, objectCollider);
+                    Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " boundoffset " + propBounds.x + boundOffset);
+                }
+                else if (propBounds.x > propBounds.z)
+                {
+                    overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x / 1.5f, objectCollider);
+                    Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
+                }
+                else
+                {
+                    overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z / 1.5f, objectCollider);
+                    Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
+                }
             }
             
-            if (boundOffset > propBounds.x && boundOffset > propBounds.z)
-            {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, boundOffset, objectCollider);
-                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " boundoffset " + propBounds.x + boundOffset);
-            }
-            else if (propBounds.x > propBounds.z)
-            {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x, objectCollider);
-                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
-            }
-            else
-            {
-                overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z, objectCollider);
-                Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
-            }
-            
-
-            //overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), colliders);
-
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
-            if (overlapCount <= 2)
+            if (overlapCount == 0)
             {
                 Instantiate(props[rndProp], new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
                 Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
             }
-            else if (overlapCount > 2)
+            else if (overlapCount > 0)
             {
                 Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
 
 
-                while (overlapCount > 2)
+                while (overlapCount > 0)
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
 
-                    if (propBounds.x > propBounds.z)
+                    if (boundOffset > propBounds.x && boundOffset > propBounds.z)
                     {
-                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
-                        Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x);
-                    }
-                    else if (propBounds.z > propBounds.x)
-                    {
-                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.z + boundOffset, objectCollider);
-                        Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " Z propbound " + propBounds.z + boundOffset);
+                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + newObjOffset, boundOffset, objectCollider);
+                        Debug.Log("Using " + props[rndProp].transform.GetChild(0).name + " boundoffset " + boundOffset);
                     }
                     else
                     {
-                        overlapCount = Physics.OverlapSphereNonAlloc(room.centerPos + objOffset, propBounds.x + boundOffset, objectCollider);
-                        Debug.Log("Using ELSE STATEMENT " + props[rndProp].transform.GetChild(0).name + " X propbound " + propBounds.x + boundOffset);
+                        overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds + new Vector3(boundOffset, 0, boundOffset), objectCollider);
                     }
 
-                    Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
+                    Debug.Log("overlapCount AFTER new gets created: " + overlapCount + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
 
-                    if (overlapCount <= 2)
+                    if (overlapCount == 0)
                     {
                         Instantiate(props[rndProp], new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
 
