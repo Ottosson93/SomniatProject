@@ -932,6 +932,7 @@ public class DungeonGenerator : MonoBehaviour
 
             Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
+
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
             Spawner(interactableProps[rndProp], room, spawnOffset, boundOffset, objOffset, rndProp, propBounds, overlapCount);
         }
@@ -939,6 +940,7 @@ public class DungeonGenerator : MonoBehaviour
 
     private int Spawner(GameObject gameObject, RNode room, float spawnOffset, float boundOffset, Vector3 objOffset, int rndProp, Vector3 propBounds, int overlapCount)
     {
+
         if (overlapCount <= 2)
         {
             Instantiate(gameObject, new Vector3(room.centerPos.x + objOffset.x, gameObject.transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
