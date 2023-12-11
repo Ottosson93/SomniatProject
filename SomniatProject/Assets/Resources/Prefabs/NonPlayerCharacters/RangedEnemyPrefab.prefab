@@ -566,7 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e20b9879d785eae48b586967f650e2d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 7824386720229001689, guid: f4412359859c9eb448f87477f99094b3, type: 3}
+  bullet: {fileID: 2522404139160357244, guid: 82576daffdc39f44a87fb2a7e00fae6a, type: 3}
   bulletPos: {fileID: 1695502807786446139}
   timer: 0
   cooldownTime: 2
