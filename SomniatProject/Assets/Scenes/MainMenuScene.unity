@@ -1020,7 +1020,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266893793725636451, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 1938856253834237007, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1102,6 +1102,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4298834643359272231, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_Name
+      value: TutorialText
+      objectReference: {fileID: 0}
     - target: {fileID: 5713910559214961979, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -1138,6 +1142,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7515256079931157026, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_Name
+      value: TutorialButton
+      objectReference: {fileID: 0}
     - target: {fileID: 7720777562105991089, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1161,6 +1169,14 @@ PrefabInstance:
     - target: {fileID: 7720777562105991089, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7736557559940021660, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_text
+      value: Tutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7761286635463292589, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: m_Name
+      value: Tutorial
       objectReference: {fileID: 0}
     - target: {fileID: 7847687340315544713, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_Name
