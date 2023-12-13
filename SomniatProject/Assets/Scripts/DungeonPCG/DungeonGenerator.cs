@@ -383,11 +383,16 @@ public class DungeonGenerator : MonoBehaviour
     {
         for (int i = 0; i < finishedNodes.Count; i++)
         {
-            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+            if (finishedNodes[i].bottom == true)
             {
-                ShrinkNodes(finishedNodes[i]);
+                //ShrinkNodes(finishedNodes[i]);
                 DeclareRoomType(finishedNodes[i]);
-                CreateRoomMesh(finishedNodes[i], i);
+                //CreateRoomMesh(finishedNodes[i], i);
+                if (finishedNodes[i].manual == false)
+                {
+                    ShrinkNodes(finishedNodes[i]);
+                    CreateRoomMesh(finishedNodes[i], i);
+                }
             }
         }
     }
@@ -517,11 +522,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (y == room.topRight.y)
                 {
-                    AddWall(new Vector2(buildPos + 2.5f, y), wall5, Vector3.zero);
+                    AddWall(new Vector2(buildPos + 2.5f, y), room, Vector3.zero);
                 }
                 else
                 {
-                    AddWall(new Vector2(buildPos + 2.5f, y), wall5, new Vector3(0, 180, 0));
+                    AddWall(new Vector2(buildPos + 2.5f, y), room, new Vector3(0, 180, 0));
                 }
                 buildPos += 5;
             }
@@ -552,6 +557,7 @@ public class DungeonGenerator : MonoBehaviour
 
     void PlaceWallsVertically(RNode room, Doorway d, float x, bool doorway)
     {
+
         float endPoint;
         if (doorway == false)
         {
@@ -569,11 +575,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (x == room.bottomLeft.x)
                 {
-                    AddWall(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 270, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), room, new Vector3(0, 270, 0));
                 }
                 else
                 {
-                    AddWall(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 90, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), room, new Vector3(0, 90, 0));
                 }
                 buildPos += 5;
             }
@@ -602,21 +608,37 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
-    void AddWall(Vector2 pos, GameObject o, Vector3 rotation)
+    void AddWall(Vector2 pos, RNode room, Vector3 rotation)
     {
         OverWriteCounter++;
         GameObject wallObject;
         if (OverWriteCounter >= 5)
         {
-            wallObject = walls[walls.Count - 1];
+            wallObject = walls[walls.Count - 4];
             OverWriteCounter = 0;
+        }
+        else if (OverWriteCounter == 3)
+        {
+            
+            if (room.isGreenRoom == true)
+            {
+                wallObject = walls[walls.Count - 3];
+            }
+            else if (room.isOrangeRoom == true)
+            {
+                wallObject = walls[walls.Count - 2];
+            }
+            else
+            {
+                wallObject = walls[walls.Count - 1];
+            }
         }
         else
         {
-            int i = Random.Range(0, walls.Count - 1);
+            int i = Random.Range(0, walls.Count - 5);
             wallObject = walls[i];
         }
-
+        
         AddObjectToSpawn(pos, wallObject, rotation);
 
     }
