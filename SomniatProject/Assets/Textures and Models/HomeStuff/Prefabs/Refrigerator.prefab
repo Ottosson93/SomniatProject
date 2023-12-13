@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011797276446}
   - component: {fileID: 33000013183432604}
   - component: {fileID: 23000010362705874}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Refrigerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}

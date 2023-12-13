@@ -19,6 +19,7 @@ public class DungeonCreator : MonoBehaviour
 
     [SerializeField] private List<GameObject> preMadeRooms; //x = width, y = height, z = type;
     [SerializeField] private GameObject wall5, wall1, pillar;
+    [SerializeField] private List<GameObject> walls;
     private List<PreMadeRoom> preMadeNodes;
 
     private List<PCGObjects> objects = new List<PCGObjects>();
@@ -47,7 +48,7 @@ public class DungeonCreator : MonoBehaviour
 
 
         generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, lucidMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, listOfAllEnemies, 3, interactableProps, props);
+            wall1, wall5, pillar, walls, listOfAllEnemies, 3, interactableProps, props);
 
 
         generator.Generate();
@@ -64,7 +65,7 @@ public class DungeonCreator : MonoBehaviour
             Debug.Log("Rebuilding Dungeon to fit all rooms");
 
             generator = new DungeonGenerator(size, maxNumberOfRooms, minimumRoomSize, material, lucidMaterial, preMadeRoomsBackUp,
-            wall1, wall5, pillar, listOfAllEnemies, 3, interactableProps, props);
+            wall1, wall5, pillar, walls, listOfAllEnemies, 3, interactableProps, props);
 
             generator.Generate();
         }

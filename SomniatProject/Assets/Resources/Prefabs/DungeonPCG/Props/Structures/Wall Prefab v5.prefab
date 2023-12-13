@@ -266,8 +266,12 @@ PrefabInstance:
       value: MergedTorchLamp
       objectReference: {fileID: 0}
     - target: {fileID: 4172933056405810163, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.014
+      objectReference: {fileID: 0}
+    - target: {fileID: 4172933056405810163, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.482
+      value: -0.034
       objectReference: {fileID: 0}
     - target: {fileID: 5543866973492696709, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_Layer
@@ -295,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_Shadows.m_Type
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_BounceIntensity
