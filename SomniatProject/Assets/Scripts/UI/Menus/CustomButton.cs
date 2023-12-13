@@ -77,6 +77,11 @@ public class CustomButton : CustomUIComponent
     {
         SceneManager.LoadScene(2);
     }
+
+    public void Close()
+    {
+        this.gameObject.SetActive(false);
+    }
     public void MainMenu()
     {
         Time.timeScale = 1f;
