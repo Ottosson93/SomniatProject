@@ -19,6 +19,8 @@ public class DungeonGenerator : MonoBehaviour
     Vector2 largestPreMadeRoom;  //maybe change to two ints: width and height
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
     private GameObject wall5, wall1, pillar;
+    private List<GameObject> walls;
+    int OverWriteCounter = 0;
     //List<Room> allRooms = new List<Room>();
 
     private GameObject startRoom;
@@ -50,12 +52,13 @@ public class DungeonGenerator : MonoBehaviour
     int[] rotationArray = { 90, 180, 270, 360 };
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom, int roomSize, Material material, Material lucidMaterial, List<GameObject> pmr, GameObject wall1, GameObject wall5,
-        GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
+        GameObject pillar, List<GameObject> walls, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
         this.wall5 = wall5;
         this.wall1 = wall1;
         this.pillar = pillar;
+        this.walls = walls;
         this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
         rootNode = new RNode(new Vector2(-size.x / 2, -size.y / 2), new Vector2(size.x / 2, size.y / 2), roomID++);
@@ -514,11 +517,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (y == room.topRight.y)
                 {
-                    AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), wall5, Vector3.zero);
+                    AddWall(new Vector2(buildPos + 2.5f, y), wall5, Vector3.zero);
                 }
                 else
                 {
-                    AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), wall5, new Vector3(0, 180, 0));
+                    AddWall(new Vector2(buildPos + 2.5f, y), wall5, new Vector3(0, 180, 0));
                 }
                 buildPos += 5;
             }
@@ -566,11 +569,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (x == room.bottomLeft.x)
                 {
-                    AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 270, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 270, 0));
                 }
                 else
                 {
-                    AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 90, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 90, 0));
                 }
                 buildPos += 5;
             }
@@ -599,6 +602,24 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
+    void AddWall(Vector2 pos, GameObject o, Vector3 rotation)
+    {
+        OverWriteCounter++;
+        GameObject wallObject;
+        if (OverWriteCounter >= 5)
+        {
+            wallObject = walls[walls.Count - 1];
+            OverWriteCounter = 0;
+        }
+        else
+        {
+            int i = Random.Range(0, walls.Count - 1);
+            wallObject = walls[i];
+        }
+
+        AddObjectToSpawn(pos, wallObject, rotation);
+
+    }
     void AddObjectToSpawn(Vector2 pos, GameObject type, Vector3 rotation)
     {
         PCGObjects obj = new PCGObjects(pos, type, rotation);

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011139200846}
   - component: {fileID: 33000011386552272}
   - component: {fileID: 23000011084367680}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BathSink
   m_TagString: Untagged
   m_Icon: {fileID: 0}

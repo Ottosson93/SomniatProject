@@ -20,13 +20,13 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.103773594, g: 0.103773594, b: 0.103773594, a: 1}
+  m_AmbientSkyColor: {r: 0.13207549, g: 0.110270575, b: 0.110270575, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.4716981, g: 0.38492346, b: 0.38492346, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1546,6 +1546,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: greenRoomMaterial
       value: 
       objectReference: {fileID: 2100000, guid: a313ef5bef4301842928e8b87d351fb6, type: 2}
@@ -1581,6 +1585,26 @@ PrefabInstance:
       propertyPath: props.Array.data[6]
       value: 
       objectReference: {fileID: 2013420277293291620, guid: 7fa4baf7b12b5ab448060a0300879196, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.data[0]
+      value: 
+      objectReference: {fileID: 593884011335473866, guid: 71e25b58a4be7dd4483c8f97c20d7ee0, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.data[1]
+      value: 
+      objectReference: {fileID: 593884011335473866, guid: 5705a2584e035394ab978baffac0dbae, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.data[2]
+      value: 
+      objectReference: {fileID: 593884011335473866, guid: 81608a89519dfcd439a982c7740a6946, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.data[3]
+      value: 
+      objectReference: {fileID: 593884011335473866, guid: f992fdb70bf706245a3c7e329ee91994, type: 3}
+    - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
+      propertyPath: walls.Array.data[4]
+      value: 
+      objectReference: {fileID: 593884011335473866, guid: f3e46d7afcd6db144848590bb1eff280, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: enemyList.Array.size
       value: 2
@@ -11088,7 +11112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 801770733559070960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -111.32505
+      value: -67.21428
       objectReference: {fileID: 0}
     - target: {fileID: 979702980579261486, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_Pivot.x
@@ -11184,7 +11208,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1131772957777357893, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -333.97516
+      value: -201.64284
       objectReference: {fileID: 0}
     - target: {fileID: 2141213450529374960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMax.y
