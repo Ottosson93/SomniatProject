@@ -248,6 +248,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5178686219891051927}
     m_Modifications:
+    - target: {fileID: 5221080027720417766, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0f6ed5b953c1cc644943552d45f09db0, type: 2}
     - target: {fileID: 6013990982369288243, guid: 446537a5e4bab814fb6203cbd4680b71, type: 3}
       propertyPath: m_Name
       value: Sword7_Blue
@@ -1020,21 +1024,15 @@ MonoBehaviour:
   maxLucidity: 100
   originalMaxLucidity: 0
   lucidity: 0
-  Strength:
-    BaseValue: 1
-  Dexterity:
-    BaseValue: 1
-  Intelligence:
-    BaseValue: 1
   damageReduction: 1
   flatSpeed: 0
   speed: 0
   meleeDamage: 0
   attackSpeed: 1
-  originalMeleeDamage: 10
-  originalAttackSpeed: 1
-  originalSpeed: 0
-  originalArmorAmount: 0
+  temporaryAttackSpeedModifier: 0
+  temporaryMeleeDamageModifier: 0
+  temporarySpeedModifier: 0
+  temporaryArmorReductionModifier: 0
   playerStats: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
   newSpeed: 0
   controller: {fileID: 0}

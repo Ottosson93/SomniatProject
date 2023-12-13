@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : MonoBehaviour
+public class Potion : Item
 {
 
     public float Lucidity;
@@ -18,8 +18,11 @@ public class Potion : MonoBehaviour
 
     void Update()
     {
-        if (pickUpScript.PickUp)
+        if (pickUpScript.PickUpButtonPressed)
+        {
             player.Heal(Lucidity);
+            DestroyItem();
+        }
 
     }
 }

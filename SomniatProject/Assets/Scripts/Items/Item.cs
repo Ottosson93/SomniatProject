@@ -11,6 +11,11 @@ public abstract class Item : MonoBehaviour
     {
         spellAttackSystem.UpdateSpell(spell);
 
+        DestroyItem();
+    }
+
+    public void DestroyItem()
+    {
         Transform parent = GetComponentInParent<Transform>();
         parent.gameObject.SetActive(false);
     }

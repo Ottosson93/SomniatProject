@@ -52,6 +52,7 @@ public class DungeonCreator : MonoBehaviour
 
         generator.Generate();
 
+        Debug.Log("Generating Rooms");
         while (generator.preMadeRooms.Count > 0)
         {
             preMadeRoomsBackUp.Clear();

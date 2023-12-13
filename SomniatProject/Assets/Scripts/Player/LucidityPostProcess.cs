@@ -6,8 +6,8 @@ public class LucidityPostProcess : MonoBehaviour
 
     private Transform lucidCamera;
     private Player player;
-    public float minScale = 0.01f; // Initial radius when lucidity is at its lowest
-    public float maxScale = 3.0f;    // Minimum radius when lucidity is at its max
+    public float minScale; // Initial radius when lucidity is at its lowest
+    public float maxScale;    // Minimum radius when lucidity is at its max
 
     private void Start()
     {
@@ -17,9 +17,10 @@ public class LucidityPostProcess : MonoBehaviour
 
     public void UpdateLucidityMask(float lucidity)
     {
+      //  Debug.Log($"KVOTEN: {lucidity / player.maxLucidity}");
         float radius = Mathf.Lerp(minScale, maxScale, lucidity / player.maxLucidity);
-       
-        lucidCamera.localScale = new Vector3(radius*1.10F, radius*0.65F, radius);
+ //       Debug.Log($"KVOTEN: {lucidity / player.maxLucidity} RADIUS: {radius}");
+        lucidCamera.localScale = new Vector3(radius*1.10F, radius*0.65F, radius);   
     }
 
     
