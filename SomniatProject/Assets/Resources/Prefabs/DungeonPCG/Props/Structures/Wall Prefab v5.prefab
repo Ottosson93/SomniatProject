@@ -265,9 +265,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: MergedTorchLamp
       objectReference: {fileID: 0}
+    - target: {fileID: 4172933056405810163, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.482
+      objectReference: {fileID: 0}
     - target: {fileID: 5543866973492696709, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_Layer
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Range
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Color.b
+      value: 0.21560161
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Color.g
+      value: 0.60976034
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8962264
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Intensity
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_Shadows.m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5889675648859993605, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
+      propertyPath: m_BounceIntensity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7161479061616121362, guid: 5f78069be0914304f88b350b4c74ef63, type: 3}
       propertyPath: m_Layer

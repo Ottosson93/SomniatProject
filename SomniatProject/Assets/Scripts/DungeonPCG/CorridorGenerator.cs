@@ -325,17 +325,6 @@ public class CorridorGenerator
 
         c.vertical = false;
         corridors.Add(c);
-        Debug.Log("-------------------------------------------------------");
-        foreach (RNode n1 in leftRooms)
-        {
-            Debug.Log("leftRoom " + n1.id);
-        }
-        foreach (RNode n1 in rightRooms)
-        {
-            Debug.Log("rightRoom " + n1.id);
-        }
-        Debug.Log("From leftlist size " + leftRooms.Count + " and " + rightRooms.Count);
-        Debug.Log("left Candidate: " + leftCandidate.id + " right candidate: " + rightCandidate.id + " connected by corridor " + c.id);
 
         Doorway ldr = new Doorway(c.bottomLeft, new Vector2(c.bottomLeft.x, c.topRight.y), true);
         leftCandidate.doorways.Add(ldr);
@@ -479,16 +468,6 @@ public class CorridorGenerator
 
         c.vertical = true;
         corridors.Add(c);
-        foreach (RNode n1 in bottomRooms)
-        {
-            Debug.Log("bottomRoom " + n1.id);
-        }
-        foreach (RNode n1 in topRooms)
-        {
-            Debug.Log("topRoom " + n1.id);
-        }
-        Debug.Log("From bottomlist size " + bottomRooms.Count + " and " + topRooms.Count);
-        Debug.Log("bottom Candidate: " + bottomCandidate.id + " top candidate: " + topCandidate.id + " connected by corridor " + c.id);
 
         Doorway bdr = new Doorway(c.bottomLeft, new Vector2(c.topRight.x, c.bottomLeft.y), false);
         bottomCandidate.doorways.Add(bdr);
