@@ -803,7 +803,7 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         CreateNoninteractableProps(room, amountOfProps, roomSize);
-        //CreateInteractableProps(room, amountOfInteractableProps);
+        CreateInteractableProps(room, amountOfInteractableProps);
     }
 
 
@@ -835,7 +835,7 @@ public class DungeonGenerator : MonoBehaviour
             int rndProp = Random.Range(3, props.Count);
 
             BoxCollider propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
+            //Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
 
             Spawner(props[rndProp], room, propBounds);
 
@@ -864,7 +864,7 @@ public class DungeonGenerator : MonoBehaviour
 
             //Takes the size of the objects meshrenderer (+X in every dimension to get some more distance) 
             BoxCollider propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
+            //Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
@@ -886,7 +886,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             amountOfEnemies = 4;
         }
-        //CreateEnemies(room, amountOfEnemies);
+        CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateEnemies(RNode room, int amountOfEnemies)
@@ -894,7 +894,7 @@ public class DungeonGenerator : MonoBehaviour
         for (int i = 0; i < amountOfEnemies; i++)
         {
             BoxCollider enemyBounds = listOfAllEnemies[i].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
+            //Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
 
             //Use instead of i (listOfAllEnemies[i]) if you want random enemies to spawn in rooms
             //int rndEnemy = Random.Range(0, listOfAllEnemies.Count);
@@ -926,7 +926,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         else if (overlapCount > 2)
         {
-            Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, spawnObject.transform.position.y, room.centerPos.y + objOffset.z));
+            //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, spawnObject.transform.position.y, room.centerPos.y + objOffset.z));
 
             for (int i = 0; i < 100; i++)
             {
