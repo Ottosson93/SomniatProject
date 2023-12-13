@@ -28,9 +28,9 @@
             fracturedCrate.SetActive(true);
             itemDropSystem.HandleBoxDrop(transform.position);
             crashAudioClip.Play();
-            Destroy(gameObject.transform.parent.gameObject, 4f);
+            Destroy(gameObject.transform.parent.gameObject, 1.5f);
             //Can change to this if you want lucid objects to stay after destruction
-            //Destroy(gameObject, 4f);
+            //Destroy(gameObject, 1.5f);
         }
 
         [ContextMenu("Test")]

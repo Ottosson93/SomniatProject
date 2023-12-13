@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3369112858851139366}
   - component: {fileID: 7801103832324817416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarRedChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 3.5, y: 1.5, z: 2}
-  m_Center: {x: -0.77, y: 0.7, z: 0}
+  m_Center: {x: -0.77, y: 0.6, z: 0}
 --- !u!1001 &1569393268865488148
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,6 +16,7 @@ public class RNode
     public RNode parent, sibling;
     public List<RNode> children = new List<RNode>();
     public bool manual = false;
+    public GameObject manualRoom;
     public bool bottom = false;
     public bool vertical = false;
     public bool connectedWithSibling = false;

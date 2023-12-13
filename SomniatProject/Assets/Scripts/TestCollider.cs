@@ -17,7 +17,7 @@ public class scr : MonoBehaviour
 
     void Update()
     {
-        overlapCount = Physics.OverlapBoxNonAlloc(transform.GetComponent<Renderer>().bounds.center, propBounds, colliders);
+        overlapCount = Physics.OverlapBoxNonAlloc(transform.GetComponent<Renderer>().bounds.size, propBounds, colliders);
     }
 
     //private void OnCollisionEnter(Collision other)

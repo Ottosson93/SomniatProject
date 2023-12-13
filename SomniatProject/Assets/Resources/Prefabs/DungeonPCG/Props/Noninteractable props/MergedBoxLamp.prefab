@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6360611360582452523}
-  m_Layer: 0
+  - component: {fileID: 4318177533800469445}
+  m_Layer: 6
   m_Name: MergedBoxLamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +34,27 @@ Transform:
   - {fileID: 1437782016097015511}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4318177533800469445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013420277293291620}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2, y: 3, z: 2}
+  m_Center: {x: 0, y: 1.4, z: 0}
 --- !u!1001 &26266868442207247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43,15 +65,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
       propertyPath: m_Size.x
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
       propertyPath: m_Size.z
-      value: 1.5
+      value: 1.75
       objectReference: {fileID: 0}
     - target: {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
+      propertyPath: m_Center.y
+      value: 0.65
       objectReference: {fileID: 0}
     - target: {fileID: 3339518242149518104, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -113,15 +139,19 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7515951779249253956, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     - target: {fileID: 7748269710294855665, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
       propertyPath: m_Convex
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
     - {fileID: 0}
     - {fileID: 4384672028256263496, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
     - {fileID: 7748269710294855665, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
+    - {fileID: 1877932031191811149, guid: ab52be90e385f1344a1a8f11bb99319c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

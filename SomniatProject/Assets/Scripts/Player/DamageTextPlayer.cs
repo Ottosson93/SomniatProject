@@ -12,9 +12,6 @@ public class DamageTextPlayer : ScriptableObject
 {
     public TextMeshPro textMeshPro;
 
-
-
-
     public async void SubtractHealth(int value, Transform transform)
     {
 
