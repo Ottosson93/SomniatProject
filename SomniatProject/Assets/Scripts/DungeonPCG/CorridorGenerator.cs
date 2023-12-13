@@ -4,6 +4,7 @@ using UnityEngine;
 using Unity.Mathematics;
 using BehaviorTree;
 using Unity.VisualScripting;
+using System.Linq;
 
 public class CorridorGenerator
 {
@@ -14,6 +15,7 @@ public class CorridorGenerator
     List<RNode> leafs = new List<RNode>();
     List<RNode> currentRooms = new List<RNode>();
     int numberOfCorridors = 0;
+    public int corridorWidth = 7;
     GameObject Wall5, Wall1, pillar;
     List<PCGObjects> corridorObjects = new List<PCGObjects>();
 
@@ -102,7 +104,11 @@ public class CorridorGenerator
             rightRoomsChildren = new List<RNode>();
             rightRoomsChildren.Add(r2);
         }
-        
+
+        //if you want to connect more often and not type manually:
+        //float candidates = rightRoomsChildren.Count + leftRoomsChildren.Count;
+        //int connections = (int)math.sqrt(candidates);
+
 
         if ((angle < 45 && angle > -45))
         {
@@ -118,7 +124,7 @@ public class CorridorGenerator
         {
             //Debug.Log("Up");
             ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
-            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            if (leftRoomsChildren.Count > 4 && rightRoomsChildren.Count > 4)
             {
                 ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
             }
@@ -127,7 +133,7 @@ public class CorridorGenerator
         {
             //Debug.Log("Down");
             ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
-            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+            if (leftRoomsChildren.Count > 4 && rightRoomsChildren.Count > 4)
             {
                 ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
             }
@@ -137,7 +143,8 @@ public class CorridorGenerator
             //Debug.Log("Left");
             
             ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
-            if(leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
+
+            if(leftRoomsChildren.Count > 4 && rightRoomsChildren.Count > 4)
             {
                 ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
             }
@@ -152,16 +159,30 @@ public class CorridorGenerator
         //corridors.Add(c);
 
     }
-    void ConnectRoomsHorizontally(List<RNode> leftRooms, List<RNode> rightRooms)
+
+    RNode pickLeftCadidate(List<RNode> leftRooms)
     {
         RNode leftCandidate = leftRooms[0];
-        RNode rightCandidate = rightRooms[0];
         RNode leftBackUp = leftRooms[0];
+        
+        //List<RNode> backUpLeftCandidates = new List<RNode>();
+        //backUpLeftCandidates = leftRooms.OrderBy()
 
-        if (leftRooms.Count > 0)
+        if (leftRooms.Count > 1)
         {
+            //get the most left candidate first
+            foreach (RNode n in leftRooms)
+            {
+                if (n.topRight.x < leftCandidate.topRight.x)
+                    leftCandidate = n;
+            }
+
             foreach (RNode node in leftRooms)
             {
+                if(CheckIfLeftIsPossible(node, leftRooms) == false)
+                {
+                    recentlyConnectedRnodes.Add(node);
+                }
                 if (node.topRight.x > leftCandidate.topRight.x && !recentlyConnectedRnodes.Contains(node))
                 {
                     leftBackUp = leftCandidate;
@@ -169,37 +190,82 @@ public class CorridorGenerator
                 }
             }
         }
-        
-        Vector2 rightSideComparisonPoint = new Vector2( rightCandidate.bottomLeft.x , rightCandidate.bottomLeft.y + rightCandidate.height / 2);
-        Vector2 leftSideComparisonPoint = new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2);
-        
-        float distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
-        
-        //float distance = Math.Abs(test - test1)
-        foreach (RNode node in rightRooms)
+        return leftCandidate;
+    }
+    private bool CheckIfLeftIsPossible(RNode leftCanidate, List<RNode> leftRooms)
+    {
+        foreach (RNode l in leftRooms)
         {
-            
-            rightSideComparisonPoint = new Vector2(node.bottomLeft.x, node.bottomLeft.y + node.height / 2);
-            float d = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
-            
-            if(d < distance)
+            if (leftCanidate.topRight.x < l.bottomLeft.x)
             {
-                distance = d;
-                rightCandidate = node;
+                return false;
             }
         }
 
-        /*
-        if(leftCandidate.bottomLeft.y - rightCandidate.topRight.y < 5)
+        return true;
+    }
+    private bool CheckIfbottomIsPossible(RNode bottomCandidate, List<RNode> bottomRooms)
+    {
+        foreach (RNode b in bottomRooms)
         {
-            Debug.Log("There was no room for a Corridor, So I changed the LEFT CANDIDATE");
-            //use leftbackup as candidate instead
-            leftCandidate = leftBackUp;
-            rightCandidate = rightRooms[0];
-            leftSideComparisonPoint = new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2);
-            rightSideComparisonPoint = new Vector2(rightCandidate.bottomLeft.x, rightCandidate.bottomLeft.y + rightCandidate.height / 2);
+            if (bottomCandidate.topRight.y < b.bottomLeft.y)
+            {
+                return false;
+            }
+        }
 
-            distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
+        return true;
+    }
+    private bool CheckIfRightIsPossible(RNode rightCanidate, List<RNode> rightRooms)
+    {
+        foreach(RNode r in rightRooms)
+        {
+            if (rightCanidate.bottomLeft.x > r.topRight.x)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+    private bool CheckIfTopIsPossible(RNode topCanidate, List<RNode> topRooms)
+    {
+        foreach (RNode t in topRooms)
+        {
+            if (topCanidate.bottomLeft.y > t.topRight.y)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    void ConnectRoomsHorizontally(List<RNode> leftRooms, List<RNode> rightRooms)
+    {
+        RNode leftCandidate;
+        if(leftRooms.Count == 1)
+            leftCandidate = leftRooms[0];
+        else
+        {
+            leftCandidate = pickLeftCadidate(leftRooms);
+        }
+
+        //setting a rightside comparison starting candidate
+        RNode rightCandidate = rightRooms[0];
+
+        int offsetY = 0;
+        bool corridorFailure = false;
+
+
+        for(int i = 0; i < leftRooms.Count; i++)
+        {
+            leftCandidate = pickLeftCadidate(leftRooms);
+
+            Vector2 rightSideComparisonPoint = new Vector2(rightCandidate.bottomLeft.x, rightCandidate.bottomLeft.y + rightCandidate.height / 2);
+            Vector2 leftSideComparisonPoint = new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2);
+
+            float distance = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
 
             //float distance = Math.Abs(test - test1)
             foreach (RNode node in rightRooms)
@@ -208,37 +274,68 @@ public class CorridorGenerator
                 rightSideComparisonPoint = new Vector2(node.bottomLeft.x, node.bottomLeft.y + node.height / 2);
                 float d = Vector2.Distance(leftSideComparisonPoint, rightSideComparisonPoint);
 
-                if (d < distance)
+                if (d < distance && !recentlyConnectedRnodes.Contains(node) && CheckIfRightIsPossible(node, rightRooms))
                 {
                     distance = d;
                     rightCandidate = node;
                 }
             }
-        }
-        */
 
-        int offsetY = 0;
-        if(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
-        {
-            while(leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
+            //PROBLEM IS HERE!
+             offsetY = 0;
+            if (leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
             {
-                offsetY = offsetY + 2;
+                while (leftSideComparisonPoint.y + offsetY <= rightCandidate.bottomLeft.y)
+                {
+                    offsetY = offsetY + 2;
+                    if (leftSideComparisonPoint.y + offsetY + corridorWidth >= leftCandidate.topRight.y)
+                    {
+                        //Debug.Log("1 Room " + leftCandidate.id + " did not connect well with " + rightCandidate.id);
+                        recentlyConnectedRnodes.Add(leftCandidate);
+                        corridorFailure = true;
+                        break;
+                    }
+                }
+            }
+            else if (leftSideComparisonPoint.y + offsetY + corridorWidth >= rightCandidate.topLeft.y)
+            {
+                while (leftSideComparisonPoint.y + offsetY + corridorWidth >= rightCandidate.topLeft.y)
+                {
+                    offsetY = offsetY - 2;
+                    if (leftSideComparisonPoint.y + offsetY <= leftCandidate.bottomRight.y)
+                    {
+                        //Debug.Log("1 Room " + leftCandidate.id + " did not connect well with " + rightCandidate.id);
+                        corridorFailure = true;
+                        recentlyConnectedRnodes.Add(leftCandidate);
+                        break;
+                    }
+                }
+            }
+            if (corridorFailure == false)
+            {
+                break;
             }
         }
-        else if(leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
-        {
-            while (leftSideComparisonPoint.y + offsetY + 5 >= rightCandidate.topLeft.y)
-            {
-                offsetY = offsetY - 2;
-            }
-        }
+        //Debug.Log("Used left candidate: " + leftCandidate.id + " and right candidate: " + rightCandidate.id);
+
 
         CNode c = new CNode(new Vector2(leftCandidate.bottomRight.x, leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY), 
-            new Vector2 (rightCandidate.topLeft.x , leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY + 5), 
+            new Vector2 (rightCandidate.topLeft.x , leftCandidate.bottomRight.y + leftCandidate.height / 2 + offsetY + corridorWidth), 
             10, idTracker++);
 
         c.vertical = false;
         corridors.Add(c);
+        Debug.Log("-------------------------------------------------------");
+        foreach (RNode n1 in leftRooms)
+        {
+            Debug.Log("leftRoom " + n1.id);
+        }
+        foreach (RNode n1 in rightRooms)
+        {
+            Debug.Log("rightRoom " + n1.id);
+        }
+        Debug.Log("From leftlist size " + leftRooms.Count + " and " + rightRooms.Count);
+        Debug.Log("left Candidate: " + leftCandidate.id + " right candidate: " + rightCandidate.id + " connected by corridor " + c.id);
 
         Doorway ldr = new Doorway(c.bottomLeft, new Vector2(c.bottomLeft.x, c.topRight.y), true);
         leftCandidate.doorways.Add(ldr);
@@ -274,17 +371,23 @@ public class CorridorGenerator
         recentlyConnectedRnodes.Add(rightCandidate);
     }
     
-    void ConnectRoomsVertically(List<RNode> bottomRooms, List<RNode> topRooms)
+    private RNode pickBottomCandidate(List<RNode> bottomRooms)
     {
-
         RNode bottomCandidate = bottomRooms[0];
-        RNode topCandidate = topRooms[0];
 
-
-        if (bottomRooms.Count > 0)
+        if (bottomRooms.Count > 1)
         {
+            foreach (RNode rnode in bottomRooms)
+            {
+                if (rnode.topRight.y < bottomCandidate.topRight.y)
+                    bottomCandidate = rnode;
+            }
             foreach (RNode node in bottomRooms)
             {
+                if (CheckIfbottomIsPossible(node, bottomRooms) == false)
+                {
+                    recentlyConnectedRnodes.Add(node);
+                }
                 if (node.topRight.y > bottomCandidate.topRight.y && !recentlyConnectedRnodes.Contains(node))
                 {
                     bottomCandidate = node;
@@ -292,53 +395,105 @@ public class CorridorGenerator
             }
         }
 
-        //point a low and center on width of a room above
-        Vector2 aboveComparisonPoint = new Vector2(topCandidate.bottomLeft.x + topCandidate.width / 2, topCandidate.bottomLeft.y);
-        Vector2 belowComparisonPoint = new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2, bottomCandidate.topRight.y);
+        return bottomCandidate;
+    }
+    void ConnectRoomsVertically(List<RNode> bottomRooms, List<RNode> topRooms)
+    {
 
-        float distance = Vector2.Distance(belowComparisonPoint, aboveComparisonPoint);
+        RNode bottomCandidate; // = bottomRooms[0];
+        RNode topCandidate = topRooms[0];
 
-        foreach (RNode node in topRooms)
-        {
-
-            aboveComparisonPoint = new Vector2(node.bottomLeft.x + node.width / 2, node.bottomLeft.y);
-            float d = Vector2.Distance(belowComparisonPoint, aboveComparisonPoint);
-
-            if (d < distance)
-            {
-                distance = d;
-                topCandidate = node;
-            }
-        }
 
         int offsetX = 0;
+        bool connectionFailure = false;
 
-        if (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
+        bottomCandidate = pickBottomCandidate(bottomRooms);
+
+        for(int i = 0; i < bottomRooms.Count; i++)
         {
-            while (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
+            bottomCandidate = pickBottomCandidate(bottomRooms);
+            //point a low and center on width of a room above
+            Vector2 aboveComparisonPoint = new Vector2(topCandidate.bottomLeft.x + topCandidate.width / 2, topCandidate.bottomLeft.y);
+            Vector2 belowComparisonPoint = new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2, bottomCandidate.topRight.y);
+
+            float distance = Vector2.Distance(belowComparisonPoint, aboveComparisonPoint);
+
+            foreach (RNode node in topRooms)
             {
-                offsetX = offsetX + 2;
+
+                aboveComparisonPoint = new Vector2(node.bottomLeft.x + node.width / 2, node.bottomLeft.y);
+                float d = Vector2.Distance(belowComparisonPoint, aboveComparisonPoint);
+
+                if (d < distance && !recentlyConnectedRnodes.Contains(node) && CheckIfTopIsPossible(node, topRooms))
+                {
+                    distance = d;
+                    topCandidate = node;
+                }
+            }
+
+            offsetX = 0;
+
+            if (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
+            {
+                while (belowComparisonPoint.x + offsetX <= topCandidate.bottomLeft.x)
+                {
+                    offsetX = offsetX + 2;
+                    if (belowComparisonPoint.x + offsetX + corridorWidth >= bottomCandidate.topRight.x)
+                    {
+                        //Debug.Log("2 Room " + bottomCandidate.id + " did not connect well with " + topCandidate.id);
+                        connectionFailure = true;
+                        recentlyConnectedRnodes.Add(bottomCandidate);
+                        break;
+                    }
+                }
+            }
+            else if (belowComparisonPoint.x + offsetX + corridorWidth >= topCandidate.bottomRight.x)
+            {
+                while (belowComparisonPoint.x + offsetX + corridorWidth >= topCandidate.bottomRight.x)
+                {
+                    offsetX = offsetX - 2;
+
+                    if (belowComparisonPoint.x + offsetX <= bottomCandidate.topLeft.x)
+                    {
+                        //Debug.Log("2 Room " + bottomCandidate.id + " did not connect well with " + topCandidate.id);
+                        connectionFailure = true;
+                        recentlyConnectedRnodes.Add(bottomCandidate);
+                        break;
+                    }
+
+                }
+            }
+
+            if (connectionFailure == false)
+            {
+                
+                break;
             }
         }
-        else if (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
-        {
-            while (belowComparisonPoint.x + offsetX + 5 >= topCandidate.bottomRight.x)
-            {
-                offsetX = offsetX - 2;
-            }
-        }
+        //Debug.Log("Used bottom candidate: " + bottomCandidate.id + " and top candidate: " + topCandidate.id);
+
         CNode c = new CNode(new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX, bottomCandidate.topRight.y), 
-            new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + 5, topCandidate.bottomLeft.y), 
+            new Vector2(bottomCandidate.bottomLeft.x + bottomCandidate.width / 2 + offsetX + corridorWidth, topCandidate.bottomLeft.y), 
             10, idTracker++);
 
 
-       c.vertical = true;
-       corridors.Add(c);
+        c.vertical = true;
+        corridors.Add(c);
+        foreach (RNode n1 in bottomRooms)
+        {
+            Debug.Log("bottomRoom " + n1.id);
+        }
+        foreach (RNode n1 in topRooms)
+        {
+            Debug.Log("topRoom " + n1.id);
+        }
+        Debug.Log("From bottomlist size " + bottomRooms.Count + " and " + topRooms.Count);
+        Debug.Log("bottom Candidate: " + bottomCandidate.id + " top candidate: " + topCandidate.id + " connected by corridor " + c.id);
 
-       Doorway bdr = new Doorway(c.bottomLeft, new Vector2(c.topRight.x, c.bottomLeft.y), false);
-       bottomCandidate.doorways.Add(bdr);
-       Doorway tdr = new Doorway(new Vector2(c.bottomLeft.x, c.topRight.y), c.topRight, false);
-       topCandidate.doorways.Add(tdr);
+        Doorway bdr = new Doorway(c.bottomLeft, new Vector2(c.topRight.x, c.bottomLeft.y), false);
+        bottomCandidate.doorways.Add(bdr);
+        Doorway tdr = new Doorway(new Vector2(c.bottomLeft.x, c.topRight.y), c.topRight, false);
+        topCandidate.doorways.Add(tdr);
 
        
        AddCorridorObject(bdr.pillarOne, pillar, Vector3.zero);
@@ -366,6 +521,8 @@ public class CorridorGenerator
                 break;
             }
         }
+        recentlyConnectedRnodes.Add(bottomCandidate);
+        recentlyConnectedRnodes.Add(topCandidate);
     }
 
     void AddCorridorObject(Vector2 pos, GameObject type, Vector3 rotation)
