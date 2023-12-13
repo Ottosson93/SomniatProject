@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5487090584618010013}
   - component: {fileID: 7338972385239945333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarOrangeChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,8 +53,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 1.5, z: 1.62}
-  m_Center: {x: -0.77, y: 0.7, z: 0}
+  m_Size: {x: 3.5, y: 1.5, z: 2}
+  m_Center: {x: -0.77, y: 0.6, z: 0}
 --- !u!1001 &116286018359488982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,9 +107,7 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChestYellow
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1134752280431537083, guid: 686f634e1b0a7e347ac107ee4b512eb8, type: 3}
-    - {fileID: 6923046318814281882, guid: 686f634e1b0a7e347ac107ee4b512eb8, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -160,8 +158,7 @@ PrefabInstance:
       value: BigPillar
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2921020749890352217, guid: 4934312b97ef67a41bae54242ea90333, type: 3}
-    - {fileID: 1575769068663082860, guid: 4934312b97ef67a41bae54242ea90333, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

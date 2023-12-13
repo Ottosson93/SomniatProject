@@ -89,11 +89,14 @@ public class DungeonCreator : MonoBehaviour
             //fix Locations
             Instantiate(p.preMadeRoom, p.centerPos, Quaternion.identity);
         }
+        
         objects = generator.GetCorridorObjects();
         foreach(PCGObjects obj in objects)
         {
             Instantiate(obj.objectType, obj.spawnPoint, obj.angle);
         }
+
+        generator.PopulateDungeon();
 
         navSurface.BuildNavMesh();
     }

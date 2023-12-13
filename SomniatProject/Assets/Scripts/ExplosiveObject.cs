@@ -25,7 +25,9 @@ public class ExplosiveObject : MonoBehaviour
 
     void Die()
     {
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
+        //Can change to this if you want lucid objects to stay after destruction
+        //Destroy(gameObject);
         CreateExplosionEffect();
         DealDamageInRadius();
     }
