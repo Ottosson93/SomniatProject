@@ -114,7 +114,7 @@ public class Spell : MonoBehaviour
                     PlayLightningImpactAtEnemyPosition(enemy.transform.position);
 
                     StunEffect stunEffect = enemy.gameObject.AddComponent<StunEffect>();
-                    stunEffect.Initialize(SpellToCast.StunDuration, SpellToCast.LightningStun);
+                    stunEffect.Initialize(SpellToCast.StunDuration, SpellToCast.LightningStun, enemy.GetComponent<Animator>());
 
                 }
 

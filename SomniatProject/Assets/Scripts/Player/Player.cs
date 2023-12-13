@@ -92,7 +92,7 @@ public class Player : MonoBehaviour
         if (playerStats.Dexterity.Value == 0)
             return baseAttackSpeed / 1;
         else
-            return baseAttackSpeed / playerStats.Dexterity.Value;
+            return baseAttackSpeed / (playerStats.Dexterity.Value/4);
     }
 
     private float CalculateAttackDamageModifierFromRelics()
