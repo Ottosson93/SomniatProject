@@ -380,8 +380,8 @@ public class DungeonGenerator : MonoBehaviour
                 ShrinkNodes(finishedNodes[i]);
                 DeclareRoomType(finishedNodes[i]);
                 CreateRoomMesh(finishedNodes[i], i);
-                SpawnProps(finishedNodes[i]);
-                SpawnEnemy(finishedNodes[i]);
+                //SpawnProps(finishedNodes[i]);
+                //SpawnEnemy(finishedNodes[i]);
             }
         }
     }
