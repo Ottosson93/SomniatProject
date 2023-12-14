@@ -1,20 +1,46 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomPointer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    Vector3 bossPos, upgradePos;
+    public Image bossPointer;
+    public Image upgradePointer;
+    private Transform playerTransform;
+    private float distanceFromCenter = 40f;
 
-    void Start()
+    void LateUpdate()
     {
-        Debug.Log("Pointing towards boss room");
+        playerTransform = GameObject.FindWithTag("Player").transform;
 
-        bossPos = GameObject.FindWithTag("BossRoom").transform.position;
-        upgradePos = GameObject.FindWithTag("UpgradeRoom").transform.position;
-        Debug.Log(bossPos);
-        this.gameObject.transform.GetChild(0).transform.LookAt(bossPos);
-        this.gameObject.transform.GetChild(1).transform.LookAt(upgradePos);
+
+        if (playerTransform == null || bossPointer == null || upgradePointer == null)
+        {
+            Debug.LogError("Missing references. Make sure to assign all required fields in the Inspector.");
+            return;
+        }
+
+
+        GameObject bossRoom = GameObject.FindWithTag("BossRoom");
+        GameObject upgradeRoom = GameObject.FindWithTag("UpgradeRoom");
+
+
+        if(bossRoom == null || upgradeRoom == null)
+        {
+            Debug.LogError("Boss Room or Upgrade Room not found!");
+            return;
+        }
+
+
+        Vector3 bossDirection = (bossRoom.transform.position - playerTransform.position).normalized;
+        Vector3 upgradeDirection = (upgradeRoom.transform.position - playerTransform.position).normalized;
+
+
+        float bossAngle = Mathf.Atan2(bossDirection.x, bossDirection.z) * Mathf.Rad2Deg;
+        float upgradeAngle = Mathf.Atan2(upgradeDirection.x,upgradeDirection.z) * Mathf.Rad2Deg;
+
+        bossPointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -bossAngle);
+        upgradePointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -upgradeAngle);
     }
 }

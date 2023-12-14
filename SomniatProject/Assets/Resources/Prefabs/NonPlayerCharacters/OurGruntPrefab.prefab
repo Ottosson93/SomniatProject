@@ -339,6 +339,7 @@ GameObject:
   - component: {fileID: -8208281938850205785}
   - component: {fileID: 7054142460237944947}
   - component: {fileID: -2307249283120497686}
+  - component: {fileID: 8532546914826902972}
   m_Layer: 9
   m_Name: OurGruntPrefab
   m_TagString: Enemy
@@ -520,6 +521,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcfd6a22df8b5ae4ebaaad34866aafd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8532546914826902972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664211645506664793}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 2.5593333, z: 2.7882173}
+  m_Center: {x: 0, y: 1.1787972, z: 0.44466695}
 --- !u!1 &2226753920156996051
 GameObject:
   m_ObjectHideFlags: 0

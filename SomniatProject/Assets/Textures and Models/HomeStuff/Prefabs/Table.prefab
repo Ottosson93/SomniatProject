@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4000011530351456}
   - component: {fileID: 33000010872359018}
   - component: {fileID: 23000011930923156}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4000011577227820}
   - component: {fileID: 33000012972745226}
   - component: {fileID: 23000013806283142}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4000010074663800}
   - component: {fileID: 33000011411882642}
   - component: {fileID: 23000011054825354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 4000013094735420}
   - component: {fileID: 33000010720514272}
   - component: {fileID: 23000013335040604}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 4000012314197496}
   - component: {fileID: 33000010318957174}
   - component: {fileID: 23000012698543164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 4000011752654510}
   - component: {fileID: 33000013353663224}
   - component: {fileID: 23000010278354406}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 4000013973161444}
   - component: {fileID: 33000010498658920}
   - component: {fileID: 23000012360978884}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -592,7 +592,7 @@ GameObject:
   - component: {fileID: 4000012076707726}
   - component: {fileID: 33000011400998624}
   - component: {fileID: 23000010176097664}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Chair (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 4000013120964812}
   - component: {fileID: 33000011651655890}
   - component: {fileID: 23000014194201144}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Net;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -16,6 +19,8 @@ public class DungeonGenerator : MonoBehaviour
     Vector2 largestPreMadeRoom;  //maybe change to two ints: width and height
     List<PreMadeRoom> preMadeRoomNodes = new List<PreMadeRoom>();
     private GameObject wall5, wall1, pillar;
+    private List<GameObject> walls;
+    int OverWriteCounter = 0;
     //List<Room> allRooms = new List<Room>();
 
     private GameObject startRoom;
@@ -41,28 +46,19 @@ public class DungeonGenerator : MonoBehaviour
     List<GameObject> listOfAllEnemies = new List<GameObject>();
 
 
-    Collider[] colliders = new Collider[10];
+    Collider[] objectCollider = new Collider[10];
     List<GameObject> interactableProps = new List<GameObject>();
     List<GameObject> props = new List<GameObject>();
     int[] rotationArray = { 90, 180, 270, 360 };
 
     public DungeonGenerator(Vector2 size, int nbrOfRoom, int roomSize, Material material, Material lucidMaterial, List<GameObject> pmr, GameObject wall1, GameObject wall5,
-        GameObject pillar, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
+        GameObject pillar, List<GameObject> walls, List<GameObject> listOfAllEnemies, LayerMask layer, List<GameObject> interactableProps, List<GameObject> props)
     {
         this.preMadeRooms = pmr;
-        /*
-        foreach ( GameObject room in this.preMadeRooms)
-        {
-            if (room.name == "Start Room")
-            {
-                this.startRoom = room;
-                preMadeRooms.Remove(room);
-                break;
-            }
-        }*/
         this.wall5 = wall5;
         this.wall1 = wall1;
         this.pillar = pillar;
+        this.walls = walls;
         this.minRoomSize = roomSize;
         //making the rootnode centered with size/2 being the center in both x and y dimensions
         rootNode = new RNode(new Vector2(-size.x / 2, -size.y / 2), new Vector2(size.x / 2, size.y / 2), roomID++);
@@ -84,25 +80,19 @@ public class DungeonGenerator : MonoBehaviour
         {
             int takeRandom = Random.Range(0, nodes.Count);
             RNode node = nodes[0];
-            //Debug.Log("nr of nodes in list: " + nodes.Count);
-            //REVERT BACK TO PREVIOUS VERSION WITHOUT MANUAL ROOMS THAT WORKS: JUST CHANGE "ManageSplit()" with "SplitRoom()";
-            if (node.width > minRoomSize && node.height > minRoomSize)
-            {
+            if (node.width >= minRoomSize && node.height >= minRoomSize)
+            { 
                 ManageSplit(node);
-                //SplitRoom(node);
             }
-            else if (node.width > minRoomSize * 1.5 && node.height < minRoomSize) //REMOVE?
+            else if (node.width > minRoomSize * 1.2 && node.height < minRoomSize)
             {
-
                 node.vertical = false;
                 ManageSplit(node);
-                //SplitRoom(node);
             }
-            else if (node.width < minRoomSize && node.height > minRoomSize * 1.5) //REMOVE?
+            else if (node.width < minRoomSize && node.height > minRoomSize * 1.2)
             {
                 node.vertical = true;
                 ManageSplit(node);
-                //SplitRoom(node);
             }
             else
             {
@@ -129,46 +119,45 @@ public class DungeonGenerator : MonoBehaviour
             for (int i = 0; i < preMadeRooms.Count; i++)
             {
                 manualRoom = preMadeRooms[i];
-                largestPreMadeRoom.x = preMadeRooms[0].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
-                largestPreMadeRoom.y = preMadeRooms[0].transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
+                largestPreMadeRoom.x = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
+                largestPreMadeRoom.y = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
 
-                if ((parentNode.width > (largestPreMadeRoom.x) && parentNode.width < (largestPreMadeRoom.x * 2) && parentNode.height >= largestPreMadeRoom.y)
-                || (parentNode.height > (largestPreMadeRoom.y) && parentNode.height < (largestPreMadeRoom.y * 2) && parentNode.width >= largestPreMadeRoom.x))
+                if ((parentNode.width > (largestPreMadeRoom.x * 1.75) && parentNode.width < (largestPreMadeRoom.x * 2.25) && parentNode.height >= largestPreMadeRoom.y)
+                || (parentNode.height > (largestPreMadeRoom.y * 1.75) && parentNode.height < (largestPreMadeRoom.y * 2.25) && parentNode.width >= largestPreMadeRoom.x))
                 {
-                    if (manualRoom.name == "Start Room" && distanceFromOrigo < 75)
+                    if (manualRoom.name == "Start Room" && distanceFromOrigo < 50)
                     {
-                        Debug.Log("Start Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        //Debug.Log("Start Room was inserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
-                        Debug.DrawLine(new Vector3(parentNode.centerPos.x, 0.2f, parentNode.centerPos.y), Vector3.zero, UnityEngine.Color.white, 500);
                         break;
                     }
                     else if (manualRoom.name == "Boss Room" && distanceFromOrigo > 100)
                     {
-                        Debug.Log("Boss Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        //Debug.Log("Boss Room was inserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom, false);
                         manualInsertionPossible = true;
                         break;
                     }
-                    else if (manualRoom.name == "Upgrade Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 150))
+                    else if (manualRoom.name == "Upgrade Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 75))
                     {
-                        Debug.Log("Upgrade Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        //Debug.Log("Upgrade Room was inserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
                         break;
                     }
-                    else if (manualRoom.name == "Corridor Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 125))
+                    else if (manualRoom.name == "Corridor Room" && (distanceFromOrigo > 25 && distanceFromOrigo < 75))
                     {
-                        Debug.Log("Corridor Room was inserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        //Debug.Log("Corridor Room was inserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom, true);
                         manualInsertionPossible = true;
                         break;
 
                     }
-                    else if (manualRoom.name == "Battle Room" && (distanceFromOrigo > 75 && distanceFromOrigo < 150))
+                    else if (manualRoom.name == "Battle Room" && (distanceFromOrigo > 75 && distanceFromOrigo < 125))
                     {
-                        Debug.Log("Battle Room was inteserted with the distance of " + (int)distanceFromOrigo);
-                        SplitRoomManually(parentNode, manualRoom);
+                        //Debug.Log("Battle Room was inteserted with the distance of " + (int)distanceFromOrigo);
+                        SplitRoomManually(parentNode, manualRoom, false);
                         manualInsertionPossible = true;
                         break;
                     }
@@ -200,41 +189,72 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    void SplitRoomManually(RNode parentNode, GameObject manualRoom)
+    //splitting parent node into a procedural room and a manual room
+    void SplitRoomManually(RNode parentNode, GameObject manualRoom, bool placeCentered)
     {
         largestPreMadeRoom.x = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.x;
         largestPreMadeRoom.y = manualRoom.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().bounds.size.z;
         float offsetWidth = Random.Range(largestPreMadeRoom.x * 0.25f, largestPreMadeRoom.x * 0.4f);
         float offsetHeight = Random.Range(largestPreMadeRoom.y * 0.25f, largestPreMadeRoom.y * 0.4f);
         PreMadeRoom pmr;
-        Vector3 posM;
+        Vector3 PosManual;
         RNode newNode;
         Vector2 bl;
         Vector2 tr;
         if (parentNode.width - largestPreMadeRoom.x > parentNode.height - largestPreMadeRoom.y)
         {
-            float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
-            //this is the node that hold the object and and coordinates of the manual room;
-            posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
-            bl = new Vector2(parentNode.bottomLeft.x + offsetWidth, parentNode.bottomLeft.y + btheight);
-            tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
+            //Debug.Log("Splitting " + manualRoom.name + " room vertically");
+            //Doing vertical Splitt
+            if ((placeCentered && parentNode.centerPos.x < 0) || (!placeCentered && parentNode.centerPos.x > 0))
+            {
+                float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
+                //this is the node that hold the object and and coordinates of the manual room;
+                PosManual = new Vector3(parentNode.topRight.x - largestPreMadeRoom.x / 2 - offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
+                bl = new Vector2(parentNode.topRight.x - largestPreMadeRoom.x - offsetWidth, parentNode.bottomLeft.y + btheight);
+                tr = new Vector2(parentNode.topRight.x - offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
 
-            newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
-            //Change ^ if adding another node of remaining space
+                //placing pcg room to the left
+                newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x - largestPreMadeRoom.x - offsetWidth, parentNode.topRight.y), roomID++);
+                //Change ^ if adding another node of remaining space
+            }
+            else
+            {
+                float btheight = (parentNode.height - largestPreMadeRoom.y) / 2;
+                //this is the node that hold the object and and coordinates of the manual room;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + offsetWidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + btheight);
+                bl = new Vector2(parentNode.bottomLeft.x + offsetWidth, parentNode.bottomLeft.y + btheight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + btheight);
+                
+                newNode = new RNode(new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + offsetWidth, parentNode.bottomLeft.y), parentNode.topRight, roomID++);
+                //Change ^ if adding another node of remaining space
+            }
 
         }
         else
         {
-            float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
-            posM = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
-            bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.bottomLeft.y + offsetHeight);
-            tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight);
+            //Debug.Log("Splitting " + manualRoom.name + " room horionztally");
+            if ((placeCentered && parentNode.centerPos.y < 0) || (!placeCentered && parentNode.centerPos.y > 0))
+            {
+                float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.topRight.y - largestPreMadeRoom.y / 2 - offsetHeight);
+                bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.topRight.y - largestPreMadeRoom.y - offsetHeight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.topRight.y - offsetHeight);
 
-            newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
-            //Change ^ if adding another node of remaining space
+                newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x, parentNode.topRight.y - largestPreMadeRoom.y - offsetHeight), roomID++);
+                //Change ^ if adding another node of remaining space
+            }
+            else
+            {
+                float btwidth = (parentNode.width - largestPreMadeRoom.x) / 2;
+                PosManual = new Vector3(parentNode.bottomLeft.x + largestPreMadeRoom.x / 2 + btwidth, 0, parentNode.bottomLeft.y + largestPreMadeRoom.y / 2 + offsetHeight);
+                bl = new Vector2(parentNode.bottomLeft.x + btwidth, parentNode.bottomLeft.y + offsetHeight);
+                tr = new Vector2(parentNode.bottomLeft.x + largestPreMadeRoom.x + btwidth, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight);
 
+                newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.bottomLeft.y + largestPreMadeRoom.y + offsetHeight), parentNode.topRight, roomID++);
+                //Change ^ if adding another node of remaining space
+            }
         }
-        pmr = new PreMadeRoom(posM, manualRoom);
+        pmr = new PreMadeRoom(PosManual, manualRoom);
         preMadeRoomNodes.Add(pmr);
 
         RNode manualRNode = new RNode(bl, tr, roomID++);
@@ -266,7 +286,7 @@ public class DungeonGenerator : MonoBehaviour
         //splitting Vertically
         if (parentNode.vertical == false)
         {
-            float splitV = Random.Range(parentNode.width * 0.25f, parentNode.width * 0.75f);
+            float splitV = Random.Range(parentNode.width * 0.3f, parentNode.width * 0.7f);
 
             newNode = new RNode(parentNode.bottomLeft, new Vector2(parentNode.topRight.x - (int)splitV, parentNode.topRight.y), roomID++);
             newNode.parent = parentNode;
@@ -285,7 +305,7 @@ public class DungeonGenerator : MonoBehaviour
         //splitting Horizontally
         else
         {
-            float splitH = Random.Range(parentNode.height * 0.25f, parentNode.height * 0.75f);
+            float splitH = Random.Range(parentNode.height * 0.3f, parentNode.height * 0.7f);
 
             newNode = new RNode(new Vector2(parentNode.bottomLeft.x, parentNode.topRight.y - (int)splitH), parentNode.topRight, roomID++);
             newNode.parent = parentNode;
@@ -358,30 +378,21 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
-
-
-    //Ska denna bort Arvid?
-    bool CheckSize(RNode n)
-    {
-        if (n.width < minRoomSize && n.height < minRoomSize)
-        {
-            return false;
-        }
-        return true;
-    }
-
     //Builds the PCG rooms
     public void BuildRooms()
     {
         for (int i = 0; i < finishedNodes.Count; i++)
         {
-            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+            if (finishedNodes[i].bottom == true)
             {
-                ShrinkNodes(finishedNodes[i]);
+                //ShrinkNodes(finishedNodes[i]);
                 DeclareRoomType(finishedNodes[i]);
-                CreateRoomMesh(finishedNodes[i], i);
-                SpawnProps(finishedNodes[i]);
-                SpawnEnemy(finishedNodes[i]);
+                //CreateRoomMesh(finishedNodes[i], i);
+                if (finishedNodes[i].manual == false)
+                {
+                    ShrinkNodes(finishedNodes[i]);
+                    CreateRoomMesh(finishedNodes[i], i);
+                }
             }
         }
     }
@@ -511,11 +522,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (y == room.topRight.y)
                 {
-                    AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), wall5, Vector3.zero);
+                    AddWall(new Vector2(buildPos + 2.5f, y), room, Vector3.zero);
                 }
                 else
                 {
-                    AddObjectToSpawn(new Vector2(buildPos + 2.5f, y), wall5, new Vector3(0, 180, 0));
+                    AddWall(new Vector2(buildPos + 2.5f, y), room, new Vector3(0, 180, 0));
                 }
                 buildPos += 5;
             }
@@ -534,7 +545,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else if (doorway == true)
             {
-                buildPos += 5; //= topDoorway.pillarTwo.x;
+                buildPos += corridorGenerator.corridorWidth; //= topDoorway.pillarTwo.x;
                 endPoint = room.topRight.x;
             }
             else if (doorway == false)
@@ -546,6 +557,7 @@ public class DungeonGenerator : MonoBehaviour
 
     void PlaceWallsVertically(RNode room, Doorway d, float x, bool doorway)
     {
+
         float endPoint;
         if (doorway == false)
         {
@@ -563,11 +575,11 @@ public class DungeonGenerator : MonoBehaviour
             {
                 if (x == room.bottomLeft.x)
                 {
-                    AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 270, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), room, new Vector3(0, 270, 0));
                 }
                 else
                 {
-                    AddObjectToSpawn(new Vector2(x, buildPos + 2.5f), wall5, new Vector3(0, 90, 0));
+                    AddWall(new Vector2(x, buildPos + 2.5f), room, new Vector3(0, 90, 0));
                 }
                 buildPos += 5;
             }
@@ -585,7 +597,7 @@ public class DungeonGenerator : MonoBehaviour
             }
             else if (doorway == true)
             {
-                buildPos += 5; //= topDoorway.pillarTwo.x;
+                buildPos += corridorGenerator.corridorWidth; //= topDoorway.pillarTwo.x;
                 endPoint = room.topRight.y;
             }
             else if (doorway == false)
@@ -596,6 +608,40 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
+    void AddWall(Vector2 pos, RNode room, Vector3 rotation)
+    {
+        OverWriteCounter++;
+        GameObject wallObject;
+        if (OverWriteCounter >= 5)
+        {
+            wallObject = walls[walls.Count - 4];
+            OverWriteCounter = 0;
+        }
+        else if (OverWriteCounter == 3)
+        {
+            
+            if (room.isGreenRoom == true)
+            {
+                wallObject = walls[walls.Count - 3];
+            }
+            else if (room.isOrangeRoom == true)
+            {
+                wallObject = walls[walls.Count - 2];
+            }
+            else
+            {
+                wallObject = walls[walls.Count - 1];
+            }
+        }
+        else
+        {
+            int i = Random.Range(0, walls.Count - 5);
+            wallObject = walls[i];
+        }
+        
+        AddObjectToSpawn(pos, wallObject, rotation);
+
+    }
     void AddObjectToSpawn(Vector2 pos, GameObject type, Vector3 rotation)
     {
         PCGObjects obj = new PCGObjects(pos, type, rotation);
@@ -739,7 +785,21 @@ public class DungeonGenerator : MonoBehaviour
     }
     #endregion
 
+
     #region Prop placement
+    public void PopulateDungeon()
+    {
+        for (int i = 0; i < finishedNodes.Count; i++)
+        {
+            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+            {
+                SpawnProps(finishedNodes[i]);
+                SpawnEnemy(finishedNodes[i]);
+            }
+        }
+    }
+
+
     private void DeclareRoomType(RNode room)
     {
 
@@ -762,14 +822,9 @@ public class DungeonGenerator : MonoBehaviour
 
     private float CalculateRoomArea(RNode room)
     {
-        float calcDiagonal = Vector2.Distance(room.bottomLeft, room.topRight);
-        Debug.Log("Area " + calcDiagonal + "ID " + room.id);
-        return calcDiagonal;
-
-        //Need work on using roomSize
-        //float calcArea = room.width * room.height;
+        float calcArea = room.width * room.height;
         //Debug.Log("Area " + calcArea + "ID " + room.id);
-        //return calcArea;
+        return calcArea;
     }
 
     public void SpawnProps(RNode room)
@@ -778,26 +833,32 @@ public class DungeonGenerator : MonoBehaviour
 
         float roomSize = CalculateRoomArea(room);
 
-        //amountOfInteractableProps = 1;
-        //amountOfProps = 1;
-
         //Place a specific amount of props depending on the size of the room
-        if (roomSize <= 30)
+        if (roomSize <= 300)
+        {
+            amountOfInteractableProps = 2;
+            amountOfProps = 0;
+        }
+        else if (roomSize > 300 && roomSize < 450)
         {
             amountOfInteractableProps = 2;
             amountOfProps = 1;
         }
-        else if (roomSize > 30 && roomSize < 50)
+        else if (roomSize >= 450 && roomSize < 800)
         {
             amountOfInteractableProps = 3;
-            amountOfProps = 2;
+            amountOfProps = 1;
         }
-        else if (roomSize >= 50)
+        else if (roomSize >= 800 && roomSize < 1100)
         {
             amountOfInteractableProps = 4;
-            amountOfProps = 3;
+            amountOfProps = 2;
         }
-
+        else if (roomSize >= 1100)
+        {
+            amountOfInteractableProps = 5;
+            amountOfProps = 10;
+        }
 
         CreateNoninteractableProps(room, amountOfProps, roomSize);
         CreateInteractableProps(room, amountOfInteractableProps);
@@ -808,7 +869,8 @@ public class DungeonGenerator : MonoBehaviour
     {
         int rndRotation = Random.Range(0, 3);
 
-        if (roomSize >= 45)
+        //Create a pillar in the middle of the room if the roomsize exceeds the condition
+        if (roomSize > 500)
         {
             if (room.isGreenRoom == true)
             {
@@ -826,64 +888,29 @@ public class DungeonGenerator : MonoBehaviour
                 Instantiate(props[0], new Vector3(room.centerPos.x, props[0].transform.position.y, room.centerPos.y), Quaternion.Euler(0, rotationArray[rndRotation], 0));
         }
 
-        for (int i = 1; i < amountOfProps; i++)
+        for (int i = 0; i < amountOfProps; i++)
         {
-            float spawnOffset = 3f, boundOffset = 3f;
-            Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
-
             int rndProp = Random.Range(3, props.Count);
 
-            //Checks if the position is occupied, takes the size of the objects collider and checks if there's anything at the spawn position
-            Vector3 propBounds = Vector3.zero;
+            BoxCollider propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
+            //Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
 
-            //Checks if the object has a collider and if it does it collects the size and assigns it to propBounds
-            if (props[rndProp].transform.gameObject.GetComponent<BoxCollider>() != null)
-            {
-                propBounds = props[rndProp].transform.gameObject.GetComponent<BoxCollider>().size + new Vector3(boundOffset, boundOffset, boundOffset);
-                //Debug.Log("Got the collider of " + props[rndProp].name + " " + propBounds);
-            }
+            Spawner(props[rndProp], room, propBounds);
 
-            //If the object doesnt have a collider then we instead get the meshrenderer (+ an offset to give the objects some space inbetween)
-            if (propBounds == Vector3.zero)
-            {
-                propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
-                //Debug.Log("Got the mesh of " + props[rndProp].name + " " + propBounds);
-            }
-
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
-
-            //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
-            if (overlapCount <= 2)
-            {
-                Instantiate(props[rndProp], new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
-            }
-            else if (overlapCount > 2)
-            {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, props[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
-
-
-                while (overlapCount > 2)
-                {
-                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
-
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
-
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
-
-                    if (overlapCount <= 2)
-                    {
-                        Instantiate(props[rndProp], new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
-
-                        //Debug.Log("overlapCount: " + overlapCount + " There's something here " + room.id + " " + props[rndProp].name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, props[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
-
-                        break;
-                    }
-                }
-            }
+            //Code to spawn objects if their siblings are a specific manual room
+            //if (room.sibling.manual)
+            //{
+            //    if (room.sibling.manualRoom.name == "Boss Room")
+            //    {
+            //        Spawner(props[7], room, propBounds);
+            //    }
+            //    else if (room.sibling.manualRoom.name == "Shop Room")
+            //    {
+            //        Spawner(props[8], room, propBounds);
+            //    }
+            //}
         }
     }
-
 
     private void CreateInteractableProps(RNode room, int amountOfInteractableProps)
     {
@@ -891,108 +918,97 @@ public class DungeonGenerator : MonoBehaviour
         //may want to change it to spawn half of the barrels in one half and rest across the room
         for (int i = 0; i < amountOfInteractableProps; i++)
         {
-            float spawnOffset = 3f, boundOffset = 2f;
-            Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
-
             int rndProp = Random.Range(0, interactableProps.Count);
 
-            //Checks if the position is occupied, takes the size of the objects meshrenderer (+X in every dimension to get some more distance) and checks if there's anything at the spawn position
-            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<MeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
-
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + objOffset, propBounds, colliders);
-
+            //Takes the size of the objects meshrenderer (+X in every dimension to get some more distance) 
+            BoxCollider propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
             //Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
 
+
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
-            if (overlapCount <= 2)
-            {
-                Instantiate(interactableProps[rndProp], new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
-
-            }
-            else if (overlapCount > 2)
-            {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + objOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + objOffset.z));
-
-                while (overlapCount > 2)
-                {
-                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
-
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newObjOffset, propBounds, colliders);
-
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
-
-
-                    if (overlapCount <= 2)
-                    {
-                        Instantiate(interactableProps[rndProp], new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
-                        //Debug.Log("overlapCount: " + overlapCount + " There's something here " + room.id + " " + interactableProps[rndProp].name + " interprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, interactableProps[rndProp].transform.position.y, room.centerPos.y + newObjOffset.z));
-
-                        break;
-                    }
-                }
-            }
+            Spawner(interactableProps[rndProp], room, propBounds);
         }
     }
-
-
-
     public void SpawnEnemy(RNode room)
     {
         //amountofenemies cannot exceed the size of listofallenemies
         if (room.isGreenRoom)
         {
             amountOfEnemies = 2;
-            CreateEnemies(room, amountOfEnemies);
         }
         else if (room.isOrangeRoom)
         {
             amountOfEnemies = 3;
-            CreateEnemies(room, amountOfEnemies);
         }
         else if (room.isRedRoom)
         {
             amountOfEnemies = 4;
-            CreateEnemies(room, amountOfEnemies);
         }
+        CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateEnemies(RNode room, int amountOfEnemies)
     {
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            float spawnOffset = 3f, boundOffset = 2f;
-            Vector3 enemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
-
-            Vector3 enemyBounds = listOfAllEnemies[i].transform.GetChild(0).gameObject.GetComponent<SkinnedMeshRenderer>().bounds.size + new Vector3(boundOffset, boundOffset, boundOffset);
+            BoxCollider enemyBounds = listOfAllEnemies[i].transform.gameObject.GetComponentInChildren<BoxCollider>();
             //Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
 
-            int overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + enemyOffset, enemyBounds + new Vector3(boundOffset, boundOffset, boundOffset), colliders);
+            //Use instead of i (listOfAllEnemies[i]) if you want random enemies to spawn in rooms
+            //int rndEnemy = Random.Range(0, listOfAllEnemies.Count);
 
-            if (overlapCount <= 2)
-            {
-                Instantiate(listOfAllEnemies[i], new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z), Quaternion.identity);
-                //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
-            }
-            else if (overlapCount > 2)
-            {
-                //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + enemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + enemyOffset.z));
+            Spawner(listOfAllEnemies[i], room, enemyBounds);
+        }
+    }
 
-                while (overlapCount > 2)
+    private void Spawner(GameObject spawnObject, RNode room, BoxCollider objBounds)
+    {
+        float spawnPositionOffset = 2.5f;
+
+        //Could need a distance check here or in if statement below so objects dont spawn too close to center  + new Vector3(boundOffset, 0, boundOffset)
+        Vector3 objOffset = new Vector3(Random.Range(-room.width / spawnPositionOffset, room.width / spawnPositionOffset), 0, Random.Range(-room.height / spawnPositionOffset, room.height / spawnPositionOffset));
+        Vector3 spawnPosition = new Vector3(room.centerPos.x + objOffset.x, spawnObject.transform.position.y, room.centerPos.y + objOffset.z);
+        //Vector3 boundSize = new Vector3(objBounds.size.x + boundOffset, 0, objBounds.size.z + boundOffset);
+        Vector3 roomCenterPos = new Vector3(room.centerPos.x, 0, room.centerPos.y);
+
+        Vector3 objCenterPos = roomCenterPos + objOffset;
+
+        int overlapCount = Physics.OverlapBoxNonAlloc(objCenterPos, objBounds.size / 2, objectCollider);
+        
+        //Debug.Log("object name " + spawnObject.name + " room id " + room.id + " objects position " + objCenterPos + " room centerpos " + room.centerPos + " objOffset " + objOffset + " objboundscenter " + objBounds.center);
+
+        if (overlapCount <= 2)
+        {
+            Instantiate(spawnObject, spawnPosition, Quaternion.identity);
+            //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, spawnObject.transform.position.y, room.centerPos.y + objOffset.z));
+        }
+        else if (overlapCount > 2)
+        {
+            //Debug.Log("overlapCount BEFORE new gets created: " + overlapCount + " There's something here " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + objOffset.x, spawnObject.transform.position.y, room.centerPos.y + objOffset.z));
+
+            for (int i = 0; i < 100; i++)
+            {
+                if (overlapCount > 2)
                 {
-                    Vector3 newEnemyOffset = new Vector3(Random.Range(-room.width / spawnOffset, room.width / spawnOffset), 0, Random.Range(-room.height / spawnOffset, room.height / spawnOffset));
+                    Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnPositionOffset, room.width / spawnPositionOffset), 0, Random.Range(-room.height / spawnPositionOffset, room.height / spawnPositionOffset));
+                    Vector3 newObjCenterPos = roomCenterPos + newObjOffset;
+                    overlapCount = Physics.OverlapBoxNonAlloc(newObjCenterPos, objBounds.size / 2, objectCollider);
 
-                    overlapCount = Physics.OverlapBoxNonAlloc(room.centerPos + newEnemyOffset, enemyBounds, colliders);
-
-                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " There's something here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
-
+                    //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, spawnObject.transform.position.y, room.centerPos.y + newObjOffset.z));
 
                     if (overlapCount <= 2)
                     {
-                        Instantiate(listOfAllEnemies[i], new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z), Quaternion.identity);
-                        //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + listOfAllEnemies[i].name + " new enemypos: " + new Vector3(room.centerPos.x + newEnemyOffset.x, listOfAllEnemies[i].transform.position.y, room.centerPos.y + newEnemyOffset.z));
+                        Instantiate(spawnObject, new Vector3(room.centerPos.x + newObjOffset.x, spawnObject.transform.position.y, room.centerPos.y + newObjOffset.z), Quaternion.identity);
+
+                        //Debug.Log("overlapCount: " + overlapCount + " There's nothing here " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, spawnObject.transform.position.y, room.centerPos.y + newObjOffset.z));
+
                         break;
                     }
+                }
+
+                if (i > 98)
+                {
+                    //Debug.Log("i = " + i + " " + room.id + " " + spawnObject.name);
                 }
             }
         }
