@@ -42,17 +42,5 @@ public class RoomPointer : MonoBehaviour
 
         bossPointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -bossAngle);
         upgradePointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -upgradeAngle);
-
-        //UpdateArrowPosition(bossPointer, bossAngle, distanceFromCenter);
-        //UpdateArrowPosition(upgradePointer, upgradeAngle, distanceFromCenter);
     }
-
-    //void UpdateArrowPosition(Image arrow, float angle, float distance)
-    //{
-    //    float x = Mathf.Cos(Mathf.Deg2Rad * angle) * distance;
-    //    float y = Mathf.Sin(Mathf.Deg2Rad * angle) * distance;
-
-    //    arrow.rectTransform.anchoredPosition = new Vector2(x, y);
-    //    arrow.rectTransform.anchoredPosition += new Vector2(0f, arrow.rectTransform.rect.height / 2f);
-    //}
 }
