@@ -42,11 +42,11 @@ public class Spell : MonoBehaviour
         }
 
 
-        if (SpellToCast.LightningImpact != null)
-        {
-            lightningImpactParticleEffect = Instantiate(SpellToCast.LightningImpact, transform.position, Quaternion.identity);
-            lightningImpactParticleEffect.Stop();
-        }
+        //if (SpellToCast.LightningImpact != null)
+        //{
+        //    lightningImpactParticleEffect = Instantiate(SpellToCast.LightningImpact, transform.position, Quaternion.identity);
+        //    lightningImpactParticleEffect.Stop();
+        //}
 
         if (SpellToCast.name.Equals("Berserk"))
         {
@@ -158,6 +158,7 @@ public class Spell : MonoBehaviour
             lightningImpactParticleEffect.transform.position = position;
             lightningImpactParticleEffect.Play();
             lightningImpactParticleEffect.Stop();
+            Destroy(lightningImpactParticleEffect);
         }
     }
 
