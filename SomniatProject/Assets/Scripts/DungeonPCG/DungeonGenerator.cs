@@ -557,7 +557,6 @@ public class DungeonGenerator : MonoBehaviour
 
     void PlaceWallsVertically(RNode room, Doorway d, float x, bool doorway)
     {
-
         float endPoint;
         if (doorway == false)
         {
@@ -606,8 +605,6 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
     }
-    #endregion
-
     void AddWall(Vector2 pos, RNode room, Vector3 rotation)
     {
         OverWriteCounter++;
@@ -642,6 +639,9 @@ public class DungeonGenerator : MonoBehaviour
         AddObjectToSpawn(pos, wallObject, rotation);
 
     }
+    #endregion
+
+    
     void AddObjectToSpawn(Vector2 pos, GameObject type, Vector3 rotation)
     {
         PCGObjects obj = new PCGObjects(pos, type, rotation);
@@ -690,6 +690,7 @@ public class DungeonGenerator : MonoBehaviour
         //room.transform.position = Vector3.zero;
         //room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
+        mesh.RecalculateNormals();
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
@@ -723,7 +724,7 @@ public class DungeonGenerator : MonoBehaviour
 
         lucidObject.transform.parent = room.transform;
         lucidObject.layer = 10;
-
+        lucidMesh.RecalculateNormals();
     }
 
     void CreateCorridorMesh(CNode n)
@@ -847,17 +848,17 @@ public class DungeonGenerator : MonoBehaviour
         else if (roomSize >= 450 && roomSize < 800)
         {
             amountOfInteractableProps = 3;
-            amountOfProps = 1;
+            amountOfProps = 2;
         }
         else if (roomSize >= 800 && roomSize < 1100)
         {
             amountOfInteractableProps = 4;
-            amountOfProps = 2;
+            amountOfProps = 3;
         }
         else if (roomSize >= 1100)
         {
             amountOfInteractableProps = 5;
-            amountOfProps = 10;
+            amountOfProps = 5;
         }
 
         CreateNoninteractableProps(room, amountOfProps, roomSize);
@@ -892,8 +893,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             int rndProp = Random.Range(3, props.Count);
 
-            BoxCollider propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            //Debug.Log("Got the mesh of " + props[rndProp].transform.GetChild(0).name + " " + propBounds);
+            Vector3 propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>().size;
+            Debug.Log("Bounding Size for (box collider) prop: " + props[rndProp].name + propBounds);
 
             Spawner(props[rndProp], room, propBounds);
 
@@ -921,8 +922,8 @@ public class DungeonGenerator : MonoBehaviour
             int rndProp = Random.Range(0, interactableProps.Count);
 
             //Takes the size of the objects meshrenderer (+X in every dimension to get some more distance) 
-            BoxCollider propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            //Debug.Log("Bounding box for prop: " + interactableProps[rndProp].name + propBounds);
+            Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>().size;
+            Debug.Log("Bounding Size (box collider) for prop: " + interactableProps[rndProp].name + propBounds);
 
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
@@ -951,8 +952,8 @@ public class DungeonGenerator : MonoBehaviour
     {
         for (int i = 0; i < amountOfEnemies; i++)
         {
-            BoxCollider enemyBounds = listOfAllEnemies[i].transform.gameObject.GetComponentInChildren<BoxCollider>();
-            //Debug.Log("Bounding box for enemy: " + listOfAllEnemies[i].name + enemyBounds);
+            Vector3 enemyBounds = listOfAllEnemies[i].transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().bounds.size;
+            Debug.Log("Bounding size (skinnedmesh) for enemy: " + listOfAllEnemies[i].name + enemyBounds);
 
             //Use instead of i (listOfAllEnemies[i]) if you want random enemies to spawn in rooms
             //int rndEnemy = Random.Range(0, listOfAllEnemies.Count);
@@ -961,7 +962,7 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private void Spawner(GameObject spawnObject, RNode room, BoxCollider objBounds)
+    private void Spawner(GameObject spawnObject, RNode room, Vector3 objBoundSize)
     {
         float spawnPositionOffset = 2.5f;
 
@@ -973,7 +974,7 @@ public class DungeonGenerator : MonoBehaviour
 
         Vector3 objCenterPos = roomCenterPos + objOffset;
 
-        int overlapCount = Physics.OverlapBoxNonAlloc(objCenterPos, objBounds.size / 2, objectCollider);
+        int overlapCount = Physics.OverlapBoxNonAlloc(objCenterPos, objBoundSize / 2, objectCollider);
         
         //Debug.Log("object name " + spawnObject.name + " room id " + room.id + " objects position " + objCenterPos + " room centerpos " + room.centerPos + " objOffset " + objOffset + " objboundscenter " + objBounds.center);
 
@@ -992,7 +993,7 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     Vector3 newObjOffset = new Vector3(Random.Range(-room.width / spawnPositionOffset, room.width / spawnPositionOffset), 0, Random.Range(-room.height / spawnPositionOffset, room.height / spawnPositionOffset));
                     Vector3 newObjCenterPos = roomCenterPos + newObjOffset;
-                    overlapCount = Physics.OverlapBoxNonAlloc(newObjCenterPos, objBounds.size / 2, objectCollider);
+                    overlapCount = Physics.OverlapBoxNonAlloc(newObjCenterPos, objBoundSize / 2, objectCollider);
 
                     //Debug.Log("overlapCount AFTER new gets created: " + overlapCount + " " + room.id + " " + spawnObject.name + " noninterprop pos: " + new Vector3(room.centerPos.x + newObjOffset.x, spawnObject.transform.position.y, room.centerPos.y + newObjOffset.z));
 
@@ -1006,10 +1007,10 @@ public class DungeonGenerator : MonoBehaviour
                     }
                 }
 
-                if (i > 98)
-                {
-                    //Debug.Log("i = " + i + " " + room.id + " " + spawnObject.name);
-                }
+                //if (i > 98)
+                //{
+                //    Debug.Log("i = " + i + " " + room.id + " " + spawnObject.name);
+                //}
             }
         }
     }

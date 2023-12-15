@@ -25,7 +25,7 @@ public class PostProcess : MonoBehaviour
         // Update shader properties based on lucidity
 
         float radius = Mathf.Lerp(minRadius, initialRadius, lucidCamera.localScale.x / 3);
-        Debug.Log($"INITIAL RADIUS: {radius}");
+        //Debug.Log($"INITIAL RADIUS: {radius}");
         // Pass the radius to the shader
         material.SetFloat("_Radius", radius);
 
