@@ -763,6 +763,7 @@ public class DungeonGenerator : MonoBehaviour
         //room.transform.position = Vector3.zero;
         //room.transform.localScale = Vector3.one;
         room.GetComponent<MeshFilter>().mesh = mesh;
+        mesh.RecalculateNormals();
         room.GetComponent<BoxCollider>().size = new Vector3(n.width, 0, n.height);
         Vector3 center = new Vector3(bottomLeftV.x + n.width / 2, 0, bottomLeftV.z + n.height / 2);
         room.GetComponent<BoxCollider>().center = center;
@@ -782,7 +783,7 @@ public class DungeonGenerator : MonoBehaviour
 
         lucidObject.transform.parent = room.transform;
         lucidObject.layer = 10;
-
+        lucidMesh.RecalculateNormals();
     }
     #endregion
 
@@ -864,7 +865,23 @@ public class DungeonGenerator : MonoBehaviour
         CreateNoninteractableProps(room, amountOfProps, roomSize);
         CreateInteractableProps(room, amountOfInteractableProps);
     }
-
+    public void SpawnEnemy(RNode room)
+    {
+        //amountofenemies cannot exceed the size of listofallenemies
+        if (room.isGreenRoom)
+        {
+            amountOfEnemies = 2;
+        }
+        else if (room.isOrangeRoom)
+        {
+            amountOfEnemies = 3;
+        }
+        else if (room.isRedRoom)
+        {
+            amountOfEnemies = 4;
+        }
+        CreateEnemies(room, amountOfEnemies);
+    }
 
     private void CreateNoninteractableProps(RNode room, int amountOfProps, double roomSize)
     {
@@ -930,23 +947,7 @@ public class DungeonGenerator : MonoBehaviour
             Spawner(interactableProps[rndProp], room, propBounds);
         }
     }
-    public void SpawnEnemy(RNode room)
-    {
-        //amountofenemies cannot exceed the size of listofallenemies
-        if (room.isGreenRoom)
-        {
-            amountOfEnemies = 2;
-        }
-        else if (room.isOrangeRoom)
-        {
-            amountOfEnemies = 3;
-        }
-        else if (room.isRedRoom)
-        {
-            amountOfEnemies = 4;
-        }
-        CreateEnemies(room, amountOfEnemies);
-    }
+    
 
     private void CreateEnemies(RNode room, int amountOfEnemies)
     {
