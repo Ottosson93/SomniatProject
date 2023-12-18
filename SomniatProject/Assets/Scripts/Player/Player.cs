@@ -84,7 +84,8 @@ public class Player : MonoBehaviour
 
     private float CalculateSpeedModifierFromRelics()
     {
-        return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed));
+        float power = 0.5f;
+        return baseSpeed * (1 + (float)Math.Pow(playerStats.Dexterity.Value / baseSpeed, power));
     }
 
     private float CalculateAttackSpeedModifierFromRelics()
