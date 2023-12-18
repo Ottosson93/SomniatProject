@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8422613285057805206}
   - component: {fileID: 1755880584166239095}
   - component: {fileID: 8801275960219560579}
+  - component: {fileID: 6926263588898609892}
   m_Layer: 10
   m_Name: LucidPlaceHolder
   m_TagString: Untagged
@@ -83,6 +84,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &6926263588898609892
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 346363123270964956}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &3149164065580326566
 GameObject:
   m_ObjectHideFlags: 0
