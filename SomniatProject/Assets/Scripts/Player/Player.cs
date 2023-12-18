@@ -104,8 +104,8 @@ public class Player : MonoBehaviour
             return baseRangedAttackSpeed / 1;
         else
             return baseRangedAttackSpeed / dexterityBonus;
-        
-            
+
+
     }
 
     private float CalculateAttackDamageModifierFromRelics()
@@ -143,13 +143,14 @@ public class Player : MonoBehaviour
         damageReduction *= temporaryArmorReductionModifier;
 
         controller.MoveSpeed = speed;
+
         Debug.Log("Melee Damage: " + meleeDamage + ", attack speed: " + attackSpeed + ", movement speed: " + speed + ", armor amount: " + damageReduction);
     }
 
     public void TakeDamage(float damage)
-    {      
+    {
         // Ensure lucidity is within the valid range
-        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);  
+        lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 
