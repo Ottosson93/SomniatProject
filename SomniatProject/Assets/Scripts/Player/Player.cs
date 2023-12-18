@@ -10,15 +10,16 @@ public class Player : MonoBehaviour
     public float maxLucidity;
     public float originalMaxLucidity = 100f;
     public float lucidity;
-    public readonly float baseSpeed = 2.0f;
+    public readonly float baseSpeed = 2f;
     public readonly float baseMeleeDamage = 10f;
-    public readonly float baseAttackSpeed = 1.0f;
+    public readonly float baseAttackSpeed = 0.4f;
     public readonly float baseArmor = 1.0f;
     public float damageReduction;
     public float flatSpeed = 0;
     public float speed;
     public float meleeDamage;
     public float attackSpeed;
+    public float rangedAttackSpeed;
     public static bool isDead = false;
 
 
@@ -43,13 +44,14 @@ public class Player : MonoBehaviour
         lucidityPostProcess = GetComponent<LucidityPostProcess>();
 
         speed = baseSpeed;
+        rangedAttackSpeed = baseAttackSpeed;
         attackSpeed = baseAttackSpeed;
         meleeDamage = baseMeleeDamage;
         lucidity = originalMaxLucidity;
         maxLucidity = originalMaxLucidity;
         damageReduction = baseArmor;
 
-        controller.MoveSpeed = speed;
+        controller.SprintSpeed = speed;
 
         temporaryArmorReductionModifier = 1.0f;
         temporaryAttackSpeedModifier = 1.0f;
@@ -84,15 +86,16 @@ public class Player : MonoBehaviour
 
     private float CalculateSpeedModifierFromRelics()
     {
-        return baseSpeed * (1 + (playerStats.Dexterity.Value / baseSpeed));
+        float power = 0.5f;
+        return baseSpeed * (1 + (float)Math.Pow(playerStats.Dexterity.Value / baseSpeed, power));
     }
 
-    private float CalculateAttackSpeedModifierFromRelics()
+    private float CalculateRangedAttackSpeedModifierFromRelics()
     {
         if (playerStats.Dexterity.Value == 0)
-            return baseAttackSpeed / 1;
+            return rangedAttackSpeed / 1;
         else
-            return baseAttackSpeed / (playerStats.Dexterity.Value/4);
+            return (rangedAttackSpeed / playerStats.Dexterity.Value)/4;
     }
 
     private float CalculateAttackDamageModifierFromRelics()
@@ -119,7 +122,8 @@ public class Player : MonoBehaviour
 
 
         speed = (baseSpeed + CalculateSpeedModifierFromRelics()) * temporarySpeedModifier;
-        attackSpeed = CalculateAttackSpeedModifierFromRelics() / temporaryAttackSpeedModifier;
+        rangedAttackSpeed = CalculateRangedAttackSpeedModifierFromRelics() / temporaryAttackSpeedModifier;
+        attackSpeed = baseAttackSpeed / temporaryAttackSpeedModifier;
         meleeDamage = (baseMeleeDamage + CalculateAttackDamageModifierFromRelics())*temporaryMeleeDamageModifier;
 
         maxLucidity = CalculateMaxLucidityModifierFromRelics();
@@ -128,7 +132,7 @@ public class Player : MonoBehaviour
 
         damageReduction *= temporaryArmorReductionModifier;
 
-        controller.MoveSpeed = speed;
+        controller.SprintSpeed = speed;
 
         Debug.Log("Melee Damage: " + meleeDamage + ", attack speed: " + attackSpeed + ", movement speed: " + speed + ", armor amount: " + damageReduction);
     }

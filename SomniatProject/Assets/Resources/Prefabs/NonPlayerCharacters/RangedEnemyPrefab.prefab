@@ -397,7 +397,6 @@ GameObject:
   - component: {fileID: 2625885900072077414}
   - component: {fileID: -3822866027384753344}
   - component: {fileID: 8271735563622068179}
-  - component: {fileID: 3618116682100017298}
   m_Layer: 9
   m_Name: RangedEnemyPrefab
   m_TagString: Enemy
@@ -571,27 +570,6 @@ MonoBehaviour:
   bulletPos: {fileID: 1695502807786446139}
   timer: 0
   cooldownTime: 2
---- !u!65 &3618116682100017298
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1695502807786733843}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.0484982, y: 2.4404676, z: 1.6706461}
-  m_Center: {x: 0.08089399, y: 1.1384476, z: -0.1332565}
 --- !u!1 &1695502807786733845
 GameObject:
   m_ObjectHideFlags: 0
