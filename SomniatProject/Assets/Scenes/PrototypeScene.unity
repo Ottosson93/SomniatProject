@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 72
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -2630,7 +2630,7 @@ GameObject:
   - component: {fileID: 455953143}
   - component: {fileID: 455953142}
   - component: {fileID: 455953141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Invis floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
