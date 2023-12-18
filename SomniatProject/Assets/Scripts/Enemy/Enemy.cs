@@ -30,7 +30,8 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage) 
     {
         current = current - damage;
-        animator.SetTrigger("Hurt");
+        //"Hurt" does not exist
+        //animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(damage, transform);
 
         if(current <= 0)
