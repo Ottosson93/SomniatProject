@@ -7,7 +7,7 @@ namespace Assets.Eric_folder
 
     public class EnemyMeleeAttack : MonoBehaviour
     {
-        [SerializeField] int damage = 1;
+        [SerializeField] int damage = 10;
         [SerializeField] float attacksPerSec = 1f;
         [SerializeField] float attackRadius;
         [SerializeField] Transform attackPoint;

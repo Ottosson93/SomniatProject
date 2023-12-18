@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  DamageAmount: 5
+  DamageAmount: 15
   DamagePerTick: 5
-  LucidityCost: 1
+  LucidityCost: 15
   Lifetime: 2
   Speed: 15
   SpellRadius: 1
@@ -29,7 +29,7 @@ MonoBehaviour:
   ExplosionDuration: 2
   StunDuration: 2
   BurnDuration: 5
-  TickInterval: 0.75
+  TickInterval: 1
   DamageBoost: 0
   AttackSpeedBoost: 0
   MovementSpeedBoost: 0

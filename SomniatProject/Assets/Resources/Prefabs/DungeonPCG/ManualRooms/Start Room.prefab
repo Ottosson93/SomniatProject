@@ -188,7 +188,7 @@ GameObject:
   - component: {fileID: 1780993977796211185}
   m_Layer: 0
   m_Name: MaskSphere
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1425,11 +1425,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 750415211029741655}
   bulletForce: 100
-  WeaponDamage: 10
+  WeaponDamage: 4
   rateOfFire: 0.3
-  accuracy: 0
   camera: {fileID: 857980248975007796}
-  crosshair: {fileID: 0}
   audioSource: {fileID: 0}
   projectilePrefab: {fileID: 3517248716899931449, guid: cc1cf958dc02f244a90f0a2a6def5957, type: 3}
 --- !u!114 &3810547148532738670

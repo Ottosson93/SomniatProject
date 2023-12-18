@@ -81,3 +81,5 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 SomniatProject/fmod_editor.log
+SomniatProject/fmod_editor.log
+SomniatProject/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset

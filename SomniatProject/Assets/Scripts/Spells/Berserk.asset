@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageAmount: 0
   DamagePerTick: 0
-  LucidityCost: 5
-  Lifetime: 2
+  LucidityCost: 10
+  Lifetime: 5
   Speed: 0
   SpellRadius: 0
   RotationSpeed: 0
