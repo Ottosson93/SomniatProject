@@ -38,7 +38,7 @@ public class RangedCheckEnemyInRange : Node
 
         if (Vector3.Distance(transform.position, target.position) <= RangedEnemyBT.attackRange)
         {
-            Debug.Log("Ranged enemy range check");
+            //Debug.Log("Ranged enemy range check");
             state = NodeState.SUCCESS;
             return state;
         }
