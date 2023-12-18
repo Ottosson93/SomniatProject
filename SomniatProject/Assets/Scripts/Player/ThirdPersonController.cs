@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -12,7 +12,7 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
     [RequireComponent(typeof(PlayerInput))]
 #endif
     public class ThirdPersonController : MonoBehaviour
@@ -115,7 +115,7 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
@@ -162,7 +162,7 @@ namespace StarterAssets
             _hasAnimator = GetComponent<Animator>();
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
             player = GetComponent<Player>();
 #else
@@ -187,7 +187,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-           
+
 
             if (_input.dash)
             {
@@ -532,7 +532,7 @@ namespace StarterAssets
             await Task.Delay((int)(dashingCooldown * 1000));
             canDash = true;
         }
-        
+
 
 
 
@@ -545,6 +545,7 @@ namespace StarterAssets
 
         private void Attack()
         {
+            Debug.Log("Attack initiated " + Time.realtimeSinceStartup);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             Collider[] hitDestructibleObjects = Physics.OverlapSphere(attackPoint.position, attackRange, destructibleObjectLayers);
 
@@ -560,7 +561,7 @@ namespace StarterAssets
             {
                 CancelInvoke("EndCombo");
 
-                if (Time.time - lastClickedTime >= 0.9f)
+                if (Time.time - lastClickedTime >= player.attackSpeed)
                 {
                     //Audio attack
                     AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeAttack, transform.position);
