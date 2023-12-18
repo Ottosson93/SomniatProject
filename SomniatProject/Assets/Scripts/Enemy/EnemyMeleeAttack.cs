@@ -21,7 +21,7 @@ namespace Assets.Eric_folder
             animator = GetComponent<Animator>();
             playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        //void Update() //Lägg till i behaviourTree istället för här
+        //void Update() //LÃ¤gg till i behaviourTree istÃ¤llet fÃ¶r hÃ¤r
         //{
         //    Attack();
         //    float distance = 1.5f;
@@ -35,7 +35,7 @@ namespace Assets.Eric_folder
         //        animator.Play("Alien8_Walking");
         //    }
         //}
-        //private void Attack() // Lägg också till i BehaviourTree
+        //private void Attack() // LÃ¤gg ocksÃ¥ till i BehaviourTree
         //{
         //    if (Time.time > nextTimeToFire)
         //    {
@@ -49,9 +49,8 @@ namespace Assets.Eric_folder
         //                    collider.GetComponent<Player>().TakeDamage(damage);
         //                    nextTimeToFire = Time.time + 1f / attacksPerSec;
         //                }
-
-        //            }
-        //        }
+        //        return;
+        //        animator.Play("Alien8_Walking");
         //    }
         //}
         private void OnDrawGizmosSelected()
@@ -60,7 +59,7 @@ namespace Assets.Eric_folder
             {
                 return;
             }
-            Gizmos.DrawWireSphere(attackPoint.position, attackRadius); // ritar attack radien för fienden.
+            Gizmos.DrawWireSphere(attackPoint.position, attackRadius); // ritar attack radien fÃ¶r fienden.
         }
     }
 

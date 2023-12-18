@@ -602,7 +602,7 @@ Camera:
   field of view: 40
   orthographic: 1
   orthographic size: 7
-  m_Depth: -1
+  m_Depth: 2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 195583
@@ -955,6 +955,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3287713902551577882, guid: 5b36bedf60c58804eb54d42b8fc555be, type: 3}
+      propertyPath: m_Depth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287713902551577882, guid: 5b36bedf60c58804eb54d42b8fc555be, type: 3}
       propertyPath: m_ClearFlags
       value: 3
       objectReference: {fileID: 0}
@@ -1102,6 +1106,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 84363304578499070}
     m_Modifications:
+    - target: {fileID: 2434976405422277944, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: currentSpell
+      value: 
+      objectReference: {fileID: -7718931055899551195, guid: 7126678de060e1d4a8e50fd4b92e01be, type: 3}
     - target: {fileID: 3973955912057358699, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
