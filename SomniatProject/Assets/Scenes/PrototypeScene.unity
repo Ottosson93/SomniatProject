@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 712
+    m_Bits: 72
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -2224,7 +2224,7 @@ GameObject:
   - component: {fileID: 455953143}
   - component: {fileID: 455953142}
   - component: {fileID: 455953141}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Invis floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4239,7 +4239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &879132566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11293,19 +11293,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 801770733559070960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 801770733559070960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 801770733559070960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 399.99997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 801770733559070960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -67.21428
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 979702980579261486, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_Pivot.x
@@ -11389,19 +11389,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1131772957777357893, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131772957777357893, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131772957777357893, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 399.99997
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1131772957777357893, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -201.64284
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2141213450529374960, guid: dc5b9e38b8eafd74aaaf7c3cf7d90d95, type: 3}
       propertyPath: m_AnchorMax.y

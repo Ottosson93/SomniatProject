@@ -96,9 +96,10 @@ public class DungeonCreator : MonoBehaviour
         {
             Instantiate(obj.objectType, obj.spawnPoint, obj.angle);
         }
-
-        navSurface.BuildNavMesh();
+        generator.PopulateDungeonWithProps();
         
-        generator.PopulateDungeon();
+        navSurface.BuildNavMesh();
+
+        generator.PopulateDungeonWithEnemies();
     }
 }

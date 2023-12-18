@@ -8,11 +8,9 @@ using System.Threading.Tasks;
 public class FireWeapon : MonoBehaviour
 {
     [SerializeField] Transform firePoint;
-    private bool isShooting;
     [SerializeField] float bulletForce;
     [SerializeField] int WeaponDamage;
     [Range(0.01f, 1f)] [SerializeField] float rateOfFire;
-    [SerializeField] float accuracy;
     Coroutine firingCoroutine;
     bool canShoot = true;
     Player player;
@@ -21,7 +19,6 @@ public class FireWeapon : MonoBehaviour
 
 
     [SerializeField] Camera camera;
-    [SerializeField] GameObject crosshair;
     [SerializeField] AudioSource audioSource;
 
     [SerializeField] GameObject projectilePrefab;
@@ -29,7 +26,6 @@ public class FireWeapon : MonoBehaviour
 
     private void Start()
     {
-        isShooting = false;
         //crosshair = Instantiate(crosshair);
         Hud_Attack[] attacks = FindObjectsOfType<Hud_Attack>();
         for (int i = 0; i < attacks.Length; ++i)
@@ -50,14 +46,14 @@ public class FireWeapon : MonoBehaviour
 
 
         //     if (!gamePauser.InMenu) //Man kan inte skjuta n�r man �r i shoppen
-        {
-            bool isRightbtnPressed = UnityEngine.InputSystem.Mouse.current.rightButton.isPressed;
+        
+        bool isRightbtnPressed = UnityEngine.InputSystem.Mouse.current.rightButton.isPressed;
 
-            if (isRightbtnPressed)//&& isShooting == false)
-            {
-                Fire();
-            }
+        if (isRightbtnPressed)//&& isShooting == false)
+        {
+            Fire();
         }
+        
     }
 
     async void Fire()

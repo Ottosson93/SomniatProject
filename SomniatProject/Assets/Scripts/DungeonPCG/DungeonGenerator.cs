@@ -789,14 +789,38 @@ public class DungeonGenerator : MonoBehaviour
 
 
     #region Prop placement
-    public void PopulateDungeon()
+
+    //public void PopulateDungeon()
+    //{
+    //    for (int i = 0; i < finishedNodes.Count; i++)
+    //    {
+    //        if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+    //        {
+    //            SpawnProps(finishedNodes[i]);
+    //            SpawnEnemy(finishedNodes[i]);
+    //        }
+    //    }
+    //}
+
+
+    public void PopulateDungeonWithEnemies()
     {
         for (int i = 0; i < finishedNodes.Count; i++)
         {
             if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
             {
                 SpawnProps(finishedNodes[i]);
-                SpawnEnemy(finishedNodes[i]);
+            }
+        }
+    }
+
+    public void PopulateDungeonWithProps()
+    {
+        for (int i = 0; i < finishedNodes.Count; i++)
+        {
+            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+            {
+                SpawnProps(finishedNodes[i]);
             }
         }
     }
@@ -835,7 +859,7 @@ public class DungeonGenerator : MonoBehaviour
 
         float roomSize = CalculateRoomArea(room);
 
-        //Place a specific amount of props depending on the size of the room
+        //Place a specific amount of props (cannot exceed corresponding list size) depending on the size of the room
         if (roomSize <= 300)
         {
             amountOfInteractableProps = 2;
@@ -880,7 +904,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             amountOfEnemies = 4;
         }
-        CreateEnemies(room, amountOfEnemies);
+        //CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateNoninteractableProps(RNode room, int amountOfProps, double roomSize)
@@ -948,7 +972,6 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
     
-
     private void CreateEnemies(RNode room, int amountOfEnemies)
     {
         for (int i = 0; i < amountOfEnemies; i++)
