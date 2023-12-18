@@ -1102,6 +1102,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 84363304578499070}
     m_Modifications:
+    - target: {fileID: 2434976405422277944, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
+      propertyPath: currentSpell
+      value: 
+      objectReference: {fileID: -7718931055899551195, guid: 7126678de060e1d4a8e50fd4b92e01be, type: 3}
     - target: {fileID: 3973955912057358699, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
