@@ -1018,6 +1018,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1260381139322785828, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: playerStatsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
     - target: {fileID: 1266893793725636451, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Tutorial
@@ -1186,6 +1190,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8057792111573943526, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
+      propertyPath: playerStatsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
     - target: {fileID: 8125775218300070627, guid: 2e42468286676a740b6cf429c86e61ff, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
