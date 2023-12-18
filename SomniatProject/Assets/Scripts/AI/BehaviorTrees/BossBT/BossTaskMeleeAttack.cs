@@ -6,7 +6,7 @@ using BehaviorTree;
 
 public class BossTaskMeleeAttack : Node
 {
-
+    public float bossMeleeDamage = 25;
     private Transform lastTarget;
     private NavMeshAgent agent;
     private Player player;
@@ -69,7 +69,7 @@ public class BossTaskMeleeAttack : Node
 
             foreach (Collider enemy in hitEnemies)
             {
-                player.TakeDamage(GuardMeleeBT.attackDamage);
+                player.TakeDamage(bossMeleeDamage);
             }
     
             animator.SetBool("Walk", false);

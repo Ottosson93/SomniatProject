@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d589e2e02c52264f8d6c99f952419af, type: 3}
   m_Name: Piercing Arrow
   m_EditorClassIdentifier: 
-  DamageAmount: 2
-  DamagePerTick: 5
-  LucidityCost: 1
+  DamageAmount: 10
+  DamagePerTick: 0
+  LucidityCost: 10
   Lifetime: 5
   Speed: 15
   SpellRadius: 1
@@ -26,10 +26,10 @@ MonoBehaviour:
   BurnParticleSystem: {fileID: 0}
   BerserkParticleSystem: {fileID: 0}
   SpellIcon: {fileID: 21300000, guid: c7983f142b364304a82bb8158574b413, type: 3}
-  ExplosionDuration: 2
+  ExplosionDuration: 0
   StunDuration: 5
-  BurnDuration: 5
-  TickInterval: 0.75
+  BurnDuration: 0
+  TickInterval: 0
   DamageBoost: 0
   AttackSpeedBoost: 0
   MovementSpeedBoost: 0
