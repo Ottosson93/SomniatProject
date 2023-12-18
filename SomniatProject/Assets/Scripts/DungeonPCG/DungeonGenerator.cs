@@ -44,7 +44,7 @@ public class DungeonGenerator : MonoBehaviour
 
     //Populate room variables
     List<GameObject> listOfAllEnemies = new List<GameObject>();
-
+    private Vector2 startRoomPosition;
 
     Collider[] objectCollider = new Collider[10];
     List<GameObject> interactableProps = new List<GameObject>();
@@ -256,6 +256,12 @@ public class DungeonGenerator : MonoBehaviour
         }
         pmr = new PreMadeRoom(PosManual, manualRoom);
         preMadeRoomNodes.Add(pmr);
+
+        if (manualRoom.name == "Start Room")
+        {
+            startRoomPosition = new Vector2(PosManual.x, PosManual.z);
+            //Debug.Log("start pos" + startRoomPosition);
+        }
 
         RNode manualRNode = new RNode(bl, tr, roomID++);
         manualRNode.parent = parentNode;
@@ -803,34 +809,34 @@ public class DungeonGenerator : MonoBehaviour
     }
 
 
-    public void PopulateDungeonWithEnemies()
-    {
-        for (int i = 0; i < finishedNodes.Count; i++)
-        {
-            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
-            {
-                SpawnEnemy(finishedNodes[i]);
-            }
-        }
-    }
+    //public void PopulateDungeonWithEnemies()
+    //{
+    //    for (int i = 0; i < finishedNodes.Count; i++)
+    //    {
+    //        if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+    //        {
+    //            SpawnEnemy(finishedNodes[i]);
+    //        }
+    //    }
+    //}
 
-    public void PopulateDungeonWithProps()
-    {
-        for (int i = 0; i < finishedNodes.Count; i++)
-        {
-            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
-            {
-                SpawnProps(finishedNodes[i]);
-            }
-        }
-    }
+    //public void PopulateDungeonWithProps()
+    //{
+    //    for (int i = 0; i < finishedNodes.Count; i++)
+    //    {
+    //        if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+    //        {
+    //            SpawnProps(finishedNodes[i]);
+    //        }
+    //    }
+    //}
 
 
     private void DeclareRoomType(RNode room)
     {
 
         //Ändra center till n.center, startroom.center
-        distFromCenter = Vector2.Distance(room.centerPos, new Vector2(0, 0));
+        distFromCenter = Vector2.Distance(room.centerPos, startRoomPosition);
         //Debug.Log(n.id + " " + distFromCenter);
         if (distFromCenter <= 50)
         {
@@ -933,7 +939,7 @@ public class DungeonGenerator : MonoBehaviour
             int rndProp = Random.Range(3, props.Count);
 
             Vector3 propBounds = props[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>().size;
-            Debug.Log("Bounding Size for (box collider) prop: " + props[rndProp].name + propBounds);
+            //Debug.Log("Bounding Size for (box collider) prop: " + props[rndProp].name + propBounds);
 
             Spawner(props[rndProp], room, propBounds);
 
@@ -962,7 +968,7 @@ public class DungeonGenerator : MonoBehaviour
 
             //Takes the size of the objects meshrenderer (+X in every dimension to get some more distance) 
             Vector3 propBounds = interactableProps[rndProp].transform.gameObject.GetComponentInChildren<BoxCollider>().size;
-            Debug.Log("Bounding Size (box collider) for prop: " + interactableProps[rndProp].name + propBounds);
+            //Debug.Log("Bounding Size (box collider) for prop: " + interactableProps[rndProp].name + propBounds);
 
 
             //If the position isn't occupied then we place an object here, else we create a new position until we find an empty space
@@ -975,7 +981,7 @@ public class DungeonGenerator : MonoBehaviour
         for (int i = 0; i < amountOfEnemies; i++)
         {
             Vector3 enemyBounds = listOfAllEnemies[i].transform.gameObject.GetComponentInChildren<SkinnedMeshRenderer>().bounds.size;
-            Debug.Log("Bounding size (skinnedmesh) for enemy: " + listOfAllEnemies[i].name + enemyBounds);
+            //Debug.Log("Bounding size (skinnedmesh) for enemy: " + listOfAllEnemies[i].name + enemyBounds);
 
             //Use instead of i (listOfAllEnemies[i]) if you want random enemies to spawn in rooms
             //int rndEnemy = Random.Range(0, listOfAllEnemies.Count);

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 8
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_GenerateLinks: 0
@@ -2024,7 +2024,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: a313ef5bef4301842928e8b87d351fb6, type: 2}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.size
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: walls.Array.size
@@ -2065,7 +2065,7 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: props.Array.data[6]
       value: 
-      objectReference: {fileID: 2013420277293291620, guid: 7fa4baf7b12b5ab448060a0300879196, type: 3}
+      objectReference: {fileID: 8339183642709114441, guid: 1a8f692fcb0bbc0499a65c5d11f4b308, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: walls.Array.data[0]
       value: 
@@ -2718,8 +2718,8 @@ Transform:
   m_GameObject: {fileID: 455953140}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 1, z: 50}
+  m_LocalPosition: {x: 0, y: -0.01, z: 0}
+  m_LocalScale: {x: 50, y: 0.001, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -6999,7 +6999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &879132566
 MonoBehaviour:
   m_ObjectHideFlags: 0

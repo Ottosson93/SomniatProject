@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Size: {x: 4, y: 8, z: 2.38}
   m_Center: {x: 0, y: 1, z: 0}
-  m_Area: 0
+  m_Area: 1
   m_AffectedAgents: ffffffff
 --- !u!1001 &1851491302461615
 PrefabInstance:

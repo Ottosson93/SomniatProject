@@ -80,11 +80,20 @@ public class FireWeapon : MonoBehaviour
         //Prevents the bullet trail from going to far when not hitting anything
         Ray ray = camera.ScreenPointToRay(mousePos);
         Vector3 targetPos = new Vector3();
-        if (Physics.Raycast(ray, out RaycastHit raycast))
+
+        int enemyLayer = 1 << 9;
+        int floorLayer = 1 << 3;
+
+        if (Physics.Raycast(ray, out RaycastHit enemyRaycast, Mathf.Infinity, enemyLayer))
         {
-            targetPos = raycast.point;
+            targetPos = enemyRaycast.point;
+        }
+        else if (Physics.Raycast(ray, out RaycastHit floorRaycast, Mathf.Infinity, floorLayer))
+        {
+            targetPos = floorRaycast.point;
             Debug.Log("Raycasted");
         }
+
 
 
         GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
