@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 2632428374370272794}
   - component: {fileID: 2813186004931535160}
   - component: {fileID: 1780993977796211185}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: MaskSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}

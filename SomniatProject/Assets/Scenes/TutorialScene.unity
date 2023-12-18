@@ -28431,11 +28431,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 750415211410194498}
   bulletForce: 100
-  WeaponDamage: 10
+  WeaponDamage: 4
   rateOfFire: 0.3
   camera: {fileID: 857980249121038369}
   audioSource: {fileID: 0}
-  projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
+  projectilePrefab: {fileID: 3517248716899931449, guid: cc1cf958dc02f244a90f0a2a6def5957, type: 3}
 --- !u!1001 &7854688380915972264
 PrefabInstance:
   m_ObjectHideFlags: 0
