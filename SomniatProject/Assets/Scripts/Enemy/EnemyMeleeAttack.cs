@@ -21,20 +21,21 @@ namespace Assets.Eric_folder
             animator = GetComponent<Animator>();
             playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        void Update() //Lägg till i behaviourTree istället för här
-        {
-            Attack();
-            float distance = 1.5f;
-            if (Vector3.Distance(transform.position, playerPos.position) < distance)
-            {
-                animator.Play("Alien8_MeleeAttack");
+        //void Update() //Lägg till i behaviourTree istället för här
+        //{
+        //    Attack();
+        //    float distance = 1.5f;
+        //    if (Vector3.Distance(transform.position, playerPos.position) < distance)
+        //    {
+        //        animator.Play("Alien8_MeleeAttack");
 
-            }
-            else
-            {
-                animator.Play("Alien8_Walking");
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        return;
+        //        animator.Play("Alien8_Walking");
+        //    }
+        //}
         private void Attack() // Lägg också till i BehaviourTree
         {
             if (Time.time > nextTimeToFire)

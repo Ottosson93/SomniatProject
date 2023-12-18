@@ -19,5 +19,5 @@ MonoBehaviour:
   modType: 
   value:
   - 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 71e39ae041589f549bb2c2d216ed89fa, type: 3}
   relicQuantity: 0

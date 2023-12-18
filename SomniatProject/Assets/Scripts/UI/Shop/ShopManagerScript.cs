@@ -77,7 +77,7 @@ public class ShopManagerScript : MonoBehaviour
     public void Update()
     {
         CheckPurchasable();
-        currencyTxt.text = "Currency: " + currencyAmount.ToString();
+        currencyTxt.text = ": " + currencyAmount.ToString();
     }
 
     public void PurchaseItem(int ButtonNumber)
