@@ -79,6 +79,7 @@ public class CustomButton : CustomUIComponent
 
     public void Tutorial()
     {
+        playerStatsSO.ResetStats();
         SceneManager.LoadScene(2);
     }
 
