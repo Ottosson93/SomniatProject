@@ -15,6 +15,8 @@ public class CustomButton : CustomUIComponent
     public GameObject victoryMenu;
     public GameObject onDeathMenu;
 
+    [SerializeField] private PlayerStats playerStatsSO;
+
     private Button button;
     private TextMeshProUGUI buttonText;
 
@@ -58,6 +60,7 @@ public class CustomButton : CustomUIComponent
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
+        playerStatsSO.ResetStats();
         Player.isDead = false;
         BossBT.isAlive = true;
     }
@@ -66,6 +69,7 @@ public class CustomButton : CustomUIComponent
     {
         Time.timeScale = 1f;
         //victoryMenu.SetActive(false);
+        playerStatsSO.ResetStats();
         BossBT.isAlive = true;
         Player.isDead = false;
         SceneManager.LoadScene(1);
@@ -88,6 +92,7 @@ public class CustomButton : CustomUIComponent
         //victoryMenu.SetActive(false);
         BossBT.isAlive = true;
         Player.isDead = false;
+        playerStatsSO.ResetStats();
         SceneManager.LoadScene(0);
     }
 

@@ -89,6 +89,7 @@ public class MenuManager : MonoBehaviour
         //Debug.Log("Boss detected");
         if (Player.isDead == true)
         {
+            playerStatsSO.ResetStats();
             OnDeath();
         }
 

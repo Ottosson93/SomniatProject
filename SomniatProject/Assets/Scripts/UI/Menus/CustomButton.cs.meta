@@ -3,7 +3,12 @@ guid: 2697455df22a4e74e8c1d2d2154ffc61
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - theme: {instanceID: 0}
+  - pauseMenu: {instanceID: 0}
+  - victoryMenu: {instanceID: 0}
+  - onDeathMenu: {instanceID: 0}
+  - playerStatsSO: {fileID: 11400000, guid: dbf5f9181d169eb4a9d16a979acbd07d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
