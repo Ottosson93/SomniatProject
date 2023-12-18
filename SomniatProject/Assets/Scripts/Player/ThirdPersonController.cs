@@ -19,7 +19,7 @@ namespace StarterAssets
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
+        public float MoveSpeed = 2f;
 
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
@@ -548,6 +548,7 @@ namespace StarterAssets
 
         private void Attack()
         {
+            Debug.Log("Attack initiated " + Time.realtimeSinceStartup);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             Collider[] hitDestructibleObjects = Physics.OverlapSphere(attackPoint.position, attackRange, destructibleObjectLayers);
 
@@ -563,7 +564,7 @@ namespace StarterAssets
             {
                 CancelInvoke("EndCombo");
 
-                if (Time.time - lastClickedTime >= 0.9f)
+                if (Time.time - lastClickedTime >= player.attackSpeed)
                 {
                     //Audio attack
                     AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeAttack, transform.position);
