@@ -835,7 +835,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 2
-  SprintSpeed: 5
   RotationSmoothTime: 0.1
   SpeedChangeRate: 3
   LandingAudioClip: {fileID: 0}
@@ -986,11 +985,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 1033906477445040309}
   bulletForce: 1
-  WeaponDamage: 2
+  WeaponDamage: 4
   rateOfFire: 0.4
-  accuracy: 0
   camera: {fileID: 0}
-  crosshair: {fileID: 0}
   audioSource: {fileID: 0}
   projectilePrefab: {fileID: 7824386720229001689, guid: fab84d45262a5c244960736fb5960abc, type: 3}
 --- !u!114 &2434976405422277944
@@ -1029,6 +1026,7 @@ MonoBehaviour:
   speed: 0
   meleeDamage: 0
   attackSpeed: 1
+  rangedAttackSpeed: 0
   temporaryAttackSpeedModifier: 0
   temporaryMeleeDamageModifier: 0
   temporarySpeedModifier: 0

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnemyMeleeAttack1
   m_EditorClassIdentifier: 
   animatorOV: {fileID: 22100000, guid: d7480e7bb485bf74393a60d64ccbda04, type: 2}
-  damage: 1
+  damage: 10
   knockback: 3
