@@ -51,7 +51,7 @@ public class Player : MonoBehaviour
         maxLucidity = originalMaxLucidity;
         damageReduction = baseArmor;
 
-        controller.SprintSpeed = speed;
+        controller.MoveSpeed = speed;
 
         temporaryArmorReductionModifier = 1.0f;
         temporaryAttackSpeedModifier = 1.0f;
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
 
         damageReduction *= temporaryArmorReductionModifier;
 
-        controller.SprintSpeed = speed;
+        controller.MoveSpeed = speed;
 
         Debug.Log("Melee Damage: " + meleeDamage + ", attack speed: " + attackSpeed + ", movement speed: " + speed + ", armor amount: " + damageReduction);
     }

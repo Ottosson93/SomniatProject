@@ -904,7 +904,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             amountOfEnemies = 4;
         }
-        //CreateEnemies(room, amountOfEnemies);
+        CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateNoninteractableProps(RNode room, int amountOfProps, double roomSize)
@@ -926,8 +926,6 @@ public class DungeonGenerator : MonoBehaviour
             {
                 Instantiate(props[2], new Vector3(room.centerPos.x, props[2].transform.position.y, room.centerPos.y), Quaternion.Euler(0, rotationArray[rndRotation], 0));
             }
-            else
-                Instantiate(props[0], new Vector3(room.centerPos.x, props[0].transform.position.y, room.centerPos.y), Quaternion.Euler(0, rotationArray[rndRotation], 0));
         }
 
         for (int i = 0; i < amountOfProps; i++)
