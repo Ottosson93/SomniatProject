@@ -10,8 +10,6 @@ public class MenuManager : MonoBehaviour
 
     public static bool GameIsPaused = false;
 
-    private Enemy boss;
-    private Player player;
 
     public GameObject pauseMenuView;
     public GameObject onDeathMenuView;
@@ -19,13 +17,7 @@ public class MenuManager : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        boss = GameObject.FindGameObjectWithTag("Boss").GetComponent<Enemy>();
         Time.timeScale = 1f;
-
-        Debug.Log("Player: " + player);
-        Debug.Log("Boss: " + boss);
-
         onDeathMenuView.SetActive(false);
     }
 
