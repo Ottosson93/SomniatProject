@@ -790,17 +790,17 @@ public class DungeonGenerator : MonoBehaviour
 
     #region Prop placement
 
-    //public void PopulateDungeon()
-    //{
-    //    for (int i = 0; i < finishedNodes.Count; i++)
-    //    {
-    //        if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
-    //        {
-    //            SpawnProps(finishedNodes[i]);
-    //            SpawnEnemy(finishedNodes[i]);
-    //        }
-    //    }
-    //}
+    public void PopulateDungeon()
+    {
+        for (int i = 0; i < finishedNodes.Count; i++)
+        {
+            if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
+            {
+                SpawnProps(finishedNodes[i]);
+                SpawnEnemy(finishedNodes[i]);
+            }
+        }
+    }
 
 
     public void PopulateDungeonWithEnemies()
@@ -809,7 +809,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             if (finishedNodes[i].bottom == true && finishedNodes[i].manual == false)
             {
-                SpawnProps(finishedNodes[i]);
+                SpawnEnemy(finishedNodes[i]);
             }
         }
     }
@@ -904,7 +904,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             amountOfEnemies = 4;
         }
-        //CreateEnemies(room, amountOfEnemies);
+        CreateEnemies(room, amountOfEnemies);
     }
 
     private void CreateNoninteractableProps(RNode room, int amountOfProps, double roomSize)
