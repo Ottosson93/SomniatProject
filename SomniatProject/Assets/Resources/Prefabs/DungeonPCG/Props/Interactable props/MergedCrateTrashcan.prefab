@@ -107,6 +107,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 9079106688035313789}
     m_Modifications:
+    - target: {fileID: -8341936145606709240, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
+      propertyPath: trashcan
+      value: 
+      objectReference: {fileID: 7926572124269514361}
     - target: {fileID: 2465079734990110219, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
       propertyPath: m_Name
       value: ExplosiveBarrel
@@ -137,6 +141,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2989941937331053745, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106456634001428597, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3106456634001428597, guid: 23e321385e378264e8ab02ac90d9ce6d, type: 3}
+      propertyPath: m_IncludeLayers.m_Bits
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

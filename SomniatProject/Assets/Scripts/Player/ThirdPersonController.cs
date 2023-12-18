@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Threading.Tasks;
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -12,17 +12,14 @@ using UnityEngine.InputSystem;
 namespace StarterAssets
 {
     [RequireComponent(typeof(CharacterController))]
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
     [RequireComponent(typeof(PlayerInput))]
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
-        public float MoveSpeed = 2.0f;
-
-        [Tooltip("Sprint speed of the character in m/s")]
-        public float SprintSpeed = 5.335f;
+        public float MoveSpeed = 5.0f;
 
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
@@ -118,7 +115,7 @@ namespace StarterAssets
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
 
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
         private Animator _animator;
@@ -165,7 +162,7 @@ namespace StarterAssets
             _hasAnimator = GetComponent<Animator>();
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
-#if ENABLE_INPUT_SYSTEM 
+#if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
             player = GetComponent<Player>();
 #else
@@ -190,7 +187,7 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-           
+
 
             if (_input.dash)
             {
@@ -207,7 +204,6 @@ namespace StarterAssets
                 canAttack = false;  // Disable attack until cooldown is over
                 StartCoroutine(AttackCooldown());
             }
-
 
             ExitAttack();
         }
@@ -299,7 +295,7 @@ namespace StarterAssets
 
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -535,7 +531,7 @@ namespace StarterAssets
             await Task.Delay((int)(dashingCooldown * 1000));
             canDash = true;
         }
-        
+
 
 
 
@@ -548,6 +544,7 @@ namespace StarterAssets
 
         private void Attack()
         {
+            Debug.Log("Attack initiated " + Time.realtimeSinceStartup);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             Collider[] hitDestructibleObjects = Physics.OverlapSphere(attackPoint.position, attackRange, destructibleObjectLayers);
 
@@ -563,7 +560,7 @@ namespace StarterAssets
             {
                 CancelInvoke("EndCombo");
 
-                if (Time.time - lastClickedTime >= 0.9f)
+                if (Time.time - lastClickedTime >= player.attackSpeed)
                 {
                     //Audio attack
                     AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeAttack, transform.position);
@@ -576,24 +573,6 @@ namespace StarterAssets
                     {
                         bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
                         enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
-
-                        //If you have the empowered relic, you gain movementspeed after killing an enemy
-                        if (player.empoweredRelic != null)
-                        {
-                            foreach (Effect effect in player.empoweredRelic.effects)
-                            {
-                                if (effect != null)
-                                {
-                                    if (effect.type == EffectType.MoveSpeed)
-                                    {
-                                        if (dead)
-                                            effect.Run();
-                                    }
-                                    else
-                                        effect.Run();
-                                }
-                            }
-                        }
                     }
 
                     if (comboCounter >= combo.Count)

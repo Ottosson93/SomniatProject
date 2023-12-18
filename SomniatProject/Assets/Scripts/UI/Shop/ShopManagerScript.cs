@@ -74,6 +74,12 @@ public class ShopManagerScript : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        CheckPurchasable();
+        currencyTxt.text = ": " + currencyAmount.ToString();
+    }
+
     public void PurchaseItem(int ButtonNumber)
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 411413619558965855}
   m_Layer: 6
   m_Name: BigPillar
-  m_TagString: Untagged
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -104,7 +104,13 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8137131110499218659, guid: 4d096224ff5b3ad4a88fc13666f86c18, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5601115478994030550, guid: 4d096224ff5b3ad4a88fc13666f86c18, type: 3}
+    - {fileID: 139378969633178874, guid: 4d096224ff5b3ad4a88fc13666f86c18, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

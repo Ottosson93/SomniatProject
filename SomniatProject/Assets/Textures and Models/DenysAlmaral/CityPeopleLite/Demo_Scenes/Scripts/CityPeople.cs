@@ -24,7 +24,7 @@ namespace CityPeople
         void PlayAnyClip()
         {
             var cl = myClips[Random.Range(0, myClips.Length)];
-            animator.CrossFadeInFixedTime(cl.name, 1.0f, -1, Random.value * cl.length);
+            animator.CrossFadeInFixedTime(cl.name, 1.0f, 1, Random.value * cl.length);
         }
 
         IEnumerator ShuffleClips()

@@ -21,46 +21,45 @@ namespace Assets.Eric_folder
             animator = GetComponent<Animator>();
             playerPos = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        void Update() //Lägg till i behaviourTree istället för här
-        {
-            Attack();
-            float distance = 1.5f;
-            if (Vector3.Distance(transform.position, playerPos.position) < distance)
-            {
-                animator.Play("Alien8_MeleeAttack");
+        //void Update() //LÃ¤gg till i behaviourTree istÃ¤llet fÃ¶r hÃ¤r
+        //{
+        //    Attack();
+        //    float distance = 1.5f;
+        //    if (Vector3.Distance(transform.position, playerPos.position) < distance)
+        //    {
+        //        animator.Play("Alien8_MeleeAttack");
 
-            }
-            else
-            {
-                animator.Play("Alien8_Walking");
-            }
-        }
-        private void Attack() // Lägg också till i BehaviourTree
-        {
-            if (Time.time > nextTimeToFire)
-            {
-                Collider[] collidersHit = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
-                if (collidersHit != null)
-                {
-                    foreach (Collider collider in collidersHit)
-                    {
-                        if (collider.tag == "Player")
-                        {
-                            collider.GetComponent<Player>().TakeDamage(damage);
-                            nextTimeToFire = Time.time + 1f / attacksPerSec;
-                        }
-
-                    }
-                }
-            }
-        }
+        //    }
+        //    else
+        //    {
+        //        animator.Play("Alien8_Walking");
+        //    }
+        //}
+        //private void Attack() // LÃ¤gg ocksÃ¥ till i BehaviourTree
+        //{
+        //    if (Time.time > nextTimeToFire)
+        //    {
+        //        Collider[] collidersHit = Physics.OverlapSphere(attackPoint.position, attackRadius, playerLayer);
+        //        if (collidersHit != null)
+        //        {
+        //            foreach (Collider collider in collidersHit)
+        //            {
+        //                if (collider.tag == "Player")
+        //                {
+        //                    collider.GetComponent<Player>().TakeDamage(damage);
+        //                    nextTimeToFire = Time.time + 1f / attacksPerSec;
+        //                }
+        //        return;
+        //        animator.Play("Alien8_Walking");
+        //    }
+        //}
         private void OnDrawGizmosSelected()
         {
             if (attackPoint == null)
             {
                 return;
             }
-            Gizmos.DrawWireSphere(attackPoint.position, attackRadius); // ritar attack radien för fienden.
+            Gizmos.DrawWireSphere(attackPoint.position, attackRadius); // ritar attack radien fÃ¶r fienden.
         }
     }
 

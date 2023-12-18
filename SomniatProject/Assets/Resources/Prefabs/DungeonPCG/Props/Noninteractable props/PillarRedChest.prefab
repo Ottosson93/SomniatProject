@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3369112858851139366}
   - component: {fileID: 7801103832324817416}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PillarRedChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1011678279711724267}
   - {fileID: 1185071624941745995}
   - {fileID: 7755941300640144602}
   m_Father: {fileID: 0}
@@ -53,8 +54,56 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5, y: 1.5, z: 1.62}
-  m_Center: {x: -0.77, y: 0.7, z: 0}
+  m_Size: {x: 3.5, y: 1.5, z: 2}
+  m_Center: {x: -0.77, y: 0.6, z: 0}
+--- !u!1 &8039101798021938426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011678279711724267}
+  - component: {fileID: 7155042108573780636}
+  m_Layer: 0
+  m_Name: NavmeshModifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1011678279711724267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039101798021938426}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.58, y: 3.05, z: 0.09}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3369112858851139366}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7155042108573780636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8039101798021938426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e95dc5ff2b64380880dd7ac5922847, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Size: {x: 4, y: 8, z: 2.38}
+  m_Center: {x: 0, y: 1, z: 0}
+  m_Area: 0
+  m_AffectedAgents: ffffffff
 --- !u!1001 &1569393268865488148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,8 +145,7 @@ PrefabInstance:
       value: BigPillar
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2921020749890352217, guid: 4934312b97ef67a41bae54242ea90333, type: 3}
-    - {fileID: 1575769068663082860, guid: 4934312b97ef67a41bae54242ea90333, type: 3}
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -159,9 +207,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 9119960018945233994, guid: 0b659410ceb01ff499a48e42951132f5, type: 3}
-    - {fileID: 4319447423516015552, guid: 0b659410ceb01ff499a48e42951132f5, type: 3}
+    - target: {fileID: 4319447423516015552, guid: 0b659410ceb01ff499a48e42951132f5, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119960018945233994, guid: 0b659410ceb01ff499a48e42951132f5, type: 3}
+      propertyPath: m_ProvidesContacts
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
