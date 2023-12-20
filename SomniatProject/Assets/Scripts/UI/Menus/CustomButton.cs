@@ -60,6 +60,7 @@ public class CustomButton : CustomUIComponent
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(1);
+        ShopManagerScript.currencyAmount = 0;
         playerStatsSO.ResetStats();
         Player.isDead = false;
         BossBT.isAlive = true;
@@ -69,6 +70,7 @@ public class CustomButton : CustomUIComponent
     {
         Time.timeScale = 1f;
         //victoryMenu.SetActive(false);
+        ShopManagerScript.currencyAmount = 0;
         playerStatsSO.ResetStats();
         BossBT.isAlive = true;
         Player.isDead = false;
@@ -94,6 +96,7 @@ public class CustomButton : CustomUIComponent
         BossBT.isAlive = true;
         Player.isDead = false;
         playerStatsSO.ResetStats();
+        ShopManagerScript.currencyAmount = 0;
         SceneManager.LoadScene(0);
     }
 

@@ -16,8 +16,8 @@ MonoBehaviour:
   description: A beautiful cake. Makes you stronger and faster.
   price: 20
   statType: 0000000001000000
-  modType: 
+  modType: 0000000000000000
   value:
   - 0
   icon: {fileID: 21300000, guid: 71e39ae041589f549bb2c2d216ed89fa, type: 3}
-  relicQuantity: 0
+  relicQuantity: 5
