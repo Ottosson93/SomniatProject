@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A alluring cookie. This makes you stronger and faster.
   price: 20
   statType: 0100000000000000
-  modType: 
+  modType: 00000000
   value:
   - 1
   icon: {fileID: 0}
