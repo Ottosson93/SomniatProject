@@ -53,6 +53,10 @@ PrefabInstance:
       value: BreadRelic
       objectReference: {fileID: 0}
     - target: {fileID: 839233260410868668, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 839233260410868668, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
       propertyPath: m_TagString
       value: Item
       objectReference: {fileID: 0}

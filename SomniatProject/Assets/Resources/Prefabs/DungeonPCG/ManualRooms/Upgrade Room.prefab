@@ -405,7 +405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6901592615021963947, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6901592615021963947, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
       propertyPath: m_LocalPosition.z
@@ -448,6 +448,10 @@ PrefabInstance:
       value: 29.625376
       objectReference: {fileID: 0}
     - target: {fileID: 8323890022148778219, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8323890022148778219, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
       propertyPath: m_Center.x
       value: 0.069514275
       objectReference: {fileID: 0}
@@ -462,6 +466,14 @@ PrefabInstance:
     - target: {fileID: 9117797283150895975, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
       propertyPath: m_Name
       value: ChangeToIdleMusic
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117797283150895975, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9117797283150895975, guid: aa22dc67f19619e4cbf04658a366c489, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

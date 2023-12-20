@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CakeRelic
       objectReference: {fileID: 0}
+    - target: {fileID: 7009146036524199079, guid: 1a6cc53f46f18974a99dab41991bb0ae, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
     - target: {fileID: 7642236399058220573, guid: 1a6cc53f46f18974a99dab41991bb0ae, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
