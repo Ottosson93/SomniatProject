@@ -544,7 +544,7 @@ namespace StarterAssets
 
         private void Attack()
         {
-            Debug.Log("Attack initiated " + Time.realtimeSinceStartup);
+            //Debug.Log("Attack initiated " + Time.realtimeSinceStartup);
             Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers);
             Collider[] hitDestructibleObjects = Physics.OverlapSphere(attackPoint.position, attackRange, destructibleObjectLayers);
 

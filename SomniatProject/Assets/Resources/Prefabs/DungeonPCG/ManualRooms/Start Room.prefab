@@ -1423,6 +1423,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e772c9472c7b54a43a34571f06863896, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ignoreLayers:
+    serializedVersion: 2
+    m_Bits: 131137
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  floorLayer:
+    serializedVersion: 2
+    m_Bits: 8
   firePoint: {fileID: 750415211029741655}
   bulletForce: 100
   WeaponDamage: 4

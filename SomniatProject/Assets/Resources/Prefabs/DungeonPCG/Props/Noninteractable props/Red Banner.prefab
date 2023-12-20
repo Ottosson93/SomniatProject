@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 278550831880833699}
   - component: {fileID: 5107593457744197734}
   - component: {fileID: 2748634268644403896}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Red Banner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
