@@ -43,29 +43,27 @@ public class ExplosiveObject : MonoBehaviour
     private void DealDamageInRadius()
     {
         int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 6, explosionColliders);
+        //Debug.Log("overlapCount.Length " + overlapCount);
 
-        if (overlapCount > 0)
+        for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
         {
-            for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
-            {
-                Collider hitCollider = explosionColliders[overlapIndex];
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                Player player = hitCollider.GetComponent<Player>();
-                ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
+            Collider hitCollider = explosionColliders[overlapIndex];
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            Player player = hitCollider.GetComponent<Player>();
+            ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
 
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(explosionDamage);
-                }
-                else if (player != null)
-                {
-                    player.TakeDamage(explosionDamageToPlayer);
-                }
-                //else if (gameObject != null)
-                //{
-                //    TakeDamage(SpellToCast.DamageAmount);
-                //}
+            if (enemy != null)
+            {
+                enemy.TakeDamage(explosionDamage);
             }
+            else if (player != null)
+            {
+                player.TakeDamage(explosionDamageToPlayer);
+            }
+            //else if (gameObject != null)
+            //{
+            //    TakeDamage(SpellToCast.DamageAmount);
+            //}
         }
     }
 }

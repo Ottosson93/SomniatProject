@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 193493409341424886}
   - component: {fileID: 821681305202909190}
   - component: {fileID: 5948576632828257085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Green Banner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -33,8 +33,7 @@ public class WallMaskScript : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag == "Obstacle")
+        if (other.CompareTag("Wall"))
         {
             if (!gameObjects.Contains(other.gameObject))
             {
