@@ -464,7 +464,7 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
-  health: 100
+  health: 50
   current: 0
   attackRange: 100
   engaged: 0
