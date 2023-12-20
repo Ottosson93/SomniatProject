@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relicData: {fileID: 11400000, guid: e99b8069fe89bc54c9a99443f0554aa4, type: 2}
+  relicData: {fileID: 11400000, guid: ae8882120c1137c44af801db5dabbad1, type: 2}
 --- !u!1001 &8973684865465807650
 PrefabInstance:
   m_ObjectHideFlags: 0

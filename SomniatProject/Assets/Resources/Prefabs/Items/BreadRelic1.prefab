@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: BreadRelic
       objectReference: {fileID: 0}
+    - target: {fileID: 839233260410868668, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
+      propertyPath: m_TagString
+      value: Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 6695563910415116737, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -367044386271650188, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
     - {fileID: 1323035254391299082, guid: 78525e678f8b0ac4f96df576ab150b28, type: 3}
@@ -154,4 +162,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relicData: {fileID: 11400000, guid: e99b8069fe89bc54c9a99443f0554aa4, type: 2}
+  relicData: {fileID: 11400000, guid: 8f5dcb2bd9b946948b9ea2a4a8678428, type: 2}

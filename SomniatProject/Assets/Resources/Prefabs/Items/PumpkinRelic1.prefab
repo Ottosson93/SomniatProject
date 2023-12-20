@@ -72,7 +72,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4228824917890696628, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
       propertyPath: m_Name
-      value: CupcakeRelic 1
+      value: PumpkinRelic1
       objectReference: {fileID: 0}
     - target: {fileID: 4228824917890696628, guid: abb2acc42af5b2a44ad440e3dcfeeda9, type: 3}
       propertyPath: m_TagString
@@ -152,4 +152,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6638c6e9ab04b2a4fb454f62796589ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  relicData: {fileID: 11400000, guid: e99b8069fe89bc54c9a99443f0554aa4, type: 2}
+  relicData: {fileID: 11400000, guid: 84d3fa2971b61f048bcc41bd3639dbf1, type: 2}
