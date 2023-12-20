@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     public Transform attackPoint;
     public Transform firePoint;
     public LayerMask enemyLayer;
+    public GameObject hitMarkerPrefab;
+    public GameObject onDeathEffectPrefab;
+
 
     public int health = 100;
     public int current;
@@ -33,6 +36,14 @@ public class Enemy : MonoBehaviour
         //"Hurt" does not exist
         //animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(damage, transform);
+        if(current > damage)
+        {
+            if (hitMarkerPrefab != null)
+            {
+                Instantiate(hitMarkerPrefab, GetComponentInChildren<Renderer>().bounds.center, Quaternion.identity);
+            }
+        }
+        
 
         if(current <= 0)
         {
@@ -55,6 +66,11 @@ public class Enemy : MonoBehaviour
 
         dead = true;                
         Destroy(gameObject);
+
+        if(onDeathEffectPrefab != null)
+        {
+            Instantiate(onDeathEffectPrefab, GetComponentInChildren<Renderer>().bounds.center, Quaternion.identity);
+        }
 
         RemoveEngagementOnKill();
 
