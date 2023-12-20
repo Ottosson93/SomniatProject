@@ -2333,15 +2333,15 @@ PrefabInstance:
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.data[3]
       value: 
-      objectReference: {fileID: 7489163079534264297, guid: c180ee33a66d40445832a4aa71a9903b, type: 3}
+      objectReference: {fileID: 7217815780039541087, guid: 98251ac758099174ea48c416c008c420, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.data[4]
       value: 
-      objectReference: {fileID: 7217815780039541087, guid: 98251ac758099174ea48c416c008c420, type: 3}
+      objectReference: {fileID: 7489163079534264297, guid: c180ee33a66d40445832a4aa71a9903b, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.data[5]
       value: 
-      objectReference: {fileID: 7489163079534264297, guid: c180ee33a66d40445832a4aa71a9903b, type: 3}
+      objectReference: {fileID: 7217815780039541087, guid: 98251ac758099174ea48c416c008c420, type: 3}
     - target: {fileID: 1316765198771549228, guid: 90b357a6365a5b24db8b0885abe5d65a, type: 3}
       propertyPath: preMadeRooms.Array.data[6]
       value: 
