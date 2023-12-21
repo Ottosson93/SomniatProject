@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6752888406500542446}
   m_Layer: 6
   m_Name: Wall Prefab v1
-  m_TagString: Obstacle
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,22 +44,6 @@ PrefabInstance:
     - target: {fileID: 7779381877309823848, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
       propertyPath: m_Name
       value: Wall_27
-      objectReference: {fileID: 0}
-    - target: {fileID: 7779381877309823848, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8112832757842210709, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: cdb27ec780dce274e8e52c7057ef5616, type: 2}
-    - target: {fileID: 9051238300485817969, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 9051238300485817969, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 9051238300485817969, guid: 2f6c4572e07a60b43b00e1c4f489a806, type: 3}
       propertyPath: m_LocalPosition.x
@@ -120,18 +104,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 6752888406500542446}
     m_Modifications:
     - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 2.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 306381562911385866, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -175,31 +147,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: LucidMesh
       objectReference: {fileID: 0}
-    - target: {fileID: 1907700878174624045, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1907700878174624045, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_TagString
-      value: Obstacle
-      objectReference: {fileID: 0}
-    - target: {fileID: 3110913104017512285, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.8044416
-      objectReference: {fileID: 0}
-    - target: {fileID: 3110913104017512285, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 8008304848468045996, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1110483291788323716, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-    - {fileID: 3672672707166972576, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
-    - {fileID: 2972017343615650812, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e38cc8848cb6adf45be1c25db1ef433b, type: 3}
