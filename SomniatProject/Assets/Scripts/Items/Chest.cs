@@ -89,7 +89,9 @@ public class Chest : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        Vector3 chestOffset = new Vector3(UnityEngine.Random.Range(1f, 3f), 0f, UnityEngine.Random.Range(1f, 3f));
+        float dropDistance = 2.0f;
+        Vector3 chestOffset = transform.forward * dropDistance;
+
         itemDropSystem.HandleChestOpen(transform.position + chestOffset);
     }
 
