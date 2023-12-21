@@ -41,9 +41,11 @@ public class TaskMeleeAttack : Node
         
         foreach (Collider enemy in hitEnemies)
         {
+
             //Audio
             AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeGruntAttack, enemy.transform.position);
             player.TakeDamage(GuardMeleeBT.attackDamage);
+            
         }
 
         
@@ -56,7 +58,7 @@ public class TaskMeleeAttack : Node
         }
 
 
-        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.65f
                 && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
             GuardMeleeBT.comboCounter = 0;
@@ -70,6 +72,7 @@ public class TaskMeleeAttack : Node
             ClearData("target");
             animator.SetBool("Walk", true);
             lucidAnimator.SetBool("Walk", true);
+
         }
         else
             GuardMeleeBT.attackCounter = 0;

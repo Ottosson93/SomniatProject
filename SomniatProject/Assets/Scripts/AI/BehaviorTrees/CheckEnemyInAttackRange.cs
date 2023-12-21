@@ -36,34 +36,38 @@ public class CheckEnemyInAttackRange : Node
 
         Transform target = (Transform)t;
 
-        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange &&  GuardMeleeBT.canAttack)
+        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange)
         {
 
-            if (Time.time - GuardMeleeBT.lastClickedTime > 2f && GuardMeleeBT.comboCounter <= combo.Count)
-            {   
-                if(Time.time - GuardMeleeBT.lastClickedTime >= 2f)
+            if(GuardMeleeBT.comboCounter <= combo.Count)
+            {
+                if (Time.time - GuardMeleeBT.lastClickedTime > GuardMeleeBT.attackRate)
                 {
-                    animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
-                    animator.Play("Attack", 1, 0);
-                  //  lucidAnimator.Play("Attack", 1, 0);
-                    GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
+                    if (Time.time - GuardMeleeBT.lastClickedTime >= GuardMeleeBT.attackRate)
+                    {
+                        animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
+                        animator.Play("Attack", 1, 0);
+
+                        GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
 
 
 
-                    GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
-                    GuardMeleeBT.lastClickedTime = Time.time;
+                        GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
+                        GuardMeleeBT.lastClickedTime = Time.time;
 
-                    agent.speed = 0f;
-                    animator.SetBool("Run", false); 
-                    lucidAnimator.SetBool("Run", false);
-                    state = NodeState.SUCCESS;
-                    return state;
+                        agent.speed = 0f;
+                        GuardBT.speed = 0f;
+                        animator.SetBool("Run", false);
+                        lucidAnimator.SetBool("Run", false);
+                        state = NodeState.SUCCESS;
+                        return state;
 
-                   
-                    
+                    }
+
                 }
-
             }
+
+            
 
            
         }
