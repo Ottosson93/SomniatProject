@@ -15,11 +15,15 @@ public class TaskMeleeAttack : Node
     private List<AttackSO> combo;
     private Enemy enemy;
 
+    public float lastClickedTime;
+    public float lastComboEnd;
+    
 
-    public TaskMeleeAttack(Transform transform, List<AttackSO> combo)
+
+    public TaskMeleeAttack(Transform transform, List<AttackSO> combo, Animator animator)
     {
         this.combo = combo;
-        animator = transform.GetComponent<Animator>();
+        this.animator = animator;
         lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
         enemy = transform.GetComponent<Enemy>();
 
@@ -62,7 +66,7 @@ public class TaskMeleeAttack : Node
                 && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
             GuardMeleeBT.comboCounter = 0;
-            GuardMeleeBT.lastComboEnd = Time.time;
+            lastComboEnd = Time.time;
         }
 
 
