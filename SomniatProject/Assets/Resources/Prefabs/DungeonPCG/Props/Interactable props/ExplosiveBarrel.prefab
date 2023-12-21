@@ -120,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   explosionDamage: 80
-  explosionDamageToPlayer: 30
-  SpellToCast: {fileID: 11400000, guid: cb00f20852dea4b4288bfd5a03b6606e, type: 2}
-  explosionColliders: []
+  explosionDamageToPlayer: 20
+  SpellToCast: {fileID: 11400000, guid: 1a86331124595ad44a6198c049d3818d, type: 2}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 640
