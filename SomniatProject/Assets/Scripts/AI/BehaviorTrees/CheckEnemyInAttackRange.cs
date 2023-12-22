@@ -12,16 +12,18 @@ public class CheckEnemyInAttackRange : Node
     private Animator lucidAnimator;
     private NavMeshAgent agent;
 
+    float lastClickedTime;
+    float lastComboEnd;
     
 
-    public CheckEnemyInAttackRange(Transform transform, List<AttackSO> combo)
+    public CheckEnemyInAttackRange(Transform transform, List<AttackSO> combo, Animator animator)
     {
         this.transform = transform;
         this.combo = combo;
-        animator = transform.GetComponent<Animator>();
-        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
+        this.animator = animator;
         agent = transform.GetComponent<NavMeshAgent>();
-        
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
+
     }
 
     public override NodeState Evaluate()
@@ -41,9 +43,9 @@ public class CheckEnemyInAttackRange : Node
 
             if(GuardMeleeBT.comboCounter <= combo.Count)
             {
-                if (Time.time - GuardMeleeBT.lastClickedTime > GuardMeleeBT.attackRate)
+                if (Time.time - lastClickedTime > GuardMeleeBT.attackRate)
                 {
-                    if (Time.time - GuardMeleeBT.lastClickedTime >= GuardMeleeBT.attackRate)
+                    if (Time.time - lastClickedTime >= GuardMeleeBT.attackRate)
                     {
                         animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
                         animator.Play("Attack", 1, 0);
@@ -53,10 +55,10 @@ public class CheckEnemyInAttackRange : Node
 
 
                         GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
-                        GuardMeleeBT.lastClickedTime = Time.time;
+                        lastClickedTime = Time.time;
 
                         agent.speed = 0f;
-                        GuardBT.speed = 0f;
+                        
                         animator.SetBool("Run", false);
                         lucidAnimator.SetBool("Run", false);
                         state = NodeState.SUCCESS;
