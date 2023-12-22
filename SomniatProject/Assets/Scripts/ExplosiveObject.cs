@@ -49,7 +49,7 @@ public class ExplosiveObject : MonoBehaviour
     private void DealDamageInRadius()
     {
         int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 6, explosionColliders, collisionLayers);
-        Debug.Log("overlapCount.Length " + overlapCount);
+        //Debug.Log("Barrel overlapCount.Length " + overlapCount);
 
         for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
         {

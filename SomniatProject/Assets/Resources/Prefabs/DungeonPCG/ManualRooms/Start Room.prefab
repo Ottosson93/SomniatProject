@@ -1425,7 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 750415211029741655}
   bulletForce: 100
-  WeaponDamage: 4
+  WeaponDamage: 5
   rateOfFire: 0.3
   camera: {fileID: 857980248975007796}
   audioSource: {fileID: 0}
