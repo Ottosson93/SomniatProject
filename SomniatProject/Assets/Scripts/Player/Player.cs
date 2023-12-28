@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float rangedAttackSpeed;
     public static bool isDead = false;
 
+    public GameObject hitMarkerPrefab;
 
     public float temporaryAttackSpeedModifier;
     public float temporaryMeleeDamageModifier;
@@ -153,6 +154,11 @@ public class Player : MonoBehaviour
         lucidity = Mathf.Clamp(lucidity - (damage * damageReduction), 0f, maxLucidity);
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
+
+        if (hitMarkerPrefab != null)
+        {
+            Instantiate(hitMarkerPrefab, transform.position, Quaternion.identity);
+        }
 
         if (lucidity <= 0)
         {
