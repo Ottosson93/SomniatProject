@@ -33,8 +33,7 @@ public class WallMaskScript : MonoBehaviour
     // Update is called once per frame
     void OnTriggerEnter(Collider other)
     {
-
-        if (other.tag == "Obstacle")
+        if (other.CompareTag("Wall"))
         {
             if (!gameObjects.Contains(other.gameObject))
             {
@@ -45,14 +44,14 @@ public class WallMaskScript : MonoBehaviour
                     foreach (var item in oldWall.GetComponentsInChildren<MeshRenderer>())
                     {
                         item.material.renderQueue = -1;
-                        Debug.Log($"Popping {item.transform.name}");
+                        //Debug.Log($"Popping {item.transform.name}");
                     }
                 }
 
                 foreach (var item in other.GetComponentsInChildren<MeshRenderer>())
                 {
                     item.material.renderQueue = 3002;
-                    Debug.Log($"Sho {other.transform.name}");
+                    //Debug.Log($"Sho {other.transform.name}");
                 }
             }
 

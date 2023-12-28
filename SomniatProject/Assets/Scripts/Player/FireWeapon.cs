@@ -81,18 +81,23 @@ public class FireWeapon : MonoBehaviour
         Ray ray = camera.ScreenPointToRay(mousePos);
         Vector3 targetPos = new Vector3();
 
-        int enemyLayer = 1 << 9;
-        int floorLayer = 1 << 3;
+        //int enemyLayer = 1 << 9;
+        //int floorLayer = 1 << 3;
+
+        int enemyLayer = LayerMask.GetMask("Enemy");
+        int floorLayer = LayerMask.GetMask("Floor");
 
         if (Physics.Raycast(ray, out RaycastHit enemyRaycast, Mathf.Infinity, enemyLayer))
         {
             targetPos = enemyRaycast.point;
+            //Debug.Log("Raycasted enemy " + enemyRaycast.collider.name);
         }
         else if (Physics.Raycast(ray, out RaycastHit floorRaycast, Mathf.Infinity, floorLayer))
         {
             targetPos = floorRaycast.point;
-            Debug.Log("Raycasted");
+            //Debug.Log("Raycasted floor " + floorRaycast.collider.name);
         }
+
 
 
 

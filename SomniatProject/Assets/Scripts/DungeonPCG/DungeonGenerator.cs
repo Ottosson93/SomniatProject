@@ -794,7 +794,7 @@ public class DungeonGenerator : MonoBehaviour
     #endregion
 
 
-    #region Prop placement
+    #region Populating the dungeon with props/enemies
 
     public void PopulateDungeon()
     {

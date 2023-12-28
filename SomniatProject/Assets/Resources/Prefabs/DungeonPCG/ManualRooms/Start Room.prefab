@@ -496,7 +496,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 40
+  orthographic size: 60
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -1289,7 +1289,7 @@ PrefabInstance:
     - target: {fileID: 2434976405422277944, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: currentSpell
       value: 
-      objectReference: {fileID: -7718931055899551195, guid: 7126678de060e1d4a8e50fd4b92e01be, type: 3}
+      objectReference: {fileID: 674473231596236386, guid: a337f9c0512c15b42af049ecac6dab92, type: 3}
     - target: {fileID: 3973955912057358699, guid: bdcbe0fcad4abb541ae120742161de76, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0
@@ -1456,7 +1456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePoint: {fileID: 750415211029741655}
   bulletForce: 100
-  WeaponDamage: 4
+  WeaponDamage: 5
   rateOfFire: 0.3
   camera: {fileID: 857980248975007796}
   audioSource: {fileID: 0}

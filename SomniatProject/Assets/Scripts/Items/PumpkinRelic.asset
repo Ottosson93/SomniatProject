@@ -16,7 +16,7 @@ MonoBehaviour:
   description: A massive pumpkin. Somehow it makes you smarter and faster.
   price: 20
   statType: 0000000002000000
-  modType: 
+  modType: 00000000
   value:
   - 1
   icon: {fileID: 0}

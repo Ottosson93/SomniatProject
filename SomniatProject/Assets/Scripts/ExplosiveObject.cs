@@ -6,7 +6,9 @@ public class ExplosiveObject : MonoBehaviour
 {
     public int health, explosionDamage, explosionDamageToPlayer;
     public SpellScriptableObject SpellToCast;
-    public Collider[] explosionColliders;
+    private Collider[] explosionColliders;
+    [SerializeField] LayerMask collisionLayers;
+
 
     private void Start()
     {
@@ -26,15 +28,19 @@ public class ExplosiveObject : MonoBehaviour
     void Die()
     {
         Destroy(gameObject.transform.parent.gameObject);
+        
         //Can change to this if you want lucid objects to stay after destruction
         //Destroy(gameObject);
-        CreateExplosionEffect();
+        
         DealDamageInRadius();
+        CreateExplosionEffect();
+        
     }
 
     private void CreateExplosionEffect()
     {
         GameObject explosion = Instantiate(SpellToCast.ExplosionPrefab, transform.position, Quaternion.identity);
+        explosion.transform.localScale = new Vector3(SpellToCast.SpellRadius * 2f, SpellToCast.SpellRadius * 2f, SpellToCast.SpellRadius * 2f);
         Destroy(explosion, SpellToCast.ExplosionDuration);
     }
 
@@ -42,30 +48,28 @@ public class ExplosiveObject : MonoBehaviour
 
     private void DealDamageInRadius()
     {
-        int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 6, explosionColliders);
+        int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 6, explosionColliders, collisionLayers);
+        //Debug.Log("Barrel overlapCount.Length " + overlapCount);
 
-        if (overlapCount > 0)
+        for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
         {
-            for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
-            {
-                Collider hitCollider = explosionColliders[overlapIndex];
-                Enemy enemy = hitCollider.GetComponent<Enemy>();
-                Player player = hitCollider.GetComponent<Player>();
-                ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
+            Collider hitCollider = explosionColliders[overlapIndex];
+            Enemy enemy = hitCollider.GetComponent<Enemy>();
+            Player player = hitCollider.GetComponent<Player>();
+            //ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
 
-                if (enemy != null)
-                {
-                    enemy.TakeDamage(explosionDamage);
-                }
-                else if (player != null)
-                {
-                    player.TakeDamage(explosionDamageToPlayer);
-                }
-                //else if (gameObject != null)
-                //{
-                //    TakeDamage(SpellToCast.DamageAmount);
-                //}
+            if (enemy != null)
+            {
+                enemy.TakeDamage(explosionDamage);
             }
+            else if (player != null)
+            {
+                player.TakeDamage(explosionDamageToPlayer);
+            }
+            //else if (explosiveObject != null && explosiveObject != gameObject)
+            //{
+            //    explosiveObject.TakeDamage(explosionDamage);
+            //}
         }
     }
 }

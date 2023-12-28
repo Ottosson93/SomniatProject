@@ -12,16 +12,18 @@ public class CheckEnemyInAttackRange : Node
     private Animator lucidAnimator;
     private NavMeshAgent agent;
 
+    float lastClickedTime;
+    float lastComboEnd;
     
 
-    public CheckEnemyInAttackRange(Transform transform, List<AttackSO> combo)
+    public CheckEnemyInAttackRange(Transform transform, List<AttackSO> combo, Animator animator)
     {
         this.transform = transform;
         this.combo = combo;
-        animator = transform.GetComponent<Animator>();
-        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
+        this.animator = animator;
         agent = transform.GetComponent<NavMeshAgent>();
-        
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
+
     }
 
     public override NodeState Evaluate()
@@ -36,34 +38,38 @@ public class CheckEnemyInAttackRange : Node
 
         Transform target = (Transform)t;
 
-        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange &&  GuardMeleeBT.canAttack)
+        if(Vector3.Distance(transform.position, target.position) <= GuardMeleeBT.attackRange)
         {
 
-            if (Time.time - GuardMeleeBT.lastClickedTime > 2f && GuardMeleeBT.comboCounter <= combo.Count)
-            {   
-                if(Time.time - GuardMeleeBT.lastClickedTime >= 2f)
+            if(GuardMeleeBT.comboCounter <= combo.Count)
+            {
+                if (Time.time - lastClickedTime > GuardMeleeBT.attackRate)
                 {
-                    animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
-                    animator.Play("Attack", 1, 0);
-                  //  lucidAnimator.Play("Attack", 1, 0);
-                    GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
+                    if (Time.time - lastClickedTime >= GuardMeleeBT.attackRate)
+                    {
+                        animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
+                        animator.Play("Attack", 1, 0);
+
+                        GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
 
 
 
-                    GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
-                    GuardMeleeBT.lastClickedTime = Time.time;
+                        GuardMeleeBT.comboCounter = GuardMeleeBT.comboCounter + 1;
+                        lastClickedTime = Time.time;
 
-                    agent.speed = 0f;
-                    animator.SetBool("Run", false); 
-                    lucidAnimator.SetBool("Run", false);
-                    state = NodeState.SUCCESS;
-                    return state;
+                        agent.speed = 0f;
+                        
+                        animator.SetBool("Run", false);
+                        lucidAnimator.SetBool("Run", false);
+                        state = NodeState.SUCCESS;
+                        return state;
 
-                   
-                    
+                    }
+
                 }
-
             }
+
+            
 
            
         }
