@@ -84,8 +84,7 @@ public class Spell : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Mask") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
         }
