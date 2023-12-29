@@ -9,22 +9,28 @@ public class CloseDoors : MonoBehaviour
 {
     [SerializeField] private GameObject jailDoor1, jailDoor2;
     [SerializeField] private Transform startPos1, startPos2, destination1, destination2;
-    [SerializeField] private List<GameObject> enemies;
-    int enemiesToKill;
-    bool closing = false;
-    bool opening = false;
-    private float speed = 8;
-    float timer;
-    bool complete = false;
+    [SerializeField] private List<GameObject> enemyList;
+    [SerializeField] private List<GameObject> spawnLocation;
+    private int enemiesToKill;
+    private bool closing = false, opening = false, complete = false;
+    private float speed = 8, timer;
+    private EnemySpawner enemySpawner;
 
     private void Start()
     {
-        enemiesToKill = enemies.Count;
+        foreach (GameObject location in spawnLocation)
+        {
+            enemySpawner = location.GetComponent<EnemySpawner>();
+        }
+
+
+        //enemiesToKill = enemyList.Count;
     }
     void Update()
     {
         if (complete == false)
         {
+            //Closes the hidden doors
             if (closing)
             {
                 jailDoor1.transform.position = Vector3.MoveTowards(jailDoor1.transform.position, destination1.position, speed * Time.deltaTime);
@@ -33,7 +39,20 @@ public class CloseDoors : MonoBehaviour
                 {
                     closing = false;
                 }
+
+                if (!closing)
+                {
+                    for (int i = 0; i < spawnLocation.Count; i++)
+                    {
+                         StartCoroutine(enemySpawner.SpawnWave());
+                    }
+                }
             }
+            
+            
+                
+            
+            //Opens the doors
             if (opening)
             {
                 
@@ -45,31 +64,32 @@ public class CloseDoors : MonoBehaviour
                     complete = true;
                 }
             }
-            if (timer > 2)
-            {
-                int deadEnemies = 0;
-                foreach (GameObject obj in enemies)
-                {
-                    if (obj == null)
-                        deadEnemies++;
-                }
+            
+            //if (timer > 2)
+            //{
+            //    int deadEnemies = 0;
+            //    foreach (GameObject obj in enemies)
+            //    {
+            //        if (obj == null)
+            //            deadEnemies++;
+            //    }
                 
-                if (deadEnemies >= enemiesToKill)
-                {
-                    opening = true;
+            //    if (deadEnemies >= enemiesToKill)
+            //    {
+            //        opening = true;
                     
-                }
-                timer = 0;
-            }
-            timer += Time.deltaTime;
+            //    }
+            //    timer = 0;
+            //}
+            
+            //timer += Time.deltaTime;
         }
         
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if (other.gameObject.tag.Equals("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             
             closing = true;
