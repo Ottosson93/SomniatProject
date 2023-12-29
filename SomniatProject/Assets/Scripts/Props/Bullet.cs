@@ -12,53 +12,50 @@ public class Bullet : MonoBehaviour
         Collider collider = this.gameObject.GetComponent<Collider>();
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Mask"))
+        {
+            Debug.Log("WE OUT BOIII");
+            Destroy(this.gameObject);
+
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.CompareTag("Mask"))
         {
-            Physics.IgnoreCollision(GetComponent<Collider>(), other);
-            Debug.Log("Lol");
+            Debug.Log("We are in sir");
+
         }
-
-        if (other.gameObject.CompareTag("Enemy"))
+        else
         {
-            other.GetComponent<Enemy>().TakeDamage(damage);
 
-            Vector3 boxSize = new Vector3(1f, 1f, 1f);
-
-            // Check for overlapping colliders within the box
-            Collider[] overlappingColliders = Physics.OverlapBox(other.bounds.center, boxSize / 2f);
-
-            // Iterate through overlapping colliders
-            foreach (Collider overlappingCollider in overlappingColliders)
+            if (other.gameObject.CompareTag("Enemy"))
             {
-                // Check if the overlapping collider is not the original collider
-                if (overlappingCollider != other)
-                {
-                    // Do something with the overlapping collider
-                    Debug.Log("Colliding with: " + overlappingCollider.gameObject.name);
-                }
-            }
+                other.GetComponent<Enemy>().TakeDamage(damage);
 
-        }
-        else if (other.gameObject.CompareTag("Boss"))
-        {
-            other.GetComponent<Enemy>().TakeDamage(damage);
-        }
-        else if (other.gameObject.CompareTag("DestructibleObject"))
-        {
-            other.GetComponent<ExplosiveObject>().TakeDamage(damage);
-        }
-        else if (other.gameObject.CompareTag("Obstacle"))
-        {
+            }
+            else if (other.gameObject.CompareTag("Boss"))
+            {
+                other.GetComponent<Enemy>().TakeDamage(damage);
+            }
+            else if (other.gameObject.CompareTag("DestructibleObject"))
+            {
+                other.GetComponent<ExplosiveObject>().TakeDamage(damage);
+            }
+            else if (other.gameObject.CompareTag("Obstacle"))
+            {
+                Destroy(this.gameObject);
+            }
+            else if (other.gameObject.CompareTag("Wall"))
+            {
+                Destroy(this.gameObject);
+            }
             Destroy(this.gameObject);
         }
-        else if (other.gameObject.CompareTag("Wall"))
-        {
-            Destroy(this.gameObject);
-        }
-        Destroy(this.gameObject);
     }
 
 }

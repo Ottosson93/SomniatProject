@@ -81,6 +81,14 @@ public class Spell : MonoBehaviour
 
 
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Mask"))
+        {
+            Destroy(this.gameObject);
+
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
