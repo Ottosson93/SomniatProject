@@ -16,6 +16,6 @@ public class RangedEnemyShoot : MonoBehaviour
     {
         Instantiate(bullet, bulletPos.position, Quaternion.identity);
         //audio
-        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedGruntAttack, bulletPos.position);
+        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedFireBullet, bulletPos.position);
     }
 }
