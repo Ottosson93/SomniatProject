@@ -44,7 +44,7 @@ public class RoomPointer : MonoBehaviour
         float upgradeAngle = Mathf.Atan2(upgradeDirection.x,upgradeDirection.z) * Mathf.Rad2Deg;
 
         bossPointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -bossAngle + camera1.transform.eulerAngles.y);
-        Debug.Log("boss pointer " + bossPointer.rectTransform.rotation);
+        
         upgradePointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -upgradeAngle + camera1.transform.eulerAngles.y);
     }
 }

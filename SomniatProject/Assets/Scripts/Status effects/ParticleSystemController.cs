@@ -6,7 +6,7 @@ using UnityEngine;
 public class ParticleSystemController : MonoBehaviour
 {
     private ParticleSystem swordSlashParticles;
-    public Animator animator;
+    private Animator animator;
 
     void Start()
     {
