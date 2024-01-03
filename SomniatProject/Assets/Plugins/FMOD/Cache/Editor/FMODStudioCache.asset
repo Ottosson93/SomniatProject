@@ -27,6 +27,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-8696068262950089862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/EnemyDeath1
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/EnemyDeath1
+  Guid:
+    Data1: 1299444088
+    Data2: 1255437764
+    Data3: 946394521
+    Data4: -980619733
+  Banks:
+  - {fileID: -5177769148804219803}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-7223286798058874762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54,7 +81,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-6944913355658797844
+--- !u!114 &-6199041301155836986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,41 +91,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/BossThrow
+  m_Name: event:/SFX/EnemyDeath2
   m_EditorClassIdentifier: 
-  Path: event:/SFX/BossThrow
+  Path: event:/SFX/EnemyDeath2
   Guid:
-    Data1: -58615570
-    Data2: 1146505914
-    Data3: 67462063
-    Data4: -1808434871
-  Banks:
-  - {fileID: -5177769148804219803}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6030143666636149744
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/BossMelee
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/BossMelee
-  Guid:
-    Data1: 549557229
-    Data2: 1172102940
-    Data3: 1600342463
-    Data4: -1303608608
+    Data1: 972704610
+    Data2: 1338217029
+    Data3: 1269041076
+    Data4: 1428683002
   Banks:
   - {fileID: -5177769148804219803}
   IsStream: 0
@@ -123,7 +123,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638394486988165223
+  lastModified: 638398097215095939
   FileSizes: []
   Exists: 1
 --- !u!114 &-5177769148804219803
@@ -141,7 +141,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 638394486990426053
+  lastModified: 638398097216520093
   FileSizes: []
   Exists: 1
 --- !u!114 &-4868517777401757642
@@ -162,6 +162,33 @@ MonoBehaviour:
     Data2: 1202968278
     Data3: 1809685121
     Data4: 2117771560
+  Banks:
+  - {fileID: -5177769148804219803}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
+--- !u!114 &-4835816791436837291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FireballHit
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FireballHit
+  Guid:
+    Data1: -2144049597
+    Data2: 1257401608
+    Data3: -469303671
+    Data4: 1552402299
   Banks:
   - {fileID: -5177769148804219803}
   IsStream: 0
@@ -281,6 +308,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 137142
+--- !u!114 &-1906930027983073129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/BossSwing
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/BossSwing
+  Guid:
+    Data1: -58615570
+    Data2: 1146505914
+    Data3: 67462063
+    Data4: -1808434871
+  Banks:
+  - {fileID: -5177769148804219803}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-1854370736254738397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +386,33 @@ MonoBehaviour:
   IsGlobal: 0
   Labels: []
   Exists: 1
+--- !u!114 &-503957795212687472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/FireballCast
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/FireballCast
+  Guid:
+    Data1: 1130447144
+    Data2: 1317096071
+    Data3: 1781125284
+    Data4: -402791041
+  Banks:
+  - {fileID: -5177769148804219803}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,16 +439,12 @@ MonoBehaviour:
   - {fileID: 8700899834748719595}
   - {fileID: 2070748216476512549}
   - {fileID: 8551073705109911542}
-  - {fileID: 2670288141008483084}
   - {fileID: 2095677868502940830}
   - {fileID: 2245622012494803997}
   - {fileID: 417869249295286638}
   - {fileID: 6678005087311828680}
   - {fileID: 9155482891117152582}
-  - {fileID: -6030143666636149744}
-  - {fileID: -6944913355658797844}
   - {fileID: 3295697580090341501}
-  - {fileID: 2867724144758568101}
   - {fileID: -3611401433768209393}
   - {fileID: 257711436910920893}
   - {fileID: 8203008975918753345}
@@ -375,12 +452,18 @@ MonoBehaviour:
   - {fileID: -4868517777401757642}
   - {fileID: -9118236895179345475}
   - {fileID: -3354491812440270692}
+  - {fileID: -503957795212687472}
+  - {fileID: -4835816791436837291}
+  - {fileID: -6199041301155836986}
+  - {fileID: -8696068262950089862}
+  - {fileID: 2821261824857340707}
+  - {fileID: -1906930027983073129}
   EditorParameters: []
   MasterBanks:
   - {fileID: -5433776439165982208}
   StringsBanks:
   - {fileID: 8357313670143442023}
-  cacheTime: 638394486990426053
+  cacheTime: 638398097216520093
   cacheVersion: 131609
 --- !u!114 &257711436910920893
 MonoBehaviour:
@@ -517,7 +600,7 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &2670288141008483084
+--- !u!114 &2821261824857340707
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,41 +610,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/FireBall
+  m_Name: event:/SFX/BossRockThrow
   m_EditorClassIdentifier: 
-  Path: event:/SFX/FireBall
+  Path: event:/SFX/BossRockThrow
   Guid:
-    Data1: -2144049597
-    Data2: 1257401608
-    Data3: -469303671
-    Data4: 1552402299
-  Banks:
-  - {fileID: -5177769148804219803}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &2867724144758568101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/New Event
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/New Event
-  Guid:
-    Data1: -2142655427
-    Data2: 1270299968
-    Data3: 697488302
-    Data4: 824435812
+    Data1: 549557229
+    Data2: 1172102940
+    Data3: 1600342463
+    Data4: -1303608608
   Banks:
   - {fileID: -5177769148804219803}
   IsStream: 0
@@ -613,7 +669,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-  lastModified: 638394486989240058
+  lastModified: 638398097215630392
   FileSizes: []
   Exists: 1
 --- !u!114 &5355724407425498850
@@ -789,10 +845,10 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638394486988180986
+  lastModified: 638398097215115980
   FileSizes:
   - Name: 
-    Value: 2028
+    Value: 2208
   Exists: 1
 --- !u!114 &8551073705109911542
 MonoBehaviour:
