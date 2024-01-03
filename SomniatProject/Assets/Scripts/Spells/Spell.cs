@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -21,15 +22,21 @@ public class Spell : MonoBehaviour
 
     private Vector3 playerPos;
 
+    private void Start()
+    {
+        myCollider = GetComponent<SphereCollider>();
+        myCollider.isTrigger = true;
+        myCollider.radius = SpellToCast.SpellRadius;
+    }
 
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
 
-        myCollider = GetComponent<SphereCollider>();
-        myCollider.isTrigger = true;
-        myCollider.radius = SpellToCast.SpellRadius;
+     //  myCollider = GetComponent<SphereCollider>();
+     //  myCollider.isTrigger = true;
+     //  myCollider.radius = SpellToCast.SpellRadius;
 
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
@@ -83,18 +90,20 @@ public class Spell : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Mask"))
-        {
-            Destroy(this.gameObject);
+        if (other.gameObject.CompareTag("LucidCapsule"))
+            Debug.Log("SpellFired Exit");
 
-        }
+        Destroy(this.gameObject);
+                //Debug.Log("Exiting");
+            //Physics.IgnoreCollision(myCollider, other);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Mask") || other.gameObject.CompareTag("Weapon"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("LucidCapsule") || other.gameObject.CompareTag("Weapon"))
         {
             Physics.IgnoreCollision(myCollider, other);
+            Debug.Log("SpellFired Enter");
         }
         else
         {
@@ -136,6 +145,7 @@ public class Spell : MonoBehaviour
             {
                 Physics.IgnoreCollision(myCollider, enemy.GetComponent<Collider>());
             }
+
 
         }
 

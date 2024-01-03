@@ -14,29 +14,22 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Mask"))
-        {
-            Debug.Log("WE OUT BOIII");
+        if (other.gameObject.CompareTag("LucidCapsule"))    
             Destroy(this.gameObject);
-
-        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject.CompareTag("Mask"))
+        if (other.gameObject.CompareTag("LucidCapsule"))
         {
-            Debug.Log("We are in sir");
-
+            
         }
         else
         {
-
             if (other.gameObject.CompareTag("Enemy"))
             {
                 other.GetComponent<Enemy>().TakeDamage(damage);
-
             }
             else if (other.gameObject.CompareTag("Boss"))
             {
