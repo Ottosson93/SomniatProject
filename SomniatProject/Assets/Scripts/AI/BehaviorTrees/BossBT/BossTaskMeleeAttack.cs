@@ -46,7 +46,7 @@ public class BossTaskMeleeAttack : Node
         }
 
 
-        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f
                 && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
             AudioManager.instance.PlaySingleSFX(SoundEvents.instance.bossMelee, enemy.transform.position);
