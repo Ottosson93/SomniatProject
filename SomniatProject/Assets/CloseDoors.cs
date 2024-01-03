@@ -1,28 +1,24 @@
-using JetBrains.Annotations;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 
 public class CloseDoors : MonoBehaviour
 {
     [SerializeField] private GameObject jailDoor1, jailDoor2;
     [SerializeField] private Transform startPos1, startPos2, destination1, destination2;
-    [SerializeField] private List<GameObject> enemyList;
-    [SerializeField] private List<GameObject> spawnLocation;
+    [SerializeField] private GameObject[] spawnLocation;
     private int enemiesToKill;
-    private bool closing = false, opening = false, complete = false;
+    private bool closing = false, spawning = false, opening = false, complete = false;
     private float speed = 8, timer;
     private EnemySpawner enemySpawner;
 
     private void Start()
     {
-        foreach (GameObject location in spawnLocation)
+        for (int i = 0; i < spawnLocation.Length; i++)
         {
-            enemySpawner = location.GetComponent<EnemySpawner>();
+            enemySpawner = spawnLocation[i].GetComponent<EnemySpawner>();
+            Debug.Log("getting locations " + enemySpawner.name);
         }
-
 
         //enemiesToKill = enemyList.Count;
     }
@@ -35,22 +31,34 @@ public class CloseDoors : MonoBehaviour
             {
                 jailDoor1.transform.position = Vector3.MoveTowards(jailDoor1.transform.position, destination1.position, speed * Time.deltaTime);
                 jailDoor2.transform.position = Vector3.MoveTowards(jailDoor2.transform.position, destination2.position, speed * Time.deltaTime);
+                
                 if (Vector3.Distance(jailDoor1.transform.position, destination1.position) < 0.1)
                 {
                     closing = false;
                 }
-
-                if (!closing)
-                {
-                    for (int i = 0; i < spawnLocation.Count; i++)
-                    {
-                         StartCoroutine(enemySpawner.SpawnWave());
-                    }
-                }
             }
             
-            
+            if (spawning)
+            {
+                //for (int i = 0; i < spawnLocation.Count; i++)
                 
+                for (int i = 0; i < spawnLocation.Length; i++)
+                {
+                    StartCoroutine(enemySpawner.SpawnWave());
+                    //enemySpawner.SpawnEnemy();
+                    //Debug.Log("Spawning");
+                }
+                
+                timer += Time.deltaTime;
+                Debug.Log(timer);
+                    
+                if (timer > 5)
+                {
+                    opening = true;
+                    spawning = false;
+                }
+                
+            }
             
             //Opens the doors
             if (opening)
@@ -64,6 +72,8 @@ public class CloseDoors : MonoBehaviour
                     complete = true;
                 }
             }
+
+            
             
             //if (timer > 2)
             //{
@@ -82,7 +92,7 @@ public class CloseDoors : MonoBehaviour
             //    timer = 0;
             //}
             
-            //timer += Time.deltaTime;
+            
         }
         
     }
@@ -91,7 +101,7 @@ public class CloseDoors : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            
+            spawning = true;
             closing = true;
         }
     }

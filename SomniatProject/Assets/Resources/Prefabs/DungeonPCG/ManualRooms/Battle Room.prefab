@@ -465,8 +465,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 22.158777, y: 1, z: 23.123077}
-  m_Center: {x: 0.7000036, y: 0, z: -0.019554138}
+  m_Size: {x: 19.095016, y: 1, z: 23.123077}
+  m_Center: {x: 2.2318838, y: 0, z: -0.019554138}
 --- !u!114 &7005901298014062749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +485,6 @@ MonoBehaviour:
   startPos2: {fileID: 4807945715411081064}
   destination1: {fileID: 4243074333211913422}
   destination2: {fileID: 8914043352677770683}
-  enemyList: []
   spawnLocation:
   - {fileID: 6805323492751842002}
   - {fileID: 235383429851860714}

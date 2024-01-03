@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform enemySpawnLocation;
-    [SerializeField] private List<GameObject> enemyList;
+    [SerializeField] private GameObject[] enemyArray;
     [SerializeField] private int waveNumber;
 
     public IEnumerator SpawnWave()
@@ -13,14 +13,16 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveNumber; i++)
         {
             SpawnEnemy();
-            yield return new WaitForSeconds(0.75f);
+            Debug.Log("Spawn waves of enemies");
+            yield return new WaitForSeconds(3f);
         }
     }
 
 
     public void SpawnEnemy()
     {
-        Instantiate(enemyList[waveNumber], enemySpawnLocation.position, enemySpawnLocation.rotation);
+        Instantiate(enemyArray[1], enemySpawnLocation.position, enemySpawnLocation.rotation);
+        Debug.Log("Spawning Enemy");
     }
 
 }
