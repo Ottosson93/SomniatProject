@@ -6,10 +6,12 @@ using UnityEngine;
 public class ParticleSystemController : MonoBehaviour
 {
     private ParticleSystem swordSlashParticles;
+    public Animator animator;
 
     void Start()
     {
         swordSlashParticles = GetComponent<ParticleSystem>();
+        animator = GetComponent<Animator>();
 
         if (swordSlashParticles == null)
         {
@@ -19,7 +21,7 @@ public class ParticleSystemController : MonoBehaviour
 
     void Update()
     {
-        bool isAttacking = YourAttackCheckLogic();
+        bool isAttacking = animator.GetBool("Attack");
 
         if (isAttacking)
         {
@@ -51,12 +53,6 @@ public class ParticleSystemController : MonoBehaviour
                 swordSlashParticles.Stop();
             }
         }
-    }
-
-    bool YourAttackCheckLogic()
-    {
-        
-        return Input.GetButtonDown("Fire1");
     }
 }
 

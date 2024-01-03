@@ -23,6 +23,7 @@ TagManager:
   - Boulder
   - FxTemporaire
   - MinimapCamera
+  - LucidCapsule
   layers:
   - Default
   - TransparentFX
