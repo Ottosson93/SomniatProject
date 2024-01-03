@@ -90,10 +90,11 @@ public class Spell : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("LucidCapsule"))
+
+        if (other.gameObject.CompareTag("LucidCapsule") && !SpellToCast.name.Equals("Boulder"))
             Destroy(this.gameObject);
 
-        
+
 
         //Debug.Log($"Exiting {this.gameObject}");
         //Physics.IgnoreCollision(myCollider, other);
@@ -151,18 +152,26 @@ public class Spell : MonoBehaviour
 
         if (SpellToCast.name.Equals("Boulder"))
         {
-            player = other.GetComponent<Player>();
 
-            if (player != null)
+            if (other.gameObject.CompareTag("LucidCapsule"))
             {
-                BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
-                if (burnEffect == null)
-                {
-                    burnEffect = player.gameObject.AddComponent<BurnEffect>();
-                }
+
             }
-            BossDealDamageInRadius();
-            CreateExplosionEffect();
+            else
+            {
+                player = other.GetComponent<Player>();
+
+                if (player != null)
+                {
+                    BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
+                    if (burnEffect == null)
+                    {
+                        burnEffect = player.gameObject.AddComponent<BurnEffect>();
+                    }
+                }
+                BossDealDamageInRadius();
+                CreateExplosionEffect();
+            }
         }
 
 
