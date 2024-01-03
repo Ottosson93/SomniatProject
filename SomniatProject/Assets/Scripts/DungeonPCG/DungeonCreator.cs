@@ -88,7 +88,12 @@ public class DungeonCreator : MonoBehaviour
         foreach(PreMadeRoom p in preMadeNodes)
         {
             //fix Locations
-            Instantiate(p.preMadeRoom, p.centerPos, Quaternion.identity);
+            int onetofour = Random.Range(0, 4);
+            if (p.preMadeRoom.name == "Upgrade Room" || p.preMadeRoom.name == "Corridor Room")
+            {
+                onetofour = 0;
+            }
+            Instantiate(p.preMadeRoom, p.centerPos, Quaternion.Euler(0, 90 * onetofour, 0));
         }
         
         objects = generator.GetCorridorObjects();

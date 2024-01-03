@@ -9,9 +9,8 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody rb;
     public float force;
     private float yDirectionOffset = 0.7f;
-    private string targetTag;
     public int damage = 2;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
