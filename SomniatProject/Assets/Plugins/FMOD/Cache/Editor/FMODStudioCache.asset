@@ -168,22 +168,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/Potion
   m_EditorClassIdentifier: 
-  Path: event:/SFX/Potion
-  Guid:
-    Data1: -193567625
-    Data2: 1102738376
-    Data3: 761496251
-    Data4: 1753193181
-  Banks:
-  - {fileID: 6607457987025347308}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6269449301744223118
+  Path: Assets/Audio/FMODBanks/Desktop/Master.bank
+  Name: Master
+  StudioPath: bank:/Master
+  lastModified: 638398756300802508
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-5177769148804219803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,22 +186,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/EyeHit
   m_EditorClassIdentifier: 
-  Path: event:/SFX/EyeHit
-  Guid:
-    Data1: -218632434
-    Data2: 1126223696
-    Data3: 2029397169
-    Data4: 865099340
-  Banks:
-  - {fileID: 6607457987025347308}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 0
---- !u!114 &-6208454063198428050
+  Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
+  Name: SFX
+  StudioPath: bank:/SFX
+  lastModified: 638398756303368344
+  FileSizes: []
+  Exists: 1
+--- !u!114 &-4868517777401757642
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -578,8 +560,8 @@ MonoBehaviour:
   MasterBanks:
   - {fileID: -3893298829300568723}
   StringsBanks:
-  - {fileID: 7889392250575011125}
-  cacheTime: 638398757220003116
+  - {fileID: 8357313670143442023}
+  cacheTime: 638398756303368344
   cacheVersion: 131609
 --- !u!114 &580264336396940166
 MonoBehaviour:
@@ -794,10 +776,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/SFX.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638398757220003116
+  Path: Assets/Audio/FMODBanks/Desktop/Music.bank
+  Name: Music
+  StudioPath: bank:/Music
+  lastModified: 638398756301957082
   FileSizes: []
   Exists: 1
 --- !u!114 &6813462148868979027
@@ -896,7 +878,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 638398757219553121
+  lastModified: 638398756300812929
   FileSizes:
   - Name: 
     Value: 2208

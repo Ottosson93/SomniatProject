@@ -26,7 +26,8 @@ public class EnemyBullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("LucidCapsule"))
         {
-
+            other.GetComponent<Player>().TakeDamage(damage);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttackHit, other.transform.position);
         }
         else
         {
