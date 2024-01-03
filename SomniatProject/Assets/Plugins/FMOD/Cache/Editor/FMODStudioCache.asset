@@ -54,7 +54,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &-7543424905581644262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -69,12 +68,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-<<<<<<< HEAD
-
-  lastModified: 638368508393794569
-=======
   lastModified: 638373735927504252
->>>>>>> parent of 389b268 (Fixed Battle Room)
   FileSizes: []
   Exists: 1
 --- !u!114 &-7426464976493990417
@@ -146,13 +140,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
-<<<<<<< HEAD
-
-  lastModified: 638368508393774624
-
-=======
   lastModified: 638373735927444251
->>>>>>> parent of 389b268 (Fixed Battle Room)
   FileSizes: []
   Exists: 1
 --- !u!114 &-6934887412510341724
@@ -301,16 +289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
-  Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
-  Name: Master.strings
-  StudioPath: bank:/Master.strings
-<<<<<<< HEAD
-
-  lastModified: 638368508393475422
-
-=======
-  lastModified: 638373735927064506
->>>>>>> parent of 389b268 (Fixed Battle Room)
   FileSizes:
   - Name: 
     Value: 1754
@@ -503,7 +481,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
---- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -544,12 +521,6 @@ MonoBehaviour:
   - {fileID: 1767678488881080903}
   StringsBanks:
   - {fileID: -5244585895977044417}
-<<<<<<< HEAD
-  cacheTime: 638368508393794569
-
-=======
-  cacheTime: 638373735927504252
->>>>>>> parent of 389b268 (Fixed Battle Room)
   cacheVersion: 131609
 --- !u!114 &557703924612928245
 MonoBehaviour:
@@ -605,7 +576,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 54857
---- !u!114 &1484031491248893459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -674,16 +644,8 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-<<<<<<< HEAD
-
-  lastModified: 638368508393475422
-
-=======
-  lastModified: 638373735927009330
->>>>>>> parent of 389b268 (Fixed Battle Room)
   FileSizes: []
   Exists: 1
---- !u!114 &2369836404346232022
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
