@@ -27,7 +27,8 @@
             navMeshObstacle.enabled = false;
             fracturedCrate.SetActive(true);
             itemDropSystem.HandleBoxDrop(transform.position);
-            crashAudioClip.Play();
+            //crashAudioClip.Play();
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.boxCollapse, transform.position);
             Destroy(gameObject.transform.parent.gameObject, 1.5f);
             //Can change to this if you want lucid objects to stay after destruction
             //Destroy(gameObject, 1.5f);

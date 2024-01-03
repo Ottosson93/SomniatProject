@@ -25,6 +25,7 @@ public class EnemyBullet : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<Player>().TakeDamage(damage);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttackHit, other.transform.position);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {

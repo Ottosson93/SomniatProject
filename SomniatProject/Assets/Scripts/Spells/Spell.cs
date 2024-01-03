@@ -104,6 +104,7 @@ public class Spell : MonoBehaviour
                     }
                 }
                 DealDamageInRadius();
+                AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireballDetonate, transform.position);
                 CreateExplosionEffect();
             }
             else if (SpellToCast.name.Equals("Piercing Arrow"))

@@ -89,7 +89,7 @@ public class DungeonCreator : MonoBehaviour
         {
             //fix Locations
             int onetofour = Random.Range(0, 4);
-            if (p.preMadeRoom.name == "Upgrade Room" || p.preMadeRoom.name == "Corridor Room")
+            if (p.preMadeRoom.name == "Upgrade Room" || p.preMadeRoom.name == "Corridor Room" || p.preMadeRoom.name == "Start Room")
             {
                 onetofour = 0;
             }
