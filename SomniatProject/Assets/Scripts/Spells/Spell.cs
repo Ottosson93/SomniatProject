@@ -17,7 +17,7 @@ public class Spell : MonoBehaviour
 
     private Player player;
     private bool berserkApplied;
-    
+
     private ParticleSystem berserkParticles;
 
     private Vector3 playerPos;
@@ -34,14 +34,14 @@ public class Spell : MonoBehaviour
     {
         player = FindObjectOfType<Player>();
 
-     //  myCollider = GetComponent<SphereCollider>();
-     //  myCollider.isTrigger = true;
-     //  myCollider.radius = SpellToCast.SpellRadius;
+        //  myCollider = GetComponent<SphereCollider>();
+        //  myCollider.isTrigger = true;
+        //  myCollider.radius = SpellToCast.SpellRadius;
 
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
-        
+
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
@@ -73,13 +73,13 @@ public class Spell : MonoBehaviour
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
             if (SpellToCast.name.Equals("Piercing Arrow"))
             {
-                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime,  Space.Self);            
+                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime, Space.Self);
             }
         }
 
-        if(player != null)
+        if (player != null)
         {
-            if(berserkParticles != null && SpellToCast.Lifetime >= 0)
+            if (berserkParticles != null && SpellToCast.Lifetime >= 0)
             {
                 berserkParticles.transform.position = player.transform.position;
                 playerPos = player.transform.position;
@@ -91,19 +91,19 @@ public class Spell : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("LucidCapsule"))
-            Debug.Log("SpellFired Exit");
+            Destroy(this.gameObject);
 
-        Destroy(this.gameObject);
-                //Debug.Log("Exiting");
-            //Physics.IgnoreCollision(myCollider, other);
+        
+
+        //Debug.Log($"Exiting {this.gameObject}");
+        //Physics.IgnoreCollision(myCollider, other);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("LucidCapsule") || other.gameObject.CompareTag("Weapon"))
         {
-            Physics.IgnoreCollision(myCollider, other);
-            Debug.Log("SpellFired Enter");
+
         }
         else
         {
@@ -183,8 +183,8 @@ public class Spell : MonoBehaviour
     {
         if (berserkApplied)
             yield break;
-        
-        if(player != null)
+
+        if (player != null)
         {
             berserkParticles = Instantiate(SpellToCast.BerserkParticleSystem, player.transform);
             //Berserk SFX
@@ -193,7 +193,7 @@ public class Spell : MonoBehaviour
 
             yield return new WaitForSeconds(SpellToCast.Lifetime);
 
-            if(berserkParticles != null)
+            if (berserkParticles != null)
             {
                 berserkParticles.Stop();
                 Destroy(berserkParticles.gameObject);
@@ -212,13 +212,13 @@ public class Spell : MonoBehaviour
 
     private void DealDamageInRadius()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*6);
-        
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius * 6);
+
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
-            
+
             if (explosiveObject != null)
             {
                 explosiveObject.TakeDamage(SpellToCast.DamageAmount);

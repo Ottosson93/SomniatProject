@@ -14,8 +14,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("LucidCapsule"))    
+        if (other.gameObject.CompareTag("LucidCapsule"))
+        {
+            Debug.Log($"Bullet Exit {this.gameObject.transform.position}");
             Destroy(this.gameObject);
+        } 
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +26,7 @@ public class Bullet : MonoBehaviour
 
         if (other.gameObject.CompareTag("LucidCapsule"))
         {
-            
+            Debug.Log($"Bullet Enter {this.gameObject.transform.position}");
         }
         else
         {
