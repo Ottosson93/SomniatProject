@@ -7156,11 +7156,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Path
-      value: event:/SFX/FireBall
+      value: event:/SFX/FireballCast
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossMelee>k__BackingField.Path
-      value: event:/SFX/BossMelee
+      value: event:/SFX/BossRockThrow
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossMusic>k__BackingField.Path
@@ -7168,7 +7168,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossThrow>k__BackingField.Path
-      value: event:/SFX/BossThrow
+      value: event:/SFX/BossSwing
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <idleMusic>k__BackingField.Path
@@ -7284,19 +7284,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Guid.Data1
-      value: -2144049597
+      value: 1130447144
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Guid.Data2
-      value: 1257401608
+      value: 1317096071
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Guid.Data3
-      value: -469303671
+      value: 1781125284
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Guid.Data4
-      value: 1552402299
+      value: -402791041
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <gruntAttackHit>k__BackingField.Path
@@ -7633,6 +7633,18 @@ PrefabInstance:
     - target: {fileID: 1408904666720293327, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123825613019264338, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: sfx
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123825613019264338, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: music
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123825613019264338, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
+      propertyPath: master
+      value: 0.497
       objectReference: {fileID: 0}
     - target: {fileID: 6822885111583267455, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: m_Name
