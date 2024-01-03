@@ -1,6 +1,7 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -16,25 +17,31 @@ public class Spell : MonoBehaviour
 
     private Player player;
     private bool berserkApplied;
-    
+
     private ParticleSystem berserkParticles;
 
     private Vector3 playerPos;
 
+    private void Start()
+    {
+        myCollider = GetComponent<SphereCollider>();
+        myCollider.isTrigger = true;
+        myCollider.radius = SpellToCast.SpellRadius;
+    }
 
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
 
-        myCollider = GetComponent<SphereCollider>();
-        myCollider.isTrigger = true;
-        myCollider.radius = SpellToCast.SpellRadius;
+        //  myCollider = GetComponent<SphereCollider>();
+        //  myCollider.isTrigger = true;
+        //  myCollider.radius = SpellToCast.SpellRadius;
 
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
-        
+
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
@@ -66,13 +73,13 @@ public class Spell : MonoBehaviour
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
             if (SpellToCast.name.Equals("Piercing Arrow"))
             {
-                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime,  Space.Self);            
+                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime, Space.Self);
             }
         }
 
-        if(player != null)
+        if (player != null)
         {
-            if(berserkParticles != null && SpellToCast.Lifetime >= 0)
+            if (berserkParticles != null && SpellToCast.Lifetime >= 0)
             {
                 berserkParticles.transform.position = player.transform.position;
                 playerPos = player.transform.position;
@@ -81,13 +88,22 @@ public class Spell : MonoBehaviour
 
 
     }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("LucidCapsule"))
+            Destroy(this.gameObject);
+
+        
+
+        //Debug.Log($"Exiting {this.gameObject}");
+        //Physics.IgnoreCollision(myCollider, other);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-       
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("LucidCapsule") || other.gameObject.CompareTag("Weapon"))
         {
-            Physics.IgnoreCollision(myCollider, other);
+
         }
         else
         {
@@ -130,6 +146,7 @@ public class Spell : MonoBehaviour
                 Physics.IgnoreCollision(myCollider, enemy.GetComponent<Collider>());
             }
 
+
         }
 
         if (SpellToCast.name.Equals("Boulder"))
@@ -166,8 +183,8 @@ public class Spell : MonoBehaviour
     {
         if (berserkApplied)
             yield break;
-        
-        if(player != null)
+
+        if (player != null)
         {
             berserkParticles = Instantiate(SpellToCast.BerserkParticleSystem, player.transform);
             //Berserk SFX
@@ -176,7 +193,7 @@ public class Spell : MonoBehaviour
 
             yield return new WaitForSeconds(SpellToCast.Lifetime);
 
-            if(berserkParticles != null)
+            if (berserkParticles != null)
             {
                 berserkParticles.Stop();
                 Destroy(berserkParticles.gameObject);
@@ -195,13 +212,13 @@ public class Spell : MonoBehaviour
 
     private void DealDamageInRadius()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*6);
-        
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius * 6);
+
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
-            
+
             if (explosiveObject != null)
             {
                 explosiveObject.TakeDamage(SpellToCast.DamageAmount);

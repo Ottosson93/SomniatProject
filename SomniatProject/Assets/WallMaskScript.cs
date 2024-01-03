@@ -44,14 +44,16 @@ public class WallMaskScript : MonoBehaviour
                     foreach (var item in oldWall.GetComponentsInChildren<MeshRenderer>())
                     {
                         item.material.renderQueue = -1;
-                        Debug.Log($"Popping {item.transform.name}");
+                        //Debug.Log($"Popping {item.transform.name}");
+
                     }
                 }
 
                 foreach (var item in other.GetComponentsInChildren<MeshRenderer>())
                 {
                     item.material.renderQueue = 3002;
-                    Debug.Log($"Sho {other.transform.name}");
+                    //Debug.Log($"Sho {other.transform.name}");
+
                 }
             }
 

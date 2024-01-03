@@ -18,6 +18,7 @@ public class PostProcess : MonoBehaviour
         material = new Material(shader);
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         lucidCamera = GameObject.FindGameObjectWithTag("Mask").GetComponent<Transform>();
+      
     }
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)

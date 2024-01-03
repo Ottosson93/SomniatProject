@@ -47,7 +47,7 @@ public class TaskMeleeAttack : Node
         {
 
             //Audio
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.meleeGruntAttack, enemy.transform.position);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.gruntAttackHit, enemy.transform.position);
             player.TakeDamage(GuardMeleeBT.attackDamage);
             
         }
