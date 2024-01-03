@@ -45,10 +45,12 @@ public class CheckEnemyInAttackRange : Node
             {
                 if (Time.time - lastClickedTime > GuardMeleeBT.attackRate)
                 {
+                    
+
                     if (Time.time - lastClickedTime >= GuardMeleeBT.attackRate)
                     {
                         animator.runtimeAnimatorController = combo[GuardMeleeBT.comboCounter].animatorOV;
-                        animator.Play("Attack", 1, 0);
+                        animator.Play("Attack", 1, 0.17f);
 
                         GuardMeleeBT.attackDamage = combo[GuardMeleeBT.comboCounter].damage;
 
