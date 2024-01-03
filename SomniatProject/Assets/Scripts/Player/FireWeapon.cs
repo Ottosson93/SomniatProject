@@ -90,12 +90,12 @@ public class FireWeapon : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit enemyRaycast, Mathf.Infinity, enemyLayer))
         {
             targetPos = enemyRaycast.point;
-            Debug.Log("Raycasted enemy " + enemyRaycast.collider.name);
+            //Debug.Log("Raycasted enemy " + enemyRaycast.collider.name);
         }
         else if (Physics.Raycast(ray, out RaycastHit floorRaycast, Mathf.Infinity, floorLayer))
         {
             targetPos = floorRaycast.point;
-            Debug.Log("Raycasted floor " + floorRaycast.collider.name);
+            //Debug.Log("Raycasted floor " + floorRaycast.collider.name);
         }
 
 

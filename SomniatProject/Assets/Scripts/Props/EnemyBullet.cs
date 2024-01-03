@@ -9,9 +9,8 @@ public class EnemyBullet : MonoBehaviour
     private Rigidbody rb;
     public float force;
     private float yDirectionOffset = 0.7f;
-    private string targetTag;
     public int damage = 2;
-    // Start is called before the first frame update
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,14 +22,23 @@ public class EnemyBullet : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+
+
+        if (other.gameObject.CompareTag("LucidCapsule"))
         {
-            other.GetComponent<Player>().TakeDamage(damage);
+
         }
-        else if (other.gameObject.CompareTag("Obstacle"))
+        else
         {
-            Destroy(this.gameObject);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.GetComponent<Player>().TakeDamage(damage);
+            }
+            else if (other.gameObject.CompareTag("Obstacle"))
+            {
+                Destroy(this.gameObject);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

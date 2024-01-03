@@ -21,6 +21,7 @@ TagManager:
   - Boss
   - VictoryMenu
   - Boulder
+  - LucidCapsule
   layers:
   - Default
   - TransparentFX

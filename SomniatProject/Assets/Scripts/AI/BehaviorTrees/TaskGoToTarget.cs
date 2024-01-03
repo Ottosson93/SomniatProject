@@ -15,10 +15,10 @@ public class TaskGoToTarget : Node
 
 
 
-    public TaskGoToTarget(Transform transform)
+    public TaskGoToTarget(Transform transform, Animator animator)
     {
         this.transform = transform;
-        animator = transform.GetComponent<Animator>();
+        this.animator = animator;
         agent = transform.GetComponent<NavMeshAgent>();
         lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
     }
