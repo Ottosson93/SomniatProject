@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6143,9 +6143,9 @@ RectTransform:
   - {fileID: 1586093966}
   m_Father: {fileID: 1332614680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 42.5, y: -80}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 73, y: 26}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &570088599
@@ -6870,9 +6870,9 @@ RectTransform:
   - {fileID: 1026563808}
   m_Father: {fileID: 1332614680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 42.5, y: -52}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 73, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &625513337
@@ -9730,11 +9730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <fireball>k__BackingField.Path
-      value: event:/SFX/FireBall
+      value: event:/SFX/FireballHit
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossMelee>k__BackingField.Path
-      value: event:/SFX/BossMelee
+      value: event:/SFX/BossRockThrow
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossMusic>k__BackingField.Path
@@ -9742,7 +9742,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <bossThrow>k__BackingField.Path
-      value: event:/SFX/BossThrow
+      value: event:/SFX/BossSwing
       objectReference: {fileID: 0}
     - target: {fileID: 1184391350465851475, guid: a6e38e8dc8a2bad4bb89a6136fe8ce2c, type: 3}
       propertyPath: <idleMusic>k__BackingField.Path
@@ -18961,9 +18961,9 @@ RectTransform:
   - {fileID: 1317978206}
   m_Father: {fileID: 1332614680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 42.5, y: -22}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 73, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1736318419

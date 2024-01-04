@@ -13,14 +13,22 @@ public class SoundEvents : MonoBehaviour
     [field: SerializeField] public EventReference bossThrow{ get; private set; }
     [field: SerializeField] public EventReference potion { get; private set; }
     [field: SerializeField] public EventReference boxCollapse { get; private set; }
-    [field: SerializeField] public EventReference meleeGruntAttack { get; private set; }
-    [field: SerializeField] public EventReference rangedGruntAttack { get; private set; }
-    [field: SerializeField] public EventReference fireball { get; private set; }
+    [field: SerializeField] public EventReference gruntAttackHit { get; private set; }
+    [field: SerializeField] public EventReference rangedFireBullet { get; private set; }
+    [field: SerializeField] public EventReference fireballCast { get; private set; }
+    [field: SerializeField] public EventReference fireballDetonate { get; private set; }
     [field: SerializeField] public EventReference piercingArrow { get; private set; }
     [field: SerializeField] public EventReference berzerk { get; private set; }
     [field: SerializeField] public EventReference music { get; private set; }
     [field: SerializeField] public EventReference bossMusic { get; private set; }
     [field: SerializeField] public EventReference idleMusic { get; private set; }
+    [field: SerializeField] public EventReference gruntSwing { get; private set; }
+    [field: SerializeField] public EventReference rangedAttackHit { get; private set; }
+    [field: SerializeField] public EventReference playerHitGrunt{ get; private set; }
+    [field: SerializeField] public EventReference playerHitEye { get; private set; }
+    [field: SerializeField] public EventReference playerHitBoss { get; private set; }
+    [field: SerializeField] public EventReference enemyDeath { get; private set; }
+    [field: SerializeField] public EventReference enemyDeath1 { get; private set; }
     public static SoundEvents instance { get; private set; }
     
 

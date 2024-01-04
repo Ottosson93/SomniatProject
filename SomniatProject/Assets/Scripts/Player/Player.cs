@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     public float rangedAttackSpeed;
     public static bool isDead = false;
 
+    public GameObject hitMarkerPrefab;
 
     public float temporaryAttackSpeedModifier;
     public float temporaryMeleeDamageModifier;
@@ -154,6 +155,11 @@ public class Player : MonoBehaviour
 
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 
+        if (hitMarkerPrefab != null)
+        {
+            Instantiate(hitMarkerPrefab, transform.position, Quaternion.identity);
+        }
+
         if (lucidity <= 0)
         {
             gameObject.SetActive(false);
@@ -164,7 +170,7 @@ public class Player : MonoBehaviour
     public void Heal(float amountHealed)
     {
         lucidity += amountHealed;
-
+        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.potion, transform.position);
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 
         if (lucidity > maxLucidity)

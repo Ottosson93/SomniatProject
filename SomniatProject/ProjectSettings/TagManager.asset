@@ -21,6 +21,9 @@ TagManager:
   - Boss
   - VictoryMenu
   - Boulder
+  - FxTemporaire
+  - MinimapCamera
+  - LucidCapsule
   layers:
   - Default
   - TransparentFX

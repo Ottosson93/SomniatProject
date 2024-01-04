@@ -41,10 +41,6 @@ public class TaskGoToTarget : Node
         if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.attackRange )
         {
 
-            // Stop the enemy just outside the attack range
-            Vector3 directionToPlayer = (transform.position - target.position).normalized;
-            Vector3 stopPosition = target.position + directionToPlayer * (GuardMeleeBT.attackRange + 0.3f);
-
             agent.SetDestination(target.position);
             
 
