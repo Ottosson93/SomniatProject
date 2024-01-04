@@ -70,6 +70,16 @@ public class ThinkingBubble : MonoBehaviour
             StartCoroutine(FadeIn());
             bubbleText.text = "\nThese seem\nto be the baddies from that\ngame that Bruno is always playing.\nI think he calls them orcs and\n beholders.\n\nWe'll see who is the orc\n and beholder now!";
         }
+        if (other.CompareTag("CorridorRoomTrigger"))
+        {
+            StartCoroutine(FadeIn());
+            bubbleText.text = "\nThis looks like Lisas\nroom.\nI wonder why its in disarray...\n\nShes the only one who is nice to me...\n\nI sure hope nothing bad has happened\nto her";
+        }
+        if (other.CompareTag("ChestTrigger"))
+        {
+            StartCoroutine(FadeIn());
+            bubbleText.text = "\nOooh! A shiny box!\nMom always gets mad at me when\nI try to eat the tasty stuff in these\n\nWell shes not here to\nstop me anymore!";
+        }
     }
     private void OnTriggerExit(Collider other)
     {
