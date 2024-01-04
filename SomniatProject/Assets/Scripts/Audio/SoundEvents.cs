@@ -25,6 +25,7 @@ public class SoundEvents : MonoBehaviour
     [field: SerializeField] public EventReference gruntSwing { get; private set; }
     [field: SerializeField] public EventReference rangedAttackHit { get; private set; }
     [field: SerializeField] public EventReference playerHitGrunt{ get; private set; }
+    [field: SerializeField] public EventReference playerHitGrunt2 { get; private set; }
     [field: SerializeField] public EventReference playerHitEye { get; private set; }
     [field: SerializeField] public EventReference playerHitBoss { get; private set; }
     [field: SerializeField] public EventReference enemyDeath { get; private set; }
