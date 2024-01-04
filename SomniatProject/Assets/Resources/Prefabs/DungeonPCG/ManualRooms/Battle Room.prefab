@@ -177,10 +177,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnLocation: {fileID: 7952144366251503741}
-  enemyList:
-  - {fileID: 1695502807786733843, guid: 461af4cece4f1ac4ebd4aa74c16acdb3, type: 3}
+  enemyArray:
   - {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
+  - {fileID: 1695502807786733843, guid: 461af4cece4f1ac4ebd4aa74c16acdb3, type: 3}
   waveNumber: 2
+  timeBetweenWaves: 3
 --- !u!1 &514085533613769555
 GameObject:
   m_ObjectHideFlags: 0
@@ -1204,10 +1205,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawnLocation: {fileID: 3184414876200672834}
-  enemyList:
-  - {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
+  enemyArray:
   - {fileID: 1695502807786733843, guid: 461af4cece4f1ac4ebd4aa74c16acdb3, type: 3}
+  - {fileID: 1664211645506664793, guid: 61863b7adee175e4a96369361bc5146b, type: 3}
   waveNumber: 2
+  timeBetweenWaves: 3
 --- !u!1 &7217815780039541087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2231,7 +2233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 54063081539217952, guid: 5f2c7301338c48447bf5fd5e2b58ecc4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3680072
+      value: -2.813
       objectReference: {fileID: 0}
     - target: {fileID: 54063081539217952, guid: 5f2c7301338c48447bf5fd5e2b58ecc4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3285,7 +3287,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 568653527279986074, guid: c65426a375c90574a95eaaf4840e9481, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 568653527279986074, guid: c65426a375c90574a95eaaf4840e9481, type: 3}
       propertyPath: m_LocalScale.z

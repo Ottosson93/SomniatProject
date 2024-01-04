@@ -6,23 +6,24 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform enemySpawnLocation;
     [SerializeField] private GameObject[] enemyArray;
-    [SerializeField] private int waveNumber;
+    //public GameObject[] enemyArray;
+    //public int waveNumber;
+    [SerializeField] private int timeBetweenWaves, waveNumber;
 
-    public IEnumerator SpawnWave()
+    public IEnumerator SpawnWave(GameObject spawnLocation)
     {
         for (int i = 0; i < waveNumber; i++)
         {
-            SpawnEnemy();
-            Debug.Log("Spawn waves of enemies");
-            yield return new WaitForSeconds(3f);
+            Instantiate(enemyArray[i % enemyArray.Length], spawnLocation.transform.position, Quaternion.identity);
+            Debug.Log("Spawn waves of enemies " + enemyArray[i % enemyArray.Length]);
+            yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
-
 
     public void SpawnEnemy()
     {
         Instantiate(enemyArray[1], enemySpawnLocation.position, enemySpawnLocation.rotation);
-        Debug.Log("Spawning Enemy");
+        Debug.Log("Spawning Enemy " + enemyArray[1].name);
     }
 
 }
