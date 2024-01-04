@@ -24,6 +24,9 @@ TagManager:
   - FxTemporaire
   - MinimapCamera
   - LucidCapsule
+  - TriggerObject
+  - CorridorRoomTrigger
+  - ChestTrigger
   layers:
   - Default
   - TransparentFX

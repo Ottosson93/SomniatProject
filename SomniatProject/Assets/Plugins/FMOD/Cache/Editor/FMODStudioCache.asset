@@ -169,11 +169,19 @@ MonoBehaviour:
   m_Name: event:/SFX/Potion
   m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
-  Name: Master
-  StudioPath: bank:/Master
-  lastModified: 638398756300802508
-  FileSizes: []
-  Exists: 1
+  Guid:
+    Data1: 0
+    Data2: 0
+    Data3: 0
+    Data4: 0
+  Banks: []
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 0
 --- !u!114 &-5177769148804219803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,37 +195,18 @@ MonoBehaviour:
   m_Name: event:/SFX/EyeHit
   m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
-  Name: SFX
-  StudioPath: bank:/SFX
-  lastModified: 638398756303368344
-  FileSizes: []
-  Exists: 1
---- !u!114 &-4868517777401757642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/BoxCollapse
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/BoxCollapse
   Guid:
-    Data1: -513472617
-    Data2: 1310134498
-    Data3: 1366317967
-    Data4: 409510980
-  Banks:
-  - {fileID: 6607457987025347308}
+    Data1: 0
+    Data2: 0
+    Data3: 0
+    Data4: 0
+  Banks: []
   IsStream: 0
-  Is3D: 1
-  IsOneShot: 1
+  Is3D: 0
+  IsOneShot: 0
   Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
+  MinDistance: 0
+  MaxDistance: 0
   Length: 0
 --- !u!114 &-5124038164378745732
 MonoBehaviour:
@@ -246,6 +235,33 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 0
+--- !u!114 &-4868517777401757642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/BoxCollapse
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/BoxCollapse
+  Guid:
+    Data1: -513472617
+    Data2: 1310134498
+    Data3: 1366317967
+    Data4: 409510980
+  Banks:
+  - {fileID: 6607457987025347308}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 0
 --- !u!114 &-3893298829300568723
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +277,7 @@ MonoBehaviour:
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 638398757219493124
+  lastModified: 638399767364564914
   FileSizes: []
   Exists: 1
 --- !u!114 &-3473750223080577977
@@ -528,6 +544,7 @@ MonoBehaviour:
   - {fileID: -3893298829300568723}
   - {fileID: 5036419736385501634}
   - {fileID: 6607457987025347308}
+  - {fileID: 8004189140107484583}
   EditorEvents:
   - {fileID: -806490813788706959}
   - {fileID: 6813462148868979027}
@@ -561,7 +578,8 @@ MonoBehaviour:
   - {fileID: -3893298829300568723}
   StringsBanks:
   - {fileID: 8357313670143442023}
-  cacheTime: 638398756303368344
+  - {fileID: 8004189140107484583}
+  cacheTime: 638399767364917112
   cacheVersion: 131609
 --- !u!114 &580264336396940166
 MonoBehaviour:
@@ -682,7 +700,7 @@ MonoBehaviour:
   StudioPath: bank:/Music
   lastModified: 638398757219923226
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &5689202923244413569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -781,7 +799,7 @@ MonoBehaviour:
   StudioPath: bank:/Music
   lastModified: 638398756301957082
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &6813462148868979027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,6 +897,26 @@ MonoBehaviour:
   Name: Master.strings
   StudioPath: bank:/Master.strings
   lastModified: 638398756300812929
+  FileSizes:
+  - Name: 
+    Value: 2208
+  Exists: 0
+--- !u!114 &8004189140107484583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
+  Name: Master.strings
+  StudioPath: bank:/Master.strings
+  lastModified: 638399767364564914
   FileSizes:
   - Name: 
     Value: 2208
