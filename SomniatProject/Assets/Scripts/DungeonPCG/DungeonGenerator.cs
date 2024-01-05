@@ -638,7 +638,7 @@ public class DungeonGenerator : MonoBehaviour
         }
         else
         {
-            int i = Random.Range(0, walls.Count - 4);
+            int i = Random.Range(0, walls.Count - 5);
             wallObject = walls[i];
         }
         
