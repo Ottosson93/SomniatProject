@@ -199,9 +199,7 @@ namespace StarterAssets
         {
             if (_input.attack1 && canAttack)
             {
-                Debug.Log("Atalay Attacking");
                 Attack();
-                Debug.Log("Atalay efter");
 
                 canAttack = false;  // Disable attack until cooldown is over
                 StartCoroutine(AttackCooldown());
@@ -307,7 +305,7 @@ namespace StarterAssets
             {
                 targetSpeed = 0.0f;
                 _animator.SetBool("Move", false);
-            }
+            } 
 
             // a reference to the players current horizontal velocity
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
@@ -364,7 +362,7 @@ namespace StarterAssets
                     transform.rotation = Quaternion.Euler(0.0f, rotation, 0.0f);
 
 
-
+                   
                 }
 
 
@@ -379,11 +377,11 @@ namespace StarterAssets
                 _animator.SetBool("Move", true);
             }
 
-            // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
-                         new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+                // move the player
+                _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
-
+           
 
             // update animator if using character
             if (_hasAnimator)
@@ -538,7 +536,7 @@ namespace StarterAssets
 
             tr.emitting = true;
 
-            await Task.Delay((int)(dashingTime * 1000));
+            await Task.Delay((int)(dashingTime*1000));
 
             isDashing = false;  // Reset dashing flag
 
@@ -573,8 +571,7 @@ namespace StarterAssets
             //Checks if the collided object is a destructible object
             foreach (Collider destructibleObject in hitDestructibleObjects)
             {
-                if (!destructibleObject.CompareTag("LucidCapsule"))
-                    destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
+                destructibleObject.GetComponent<ExplosiveObject>().TakeDamage((int)player.meleeDamage);
             }
 
             if (Time.time - lastComboEnd > 0.5f && comboCounter <= combo.Count)

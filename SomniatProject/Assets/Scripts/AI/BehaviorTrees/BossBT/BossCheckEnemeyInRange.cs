@@ -46,7 +46,7 @@ public class BossCheckEnemyInAttackRange : Node
                 if (Time.time - BossBT.lastClickedTime >= 2f)
                 {
                     animator.runtimeAnimatorController = combo[BossBT.comboCounter].animatorOV;
-                    animator.Play("Attack", 1, 0.5f);
+                    animator.Play("Attack", 1, 0);
                     BossBT.attackDamage = combo[BossBT.comboCounter].damage;
 
                     BossBT.comboCounter = BossBT.comboCounter + 1;

@@ -115,11 +115,7 @@ public class CorridorGenerator
             //Debug.Log("Right");
             
             ConnectRoomsHorizontally(leftRoomsChildren, rightRoomsChildren);
-            if (leftRoomsChildren.Count > 4 && rightRoomsChildren.Count > 4)
-            {
-                ConnectRoomsHorizontally(leftRoomsChildren, rightRoomsChildren);
-            }
-            if (leftRoomsChildren.Count > 8 && rightRoomsChildren.Count > 8)
+            if (leftRoomsChildren.Count + rightRoomsChildren.Count > 8)
             {
                 ConnectRoomsHorizontally(leftRoomsChildren, rightRoomsChildren);
             }
@@ -132,20 +128,12 @@ public class CorridorGenerator
             {
                 ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
             }
-            if (leftRoomsChildren.Count > 8 && rightRoomsChildren.Count > 8)
-            {
-                ConnectRoomsVertically(leftRoomsChildren, rightRoomsChildren);
-            }
         }
         else if ((angle > -135 && angle < -45))
         {
             //Debug.Log("Down");
             ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
             if (leftRoomsChildren.Count > 4 && rightRoomsChildren.Count > 4)
-            {
-                ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
-            }
-            if (leftRoomsChildren.Count > 8 && rightRoomsChildren.Count > 8)
             {
                 ConnectRoomsVertically(rightRoomsChildren, leftRoomsChildren);
             }
@@ -160,12 +148,8 @@ public class CorridorGenerator
             {
                 ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
             }
-            if (leftRoomsChildren.Count > 8 && rightRoomsChildren.Count > 8)
-            {
-                ConnectRoomsHorizontally(rightRoomsChildren, leftRoomsChildren);
-            }
 
-
+            
         }
         recentlyConnectedRnodes.Clear();
         r1.connectedWithSibling = true;

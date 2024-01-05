@@ -90,7 +90,7 @@ public class SpellAttackSystem : MonoBehaviour
     private void CastSpell()
     {
         if (currentSpell.SpellToCast.name.Equals("Fireball"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireballCast, player.transform.position);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireball, player.transform.position);
         if (currentSpell.SpellToCast.name.Equals("Piercing Arrow"))
             AudioManager.instance.PlaySingleSFX(SoundEvents.instance.piercingArrow, player.transform.position);
         var (success, position) = controller.GetMousePosition();
@@ -121,7 +121,6 @@ public class SpellAttackSystem : MonoBehaviour
         castPoint.forward = direction;
 
 
-        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.bossThrow, castPoint.position);
         Instantiate(spell, castPoint.position, castPoint.rotation);
     }
 }
