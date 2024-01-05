@@ -10,8 +10,8 @@ public class BossBT : Tree
 
     public static float speed = 1f;
     public static float targetedSpeed = 4f;
-    public static float fovRange = 8f;
-    public static float distance = 10f;
+    public static float fovRange = 6f;
+    public static float distance = 9f;
     public static float attackRange = 4f;
     public static float rotationSpeed = 3f;
     public static float attackDamage = 0;

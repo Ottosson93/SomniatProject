@@ -32,16 +32,6 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage) 
     {
-        Debug.Log("Damage Done" + this.gameObject.name);
-        if (this.gameObject.name.Equals("RangedEnemyPrefab(Clone)"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitEye, transform.position);
-        else if (this.gameObject.name.Equals("OurGruntPrefab(Clone)"))
-        {
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitGrunt, transform.position);
-            Debug.Log("grunt Took dmaage");
-        }
-        else if (this.gameObject.CompareTag("Boss"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitBoss, transform.position);
         current = current - damage;
         //"Hurt" does not exist
         //animator.SetTrigger("Hurt");

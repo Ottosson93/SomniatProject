@@ -308,9 +308,8 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
-  - Master.strings
   - Music
-  - Music
+  - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264
   EnableMemoryTracking: 0

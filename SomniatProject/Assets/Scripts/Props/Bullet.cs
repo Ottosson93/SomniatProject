@@ -12,46 +12,29 @@ public class Bullet : MonoBehaviour
         Collider collider = this.gameObject.GetComponent<Collider>();
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("LucidCapsule"))
-        {
-            Debug.Log($"Bullet Exit {this.gameObject.transform.position}");
-            Destroy(this.gameObject);
-        } 
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-
-        if (other.gameObject.CompareTag("LucidCapsule"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log($"Bullet Enter {this.gameObject.transform.position}");
+            other.GetComponent<Enemy>().TakeDamage(damage);
         }
-        else
+        else if (other.gameObject.CompareTag("Boss"))
         {
-            if (other.gameObject.CompareTag("Enemy"))
-            {
-                other.GetComponent<Enemy>().TakeDamage(damage);
-            }
-            else if (other.gameObject.CompareTag("Boss"))
-            {
-                other.GetComponent<Enemy>().TakeDamage(damage);
-            }
-            else if (other.gameObject.CompareTag("DestructibleObject"))
-            {
-                other.GetComponent<ExplosiveObject>().TakeDamage(damage);
-            }
-            else if (other.gameObject.CompareTag("Obstacle"))
-            {
-                Destroy(this.gameObject);
-            }
-            else if (other.gameObject.CompareTag("Wall"))
-            {
-                Destroy(this.gameObject);
-            }
+            other.GetComponent<Enemy>().TakeDamage(damage);
+        }
+        else if (other.gameObject.CompareTag("DestructibleObject"))
+        {
+            other.GetComponent<ExplosiveObject>().TakeDamage(damage);
+        }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
             Destroy(this.gameObject);
         }
+        else if (other.gameObject.CompareTag("Wall"))
+        {
+            Destroy(this.gameObject);
+        }
+        Destroy(this.gameObject);
     }
 
 }

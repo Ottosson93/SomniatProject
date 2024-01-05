@@ -45,7 +45,6 @@ public class WallMaskScript : MonoBehaviour
                     {
                         item.material.renderQueue = -1;
                         //Debug.Log($"Popping {item.transform.name}");
-
                     }
                 }
 
@@ -53,7 +52,6 @@ public class WallMaskScript : MonoBehaviour
                 {
                     item.material.renderQueue = 3002;
                     //Debug.Log($"Sho {other.transform.name}");
-
                 }
             }
 

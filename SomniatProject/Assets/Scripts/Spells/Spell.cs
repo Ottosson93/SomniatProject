@@ -1,7 +1,6 @@
 using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -17,32 +16,38 @@ public class Spell : MonoBehaviour
 
     private Player player;
     private bool berserkApplied;
-
-    private static Spell activeBerserkSpell;
-
+    
     private ParticleSystem berserkParticles;
 
     private Vector3 playerPos;
 
-    private void Start()
-    {
-        myCollider = GetComponent<SphereCollider>();
-        myCollider.isTrigger = true;
-        myCollider.radius = SpellToCast.SpellRadius;
-    }
 
 
     private void Awake()
     {
         player = FindObjectOfType<Player>();
+
+        myCollider = GetComponent<SphereCollider>();
+        myCollider.isTrigger = true;
+        myCollider.radius = SpellToCast.SpellRadius;
+
         myRigidbody = GetComponent<Rigidbody>();
         myRigidbody.isKinematic = true;
 
+        
 
         if (!SpellToCast.name.Equals("Berserk"))
         {
             Destroy(this.gameObject, SpellToCast.Lifetime);
         }
+
+
+        //if (SpellToCast.LightningImpact != null)
+        //{
+        //    lightningImpactParticleEffect = Instantiate(SpellToCast.LightningImpact, transform.position, Quaternion.identity);
+        //    lightningImpactParticleEffect.Stop();
+        //}
+
         if (SpellToCast.name.Equals("Berserk"))
         {
             berserkApplied = false;
@@ -50,21 +55,8 @@ public class Spell : MonoBehaviour
             Debug.Log("original Speed: " + player.speed + " original Attack Speed: " + player.attackSpeed + " original Damage Amount: " + player.meleeDamage + " original Armor Amount: " + player.damageReduction);
             player.StartBerserk(SpellToCast.ArmorReduction, SpellToCast.AttackSpeedBoost, SpellToCast.DamageBoost, SpellToCast.MovementSpeedBoost);
             Debug.Log("new Speed: " + player.speed + " new Attack Speed: " + player.attackSpeed + " new Damage Amount: " + player.meleeDamage + " new Armor Amount: " + player.damageReduction);
-
-            if (activeBerserkSpell != null)
-            {
-                activeBerserkSpell.DestroySpell();
-            }
-
-            activeBerserkSpell = this;
             StartCoroutine(ApplyBerserkEffects());
         }
-    }
-
-    private void DestroySpell()
-    {
-        activeBerserkSpell = null;
-        Destroy(this.gameObject);
     }
 
     private void Update()
@@ -74,13 +66,13 @@ public class Spell : MonoBehaviour
             transform.Translate(Vector3.forward * SpellToCast.Speed * Time.deltaTime);
             if (SpellToCast.name.Equals("Piercing Arrow"))
             {
-                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime, Space.Self);
+                transform.Rotate(0f, 0f, SpellToCast.RotationSpeed * Time.deltaTime,  Space.Self);            
             }
         }
 
-        if (player != null)
+        if(player != null)
         {
-            if (berserkParticles != null && SpellToCast.Lifetime >= 0)
+            if(berserkParticles != null && SpellToCast.Lifetime >= 0)
             {
                 berserkParticles.transform.position = player.transform.position;
                 playerPos = player.transform.position;
@@ -89,19 +81,13 @@ public class Spell : MonoBehaviour
 
 
     }
-    private void OnTriggerExit(Collider other)
-    {
-
-        if (other.gameObject.CompareTag("LucidCapsule") && !SpellToCast.name.Equals("Boulder") && !SpellToCast.name.Equals("Berserk"))
-            Destroy(this.gameObject);
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("LucidCapsule") || other.gameObject.CompareTag("Weapon"))
+       
+        if (other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Weapon"))
         {
-
+            Physics.IgnoreCollision(myCollider, other);
         }
         else
         {
@@ -118,7 +104,6 @@ public class Spell : MonoBehaviour
                     }
                 }
                 DealDamageInRadius();
-                AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireballDetonate, transform.position);
                 CreateExplosionEffect();
             }
             else if (SpellToCast.name.Equals("Piercing Arrow"))
@@ -145,31 +130,22 @@ public class Spell : MonoBehaviour
                 Physics.IgnoreCollision(myCollider, enemy.GetComponent<Collider>());
             }
 
-
         }
 
         if (SpellToCast.name.Equals("Boulder"))
         {
+            player = other.GetComponent<Player>();
 
-            if (other.gameObject.CompareTag("LucidCapsule"))
+            if (player != null)
             {
-
-            }
-            else
-            {
-                player = other.GetComponent<Player>();
-
-                if (player != null)
+                BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
+                if (burnEffect == null)
                 {
-                    BurnEffect burnEffect = player.gameObject.GetComponent<BurnEffect>();
-                    if (burnEffect == null)
-                    {
-                        burnEffect = player.gameObject.AddComponent<BurnEffect>();
-                    }
+                    burnEffect = player.gameObject.AddComponent<BurnEffect>();
                 }
-                BossDealDamageInRadius();
-                CreateExplosionEffect();
             }
+            BossDealDamageInRadius();
+            CreateExplosionEffect();
         }
 
 
@@ -188,60 +164,44 @@ public class Spell : MonoBehaviour
 
     private IEnumerator ApplyBerserkEffects()
     {
-
-
         if (berserkApplied)
             yield break;
-
-        if (player != null)
+        
+        if(player != null)
         {
             berserkParticles = Instantiate(SpellToCast.BerserkParticleSystem, player.transform);
+            //Berserk SFX
             AudioManager.instance.PlaySingleSFX(SoundEvents.instance.berzerk, player.transform.position);
             berserkParticles.Play();
 
+            yield return new WaitForSeconds(SpellToCast.Lifetime);
 
-            float startTime = Time.time;
-            float elapsedTime = 0;
-
-            while (elapsedTime < SpellToCast.Lifetime)
-            {
-                elapsedTime = Time.time - startTime;
-                if (activeBerserkSpell != this)
-                {
-                    break;
-                }
-                yield return null;
-            }
-
-            if (berserkParticles != null)
+            if(berserkParticles != null)
             {
                 berserkParticles.Stop();
                 Destroy(berserkParticles.gameObject);
             }
 
-            if (activeBerserkSpell == this)
-            {
-                player.EndBerserk();
-                Debug.Log("reset Speed: " + player.speed + " reset Attack Speed: " + player.attackSpeed + " reset Damage Amount: " + player.meleeDamage + " reset Armor Amount: " + player.damageReduction);
-            }
-
+            //reset stats
+            player.EndBerserk();
+            Debug.Log("reset Speed: " + player.speed + " reset Attack Speed: " + player.attackSpeed + " reset Damage Amount: " + player.meleeDamage + " reset Armor Amount: " + player.damageReduction);
         }
 
 
         berserkApplied = true;
-        yield return null;
+
         Destroy(this.gameObject);
     }
 
     private void DealDamageInRadius()
     {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius * 6);
-
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, SpellToCast.SpellRadius*6);
+        
         foreach (Collider hitCollider in hitColliders)
         {
             Enemy enemy = hitCollider.GetComponent<Enemy>();
             ExplosiveObject explosiveObject = hitCollider.GetComponent<ExplosiveObject>();
-
+            
             if (explosiveObject != null)
             {
                 explosiveObject.TakeDamage(SpellToCast.DamageAmount);
@@ -260,6 +220,29 @@ public class Spell : MonoBehaviour
                 burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
             }
         }
+
+        //int overlapCount = Physics.OverlapSphereNonAlloc(transform.position, SpellToCast.SpellRadius * 2, spellColliders);
+
+        //if (overlapCount > 0)
+        //{
+        //    for (var overlapIndex = 0; overlapIndex < overlapCount; overlapIndex++)
+        //    {
+        //        Enemy enemy = GetComponent<Enemy>();
+        //        if (enemy != null)
+        //        {
+        //            enemy.TakeDamage(SpellToCast.DamageAmount);
+
+        //            BurnEffect burnEffect = gameObject.GetComponent<BurnEffect>();
+        //            if (burnEffect == null)
+        //            {
+        //                burnEffect = gameObject.AddComponent<BurnEffect>();
+        //            }
+
+        //            burnEffect.Initialize(SpellToCast.BurnDuration, SpellToCast.BurnParticleSystem, SpellToCast.DamagePerTick, SpellToCast.TickInterval);
+        //        }
+        //    }
+        //}
+
         Destroy(this.gameObject);
     }
 

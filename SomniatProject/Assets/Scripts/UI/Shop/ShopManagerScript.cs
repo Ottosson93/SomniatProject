@@ -93,19 +93,6 @@ public class ShopManagerScript : MonoBehaviour
         }
     }
 
-    public void PurchasePotion(int ButtonNumber)
-    {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-        if (currencyAmount >= relicItemsSO[ButtonNumber].price)
-        {
-            player.Heal(40);
-            currencyAmount = currencyAmount - relicItemsSO[ButtonNumber].price;
-            currencyTxt.text = "Currency " + currencyAmount.ToString();
-            CheckPurchasable();
-        }
-    }
-
     public void Show(GameObject shopView)
     {
         shopView.SetActive(true);
