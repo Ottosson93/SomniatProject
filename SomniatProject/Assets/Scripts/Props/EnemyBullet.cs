@@ -22,14 +22,24 @@ public class EnemyBullet : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player"))
+
+
+        if (other.gameObject.CompareTag("LucidCapsule"))
         {
             other.GetComponent<Player>().TakeDamage(damage);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.rangedAttackHit, other.transform.position);
         }
-        else if (other.gameObject.CompareTag("Obstacle"))
+        else
         {
-            Destroy(this.gameObject);
+            if (other.gameObject.CompareTag("Player"))
+            {
+                other.GetComponent<Player>().TakeDamage(damage);
+            }
+            else if (other.gameObject.CompareTag("Obstacle"))
+            {
+                Destroy(this.gameObject);
+            }
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

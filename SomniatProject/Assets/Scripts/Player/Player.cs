@@ -170,7 +170,7 @@ public class Player : MonoBehaviour
     public void Heal(float amountHealed)
     {
         lucidity += amountHealed;
-
+        AudioManager.instance.PlaySingleSFX(SoundEvents.instance.potion, transform.position);
         lucidityPostProcess.UpdateLucidityMask(lucidity);
 
         if (lucidity > maxLucidity)

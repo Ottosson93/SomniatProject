@@ -18,7 +18,7 @@ public class Potion : Item
 
     void Update()
     {
-        if (pickUpScript.PickUpButtonPressed)
+        if (pickUpScript.PickUpItem)
         {
             player.Heal(Lucidity);
             DestroyItem();

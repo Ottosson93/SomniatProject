@@ -21,6 +21,12 @@ TagManager:
   - Boss
   - VictoryMenu
   - Boulder
+  - FxTemporaire
+  - MinimapCamera
+  - LucidCapsule
+  - TriggerObject
+  - CorridorRoomTrigger
+  - ChestTrigger
   layers:
   - Default
   - TransparentFX

@@ -62,9 +62,10 @@ public class TaskMeleeAttack : Node
         }
 
 
-        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.65f
+        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f
                 && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.gruntSwing, enemy.transform.position);
             GuardMeleeBT.comboCounter = 0;
             lastComboEnd = Time.time;
         }

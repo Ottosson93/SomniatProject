@@ -14,6 +14,8 @@ public class BossTaskMeleeAttack : Node
     private List<AttackSO> combo;
     private Enemy enemy;
 
+    
+
 
     public BossTaskMeleeAttack(Transform transform, List<AttackSO> combo)
     {
@@ -44,10 +46,10 @@ public class BossTaskMeleeAttack : Node
         }
 
 
-        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.99f
+        if (animator.GetCurrentAnimatorStateInfo(1).normalizedTime > 0.9f
                 && animator.GetCurrentAnimatorStateInfo(1).IsTag("Attack"))
         {
-
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.bossMelee, enemy.transform.position);
             BossBT.comboCounter = 0;
             BossBT.lastComboEnd = Time.time;
         }
