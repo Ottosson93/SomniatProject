@@ -39,23 +39,25 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        if (instance != null)
+        GameObject[] audioManagers = GameObject.FindGameObjectsWithTag("AudioManager");
+
+        if (audioManagers.Length > 1)
         {
             Destroy(gameObject);
             Debug.LogError("Found more than one Audio Manager in the scene");
+            return;
         }
-        else
-        {
-            DontDestroyOnLoad(this);
-        }
-        instance = this;
+
+        DontDestroyOnLoad(this);
 
         masterSlider = GameObject.Find("MasterSlider").GetComponent<Slider>();
         musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
         sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
 
-
         InitializeMusic(SoundEvents.instance.music);
+
+        instance = this;
+
         //AudioManager.instance.PlaySingleSFX(SoundEvents.instance.death, new Vector3(0,0,0));
     }
     private void FixedUpdate()
@@ -68,7 +70,7 @@ public class AudioManager : MonoBehaviour
     {
         musicEventInstance = CreateEventInstance(musicEventReference);
         musicEventInstance.start();
-        
+
     }
 
     public void RestartMusic(EventReference musicEventReference)
@@ -102,7 +104,7 @@ public class AudioManager : MonoBehaviour
     public void AddEnemyEngage()
     {
         enemiesEngaged++;
-        if(enemiesEngaged == 1)
+        if (enemiesEngaged == 1)
         {
             musicEventInstance.setParameterByName("Combat", 1f);
         }
