@@ -19,6 +19,7 @@ public class CloseDoors : MonoBehaviour
     private int enemiesToKill;
     private bool spawning = false;
     private float speed = 8, timer;
+    [SerializeField] private float timerTilDoorOpens;
     private EnemySpawner enemySpawner;
 
     private State state;
@@ -36,7 +37,7 @@ public class CloseDoors : MonoBehaviour
             Debug.Log("getting locations " + enemySpawner.name);
         }
         
-        //enemiesToKill = EnemySpawner.waveNumber * spawnLocation.Length;
+        enemiesToKill = enemySpawner.waveNumber * spawnLocation.Length;
         Debug.Log("Enemies to kill " + enemiesToKill);
     }
     void Update()
@@ -66,25 +67,52 @@ public class CloseDoors : MonoBehaviour
                 //if (timer > 2)
                 //{
                 //    int deadEnemies = 0;
-                //    for (int i = 0; i < spawnLocation.Length; i++)
+                //    foreach (GameObject obj in enemies)
                 //    {
-                //        foreach (GameObject obj in enemySpawner.enemyArray)
-                //        {
-                //            Debug.Log("Enemies in array " + enemySpawner.enemyArray.Length);
-                //            if (obj == null)
-                //                deadEnemies++;
-                //        }
+                //        if (obj == null)
+                //            deadEnemies++;
                 //    }
-
 
                 //    if (deadEnemies >= enemiesToKill)
                 //    {
-                //        state = State.Opening;
+                //        opening = true;
+                //        //    if (deadEnemies >= enemiesToKill)
+                //        //    {
+                //        //        opening = true;
 
                 //    }
                 //    timer = 0;
                 //}
                 //timer += Time.deltaTime;
+
+
+                //int deadEnemies = 0;
+                //for (int i = 0; i < spawnLocation.Length; i++)
+                //{
+                //    foreach (GameObject obj in enemySpawner.enemyArray)
+                //    {
+                //        Debug.Log("Enemies in array " + enemySpawner.enemyArray.Length);
+                //        if (obj == null)
+                //            deadEnemies++;
+                //    }
+                //}
+
+
+                //if (deadEnemies >= enemiesToKill)
+                //{
+                //    state = State.Opening;
+
+                //}
+                //timer = 0;
+
+
+                //timerTilDoorOpens -= Time.deltaTime;
+                //Debug.Log(timerTilDoorOpens);
+
+                //if (timerTilDoorOpens < 0)
+                //{
+                //    state = State.Opening;
+                //}
 
                 timer += Time.deltaTime;
                 Debug.Log(timer);

@@ -5,10 +5,11 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform enemySpawnLocation;
-    [SerializeField] private GameObject[] enemyArray;
-    //public GameObject[] enemyArray;
-    //public int waveNumber;
-    [SerializeField] private int timeBetweenWaves, waveNumber;
+    //[SerializeField] private GameObject[] enemyArray;
+    public GameObject[] enemyArray;
+    public int waveNumber;
+    [SerializeField] private int timeBetweenWaves;
+    //[SerializeField] private int waveNumber;
 
     public IEnumerator SpawnWave(GameObject spawnLocation)
     {
