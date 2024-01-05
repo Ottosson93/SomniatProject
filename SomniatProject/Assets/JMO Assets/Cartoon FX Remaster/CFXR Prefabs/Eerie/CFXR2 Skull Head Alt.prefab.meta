@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:SomniatProject/Assets/JMO Assets/Cartoon FX Remaster/CFXR Prefabs/Eerie/CFXR2 Skull Head Alt.prefab.meta
 guid: 463cf9f7af4680240898f6aeba3fe3e6
 PrefabImporter:
+========
+guid: 311d665729bd5b343b6b1b19f90e78c2
+DefaultImporter:
+>>>>>>>> parent of 389b268 (Fixed Battle Room):SomniatProject/Assets/Textures and Models/LowPolyDungeonsLite/LowPolyDungeonsLite_2020.3.0_URP_v1.1.unitypackage.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

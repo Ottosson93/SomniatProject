@@ -9,10 +9,13 @@ public class RoomPointer : MonoBehaviour
     public Image upgradePointer;
     private Transform playerTransform;
     private float distanceFromCenter = 40f;
+    private Camera camera1;
 
     void LateUpdate()
     {
         playerTransform = GameObject.FindWithTag("Player").transform;
+
+        camera1 = GameObject.FindGameObjectWithTag("MinimapCamera").GetComponent<Camera>();
 
 
         if (playerTransform == null || bossPointer == null || upgradePointer == null)
@@ -40,7 +43,8 @@ public class RoomPointer : MonoBehaviour
         float bossAngle = Mathf.Atan2(bossDirection.x, bossDirection.z) * Mathf.Rad2Deg;
         float upgradeAngle = Mathf.Atan2(upgradeDirection.x,upgradeDirection.z) * Mathf.Rad2Deg;
 
-        bossPointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -bossAngle);
-        upgradePointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -upgradeAngle);
+        bossPointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -bossAngle + camera1.transform.eulerAngles.y);
+        
+        upgradePointer.rectTransform.rotation = Quaternion.Euler(0f, 0f, -upgradeAngle + camera1.transform.eulerAngles.y);
     }
 }
