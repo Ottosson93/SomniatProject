@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < waveNumber; i++)
         {
             Instantiate(enemyArray[i % enemyArray.Length], spawnLocation.transform.position, Quaternion.identity);
-            Debug.Log("Spawn waves of enemies " + enemyArray[i % enemyArray.Length]);
+            //Debug.Log("Spawn waves of enemies " + enemyArray[i % enemyArray.Length]);
             yield return new WaitForSeconds(timeBetweenWaves);
         }
     }
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy()
     {
         Instantiate(enemyArray[1], enemySpawnLocation.position, enemySpawnLocation.rotation);
-        Debug.Log("Spawning Enemy " + enemyArray[1].name);
+        //Debug.Log("Spawning Enemy " + enemyArray[1].name);
     }
 
 }
