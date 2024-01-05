@@ -27,6 +27,10 @@ TagManager:
   - TriggerObject
   - CorridorRoomTrigger
   - ChestTrigger
+  - AudioManager
+  - MasterSlider
+  - MusicSlider
+  - SFXSlider
   layers:
   - Default
   - TransparentFX
