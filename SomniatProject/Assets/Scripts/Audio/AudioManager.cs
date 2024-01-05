@@ -3,16 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FMOD.Studio;
+using UnityEngine.UI;
 
 public class AudioManager : MonoBehaviour
 {
     [Header("Volume")]
     [Range(0f, 1f)]
-    public float master = 1;
+    public static float master = 1;
     [Range(0f, 1f)]
-    public float sfx = 1;
+    public static float sfx = 1;
     [Range(0f, 1f)]
-    public float music = 1;
+    public static float music = 1;
+
+    public Slider masterSlider;
+    public Slider musicSlider;
+    public Slider sfxSlider;
 
     private Bus masterBus;
     private Bus sfxBus;
@@ -26,12 +31,6 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance { get; private set; }
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogError("Found more than one Audio Manager in the scene");
-        }
-        instance = this;
-
         eventInstances = new List<EventInstance>();
         masterBus = RuntimeManager.GetBus("bus:/");
         sfxBus = RuntimeManager.GetBus("bus:/SFX");
@@ -40,6 +39,22 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
+        if (instance != null)
+        {
+            Destroy(gameObject);
+            Debug.LogError("Found more than one Audio Manager in the scene");
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+        }
+        instance = this;
+
+        masterSlider = GameObject.Find("MasterSlider").GetComponent<Slider>();
+        musicSlider = GameObject.Find("MusicSlider").GetComponent<Slider>();
+        sfxSlider = GameObject.Find("SFXSlider").GetComponent<Slider>();
+
+
         InitializeMusic(SoundEvents.instance.music);
         //AudioManager.instance.PlaySingleSFX(SoundEvents.instance.death, new Vector3(0,0,0));
     }

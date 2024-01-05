@@ -8,11 +8,18 @@ public class SettingsMenuView : Menu
     [SerializeField] private Button _backButton;
 
     public AudioMixer audioMixer;
+
+    public Slider masterVolumeSlider;
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+
     Resolution[] resolutions;
 
     public TMPro.TMP_Dropdown resolutionDropdown;
     private void Awake()
     {
+        DontDestroyOnLoad(this);
+
         resolutions = Screen.resolutions;
 
         resolutionDropdown.ClearOptions();
@@ -32,15 +39,34 @@ public class SettingsMenuView : Menu
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxVolumeSlider.onValueChanged.AddListener(SetSFXVolume);
+
+        masterVolumeSlider.value = AudioManager.master;
+        musicVolumeSlider.value = AudioManager.music;
+        sfxVolumeSlider.value = AudioManager.sfx;
+
     }
     public override void Initialize()
     {
         _backButton.onClick.AddListener(() => MainMenuManager.ShowLast());
     }
 
-    public void SetVolume(float volume)
+    public void SetMusicVolume(float volume)
     {
-        audioMixer.SetFloat("MasterVolume", volume);
+        AudioManager.music = volume;
+    }
+
+    public void SetMasterVolume(float volume)
+    {
+        AudioManager.master = volume;
+    }
+
+    public void SetSFXVolume(float volume)
+    {
+        AudioManager.sfx = volume;
     }
 
     public void SetQuality(int qualityIndex)
