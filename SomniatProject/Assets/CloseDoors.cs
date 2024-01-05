@@ -34,11 +34,11 @@ public class CloseDoors : MonoBehaviour
         for (int i = 0; i < spawnLocation.Length; i++)
         {
             enemySpawner = spawnLocation[i].GetComponent<EnemySpawner>();
-            //Debug.Log("getting locations " + enemySpawner.name);
+            Debug.Log("getting locations " + enemySpawner.name);
         }
         
         enemiesToKill = enemySpawner.waveNumber * spawnLocation.Length;
-        //Debug.Log("Enemies to kill " + enemiesToKill);
+        Debug.Log("Enemies to kill " + enemiesToKill);
     }
     void Update()
     {
@@ -117,7 +117,7 @@ public class CloseDoors : MonoBehaviour
                 timer += Time.deltaTime;
                 Debug.Log(timer);
 
-                if (timer > 10)
+                if (timer > 5)
                 {
                     state = State.Opening;
                 }
@@ -152,7 +152,7 @@ public class CloseDoors : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && state == State.Idle)
         {
             state = State.Closing;
-            //Debug.Log("Player has entered battle room");
+            Debug.Log("Player has entered battle room");
         }
     }
 }
