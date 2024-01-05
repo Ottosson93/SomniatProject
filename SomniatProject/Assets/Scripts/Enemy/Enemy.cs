@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
             Debug.Log("grunt Took dmaage");
         }
         else if (this.gameObject.CompareTag("Boss"))
-            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitEye, transform.position);
+            AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitBoss, transform.position);
         current = current - damage;
         //"Hurt" does not exist
         //animator.SetTrigger("Hurt");
