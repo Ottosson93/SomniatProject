@@ -489,7 +489,7 @@ MonoBehaviour:
   spawnLocation:
   - {fileID: 6805323492751842002}
   - {fileID: 235383429851860714}
-  timerToOpenDoor: 5
+  timerTilDoorOpens: 0
 --- !u!1 &2589359084258545708
 GameObject:
   m_ObjectHideFlags: 0
