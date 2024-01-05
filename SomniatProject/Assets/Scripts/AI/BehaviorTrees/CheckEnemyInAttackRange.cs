@@ -61,8 +61,8 @@ public class CheckEnemyInAttackRange : Node
 
                         agent.speed = 0f;
                         
-                        animator.SetBool("Run", false);
-                        lucidAnimator.SetBool("Run", false);
+                        animator.SetBool("Walk", false);
+                        lucidAnimator.SetBool("Walk", false);
                         state = NodeState.SUCCESS;
                         return state;
 
@@ -76,8 +76,9 @@ public class CheckEnemyInAttackRange : Node
            
         }
 
-        
 
+        animator.SetBool("Walk", true);
+        lucidAnimator.SetBool("Walk", true);
         state = NodeState.FAILURE;
         return state;
 

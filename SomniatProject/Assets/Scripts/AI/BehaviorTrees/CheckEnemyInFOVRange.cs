@@ -6,12 +6,15 @@ public class CheckEnemyInFOVRange : Node
 
     private Transform transform;
     private Enemy enemy;
-
+    private Animator animator;
+    private Animator lucidAnimator;
 
     public CheckEnemyInFOVRange(Transform transform)
     {
         this.transform = transform;
         enemy = transform.GetComponent<Enemy>();
+        animator = transform.GetComponent<Animator>();
+        lucidAnimator = transform.Find("LucidMesh").GetComponent<Animator>();
     }
 
     public override NodeState Evaluate()
@@ -31,6 +34,9 @@ public class CheckEnemyInFOVRange : Node
                 if (collider.CompareTag("Player"))
                 {
                     parent.parent.SetData("target", collider.transform);
+
+                    animator.SetBool("Walk", true);
+                    lucidAnimator.SetBool("Walk", true);
 
                     AudioManager.instance.AddEnemyEngage();
                     enemy.engaged = true;

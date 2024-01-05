@@ -40,21 +40,20 @@ public class TaskGoToTarget : Node
 
         if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.attackRange )
         {
+            //animator.SetBool("Walk", true);
+            //lucidAnimator.SetBool("Walk", true);
 
             agent.SetDestination(target.position);
-            
-
             float currentTime = Time.deltaTime - followStartTime;
             agent.speed = GuardMeleeBT.targetedSpeed;
 
-            animator.SetBool("Walk", true);
-            lucidAnimator.SetBool("Walk", true);
+         
 
             if (Vector3.Distance(transform.position, target.position) > GuardMeleeBT.distance || currentTime > maxFollowTime)
             {
                 animator.SetBool("Walk", false);
                 lucidAnimator.SetBool("Walk", false);
-                agent.speed = GuardMeleeBT.speed;
+                //agent.speed = GuardMeleeBT.speed;
                 ClearData("target");
             }
         }
