@@ -14,7 +14,6 @@ public class CustomButton : CustomUIComponent
     public GameObject pauseMenu;
     public GameObject victoryMenu;
     public GameObject onDeathMenu;
-    public GameObject settingsMenu;
 
     [SerializeField] private PlayerStats playerStatsSO;
 
@@ -84,12 +83,6 @@ public class CustomButton : CustomUIComponent
     {
         playerStatsSO.ResetStats();
         SceneManager.LoadScene(2);
-    }
-
-    public void SettingsMenu()
-    {
-        settingsMenu.SetActive(true);
-        pauseMenu.SetActive(false);
     }
 
     public void Close()

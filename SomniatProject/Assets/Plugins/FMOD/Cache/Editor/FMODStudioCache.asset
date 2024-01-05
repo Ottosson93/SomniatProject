@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/RangedAttackHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/RangedAttackHit
   Guid:
     Data1: 952606334
@@ -38,7 +38,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/RangedAttack
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/RangedAttack
   Guid:
     Data1: 1588730303
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/GruntHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/GruntHit
   Guid:
     Data1: -1986747911
@@ -92,9 +92,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/MusicEventFull/Combat
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Name: Combat
-  StudioPath:
+  StudioPath: 
   Min: 0
   Max: 1
   Default: 0
@@ -116,9 +116,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/MusicEventFull/Lucidity
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Name: Lucidity
-  StudioPath:
+  StudioPath: 
   Min: 0
   Max: 100
   Default: 100
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/BossMusic
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/BossMusic
   Guid:
     Data1: -2017303826
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/Potion
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
   Guid:
     Data1: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/EyeHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/SFX.bank
   Guid:
     Data1: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/EnemyDeath1
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/EnemyDeath1
   Guid:
     Data1: 1299444088
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/BoxCollapse
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/BoxCollapse
   Guid:
     Data1: -513472617
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/IdleMusic
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/IdleMusic
   Guid:
     Data1: 1354769608
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/Berzerk
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/Berzerk
   Guid:
     Data1: -975879129
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/ChestOpen
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/ChestOpen
   Guid:
     Data1: -2142726402
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/FireballCast
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/FireballCast
   Guid:
     Data1: 1130447144
@@ -399,7 +399,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/MusicEventFull
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/MusicEventFull
   Guid:
     Data1: 394121399
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/RangedFireBullet
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/RangedFireBullet
   Guid:
     Data1: -479117370
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/MusicEvent
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/MusicEvent
   Guid:
     Data1: -752923345
@@ -484,7 +484,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/Dash
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/Dash
   Guid:
     Data1: -857348789
@@ -511,7 +511,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/BossHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/BossHit
   Guid:
     Data1: -1818559090
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d32cf7c32a3ed8347bac48ef5ed56d82, type: 3}
   m_Name: FMODStudioCache
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 7889392250575011125}
   - {fileID: -3893298829300568723}
@@ -592,7 +592,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/FireballHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/FireballHit
   Guid:
     Data1: -2144049597
@@ -619,9 +619,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/MusicEvent/Lucidity
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Name: Lucidity
-  StudioPath:
+  StudioPath: 
   Min: 0
   Max: 100
   Default: 100
@@ -643,9 +643,9 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/MusicEvent/Combat
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Name: Combat
-  StudioPath:
+  StudioPath: 
   Min: 0
   Max: 1
   Default: 0
@@ -667,7 +667,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/PiercingArrow
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/PiercingArrow
   Guid:
     Data1: 593174697
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Music.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/GruntAttackHit
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/GruntAttackHit
   Guid:
     Data1: 419216596
@@ -739,7 +739,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/meleeAttack
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/meleeAttack
   Guid:
     Data1: -1765253578
@@ -766,7 +766,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/EnemyDeath2
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/EnemyDeath2
   Guid:
     Data1: 972704610
@@ -793,7 +793,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/SFX.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Music.bank
   Name: Music
   StudioPath: bank:/Music
@@ -811,7 +811,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/MusicTest
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/MusicTest
   Guid:
     Data1: 1363464782
@@ -838,7 +838,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/GruntSwing
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/GruntSwing
   Guid:
     Data1: 708748134
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/BossRockThrow
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/BossRockThrow
   Guid:
     Data1: 549557229
@@ -892,13 +892,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
   lastModified: 638398756300812929
   FileSizes:
-  - Name:
+  - Name: 
     Value: 2208
   Exists: 0
 --- !u!114 &8004189140107484583
@@ -912,13 +912,13 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
   m_Name: bank:/Master.strings.bank
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: Assets/Audio/FMODBanks/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
   lastModified: 638400530351495415
   FileSizes:
-  - Name:
+  - Name: 
     Value: 2252
   Exists: 1
 --- !u!114 &8033453779628657514
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/Music/100% Music
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/Music/100% Music
   Guid:
     Data1: 2125914709
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
   m_Name: event:/SFX/BossSwing
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   Path: event:/SFX/BossSwing
   Guid:
     Data1: -58615570
