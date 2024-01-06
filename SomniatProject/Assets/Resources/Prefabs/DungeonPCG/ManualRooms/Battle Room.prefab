@@ -520,7 +520,6 @@ MonoBehaviour:
   destination2: {fileID: 8914043352677770683}
   spawnLocation:
   - {fileID: 6805323492751842002}
-  - {fileID: 0}
   timerTilDoorOpens: 0
 --- !u!1 &2589359084258545708
 GameObject:
