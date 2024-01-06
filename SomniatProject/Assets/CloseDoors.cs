@@ -14,9 +14,10 @@ public class CloseDoors : MonoBehaviour
     }
 
     [SerializeField] private GameObject jailDoor1, jailDoor2;
-    [SerializeField] private Transform startPos1, startPos2, destination1, destination2;
+    [SerializeField] private Transform startPos1, startPos2, destination1, destination2, rewardObject;
     [SerializeField] private GameObject[] spawnLocation;
     private int enemiesToKill;
+    //[SerializeField] private List<GameObject> enemies;
     private bool spawning = false;
     private float speed = 8, timer;
     [SerializeField] private float timerTilDoorOpens;
@@ -27,6 +28,7 @@ public class CloseDoors : MonoBehaviour
     private void Awake()
     {
         state = State.Idle;
+        rewardObject.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -36,9 +38,9 @@ public class CloseDoors : MonoBehaviour
             enemySpawner = spawnLocation[i].GetComponent<EnemySpawner>();
             Debug.Log("getting locations " + enemySpawner.name);
         }
-        
+
         enemiesToKill = enemySpawner.waveNumber * spawnLocation.Length;
-        Debug.Log("Enemies to kill " + enemiesToKill);
+        Debug.Log("Enemies to kill " + enemiesToKill + " Enemy list count " + enemySpawner.enemiesToKill.Count);
     }
     void Update()
     {
@@ -64,26 +66,43 @@ public class CloseDoors : MonoBehaviour
                     spawning = true;
                 }
 
-                //if (timer > 2)
-                //{
-                //    int deadEnemies = 0;
-                //    foreach (GameObject obj in enemies)
-                //    {
-                //        if (obj == null)
-                //            deadEnemies++;
-                //    }
+                if (timer < 2)
+                {
+                    timer += Time.deltaTime;
 
-                //    if (deadEnemies >= enemiesToKill)
-                //    {
-                //        opening = true;
-                //        //    if (deadEnemies >= enemiesToKill)
-                //        //    {
-                //        //        opening = true;
+                    Debug.Log(timer);
+                }
+                
+                if (timer > 2 && timer < 5)
+                {
+                    int deadEnemies = 0;
+                    foreach (GameObject obj in enemySpawner.enemiesToKill)
+                    {
+                        if (obj == null)
+                            deadEnemies++;
+                    }
 
-                //    }
-                //    timer = 0;
-                //}
-                //timer += Time.deltaTime;
+                    if (deadEnemies >= enemiesToKill)
+                    {
+                        state = State.Opening;
+                    }
+                    timer += Time.deltaTime;
+
+                    Debug.Log(timer);
+                }
+                
+                if (timer > 5)
+                {
+                    int deadEnemies = 1;
+                    enemySpawner.enemiesToKill.Clear();
+                    Debug.Log( " Enemy list count " + enemySpawner.enemiesToKill.Count);
+
+                    if (deadEnemies >= enemySpawner.enemiesToKill.Count)
+                    {
+                        state = State.Opening;
+                    }
+                }
+
 
 
                 //int deadEnemies = 0;
@@ -114,18 +133,19 @@ public class CloseDoors : MonoBehaviour
                 //    state = State.Opening;
                 //}
 
-                timer += Time.deltaTime;
-                Debug.Log(timer);
+                //timer += Time.deltaTime;
+                //Debug.Log(timer);
 
-                if (timer > 5)
-                {
-                    state = State.Opening;
-                }
+                //if (timer > 5)
+                //{
+                //    state = State.Opening;
+                //}
             }
 
             //Opens the doors
             if (state == State.Opening)
             {
+                rewardObject.gameObject.SetActive(true);
                 jailDoor1.transform.position = Vector3.MoveTowards(jailDoor1.transform.position, startPos1.position, speed * Time.deltaTime);
                 jailDoor2.transform.position = Vector3.MoveTowards(jailDoor2.transform.position, startPos2.position, speed * Time.deltaTime);
 
