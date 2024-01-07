@@ -15,8 +15,8 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int i = 0; i < waveNumber; i++)
         {
-            Instantiate(enemyList[i % enemyList.Count], spawnLocation.transform.position, Quaternion.identity);
-            enemiesToKill.Add(enemyList[i % enemyList.Count]);
+            var obj = Instantiate(enemyList[i % enemyList.Count], spawnLocation.transform.position, Quaternion.identity);
+            enemiesToKill.Add(obj);
             Debug.Log("Spawn waves of enemies " + enemyList[i % enemyList.Count] + " enemies to kill " + enemiesToKill.Count);
             yield return new WaitForSeconds(timeBetweenWaves);
         }

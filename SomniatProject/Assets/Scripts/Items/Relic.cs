@@ -29,7 +29,6 @@ public class Relic : Item
         // Dont know what to name it but i simply remade Atalay's update script to return a bool. So that i could use it in this class for my Equip() script. 
         if (pickUpScript.PickUpItem)
         {
-            Debug.Log("Atalay");
             player.Equip(relicData);
             gameObject.SetActive(false);
         }
