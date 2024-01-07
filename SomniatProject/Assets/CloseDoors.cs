@@ -29,7 +29,7 @@ public class CloseDoors : MonoBehaviour
     private void Awake()
     {
         state = State.Idle;
-        rewardObject.gameObject.SetActive(false);
+        
     }
 
     private void Start()
@@ -53,6 +53,7 @@ public class CloseDoors : MonoBehaviour
             //Closes the hidden doors
             if (state == State.Closing)
             {
+                rewardObject.gameObject.SetActive(false);
                 jailDoor1.transform.position = Vector3.MoveTowards(jailDoor1.transform.position, destination1.position, speed * Time.deltaTime);
                 jailDoor2.transform.position = Vector3.MoveTowards(jailDoor2.transform.position, destination2.position, speed * Time.deltaTime);
 
