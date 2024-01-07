@@ -109,6 +109,7 @@ public class Spell : MonoBehaviour
             ExplosiveObject explosiveObject = other.GetComponent<ExplosiveObject>();
             if (SpellToCast.name.Equals("Fireball"))
             {
+                AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireballDetonate, transform.position);
                 if (enemy != null)
                 {
                     BurnEffect burnEffect = other.gameObject.GetComponent<BurnEffect>();
@@ -118,7 +119,6 @@ public class Spell : MonoBehaviour
                     }
                 }
                 DealDamageInRadius();
-                AudioManager.instance.PlaySingleSFX(SoundEvents.instance.fireballDetonate, transform.position);
                 CreateExplosionEffect();
             }
             else if (SpellToCast.name.Equals("Piercing Arrow"))
