@@ -38,6 +38,7 @@ public class SoundEvents : MonoBehaviour
         if (instance != null)
         {
             Debug.LogError("Found more than one 'Sound Events' script in the scene");
+            Destroy(this);
         }
         instance = this;
     }

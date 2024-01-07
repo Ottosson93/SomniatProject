@@ -43,7 +43,7 @@ public class AudioManager : MonoBehaviour
 
         if (audioManagers.Length > 1)
         {
-            Destroy(gameObject);
+            Destroy(this);
             Debug.LogError("Found more than one Audio Manager in the scene");
             return;
         }

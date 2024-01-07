@@ -104,11 +104,12 @@ public class CustomButton : CustomUIComponent
         Player.isDead = false;
         playerStatsSO.ResetStats();
         ShopManagerScript.currencyAmount = 0;
-        while(AudioManager.instance.enemiesEngaged > 0)
+
+        while (AudioManager.instance.enemiesEngaged > 0)
         {
             AudioManager.instance.removeEnemyEngage();
         }
-        
+
         SceneManager.LoadScene(0);
     }
 
