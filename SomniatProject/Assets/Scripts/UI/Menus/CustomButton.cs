@@ -75,6 +75,11 @@ public class CustomButton : CustomUIComponent
         playerStatsSO.ResetStats();
         BossBT.isAlive = true;
         Player.isDead = false;
+        while (AudioManager.instance.enemiesEngaged > 0)
+        {
+            AudioManager.instance.removeEnemyEngage();
+        }
+        AudioManager.instance.RestartMusic(SoundEvents.instance.music);
         SceneManager.LoadScene(1);
         
         
@@ -104,12 +109,11 @@ public class CustomButton : CustomUIComponent
         Player.isDead = false;
         playerStatsSO.ResetStats();
         ShopManagerScript.currencyAmount = 0;
-
         while (AudioManager.instance.enemiesEngaged > 0)
         {
             AudioManager.instance.removeEnemyEngage();
         }
-
+        AudioManager.instance.RestartMusic(SoundEvents.instance.music);
         SceneManager.LoadScene(0);
     }
 
