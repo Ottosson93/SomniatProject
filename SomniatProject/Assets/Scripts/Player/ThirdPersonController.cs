@@ -199,9 +199,7 @@ namespace StarterAssets
         {
             if (_input.attack1 && canAttack)
             {
-                Debug.Log("Atalay Attacking");
                 Attack();
-                Debug.Log("Atalay efter");
 
                 canAttack = false;  // Disable attack until cooldown is over
                 StartCoroutine(AttackCooldown());
@@ -592,7 +590,7 @@ namespace StarterAssets
 
                     foreach (Collider enemy in hitEnemies)
                     {
-                        bool dead = enemy.GetComponent<Enemy>().current - player.meleeDamage <= 0;
+                        bool dead = enemy.GetComponent<Enemy>().Current - player.meleeDamage <= 0;
                         enemy.GetComponent<Enemy>().TakeDamage((int)player.meleeDamage);
                     }
 

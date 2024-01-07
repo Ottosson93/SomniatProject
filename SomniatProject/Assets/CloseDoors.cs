@@ -9,14 +9,16 @@ public class CloseDoors : MonoBehaviour
         Idle,
         Closing,
         Spawning,
+        Fighting,
         Opening,
         Completed
     }
 
     [SerializeField] private GameObject jailDoor1, jailDoor2;
-    [SerializeField] private Transform startPos1, startPos2, destination1, destination2;
+    [SerializeField] private Transform startPos1, startPos2, destination1, destination2, rewardObject;
     [SerializeField] private GameObject[] spawnLocation;
     private int enemiesToKill;
+    //[SerializeField] private List<GameObject> enemies;
     private bool spawning = false;
     private float speed = 8, timer;
     [SerializeField] private float timerTilDoorOpens;
@@ -27,6 +29,7 @@ public class CloseDoors : MonoBehaviour
     private void Awake()
     {
         state = State.Idle;
+        rewardObject.gameObject.SetActive(false);
     }
 
     private void Start()
@@ -34,14 +37,17 @@ public class CloseDoors : MonoBehaviour
         for (int i = 0; i < spawnLocation.Length; i++)
         {
             enemySpawner = spawnLocation[i].GetComponent<EnemySpawner>();
-            //Debug.Log("getting locations " + enemySpawner.name);
+            Debug.Log("getting locations " + enemySpawner.name);
         }
-        
+
         enemiesToKill = enemySpawner.waveNumber * spawnLocation.Length;
-        //Debug.Log("Enemies to kill " + enemiesToKill);
+        Debug.Log("Enemies to kill " + enemiesToKill + " Enemy list count " + enemySpawner.enemiesToKill.Count);
     }
     void Update()
     {
+        Debug.Log(state);
+
+
         if (state != State.Completed)
         {
             //Closes the hidden doors
@@ -57,75 +63,43 @@ public class CloseDoors : MonoBehaviour
             }
 
             if (state == State.Spawning)
-            { 
+            {
                 if (!spawning)
                 {
                     StartSpawning();
                     spawning = true;
                 }
 
-                //if (timer > 2)
-                //{
-                //    int deadEnemies = 0;
-                //    foreach (GameObject obj in enemies)
-                //    {
-                //        if (obj == null)
-                //            deadEnemies++;
-                //    }
+                state = State.Fighting;
+            }
 
-                //    if (deadEnemies >= enemiesToKill)
-                //    {
-                //        opening = true;
-                //        //    if (deadEnemies >= enemiesToKill)
-                //        //    {
-                //        //        opening = true;
+            if (state == State.Fighting)
+            {
 
-                //    }
-                //    timer = 0;
-                //}
-                //timer += Time.deltaTime;
+                int deadEnemies = 0;
 
+                foreach (GameObject obj in enemySpawner.enemiesToKill)
+                {
+                    Debug.Log($"{obj}");
 
-                //int deadEnemies = 0;
-                //for (int i = 0; i < spawnLocation.Length; i++)
-                //{
-                //    foreach (GameObject obj in enemySpawner.enemyArray)
-                //    {
-                //        Debug.Log("Enemies in array " + enemySpawner.enemyArray.Length);
-                //        if (obj == null)
-                //            deadEnemies++;
-                //    }
-                //}
+                    if (obj == null)
+                    {
+                        Debug.Log("Null Enemy");
+                        deadEnemies++;
+                    }
+                }
 
-
-                //if (deadEnemies >= enemiesToKill)
-                //{
-                //    state = State.Opening;
-
-                //}
-                //timer = 0;
-
-
-                //timerTilDoorOpens -= Time.deltaTime;
-                //Debug.Log(timerTilDoorOpens);
-
-                //if (timerTilDoorOpens < 0)
-                //{
-                //    state = State.Opening;
-                //}
-
-                timer += Time.deltaTime;
-                Debug.Log(timer);
-
-                if (timer > 10)
+                if (deadEnemies >= enemiesToKill)
                 {
                     state = State.Opening;
                 }
+              
             }
 
             //Opens the doors
             if (state == State.Opening)
             {
+                rewardObject.gameObject.SetActive(true);
                 jailDoor1.transform.position = Vector3.MoveTowards(jailDoor1.transform.position, startPos1.position, speed * Time.deltaTime);
                 jailDoor2.transform.position = Vector3.MoveTowards(jailDoor2.transform.position, startPos2.position, speed * Time.deltaTime);
 
@@ -152,7 +126,7 @@ public class CloseDoors : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && state == State.Idle)
         {
             state = State.Closing;
-            //Debug.Log("Player has entered battle room");
+            Debug.Log("Player has entered battle room");
         }
     }
 }

@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 
 
     public int health = 100;
-    public int current;
+    private int current;
     public float attackRange;
 
     public bool engaged = false; 
@@ -23,9 +23,11 @@ public class Enemy : MonoBehaviour
 
     public bool dead = false;
 
+    public int Current { get => current; set => current = value; }
+
     private void Start()
     {
-        current = health;
+        Current = health;
         itemDropSystem = GetComponent<ItemDropSystem>();
     }
 
@@ -42,11 +44,11 @@ public class Enemy : MonoBehaviour
         }
         else if (this.gameObject.CompareTag("Boss"))
             AudioManager.instance.PlaySingleSFX(SoundEvents.instance.playerHitBoss, transform.position);
-        current = current - damage;
+        Current = Current - damage;
         //"Hurt" does not exist
         //animator.SetTrigger("Hurt");
         damageTextPlayer.SubtractHealth(damage, transform);
-        if(current > damage)
+        if(Current > damage)
         {
             if (hitMarkerPrefab != null)
             {
@@ -55,7 +57,7 @@ public class Enemy : MonoBehaviour
         }
         
 
-        if(current <= 0)
+        if(Current <= 0)
         {
             Die();
         }
