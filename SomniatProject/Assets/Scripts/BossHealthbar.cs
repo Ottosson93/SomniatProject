@@ -32,7 +32,7 @@ public class BossHealthbar : MonoBehaviour
     {
         
         CheckForPlayer();
-        bossHealth = boss.current;
+        bossHealth = boss.Current;
         healthbarFill.type = Image.Type.Filled;
         healthbarFill.fillAmount = bossHealth / boss.health;
         
