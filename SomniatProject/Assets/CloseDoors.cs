@@ -37,16 +37,12 @@ public class CloseDoors : MonoBehaviour
         for (int i = 0; i < spawnLocation.Length; i++)
         {
             enemySpawner = spawnLocation[i].GetComponent<EnemySpawner>();
-            Debug.Log("getting locations " + enemySpawner.name);
         }
 
         enemiesToKill = enemySpawner.waveNumber * spawnLocation.Length;
-        Debug.Log("Enemies to kill " + enemiesToKill + " Enemy list count " + enemySpawner.enemiesToKill.Count);
     }
     void Update()
     {
-        Debug.Log(state);
-
 
         if (state != State.Completed)
         {
@@ -81,11 +77,10 @@ public class CloseDoors : MonoBehaviour
 
                 foreach (GameObject obj in enemySpawner.enemiesToKill)
                 {
-                    Debug.Log($"{obj}");
+
 
                     if (obj == null)
                     {
-                        Debug.Log("Null Enemy");
                         deadEnemies++;
                     }
                 }
@@ -127,7 +122,6 @@ public class CloseDoors : MonoBehaviour
         if (other.gameObject.CompareTag("Player") && state == State.Idle)
         {
             state = State.Closing;
-            Debug.Log("Player has entered battle room");
         }
     }
 }
