@@ -91,3 +91,6 @@ SomniatProject/Assets/Plugins/FMOD/Cache/Editor/FMODStudioCache.asset.meta
 SomniatProject/Assets/Plugins/FMOD/platforms/mac/lib/fmodstudio.bundle/Contents/Info.plist
 SomniatProject/Assets/Plugins/FMOD/platforms/mac/lib/fmodstudioL.bundle/Contents/Info.plist
 SomniatProject/Assets/Plugins/FMOD/platforms/mac/lib/resonanceaudio.bundle/Contents/Info.plist
+*.plist
+SomniatProject/ProjectSettings/Packages/com.unity.probuilder/Settings.json
+SomniatProject/ProjectSettings/Packages/com.unity.testtools.codecoverage/Settings.json
